@@ -1,0 +1,667 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TarihGram</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#1d4f73">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one phone-sized column. Login = full-bleed Leaflet atlas with centred mark; app = sticky top bar, left drawer, single feed. */
+:root {
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --fg: #16212b;
+  --muted: #5d6b78;
+  --line: #dde3e9;
+  --accent: #1d6fa3;
+  --accent-ink: #ffffff;
+  --gold: #c08a2e;
+  --scrim: rgba(10, 22, 34, .45);
+  --shadow: 0 10px 30px rgba(16, 33, 48, .16);
+
+  --ocean: #1d4f73;
+  --land-0: #e3b55b;
+  --land-1: #c9714f;
+  --land-2: #8fae5d;
+  --land-3: #d98b8f;
+  --land-4: #b39ad1;
+  --border-land: #fdf6e6;
+
+  --font-display: "Cinzel", "Trajan Pro", Georgia, serif;
+  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --r-sm: 10px;
+  --r-md: 16px;
+  --app-w: 440px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f161d; --surface: #17212b; --fg: #e8eef3; --muted: #93a3b1; --line: #26333f;
+    --accent: #5fb0e4; --accent-ink: #08202f; --gold: #e0ae55; --scrim: rgba(0,0,0,.6);
+    --shadow: 0 10px 30px rgba(0,0,0,.5); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f161d; --surface: #17212b; --fg: #e8eef3; --muted: #93a3b1; --line: #26333f;
+  --accent: #5fb0e4; --accent-ink: #08202f; --gold: #e0ae55; --scrim: rgba(0,0,0,.6);
+  --shadow: 0 10px 30px rgba(0,0,0,.5); color-scheme: dark;
+}
+
+/* --- Leaflet core styles (inlined subset of leaflet@1.9.4) --- */
+.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}
+.leaflet-container{overflow:hidden;-webkit-tap-highlight-color:transparent}
+.leaflet-tile{user-select:none;-webkit-user-drag:none;visibility:hidden}
+.leaflet-tile-loaded{visibility:inherit}
+.leaflet-container img.leaflet-tile{max-width:none!important;max-height:none!important}
+.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}
+.leaflet-pane>svg path{pointer-events:none}
+.leaflet-control-container{display:none}
+.leaflet-zoom-anim .leaflet-zoom-animated{transition:transform .25s cubic-bezier(0,0,.25,1)}
+
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { margin: 0; }
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+/* ================= GİRİŞ EKRANI ================= */
+.login {
+  position: fixed; inset: 0;
+  background: var(--ocean);
+  color: #fff;
+  overflow: hidden;
+}
+#map { position: absolute; inset: 0; background: var(--ocean); }
+.login::after { /* legibility vignette over the atlas */
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 500;
+  background:
+    radial-gradient(ellipse 70% 42% at 50% 48%, rgba(8,26,40,.62), rgba(8,26,40,0) 75%),
+    linear-gradient(180deg, rgba(8,26,40,.25), rgba(8,26,40,0) 30%, rgba(8,26,40,0) 70%, rgba(8,26,40,.45));
+}
+.login-center {
+  position: absolute; inset: 0; z-index: 600;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 28px;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
+  text-align: center;
+}
+.brand { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.brand-mark {
+  width: 74px; height: 74px; border-radius: 22px;
+  display: grid; place-items: center;
+  background: linear-gradient(145deg, #f3c86b, #c0782f);
+  box-shadow: 0 8px 24px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.35);
+}
+.brand-mark svg { width: 44px; height: 44px; }
+.brand h1 {
+  margin: 0;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(2.4rem, 11vw, 3.4rem);
+  letter-spacing: .04em; line-height: 1;
+  text-shadow: 0 3px 18px rgba(0,0,0,.45);
+}
+.brand h1 span { color: #f3c86b; }
+.brand p { margin: 0; font-size: .95rem; opacity: .9; text-shadow: 0 1px 8px rgba(0,0,0,.5); max-width: 28ch; }
+.login-actions { display: grid; gap: 12px; width: min(100%, 320px); }
+.btn {
+  border: 0; border-radius: 999px; padding: 15px 20px;
+  font-weight: 700; font-size: 1rem; letter-spacing: .01em;
+  transition: transform .12s ease, filter .12s ease;
+}
+.btn:active { transform: scale(.98); }
+.btn-primary { background: #f3c86b; color: #2a1a05; box-shadow: 0 6px 18px rgba(0,0,0,.3); }
+.btn-ghost { background: rgba(255,255,255,.14); color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.75); backdrop-filter: blur(6px); }
+.version {
+  position: absolute; z-index: 600;
+  right: calc(14px + env(safe-area-inset-right, 0px));
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  font-size: 11px; font-weight: 700; letter-spacing: .08em;
+  color: rgba(255,255,255,.85);
+  background: rgba(8,26,40,.45); padding: 3px 8px; border-radius: 6px;
+}
+
+/* --- Google modal (bottom sheet) --- */
+.sheet-wrap {
+  position: fixed; inset: 0; z-index: 1000;
+  display: flex; align-items: flex-end; justify-content: center;
+  background: var(--scrim);
+  animation: fade .18s ease;
+}
+.sheet {
+  width: min(100%, var(--app-w));
+  background: var(--surface); color: var(--fg);
+  border-radius: 22px 22px 0 0;
+  padding: 10px 22px calc(26px + env(safe-area-inset-bottom, 0px));
+  box-shadow: var(--shadow);
+  animation: rise .22s cubic-bezier(.2,.8,.2,1);
+}
+.sheet-grip { width: 40px; height: 5px; border-radius: 3px; background: var(--line); margin: 0 auto 14px; }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.sheet h2 { margin: 0; font-size: 1.25rem; }
+.sheet .sub { margin: 6px 0 20px; color: var(--muted); font-size: .92rem; }
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 12px; border: 0;
+  display: grid; place-items: center; background: transparent;
+}
+.icon-btn:hover { background: color-mix(in srgb, var(--fg) 8%, transparent); }
+.icon-btn svg { width: 22px; height: 22px; }
+.google-btn {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 14px 18px; border-radius: 12px;
+  background: var(--surface); color: var(--fg);
+  border: 1.5px solid var(--line); font-weight: 600; font-size: 1rem;
+}
+.google-btn:hover { border-color: var(--muted); }
+.google-btn svg { width: 20px; height: 20px; flex: none; }
+.google-btn[disabled] { opacity: .7; cursor: progress; }
+.spinner { width: 18px; height: 18px; border-radius: 50%; border: 2.5px solid var(--line); border-top-color: var(--accent); animation: spin .7s linear infinite; }
+.fine { margin: 16px 0 0; font-size: .78rem; color: var(--muted); text-align: center; }
+.switch-mode { background: none; border: 0; padding: 0; color: var(--accent); font-weight: 700; }
+
+/* ================= ANA EKRAN ================= */
+.app {
+  min-height: 100%;
+  width: min(100%, var(--app-w));
+  margin: 0 auto;
+  background: var(--bg);
+  position: relative;
+}
+@media (min-width: 480px) { .app { box-shadow: 0 0 0 1px var(--line); } }
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10;
+  background: var(--surface);
+}
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 8px;
+  padding-block: 8px;
+  padding-left: max(10px, env(safe-area-inset-left, 0px));
+  padding-right: max(10px, env(safe-area-inset-right, 0px));
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar .logo {
+  justify-self: center; margin: 0;
+  font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; letter-spacing: .04em;
+}
+.topbar .logo span { color: var(--gold); }
+.settings-btn {
+  display: flex; align-items: center; gap: 6px;
+  border: 0; background: transparent; padding: 8px 10px; border-radius: 12px;
+  font-weight: 600; font-size: .88rem;
+}
+.settings-btn:hover { background: color-mix(in srgb, var(--fg) 8%, transparent); }
+.settings-btn svg { width: 22px; height: 22px; }
+
+.feed {
+  display: flex; flex-direction: column; gap: 14px;
+  padding-block: 14px 40px;
+  padding-left: max(12px, env(safe-area-inset-left, 0px));
+  padding-right: max(12px, env(safe-area-inset-right, 0px));
+}
+.feed-note { margin: 0 4px; color: var(--muted); font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 700; }
+
+.post {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+.post-head { display: flex; align-items: center; gap: 11px; padding: 12px 14px; }
+.avatar {
+  width: 40px; height: 40px; border-radius: 50%; flex: none;
+  display: grid; place-items: center;
+  font-weight: 700; font-size: .9rem; color: #fff;
+}
+.post-who { min-width: 0; display: flex; flex-direction: column; }
+.post-who strong { font-size: .95rem; }
+.post-place { display: flex; align-items: center; gap: 4px; color: var(--muted); font-size: .85rem; }
+.post-place svg { width: 14px; height: 14px; flex: none; color: var(--gold); }
+.media { position: relative; }
+.slides {
+  display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.slides::-webkit-scrollbar { display: none; }
+.slides img {
+  flex: 0 0 100%; width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  scroll-snap-align: start; display: block; background: var(--line);
+}
+.count {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(10,20,30,.62); color: #fff; font-size: .75rem; font-weight: 700;
+  padding: 3px 9px; border-radius: 999px; font-variant-numeric: tabular-nums;
+}
+.dots { display: flex; justify-content: center; gap: 6px; padding: 10px 0 12px; }
+.dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--line); transition: background .2s; }
+.dots i.on { background: var(--accent); }
+
+/* --- Drawer menu --- */
+.drawer-wrap { position: fixed; inset: 0; z-index: 900; background: var(--scrim); animation: fade .18s ease; }
+.drawer {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  width: min(84vw, 320px);
+  background: var(--surface);
+  display: flex; flex-direction: column;
+  padding-top: calc(14px + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  padding-left: env(safe-area-inset-left, 0px);
+  box-shadow: var(--shadow);
+  animation: slide .22s cubic-bezier(.2,.8,.2,1);
+}
+.drawer-top { display: flex; align-items: center; justify-content: space-between; padding: 0 12px 10px 20px; }
+.drawer-top .logo { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; letter-spacing: .04em; }
+.drawer-top .logo span { color: var(--gold); }
+.menu { list-style: none; margin: 0; padding: 6px 12px; display: grid; gap: 2px; }
+.menu button {
+  width: 100%; display: flex; align-items: center; gap: 14px;
+  padding: 12px 12px; border: 0; border-radius: 12px; background: transparent;
+  font-weight: 600; font-size: 1rem; text-align: left;
+}
+.menu button:hover { background: color-mix(in srgb, var(--fg) 7%, transparent); }
+.menu button[aria-current="page"] { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+.menu svg { width: 22px; height: 22px; flex: none; }
+.menu .share-btn { background: var(--accent); color: var(--accent-ink); margin-bottom: 8px; justify-content: center; }
+.menu .share-btn:hover { background: var(--accent); filter: brightness(1.08); }
+.me {
+  margin-top: auto; margin-inline: 12px;
+  border-top: 1px solid var(--line);
+  padding: 14px 8px 2px;
+  display: grid; gap: 12px;
+}
+.me-row { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.me-row .avatar { width: 48px; height: 48px; font-size: 1rem; }
+.me-id { min-width: 0; display: flex; flex-direction: column; }
+.me-id strong { font-size: 1rem; }
+.me-id span { color: var(--muted); font-size: .82rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; }
+.stats div { display: flex; flex-direction: column; }
+.stats b { font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.stats span { color: var(--muted); font-size: .75rem; }
+
+/* --- Settings sheet rows --- */
+.seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--bg); padding: 4px; border-radius: 12px; }
+.seg button { border: 0; background: transparent; padding: 9px 6px; border-radius: 9px; font-weight: 600; font-size: .9rem; }
+.seg button[aria-pressed="true"] { background: var(--surface); box-shadow: 0 1px 4px rgba(0,0,0,.12); }
+.set-label { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 700; margin: 0 0 8px; }
+.danger { width: 100%; margin-top: 18px; border: 1.5px solid var(--line); background: transparent; color: #c0392b; border-radius: 12px; padding: 13px; font-weight: 700; }
+
+.toast {
+  position: fixed; left: 50%; z-index: 1200;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  background: var(--fg); color: var(--bg);
+  padding: 10px 16px; border-radius: 999px; font-weight: 600; font-size: .9rem;
+  box-shadow: var(--shadow); max-width: calc(100% - 32px); text-align: center;
+  animation: rise .2s ease;
+}
+
+@keyframes fade { from { opacity: 0 } }
+@keyframes rise { from { transform: translateY(24px); opacity: 0 } }
+@keyframes slide { from { transform: translateX(-100%) } }
+@keyframes spin { to { transform: rotate(360deg) } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+
+<!-- ================= GİRİŞ EKRANI ================= -->
+<section class="login" id="login" aria-label="Giriş ekranı">
+  <div id="map" aria-hidden="true"></div>
+  <div class="login-center">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#2a1a05" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M6 18 L24 8 L42 18 Z" fill="#fbe3a6"/>
+          <path d="M9 18 H39"/><path d="M12 22 V36 M20 22 V36 M28 22 V36 M36 22 V36"/>
+          <path d="M8 38 H40 M6 42 H42"/>
+        </svg>
+      </div>
+      <h1>Tarih<span>Gram</span></h1>
+      <p>Gezdiğin tarihi yerleri paylaş, dünyayı keşfet.</p>
+    </div>
+    <div class="login-actions">
+      <button class="btn btn-primary" id="btn-signup" type="button">Kayıt Ol</button>
+      <button class="btn btn-ghost" id="btn-signin" type="button">Giriş Yap</button>
+    </div>
+  </div>
+  <div class="version">1.0 E</div>
+</section>
+
+<!-- ================= ANA EKRAN ================= -->
+<div class="app" id="app" hidden>
+  <header class="topbar">
+    <button class="icon-btn" id="btn-menu" type="button" aria-label="Menüyü aç" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <p class="logo">Tarih<span>Gram</span></p>
+    <button class="settings-btn" id="btn-settings" type="button" aria-label="Ayarlar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span>Ayarlar</span>
+    </button>
+  </header>
+
+  <main class="feed" id="feed" aria-label="Ana sayfa akışı">
+    <p class="feed-note">Örnek gönderiler</p>
+  </main>
+</div>
+
+<!-- Menü (çekmece) -->
+<div class="drawer-wrap" id="drawer" hidden>
+  <nav class="drawer" aria-label="Ana menü">
+    <div class="drawer-top">
+      <span class="logo">Tarih<span>Gram</span></span>
+      <button class="icon-btn" id="btn-menu-close" type="button" aria-label="Menüyü kapat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <ul class="menu" id="menu-list"></ul>
+    <div class="me" id="me"></div>
+  </nav>
+</div>
+
+<!-- Google ile giriş modalı -->
+<div class="sheet-wrap" id="auth" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <div class="sheet-grip"></div>
+    <div class="sheet-head">
+      <h2 id="auth-title">Giriş Yap</h2>
+      <button class="icon-btn" id="auth-close" type="button" aria-label="Kapat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <p class="sub" id="auth-sub">Hesabına Google ile giriş yap.</p>
+    <button class="google-btn" id="google-btn" type="button">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      <span id="google-label">Google ile Giriş Yap</span>
+    </button>
+    <p class="fine" id="auth-switch"></p>
+    <p class="fine">Bu sürüm bir prototiptir: Google girişi örnek bir hesapla taklit edilir.</p>
+  </div>
+</div>
+
+<!-- Ayarlar -->
+<div class="sheet-wrap" id="settings" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="sheet-grip"></div>
+    <div class="sheet-head">
+      <h2 id="settings-title">Ayarlar</h2>
+      <button class="icon-btn" id="settings-close" type="button" aria-label="Kapat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <p class="sub">Uygulama görünümünü seç.</p>
+    <p class="set-label">Tema</p>
+    <div class="seg" id="theme-seg">
+      <button type="button" data-theme-choice="system">Sistem</button>
+      <button type="button" data-theme-choice="light">Açık</button>
+      <button type="button" data-theme-choice="dark">Koyu</button>
+    </div>
+    <button class="danger" id="btn-logout" type="button">Çıkış Yap</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+    del: function (k) { try { localStorage.removeItem(k); } catch (e) {} }
+  };
+
+  /* ---------- Örnek veri ---------- */
+  var USER = {
+    name: "Deniz Arslan", handle: "@denizarslan", email: "Google hesabı (örnek)",
+    initials: "DA", color: "#1d6fa3",
+    posts: 12, followers: 248, following: 180
+  };
+  var POSTS = [
+    { who: "Ayşe Yılmaz", initials: "AY", color: "#c9714f", place: "Ephesus (Efes), İzmir",
+      images: [
+        { src: "assets/efes-celsus.svg", alt: "Efes'teki Celsus Kütüphanesi'nin iki katlı sütunlu cephesi" },
+        { src: "assets/efes-tiyatro.svg", alt: "Efes Büyük Tiyatrosu'nun yarım daire oturma basamakları" }
+      ] },
+    { who: "Mehmet Kaya", initials: "MK", color: "#6f8f3e", place: "Göreme, Kapadokya",
+      images: [ { src: "assets/kapadokya.svg", alt: "Peri bacalarının üzerinde uçan sıcak hava balonları" } ] },
+    { who: "Elif Demir", initials: "ED", color: "#8b6bb8", place: "Galata Kulesi, İstanbul",
+      images: [ { src: "assets/galata.svg", alt: "Gün batımında Galata Kulesi ve Haliç" } ] }
+  ];
+  var MENU = [
+    { id: "share", label: "+ Paylaş", cls: "share-btn",
+      icon: '' },
+    { id: "home", label: "Ana Sayfa",
+      icon: '<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>' },
+    { id: "explore", label: "Keşfet",
+      icon: '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>' },
+    { id: "history", label: "Geçmiş",
+      icon: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' },
+    { id: "maps", label: "Haritalar",
+      icon: '<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>' },
+    { id: "saved", label: "Kaydedilenler",
+      icon: '<path d="M6 3h12v18l-6-4-6 4z"/>' },
+    { id: "profile", label: "Profil",
+      icon: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>' }
+  ];
+  var current = "home";
+
+  /* ---------- Harita (Leaflet) ---------- */
+  var LAND = ["--land-0", "--land-1", "--land-2", "--land-3", "--land-4"];
+  var css = getComputedStyle(document.documentElement);
+  function tok(n) { return css.getPropertyValue(n).trim(); }
+  var map = null;
+
+  function initMap() {
+    if (!window.L || map) return;
+    var portrait = window.innerHeight > window.innerWidth;
+    map = L.map("map", {
+      zoomControl: false, attributionControl: false,
+      dragging: false, scrollWheelZoom: false, doubleClickZoom: false,
+      boxZoom: false, keyboard: false, touchZoom: false, tap: false,
+      zoomSnap: 0.25, worldCopyJump: false
+    }).setView(portrait ? [34, 34] : [28, 20], portrait ? 2 : 2.25);
+
+    fetch("data/world.json").then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    }).then(function (geo) {
+      var style = function (f) {
+        return { fillColor: tok(LAND[f.properties.c % LAND.length]), fillOpacity: 1,
+                 color: tok("--border-land"), weight: 0.8, opacity: 0.9 };
+      };
+      // Dünya üç kopya çizilir; böylece yatay kaydırmada boşluk kalmaz.
+      [-360, 0, 360].forEach(function (shift) {
+        L.geoJSON(shift ? shiftGeo(geo, shift) : geo, { style: style, interactive: false }).addTo(map);
+      });
+      drift();
+    }).catch(function () {
+      // Yerel veri yüklenemezse (ör. dosya doğrudan açıldıysa) çevrim içi harita katmanına geç.
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 6 }).addTo(map);
+    });
+  }
+  function shiftGeo(geo, dx) {
+    var mv = function (c) { return typeof c[0] === "number" ? [c[0] + dx, c[1]] : c.map(mv); };
+    return { type: "FeatureCollection", features: geo.features.map(function (f) {
+      return { type: "Feature", properties: f.properties, geometry: { type: f.geometry.type, coordinates: mv(f.geometry.coordinates) } };
+    }) };
+  }
+  var driftTimer = null;
+  function drift() {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var dir = 1, steps = 0;
+    clearInterval(driftTimer);
+    driftTimer = setInterval(function () {
+      if ($("login").hidden) return;
+      map.panBy([dir * 0.6, 0], { animate: false });
+      if (++steps > 900) { steps = 0; dir = -dir; }
+    }, 40);
+  }
+
+  /* ---------- Ekran geçişleri ---------- */
+  function showLogin() {
+    $("app").hidden = true; $("login").hidden = false;
+    initMap();
+    if (map) setTimeout(function () { map.invalidateSize(); }, 0);
+  }
+  function showApp() {
+    $("login").hidden = true; $("app").hidden = false;
+    renderFeed(); renderMenu(); renderMe();
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- Modal: Google ile giriş ---------- */
+  var mode = "signin";
+  function openAuth(m) {
+    mode = m;
+    var signup = m === "signup";
+    $("auth-title").textContent = signup ? "Kayıt Ol" : "Giriş Yap";
+    $("auth-sub").textContent = signup ? "TarihGram hesabını Google ile saniyeler içinde oluştur." : "Hesabına Google ile giriş yap.";
+    $("google-label").textContent = signup ? "Google ile Kayıt Ol" : "Google ile Giriş Yap";
+    $("auth-switch").innerHTML = signup
+      ? 'Zaten hesabın var mı? <button type="button" class="switch-mode" data-to="signin">Giriş Yap</button>'
+      : 'Hesabın yok mu? <button type="button" class="switch-mode" data-to="signup">Kayıt Ol</button>';
+    resetGoogleBtn();
+    $("auth").hidden = false;
+    $("google-btn").focus();
+  }
+  function closeAuth() { $("auth").hidden = true; }
+  function resetGoogleBtn() {
+    var b = $("google-btn"); b.disabled = false;
+    var s = b.querySelector(".spinner"); if (s) s.remove();
+    b.querySelector("svg").hidden = false;
+  }
+  $("btn-signup").addEventListener("click", function () { openAuth("signup"); });
+  $("btn-signin").addEventListener("click", function () { openAuth("signin"); });
+  $("auth-close").addEventListener("click", closeAuth);
+  $("auth").addEventListener("click", function (e) {
+    if (e.target === this) closeAuth();
+    var sw = e.target.closest(".switch-mode"); if (sw) openAuth(sw.dataset.to);
+  });
+  $("google-btn").addEventListener("click", function () {
+    var b = this; b.disabled = true;
+    b.querySelector("svg").hidden = true;
+    var sp = document.createElement("span"); sp.className = "spinner"; b.prepend(sp);
+    $("google-label").textContent = "Google hesabına bağlanılıyor…";
+    setTimeout(function () {
+      store.set("tg_session", "1");
+      closeAuth(); showApp();
+      toast(mode === "signup" ? "Hoş geldin, " + USER.name.split(" ")[0] + "! Hesabın oluşturuldu." : "Giriş yapıldı. Hoş geldin, " + USER.name.split(" ")[0] + "!");
+    }, 900);
+  });
+
+  /* ---------- Akış ---------- */
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  var PIN = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>';
+  function renderFeed() {
+    var feed = $("feed");
+    feed.querySelectorAll(".post").forEach(function (n) { n.remove(); });
+    POSTS.forEach(function (p) {
+      var multi = p.images.length > 1;
+      var el = document.createElement("article");
+      el.className = "post";
+      el.innerHTML =
+        '<header class="post-head">' +
+          '<div class="avatar" style="background:' + p.color + '" aria-hidden="true">' + p.initials + '</div>' +
+          '<div class="post-who"><strong>' + esc(p.who) + '</strong>' +
+          '<span class="post-place">' + PIN + esc(p.place) + '</span></div>' +
+        '</header>' +
+        '<div class="media">' +
+          '<div class="slides" tabindex="0" aria-label="' + esc(p.place) + ' görselleri">' +
+            p.images.map(function (im) { return '<img src="' + im.src + '" alt="' + esc(im.alt) + '" loading="lazy">'; }).join("") +
+          '</div>' +
+          (multi ? '<span class="count">1/' + p.images.length + '</span>' : '') +
+        '</div>' +
+        (multi ? '<div class="dots">' + p.images.map(function (_, i) { return '<i class="' + (i ? '' : 'on') + '"></i>'; }).join("") + '</div>' : '');
+      feed.appendChild(el);
+      if (multi) {
+        var sl = el.querySelector(".slides"), dots = el.querySelectorAll(".dots i"), cnt = el.querySelector(".count");
+        sl.addEventListener("scroll", function () {
+          var i = Math.round(sl.scrollLeft / sl.clientWidth);
+          dots.forEach(function (d, j) { d.classList.toggle("on", i === j); });
+          cnt.textContent = (i + 1) + "/" + p.images.length;
+        }, { passive: true });
+      }
+    });
+  }
+
+  /* ---------- Menü ---------- */
+  function renderMenu() {
+    $("menu-list").innerHTML = MENU.map(function (m) {
+      var icon = m.icon ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + m.icon + '</svg>' : '';
+      return '<li><button type="button" data-id="' + m.id + '"' + (m.cls ? ' class="' + m.cls + '"' : '') +
+        (m.id === current ? ' aria-current="page"' : '') + '>' + icon + '<span>' + m.label + '</span></button></li>';
+    }).join("");
+  }
+  function renderMe() {
+    $("me").innerHTML =
+      '<div class="me-row"><div class="avatar" style="background:' + USER.color + '" aria-hidden="true">' + USER.initials + '</div>' +
+      '<div class="me-id"><strong>' + esc(USER.name) + '</strong><span>' + esc(USER.handle) + '</span><span>' + esc(USER.email) + '</span></div></div>' +
+      '<div class="stats">' +
+        '<div><b>' + USER.posts + '</b><span>Gönderi</span></div>' +
+        '<div><b>' + USER.followers + '</b><span>Takipçi</span></div>' +
+        '<div><b>' + USER.following + '</b><span>Takip</span></div>' +
+      '</div>';
+  }
+  function openMenu() { renderMenu(); $("drawer").hidden = false; $("btn-menu").setAttribute("aria-expanded", "true"); }
+  function closeMenu() { $("drawer").hidden = true; $("btn-menu").setAttribute("aria-expanded", "false"); }
+  $("btn-menu").addEventListener("click", openMenu);
+  $("btn-menu-close").addEventListener("click", closeMenu);
+  $("drawer").addEventListener("click", function (e) {
+    if (e.target === this) return closeMenu();
+    var b = e.target.closest("button[data-id]"); if (!b) return;
+    var item = MENU.filter(function (m) { return m.id === b.dataset.id; })[0];
+    closeMenu();
+    if (item.id === "home") { current = "home"; window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+    toast((item.id === "share" ? "Paylaş" : item.label) + " bölümü bir sonraki aşamada eklenecek.");
+  });
+
+  /* ---------- Ayarlar ---------- */
+  function applyTheme(t) {
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    else document.documentElement.removeAttribute("data-theme");
+    document.querySelectorAll("#theme-seg button").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.themeChoice === (t || "system")));
+    });
+  }
+  $("btn-settings").addEventListener("click", function () { $("settings").hidden = false; });
+  $("settings-close").addEventListener("click", function () { $("settings").hidden = true; });
+  $("settings").addEventListener("click", function (e) { if (e.target === this) this.hidden = true; });
+  $("theme-seg").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    var t = b.dataset.themeChoice; store.set("tg_theme", t); applyTheme(t);
+  });
+  $("btn-logout").addEventListener("click", function () {
+    store.del("tg_session"); $("settings").hidden = true; showLogin(); toast("Çıkış yapıldı.");
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    closeAuth(); closeMenu(); $("settings").hidden = true;
+  });
+
+  var toastTimer;
+  function toast(msg) {
+    var t = $("toast"); t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 2600);
+  }
+
+  /* ---------- Başlat ---------- */
+  applyTheme(store.get("tg_theme") || "system");
+  if (store.get("tg_session") === "1") { showApp(); initMap(); } else showLogin();
+  window.addEventListener("resize", function () { if (map) map.invalidateSize(); });
+})();
+</script>

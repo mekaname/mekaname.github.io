@@ -1386,15 +1386,15 @@ var FIREBASE_CONFIG = {
     else if (pw.length < 6) { bad = "f-pass"; text = "Şifre en az 6 karakter olmalı."; }
     if (bad) { $(bad).setAttribute("aria-invalid", "true"); $(bad).focus(); return msg(text, ""); }
     msg("", ""); busy(true);
+    welcome = up ? "Hesabın oluşturuldu. Hoş geldin!" : "Giriş yapıldı.";
     (up ? Auth.signUp(name, email, pw) : Auth.signIn(email, pw))
-      .then(function () { welcome = up ? "Hesabın oluşturuldu. Hoş geldin!" : "Giriş yapıldı."; })
-      .catch(function (err) { msg(errText(err), ""); })
+      .catch(function (err) { welcome = ""; msg(errText(err), ""); })
       .then(function () { busy(false); });
   });
   $("google-btn").addEventListener("click", function () {
     msg("", ""); busy(true);
-    Auth.google().then(function () { welcome = "Google hesabınla giriş yapıldı."; })
-      .catch(function (err) { msg(errText(err), ""); })
+    welcome = "Google hesabınla giriş yapıldı.";
+    Auth.google().catch(function (err) { welcome = ""; msg(errText(err), ""); })
       .then(function () { busy(false); });
   });
   $("btn-forgot").addEventListener("click", function () {
@@ -1538,7 +1538,7 @@ var FIREBASE_CONFIG = {
   function gmapsLink(c, q) { return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(c[0] + "," + c[1]) + (q ? "" : ""); }
   function renderDetail(p) {
     route = "detail"; setTop("back", p.yer);
-    var a = person(p.yazar), shortName = p.yer.split(" (")[0];
+    var a = person(p.yazar);
     var credits = p.medya.map(function (m) {
       var c = DATA.kaynaklar && DATA.kaynaklar[m.kaynak]; if (!c) return "";
       return '<li>' + (m.tur === "video" ? "Video" : "Fotoğraf") + ': <a href="' + esc(c.page) + '" target="_blank" rel="noopener">' + esc(c.artist || c.title) + '</a>, ' + esc(c.license) + '</li>';
@@ -1565,7 +1565,7 @@ var FIREBASE_CONFIG = {
       '<ul class="similar">' + p.benzer.map(function (s, i) {
         return '<li><span class="num">' + (i + 1) + '</span><div class="info"><button class="name" data-a="fly" data-i="' + i + '" type="button">' + esc(s.ad) + '</button><p class="desc">' + esc(s.aciklama) + '</p></div>' +
           '<div class="side"><span>' + fmt(km(p.koordinat, s.koordinat)) + ' km</span><a href="' + gmapsLink(s.koordinat) + '" target="_blank" rel="noopener">Haritada aç</a></div></li>';
-      }).join("") + '</ul><p class="map-actions">Uzaklıklar ' + esc(shortName) + '\'e kuş uçuşu olarak hesaplanmıştır.</p></section>' +
+      }).join("") + '</ul><p class="map-actions">Uzaklıklar bu mekâna kuş uçuşu olarak hesaplanmıştır.</p></section>' +
 
       '<section class="sec" aria-labelledby="h-com"><h3 id="h-com">Yorumlar</h3><ul class="comments" id="comments"></ul></section>' +
       '</article>';

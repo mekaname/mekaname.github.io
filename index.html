@@ -1302,13 +1302,30 @@ var FIREBASE_CONFIG = {
   function avatarHTML(name, color, photo) {
     return '<div class="avatar" style="background:' + color + '" aria-hidden="true">' + (photo ? '<img src="' + esc(photo) + '" alt="" referrerpolicy="no-referrer">' : esc(initials(name))) + '</div>';
   }
-  function mediaSrc(m) { return m.tur === "video" ? "assets/video/" + m.kaynak + ".mp4" : "assets/foto/" + m.kaynak + ".jpg"; }
-  function posterSrc(m) { return "assets/video/" + m.kaynak + ".jpg"; }
+  /* Dosya çözümleyici: tek dosyalık sürümde (önizleme) tüm dosyalar sayfanın içine gömülüdür (window.TG_GOMULU). */
+  var GOMULU = window.TG_GOMULU || null, blobs = {};
+  function asset(path) {
+    if (!GOMULU || !GOMULU[path]) return path;
+    var d = GOMULU[path];
+    if (d.indexOf("data:video/") !== 0) return d;
+    if (blobs[path]) return blobs[path];
+    try {
+      var bin = atob(d.slice(d.indexOf(",") + 1)), u = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+      return (blobs[path] = URL.createObjectURL(new Blob([u], { type: "video/mp4" })));
+    } catch (e) { return d; }
+  }
+  function getJSON(path) {
+    if (GOMULU && GOMULU[path]) return Promise.resolve(GOMULU[path]);
+    return fetch(path).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  }
+  function mediaSrc(m) { return asset(m.tur === "video" ? "assets/video/" + m.kaynak + ".mp4" : "assets/foto/" + m.kaynak + ".jpg"); }
+  function posterSrc(m) { return asset("assets/video/" + m.kaynak + ".jpg"); }
 
   /* ===================== GİRİŞ EKRANI HARİTASI ===================== */
   var WORLD = [[-85.0511, -180], [85.0511, 180]];
   function worldImage(map, shift) {
-    return L.imageOverlay("assets/fiziki-harita.jpg", [[WORLD[0][0], WORLD[0][1] + shift], [WORLD[1][0], WORLD[1][1] + shift]], { interactive: false }).addTo(map);
+    return L.imageOverlay(asset("assets/fiziki-harita.jpg"), [[WORLD[0][0], WORLD[0][1] + shift], [WORLD[1][0], WORLD[1][1] + shift]], { interactive: false }).addTo(map);
   }
   var loginMap = null, raf = 0;
   function initLoginMap() {
@@ -1601,7 +1618,7 @@ var FIREBASE_CONFIG = {
 
   /* Haritalar: çevrim içi katman (OpenStreetMap / Google) yüklenemezse yerel fiziki haritaya geçer */
   var coastCache = null;
-  function coasts() { return coastCache || (coastCache = fetch("data/kiyilar.json").then(function (r) { return r.json(); }).catch(function () { return null; })); }
+  function coasts() { return coastCache || (coastCache = getJSON("data/kiyilar.json").catch(function () { return null; })); }
   function localBase(map) {
     // İnternet katmanı yoksa: uzak zoomda fiziki dünya görüntüsü, yakında net kıyı çizgileriyle çizilmiş kara/deniz.
     map.getContainer().style.background = "#9fc5de";
@@ -1737,7 +1754,7 @@ var FIREBASE_CONFIG = {
   /* ===================== BAŞLAT ===================== */
   var welcome = "";
   applyTheme(store.get("tg_tema", "system"));
-  var dataReady = fetch("data/gonderiler.json").then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  var dataReady = getJSON("data/gonderiler.json");
   Auth.onChange(function (u) {
     USER = u;
     if (!u) { ST = null; stopMaps(); if (location.hash) history.replaceState(null, "", location.pathname + location.search); showLogin(); return; }
@@ -1745,7 +1762,11 @@ var FIREBASE_CONFIG = {
     dataReady.then(function (d) {
       DATA = d; showApp();
       if (welcome) { toast(welcome); welcome = ""; }
-    }).catch(function () { toast("Gönderiler yüklenemedi. Sayfayı yenile."); });
+    }).catch(function () {
+      // Veriler gelmese bile giriş tamamlanır; akış boş gösterilir.
+      DATA = { kullanicilar: {}, gonderiler: [], kaynaklar: {} }; showApp();
+      toast("Gönderiler yüklenemedi. İnternet bağlantını kontrol edip sayfayı yenile.");
+    });
   });
   window.addEventListener("resize", function () { if (loginMap) loginMap.invalidateSize(); });
 })();

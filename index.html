@@ -2,412 +2,1129 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>TarihGram</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="theme-color" content="#1d4f73">
+<meta name="theme-color" content="#1b5e8c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Manrope:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Young+Serif&display=swap">
 <style>
-/* Layout: one phone-sized column. Login = full-bleed Leaflet atlas with centred mark; app = sticky top bar, left drawer, single feed. */
+/* Layout: tek telefon sütunu. Giriş = tam ekran fiziki harita + ortada logo; uygulama = yapışkan üst çubuk, soldan çekmece, akış ve gönderi detay sayfası. */
 :root {
-  --bg: #f4f6f8;
+  --bg: #f2f3f1;
   --surface: #ffffff;
-  --fg: #16212b;
-  --muted: #5d6b78;
-  --line: #dde3e9;
-  --accent: #1d6fa3;
+  --fg: #1a1c1e;
+  --muted: #646b72;
+  --line: #e2e4e3;
+  --accent: #1b5e8c;
   --accent-ink: #ffffff;
-  --gold: #c08a2e;
-  --scrim: rgba(10, 22, 34, .45);
-  --shadow: 0 10px 30px rgba(16, 33, 48, .16);
+  --like: #e0334f;
+  --scrim: rgba(12, 16, 20, .5);
+  --shadow: 0 12px 32px rgba(15, 25, 35, .18);
+  --sea: #24547f;
 
-  --ocean: #1d4f73;
-  --land-0: #e3b55b;
-  --land-1: #c9714f;
-  --land-2: #8fae5d;
-  --land-3: #d98b8f;
-  --land-4: #b39ad1;
-  --border-land: #fdf6e6;
+  --font-display: "Young Serif", Georgia, "Times New Roman", serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
-  --font-display: "Cinzel", "Trajan Pro", Georgia, serif;
-  --font-body: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-
-  --r-sm: 10px;
-  --r-md: 16px;
-  --app-w: 440px;
+  --app-w: 470px;
+  --r: 14px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0f161d; --surface: #17212b; --fg: #e8eef3; --muted: #93a3b1; --line: #26333f;
-    --accent: #5fb0e4; --accent-ink: #08202f; --gold: #e0ae55; --scrim: rgba(0,0,0,.6);
-    --shadow: 0 10px 30px rgba(0,0,0,.5); color-scheme: dark;
+    --bg: #0e1012; --surface: #16191c; --fg: #eceef0; --muted: #9aa2aa; --line: #282c31;
+    --accent: #6fb1e0; --accent-ink: #0b2030; --like: #ff5a72; --scrim: rgba(0,0,0,.62);
+    --shadow: 0 12px 32px rgba(0,0,0,.55); color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0f161d; --surface: #17212b; --fg: #e8eef3; --muted: #93a3b1; --line: #26333f;
-  --accent: #5fb0e4; --accent-ink: #08202f; --gold: #e0ae55; --scrim: rgba(0,0,0,.6);
-  --shadow: 0 10px 30px rgba(0,0,0,.5); color-scheme: dark;
+  --bg: #0e1012; --surface: #16191c; --fg: #eceef0; --muted: #9aa2aa; --line: #282c31;
+  --accent: #6fb1e0; --accent-ink: #0b2030; --like: #ff5a72; --scrim: rgba(0,0,0,.62);
+  --shadow: 0 12px 32px rgba(0,0,0,.55); color-scheme: dark;
 }
 
-/* --- Leaflet core styles (inlined subset of leaflet@1.9.4) --- */
-.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}
-.leaflet-container{overflow:hidden;-webkit-tap-highlight-color:transparent}
-.leaflet-tile{user-select:none;-webkit-user-drag:none;visibility:hidden}
-.leaflet-tile-loaded{visibility:inherit}
-.leaflet-container img.leaflet-tile{max-width:none!important;max-height:none!important}
-.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}
-.leaflet-pane>svg path{pointer-events:none}
-.leaflet-control-container{display:none}
-.leaflet-zoom-anim .leaflet-zoom-animated{transition:transform .25s cubic-bezier(0,0,.25,1)}
+/* Leaflet 1.9.4 stil dosyası (satır içi) */
+.leaflet-pane,
+ .leaflet-tile,
+ .leaflet-marker-icon,
+ .leaflet-marker-shadow,
+ .leaflet-tile-container,
+ .leaflet-pane > svg,
+ .leaflet-pane > canvas,
+ .leaflet-zoom-box,
+ .leaflet-image-layer,
+ .leaflet-layer {
+ 	position: absolute;
+ 	left: 0;
+ 	top: 0;
+ 	}
+ .leaflet-container {
+ 	overflow: hidden;
+ 	}
+ .leaflet-tile,
+ .leaflet-marker-icon,
+ .leaflet-marker-shadow {
+ 	-webkit-user-select: none;
+ 	 -moz-user-select: none;
+ 	 user-select: none;
+ 	 -webkit-user-drag: none;
+ 	}
+ 
+ .leaflet-tile::selection {
+ 	background: transparent;
+ }
+ 
+ .leaflet-safari .leaflet-tile {
+ 	image-rendering: -webkit-optimize-contrast;
+ 	}
+ 
+ .leaflet-safari .leaflet-tile-container {
+ 	width: 1600px;
+ 	height: 1600px;
+ 	-webkit-transform-origin: 0 0;
+ 	}
+ .leaflet-marker-icon,
+ .leaflet-marker-shadow {
+ 	display: block;
+ 	}
+ 
+ 
+ .leaflet-container .leaflet-overlay-pane svg {
+ 	max-width: none !important;
+ 	max-height: none !important;
+ 	}
+ .leaflet-container .leaflet-marker-pane img,
+ .leaflet-container .leaflet-shadow-pane img,
+ .leaflet-container .leaflet-tile-pane img,
+ .leaflet-container img.leaflet-image-layer,
+ .leaflet-container .leaflet-tile {
+ 	max-width: none !important;
+ 	max-height: none !important;
+ 	width: auto;
+ 	padding: 0;
+ 	}
+ 
+ .leaflet-container img.leaflet-tile {
+ 	
+ 	mix-blend-mode: plus-lighter;
+ }
+ 
+ .leaflet-container.leaflet-touch-zoom {
+ 	-ms-touch-action: pan-x pan-y;
+ 	touch-action: pan-x pan-y;
+ 	}
+ .leaflet-container.leaflet-touch-drag {
+ 	-ms-touch-action: pinch-zoom;
+ 	
+ 	touch-action: none;
+ 	touch-action: pinch-zoom;
+ }
+ .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+ 	-ms-touch-action: none;
+ 	touch-action: none;
+ }
+ .leaflet-container {
+ 	-webkit-tap-highlight-color: transparent;
+ }
+ .leaflet-container a {
+ 	-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);
+ }
+ .leaflet-tile {
+ 	filter: inherit;
+ 	visibility: hidden;
+ 	}
+ .leaflet-tile-loaded {
+ 	visibility: inherit;
+ 	}
+ .leaflet-zoom-box {
+ 	width: 0;
+ 	height: 0;
+ 	-moz-box-sizing: border-box;
+ 	 box-sizing: border-box;
+ 	z-index: 800;
+ 	}
+ 
+ .leaflet-overlay-pane svg {
+ 	-moz-user-select: none;
+ 	}
+ 
+ .leaflet-pane { z-index: 400; }
+ 
+ .leaflet-tile-pane { z-index: 200; }
+ .leaflet-overlay-pane { z-index: 400; }
+ .leaflet-shadow-pane { z-index: 500; }
+ .leaflet-marker-pane { z-index: 600; }
+ .leaflet-tooltip-pane { z-index: 650; }
+ .leaflet-popup-pane { z-index: 700; }
+ 
+ .leaflet-map-pane canvas { z-index: 100; }
+ .leaflet-map-pane svg { z-index: 200; }
+ 
+ .leaflet-vml-shape {
+ 	width: 1px;
+ 	height: 1px;
+ 	}
+ .lvml {
+ 	behavior: url(#default#VML);
+ 	display: inline-block;
+ 	position: absolute;
+ 	}
+ 
+ 
+ 
+ 
+ .leaflet-control {
+ 	position: relative;
+ 	z-index: 800;
+ 	pointer-events: visiblePainted; 
+ 	pointer-events: auto;
+ 	}
+ .leaflet-top,
+ .leaflet-bottom {
+ 	position: absolute;
+ 	z-index: 1000;
+ 	pointer-events: none;
+ 	}
+ .leaflet-top {
+ 	top: 0;
+ 	}
+ .leaflet-right {
+ 	right: 0;
+ 	}
+ .leaflet-bottom {
+ 	bottom: 0;
+ 	}
+ .leaflet-left {
+ 	left: 0;
+ 	}
+ .leaflet-control {
+ 	float: left;
+ 	clear: both;
+ 	}
+ .leaflet-right .leaflet-control {
+ 	float: right;
+ 	}
+ .leaflet-top .leaflet-control {
+ 	margin-top: 10px;
+ 	}
+ .leaflet-bottom .leaflet-control {
+ 	margin-bottom: 10px;
+ 	}
+ .leaflet-left .leaflet-control {
+ 	margin-left: 10px;
+ 	}
+ .leaflet-right .leaflet-control {
+ 	margin-right: 10px;
+ 	}
+ 
+ 
+ 
+ 
+ .leaflet-fade-anim .leaflet-popup {
+ 	opacity: 0;
+ 	-webkit-transition: opacity 0.2s linear;
+ 	 -moz-transition: opacity 0.2s linear;
+ 	 transition: opacity 0.2s linear;
+ 	}
+ .leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+ 	opacity: 1;
+ 	}
+ .leaflet-zoom-animated {
+ 	-webkit-transform-origin: 0 0;
+ 	 -ms-transform-origin: 0 0;
+ 	 transform-origin: 0 0;
+ 	}
+ svg.leaflet-zoom-animated {
+ 	will-change: transform;
+ }
+ 
+ .leaflet-zoom-anim .leaflet-zoom-animated {
+ 	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
+ 	 -moz-transition: -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
+ 	 transition: transform 0.25s cubic-bezier(0,0,0.25,1);
+ 	}
+ .leaflet-zoom-anim .leaflet-tile,
+ .leaflet-pan-anim .leaflet-tile {
+ 	-webkit-transition: none;
+ 	 -moz-transition: none;
+ 	 transition: none;
+ 	}
+ 
+ .leaflet-zoom-anim .leaflet-zoom-hide {
+ 	visibility: hidden;
+ 	}
+ 
+ 
+ 
+ 
+ .leaflet-interactive {
+ 	cursor: pointer;
+ 	}
+ .leaflet-grab {
+ 	cursor: -webkit-grab;
+ 	cursor: -moz-grab;
+ 	cursor: grab;
+ 	}
+ .leaflet-crosshair,
+ .leaflet-crosshair .leaflet-interactive {
+ 	cursor: crosshair;
+ 	}
+ .leaflet-popup-pane,
+ .leaflet-control {
+ 	cursor: auto;
+ 	}
+ .leaflet-dragging .leaflet-grab,
+ .leaflet-dragging .leaflet-grab .leaflet-interactive,
+ .leaflet-dragging .leaflet-marker-draggable {
+ 	cursor: move;
+ 	cursor: -webkit-grabbing;
+ 	cursor: -moz-grabbing;
+ 	cursor: grabbing;
+ 	}
+ 
+ 
+ .leaflet-marker-icon,
+ .leaflet-marker-shadow,
+ .leaflet-image-layer,
+ .leaflet-pane > svg path,
+ .leaflet-tile-container {
+ 	pointer-events: none;
+ 	}
+ 
+ .leaflet-marker-icon.leaflet-interactive,
+ .leaflet-image-layer.leaflet-interactive,
+ .leaflet-pane > svg path.leaflet-interactive,
+ svg.leaflet-image-layer.leaflet-interactive path {
+ 	pointer-events: visiblePainted; 
+ 	pointer-events: auto;
+ 	}
+ 
+ 
+ 
+ .leaflet-container {
+ 	background: #ddd;
+ 	outline-offset: 1px;
+ 	}
+ .leaflet-container a {
+ 	color: #0078A8;
+ 	}
+ .leaflet-zoom-box {
+ 	border: 2px dotted #38f;
+ 	background: rgba(255,255,255,0.5);
+ 	}
+ 
+ 
+ 
+ .leaflet-container {
+ 	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+ 	font-size: 12px;
+ 	font-size: 0.75rem;
+ 	line-height: 1.5;
+ 	}
+ 
+ 
+ 
+ 
+ .leaflet-bar {
+ 	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+ 	border-radius: 4px;
+ 	}
+ .leaflet-bar a {
+ 	background-color: #fff;
+ 	border-bottom: 1px solid #ccc;
+ 	width: 26px;
+ 	height: 26px;
+ 	line-height: 26px;
+ 	display: block;
+ 	text-align: center;
+ 	text-decoration: none;
+ 	color: black;
+ 	}
+ .leaflet-bar a,
+ .leaflet-control-layers-toggle {
+ 	background-position: 50% 50%;
+ 	background-repeat: no-repeat;
+ 	display: block;
+ 	}
+ .leaflet-bar a:hover,
+ .leaflet-bar a:focus {
+ 	background-color: #f4f4f4;
+ 	}
+ .leaflet-bar a:first-child {
+ 	border-top-left-radius: 4px;
+ 	border-top-right-radius: 4px;
+ 	}
+ .leaflet-bar a:last-child {
+ 	border-bottom-left-radius: 4px;
+ 	border-bottom-right-radius: 4px;
+ 	border-bottom: none;
+ 	}
+ .leaflet-bar a.leaflet-disabled {
+ 	cursor: default;
+ 	background-color: #f4f4f4;
+ 	color: #bbb;
+ 	}
+ 
+ .leaflet-touch .leaflet-bar a {
+ 	width: 30px;
+ 	height: 30px;
+ 	line-height: 30px;
+ 	}
+ .leaflet-touch .leaflet-bar a:first-child {
+ 	border-top-left-radius: 2px;
+ 	border-top-right-radius: 2px;
+ 	}
+ .leaflet-touch .leaflet-bar a:last-child {
+ 	border-bottom-left-radius: 2px;
+ 	border-bottom-right-radius: 2px;
+ 	}
+ 
+ 
+ 
+ .leaflet-control-zoom-in,
+ .leaflet-control-zoom-out {
+ 	font: bold 18px 'Lucida Console', Monaco, monospace;
+ 	text-indent: 1px;
+ 	}
+ 
+ .leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out {
+ 	font-size: 22px;
+ 	}
+ 
+ 
+ 
+ 
+ .leaflet-control-layers {
+ 	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+ 	background: #fff;
+ 	border-radius: 5px;
+ 	}
+ .leaflet-control-layers-toggle {
+ 	background-image: none;
+ 	width: 36px;
+ 	height: 36px;
+ 	}
+ .leaflet-retina .leaflet-control-layers-toggle {
+ 	background-image: none;
+ 	background-size: 26px 26px;
+ 	}
+ .leaflet-touch .leaflet-control-layers-toggle {
+ 	width: 44px;
+ 	height: 44px;
+ 	}
+ .leaflet-control-layers .leaflet-control-layers-list,
+ .leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+ 	display: none;
+ 	}
+ .leaflet-control-layers-expanded .leaflet-control-layers-list {
+ 	display: block;
+ 	position: relative;
+ 	}
+ .leaflet-control-layers-expanded {
+ 	padding: 6px 10px 6px 6px;
+ 	color: #333;
+ 	background: #fff;
+ 	}
+ .leaflet-control-layers-scrollbar {
+ 	overflow-y: scroll;
+ 	overflow-x: hidden;
+ 	padding-right: 5px;
+ 	}
+ .leaflet-control-layers-selector {
+ 	margin-top: 2px;
+ 	position: relative;
+ 	top: 1px;
+ 	}
+ .leaflet-control-layers label {
+ 	display: block;
+ 	font-size: 13px;
+ 	font-size: 1.08333em;
+ 	}
+ .leaflet-control-layers-separator {
+ 	height: 0;
+ 	border-top: 1px solid #ddd;
+ 	margin: 5px -10px 5px -6px;
+ 	}
+ 
+ 
+ .leaflet-default-icon-path { 
+ 	background-image: none;
+ 	}
+ 
+ 
+ 
+ 
+ .leaflet-container .leaflet-control-attribution {
+ 	background: #fff;
+ 	background: rgba(255, 255, 255, 0.8);
+ 	margin: 0;
+ 	}
+ .leaflet-control-attribution,
+ .leaflet-control-scale-line {
+ 	padding: 0 5px;
+ 	color: #333;
+ 	line-height: 1.4;
+ 	}
+ .leaflet-control-attribution a {
+ 	text-decoration: none;
+ 	}
+ .leaflet-control-attribution a:hover,
+ .leaflet-control-attribution a:focus {
+ 	text-decoration: underline;
+ 	}
+ .leaflet-attribution-flag {
+ 	display: inline !important;
+ 	vertical-align: baseline !important;
+ 	width: 1em;
+ 	height: 0.6669em;
+ 	}
+ .leaflet-left .leaflet-control-scale {
+ 	margin-left: 5px;
+ 	}
+ .leaflet-bottom .leaflet-control-scale {
+ 	margin-bottom: 5px;
+ 	}
+ .leaflet-control-scale-line {
+ 	border: 2px solid #777;
+ 	border-top: none;
+ 	line-height: 1.1;
+ 	padding: 2px 5px 1px;
+ 	white-space: nowrap;
+ 	-moz-box-sizing: border-box;
+ 	 box-sizing: border-box;
+ 	background: rgba(255, 255, 255, 0.8);
+ 	text-shadow: 1px 1px #fff;
+ 	}
+ .leaflet-control-scale-line:not(:first-child) {
+ 	border-top: 2px solid #777;
+ 	border-bottom: none;
+ 	margin-top: -2px;
+ 	}
+ .leaflet-control-scale-line:not(:first-child):not(:last-child) {
+ 	border-bottom: 2px solid #777;
+ 	}
+ 
+ .leaflet-touch .leaflet-control-attribution,
+ .leaflet-touch .leaflet-control-layers,
+ .leaflet-touch .leaflet-bar {
+ 	box-shadow: none;
+ 	}
+ .leaflet-touch .leaflet-control-layers,
+ .leaflet-touch .leaflet-bar {
+ 	border: 2px solid rgba(0,0,0,0.2);
+ 	background-clip: padding-box;
+ 	}
+ 
+ 
+ 
+ 
+ .leaflet-popup {
+ 	position: absolute;
+ 	text-align: center;
+ 	margin-bottom: 20px;
+ 	}
+ .leaflet-popup-content-wrapper {
+ 	padding: 1px;
+ 	text-align: left;
+ 	border-radius: 12px;
+ 	}
+ .leaflet-popup-content {
+ 	margin: 13px 24px 13px 20px;
+ 	line-height: 1.3;
+ 	font-size: 13px;
+ 	font-size: 1.08333em;
+ 	min-height: 1px;
+ 	}
+ .leaflet-popup-content p {
+ 	margin: 17px 0;
+ 	margin: 1.3em 0;
+ 	}
+ .leaflet-popup-tip-container {
+ 	width: 40px;
+ 	height: 20px;
+ 	position: absolute;
+ 	left: 50%;
+ 	margin-top: -1px;
+ 	margin-left: -20px;
+ 	overflow: hidden;
+ 	pointer-events: none;
+ 	}
+ .leaflet-popup-tip {
+ 	width: 17px;
+ 	height: 17px;
+ 	padding: 1px;
+ 
+ 	margin: -10px auto 0;
+ 	pointer-events: auto;
+ 
+ 	-webkit-transform: rotate(45deg);
+ 	 -moz-transform: rotate(45deg);
+ 	 -ms-transform: rotate(45deg);
+ 	 transform: rotate(45deg);
+ 	}
+ .leaflet-popup-content-wrapper,
+ .leaflet-popup-tip {
+ 	background: white;
+ 	color: #333;
+ 	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+ 	}
+ .leaflet-container a.leaflet-popup-close-button {
+ 	position: absolute;
+ 	top: 0;
+ 	right: 0;
+ 	border: none;
+ 	text-align: center;
+ 	width: 24px;
+ 	height: 24px;
+ 	font: 16px/24px Tahoma, Verdana, sans-serif;
+ 	color: #757575;
+ 	text-decoration: none;
+ 	background: transparent;
+ 	}
+ .leaflet-container a.leaflet-popup-close-button:hover,
+ .leaflet-container a.leaflet-popup-close-button:focus {
+ 	color: #585858;
+ 	}
+ .leaflet-popup-scrolled {
+ 	overflow: auto;
+ 	}
+ 
+ .leaflet-oldie .leaflet-popup-content-wrapper {
+ 	-ms-zoom: 1;
+ 	}
+ .leaflet-oldie .leaflet-popup-tip {
+ 	width: 24px;
+ 	margin: 0 auto;
+ 
+ 	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+ 	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
+ 	}
+ 
+ .leaflet-oldie .leaflet-control-zoom,
+ .leaflet-oldie .leaflet-control-layers,
+ .leaflet-oldie .leaflet-popup-content-wrapper,
+ .leaflet-oldie .leaflet-popup-tip {
+ 	border: 1px solid #999;
+ 	}
+ 
+ 
+ 
+ 
+ .leaflet-div-icon {
+ 	background: #fff;
+ 	border: 1px solid #666;
+ 	}
+ 
+ 
+ 
+ 
+ .leaflet-tooltip {
+ 	position: absolute;
+ 	padding: 6px;
+ 	background-color: #fff;
+ 	border: 1px solid #fff;
+ 	border-radius: 3px;
+ 	color: #222;
+ 	white-space: nowrap;
+ 	-webkit-user-select: none;
+ 	-moz-user-select: none;
+ 	-ms-user-select: none;
+ 	user-select: none;
+ 	pointer-events: none;
+ 	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+ 	}
+ .leaflet-tooltip.leaflet-interactive {
+ 	cursor: pointer;
+ 	pointer-events: auto;
+ 	}
+ .leaflet-tooltip-top:before,
+ .leaflet-tooltip-bottom:before,
+ .leaflet-tooltip-left:before,
+ .leaflet-tooltip-right:before {
+ 	position: absolute;
+ 	pointer-events: none;
+ 	border: 6px solid transparent;
+ 	background: transparent;
+ 	content: "";
+ 	}
+ 
+ 
+ 
+ .leaflet-tooltip-bottom {
+ 	margin-top: 6px;
+ }
+ .leaflet-tooltip-top {
+ 	margin-top: -6px;
+ }
+ .leaflet-tooltip-bottom:before,
+ .leaflet-tooltip-top:before {
+ 	left: 50%;
+ 	margin-left: -6px;
+ 	}
+ .leaflet-tooltip-top:before {
+ 	bottom: 0;
+ 	margin-bottom: -12px;
+ 	border-top-color: #fff;
+ 	}
+ .leaflet-tooltip-bottom:before {
+ 	top: 0;
+ 	margin-top: -12px;
+ 	margin-left: -6px;
+ 	border-bottom-color: #fff;
+ 	}
+ .leaflet-tooltip-left {
+ 	margin-left: -6px;
+ }
+ .leaflet-tooltip-right {
+ 	margin-left: 6px;
+ }
+ .leaflet-tooltip-left:before,
+ .leaflet-tooltip-right:before {
+ 	top: 50%;
+ 	margin-top: -6px;
+ 	}
+ .leaflet-tooltip-left:before {
+ 	right: 0;
+ 	margin-right: -12px;
+ 	border-left-color: #fff;
+ 	}
+ .leaflet-tooltip-right:before {
+ 	left: 0;
+ 	margin-left: -12px;
+ 	border-right-color: #fff;
+ 	}
+ 
+ 
+ 
+ @media print {
+ 	
+ 	.leaflet-control {
+ 		-webkit-print-color-adjust: exact;
+ 		print-color-adjust: exact;
+ 		}
+ 	}
 
 [hidden] { display: none !important; }
 html, body { height: 100%; }
-body { margin: 0; }
 :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
 body {
+  margin: 0;
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body);
   font-size: 15px;
-  line-height: 1.45;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
-button { font: inherit; color: inherit; cursor: pointer; }
-:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+a { color: var(--accent); }
+:focus-visible { outline: 2.5px solid var(--accent); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ================= GİRİŞ EKRANI ================= */
-.login {
-  position: fixed; inset: 0;
-  background: var(--ocean);
-  color: #fff;
-  overflow: hidden;
-}
-#map { position: absolute; inset: 0; background: var(--ocean); }
-.login::after { /* legibility vignette over the atlas */
+.login { position: fixed; inset: 0; background: var(--sea); color: #fff; overflow: hidden; }
+#login-map { position: absolute; inset: 0; background: var(--sea); }
+.login::after {
   content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 500;
   background:
-    radial-gradient(ellipse 70% 42% at 50% 48%, rgba(8,26,40,.62), rgba(8,26,40,0) 75%),
-    linear-gradient(180deg, rgba(8,26,40,.25), rgba(8,26,40,0) 30%, rgba(8,26,40,0) 70%, rgba(8,26,40,.45));
+    radial-gradient(ellipse 85% 38% at 50% 50%, rgba(6, 18, 30, .55), rgba(6, 18, 30, 0) 72%),
+    linear-gradient(180deg, rgba(6,18,30,.3), rgba(6,18,30,0) 25%, rgba(6,18,30,0) 65%, rgba(6,18,30,.55));
 }
 .login-center {
   position: absolute; inset: 0; z-index: 600;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 28px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;
   padding-left: max(24px, env(safe-area-inset-left, 0px));
   padding-right: max(24px, env(safe-area-inset-right, 0px));
   text-align: center;
 }
-.brand { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-.brand-mark {
-  width: 74px; height: 74px; border-radius: 22px;
-  display: grid; place-items: center;
-  background: linear-gradient(145deg, #f3c86b, #c0782f);
-  box-shadow: 0 8px 24px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.35);
-}
-.brand-mark svg { width: 44px; height: 44px; }
-.brand h1 {
-  margin: 0;
-  font-family: var(--font-display); font-weight: 800;
-  font-size: clamp(2.4rem, 11vw, 3.4rem);
-  letter-spacing: .04em; line-height: 1;
-  text-shadow: 0 3px 18px rgba(0,0,0,.45);
-}
-.brand h1 span { color: #f3c86b; }
-.brand p { margin: 0; font-size: .95rem; opacity: .9; text-shadow: 0 1px 8px rgba(0,0,0,.5); max-width: 28ch; }
-.login-actions { display: grid; gap: 12px; width: min(100%, 320px); }
-.btn {
-  border: 0; border-radius: 999px; padding: 15px 20px;
-  font-weight: 700; font-size: 1rem; letter-spacing: .01em;
-  transition: transform .12s ease, filter .12s ease;
-}
+.wordmark { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(2.7rem, 13vw, 3.8rem); line-height: 1; letter-spacing: -.01em; text-shadow: 0 2px 20px rgba(0,0,0,.5); }
+.tagline { margin: 12px 0 0; font-size: 1.02rem; opacity: .92; text-shadow: 0 1px 10px rgba(0,0,0,.6); }
+.login-actions { display: grid; gap: 12px; width: min(100%, 300px); }
+.btn { border: 0; border-radius: 12px; padding: 14px 18px; font-weight: 600; font-size: 1rem; transition: transform .1s ease, background .15s ease; }
 .btn:active { transform: scale(.98); }
-.btn-primary { background: #f3c86b; color: #2a1a05; box-shadow: 0 6px 18px rgba(0,0,0,.3); }
-.btn-ghost { background: rgba(255,255,255,.14); color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.75); backdrop-filter: blur(6px); }
+.btn-light { background: #fff; color: #16212b; }
+.btn-light:hover { background: #eef2f5; }
+.btn-outline { background: rgba(10, 25, 40, .35); color: #fff; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.8); }
+.btn-outline:hover { background: rgba(10, 25, 40, .5); }
 .version {
   position: absolute; z-index: 600;
-  right: calc(14px + env(safe-area-inset-right, 0px));
-  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-  font-size: 11px; font-weight: 700; letter-spacing: .08em;
-  color: rgba(255,255,255,.85);
-  background: rgba(8,26,40,.45); padding: 3px 8px; border-radius: 6px;
+  right: calc(12px + env(safe-area-inset-right, 0px));
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  font-size: 11px; font-weight: 600; letter-spacing: .06em; color: rgba(255,255,255,.82);
+}
+.map-credit {
+  position: absolute; z-index: 600;
+  left: calc(12px + env(safe-area-inset-left, 0px));
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  font-size: 10px; color: rgba(255,255,255,.6);
 }
 
-/* --- Google modal (bottom sheet) --- */
-.sheet-wrap {
+/* ================= GİRİŞ / KAYIT PENCERESİ ================= */
+.modal-wrap {
   position: fixed; inset: 0; z-index: 1000;
-  display: flex; align-items: flex-end; justify-content: center;
+  display: grid; place-items: center;
   background: var(--scrim);
-  animation: fade .18s ease;
+  padding: 16px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  overflow-y: auto;
+  animation: fade .16s ease;
 }
-.sheet {
-  width: min(100%, var(--app-w));
+.modal {
+  width: min(100%, 400px);
   background: var(--surface); color: var(--fg);
-  border-radius: 22px 22px 0 0;
-  padding: 10px 22px calc(26px + env(safe-area-inset-bottom, 0px));
-  box-shadow: var(--shadow);
-  animation: rise .22s cubic-bezier(.2,.8,.2,1);
+  border-radius: 18px; box-shadow: var(--shadow);
+  padding: 24px 22px 20px;
+  animation: pop .2s cubic-bezier(.2,.8,.2,1);
 }
-.sheet-grip { width: 40px; height: 5px; border-radius: 3px; background: var(--line); margin: 0 auto 14px; }
-.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.sheet h2 { margin: 0; font-size: 1.25rem; }
-.sheet .sub { margin: 6px 0 20px; color: var(--muted); font-size: .92rem; }
-.icon-btn {
-  width: 40px; height: 40px; border-radius: 12px; border: 0;
-  display: grid; place-items: center; background: transparent;
-}
+.modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.modal h2 { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; line-height: 1.15; }
+.modal .lead { margin: 6px 0 18px; color: var(--muted); font-size: .93rem; }
+.icon-btn { width: 40px; height: 40px; flex: none; border-radius: 10px; border: 0; background: transparent; display: grid; place-items: center; margin: -6px -8px 0 0; }
 .icon-btn:hover { background: color-mix(in srgb, var(--fg) 8%, transparent); }
 .icon-btn svg { width: 22px; height: 22px; }
-.google-btn {
+.form { display: grid; gap: 12px; }
+.field { display: grid; gap: 5px; }
+.field label { font-size: .85rem; font-weight: 600; }
+.field input {
+  width: 100%; box-sizing: border-box;
+  border: 1.5px solid var(--line); border-radius: 10px; background: var(--surface);
+  padding: 12px 13px; font-size: 1rem;
+}
+.field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
+.field input[aria-invalid="true"] { border-color: var(--like); }
+.pw { position: relative; }
+.pw input { padding-right: 70px; }
+.pw button { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); border: 0; background: none; color: var(--accent); font-weight: 600; font-size: .85rem; padding: 6px 8px; }
+.form-error { margin: 0; color: var(--like); font-size: .88rem; font-weight: 500; }
+.form-info { margin: 0; color: var(--accent); font-size: .88rem; font-weight: 500; }
+.btn-primary { background: var(--accent); color: var(--accent-ink); width: 100%; margin-top: 4px; }
+.btn-primary:hover { filter: brightness(1.07); }
+.btn[disabled] { opacity: .65; cursor: progress; }
+.or { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: .85rem; margin: 16px 0; }
+.or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.gbtn {
   width: 100%; display: flex; align-items: center; justify-content: center; gap: 12px;
-  padding: 14px 18px; border-radius: 12px;
-  background: var(--surface); color: var(--fg);
-  border: 1.5px solid var(--line); font-weight: 600; font-size: 1rem;
+  padding: 12px 16px; border-radius: 10px;
+  background: #fff; color: #1f1f1f; border: 1px solid #747775;
+  font-family: "Roboto", var(--font-body); font-weight: 500; font-size: .98rem;
 }
-.google-btn:hover { border-color: var(--muted); }
-.google-btn svg { width: 20px; height: 20px; flex: none; }
-.google-btn[disabled] { opacity: .7; cursor: progress; }
-.spinner { width: 18px; height: 18px; border-radius: 50%; border: 2.5px solid var(--line); border-top-color: var(--accent); animation: spin .7s linear infinite; }
-.fine { margin: 16px 0 0; font-size: .78rem; color: var(--muted); text-align: center; }
-.switch-mode { background: none; border: 0; padding: 0; color: var(--accent); font-weight: 700; }
+.gbtn:hover { background: #f6f8fa; }
+.gbtn svg { width: 20px; height: 20px; flex: none; }
+.modal-foot { margin: 16px 0 0; text-align: center; font-size: .9rem; color: var(--muted); }
+.link-btn { border: 0; background: none; padding: 0; color: var(--accent); font-weight: 600; }
+.forgot { justify-self: end; font-size: .85rem; }
+.local-note { margin: 14px 0 0; padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--accent) 9%, transparent); font-size: .8rem; color: var(--muted); }
 
-/* ================= ANA EKRAN ================= */
-.app {
-  min-height: 100%;
-  width: min(100%, var(--app-w));
-  margin: 0 auto;
-  background: var(--bg);
-  position: relative;
-}
-@media (min-width: 480px) { .app { box-shadow: 0 0 0 1px var(--line); } }
-body::before {
-  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10;
-  background: var(--surface);
-}
+/* ================= UYGULAMA ================= */
+.app { min-height: 100%; width: min(100%, var(--app-w)); margin: 0 auto; background: var(--bg); position: relative; }
+@media (min-width: 520px) { .app { box-shadow: 0 0 0 1px var(--line); } }
+body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--surface); }
 .topbar {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
-  display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 8px;
-  padding-block: 8px;
-  padding-left: max(10px, env(safe-area-inset-left, 0px));
-  padding-right: max(10px, env(safe-area-inset-right, 0px));
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
+  display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 6px;
+  padding-block: 6px;
+  padding-left: max(8px, env(safe-area-inset-left, 0px));
+  padding-right: max(8px, env(safe-area-inset-right, 0px));
+  background: var(--surface); border-bottom: 1px solid var(--line);
 }
-.topbar .logo {
-  justify-self: center; margin: 0;
-  font-family: var(--font-display); font-weight: 800; font-size: 1.35rem; letter-spacing: .04em;
-}
-.topbar .logo span { color: var(--gold); }
-.settings-btn {
-  display: flex; align-items: center; gap: 6px;
-  border: 0; background: transparent; padding: 8px 10px; border-radius: 12px;
-  font-weight: 600; font-size: .88rem;
-}
+.topbar .icon-btn { margin: 0; }
+.topbar-title { margin: 0; justify-self: center; font-family: var(--font-display); font-weight: 400; font-size: 1.45rem; line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.topbar-title.small { font-family: var(--font-body); font-weight: 700; font-size: 1rem; }
+.settings-btn { display: flex; align-items: center; gap: 6px; border: 0; background: transparent; padding: 8px 10px; border-radius: 10px; font-weight: 600; font-size: .88rem; }
 .settings-btn:hover { background: color-mix(in srgb, var(--fg) 8%, transparent); }
-.settings-btn svg { width: 22px; height: 22px; }
+.settings-btn svg { width: 21px; height: 21px; }
 
-.feed {
-  display: flex; flex-direction: column; gap: 14px;
-  padding-block: 14px 40px;
-  padding-left: max(12px, env(safe-area-inset-left, 0px));
-  padding-right: max(12px, env(safe-area-inset-right, 0px));
-}
-.feed-note { margin: 0 4px; color: var(--muted); font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 700; }
+.view-head { margin: 0; padding: 16px 16px 0; font-family: var(--font-display); font-weight: 400; font-size: 1.4rem; }
+.empty { margin: 24px 16px; padding: 28px 20px; border: 1.5px dashed var(--line); border-radius: var(--r); text-align: center; color: var(--muted); }
+.feed { display: flex; flex-direction: column; padding-bottom: 32px; }
 
-.post {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  overflow: hidden;
-}
-.post-head { display: flex; align-items: center; gap: 11px; padding: 12px 14px; }
-.avatar {
-  width: 40px; height: 40px; border-radius: 50%; flex: none;
-  display: grid; place-items: center;
-  font-weight: 700; font-size: .9rem; color: #fff;
-}
-.post-who { min-width: 0; display: flex; flex-direction: column; }
-.post-who strong { font-size: .95rem; }
-.post-place { display: flex; align-items: center; gap: 4px; color: var(--muted); font-size: .85rem; }
-.post-place svg { width: 14px; height: 14px; flex: none; color: var(--gold); }
-.media { position: relative; }
-.slides {
-  display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
+/* --- Gönderi kartı --- */
+.post { background: var(--surface); border-bottom: 1px solid var(--line); }
+@media (min-width: 520px) { .feed { gap: 14px; padding: 14px 12px 32px; } .post { border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; } }
+.post-head { display: flex; align-items: center; gap: 10px; padding: 10px 14px; }
+.avatar { width: 38px; height: 38px; border-radius: 50%; flex: none; display: grid; place-items: center; font-weight: 700; font-size: .82rem; color: #fff; overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.who { min-width: 0; display: flex; flex-direction: column; line-height: 1.3; }
+.who strong { font-size: .95rem; }
+.place-link { border: 0; background: none; padding: 0; text-align: left; color: var(--muted); font-size: .86rem; display: inline-flex; gap: 4px; align-items: center; min-width: 0; }
+.place-link span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.place-link:hover span { text-decoration: underline; }
+.place-link svg { width: 14px; height: 14px; flex: none; color: var(--accent); }
+.when { margin-left: auto; color: var(--muted); font-size: .8rem; white-space: nowrap; align-self: flex-start; padding-top: 2px; }
+
+.media { position: relative; background: #000; user-select: none; }
+.slides { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
 .slides::-webkit-scrollbar { display: none; }
-.slides img {
-  flex: 0 0 100%; width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
-  scroll-snap-align: start; display: block; background: var(--line);
-}
-.count {
-  position: absolute; top: 10px; right: 10px;
-  background: rgba(10,20,30,.62); color: #fff; font-size: .75rem; font-weight: 700;
-  padding: 3px 9px; border-radius: 999px; font-variant-numeric: tabular-nums;
-}
-.dots { display: flex; justify-content: center; gap: 6px; padding: 10px 0 12px; }
-.dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--line); transition: background .2s; }
+.slide { flex: 0 0 100%; aspect-ratio: 4 / 5; scroll-snap-align: start; position: relative; cursor: pointer; }
+.slide img, .slide video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.detail .slide { cursor: default; }
+.badge { position: absolute; top: 10px; right: 10px; z-index: 2; background: rgba(10,14,18,.66); color: #fff; font-size: .75rem; font-weight: 600; padding: 3px 9px; border-radius: 999px; font-variant-numeric: tabular-nums; }
+.vid-tag { position: absolute; left: 10px; top: 10px; z-index: 2; display: flex; align-items: center; gap: 4px; background: rgba(10,14,18,.66); color: #fff; font-size: .72rem; font-weight: 600; padding: 3px 8px; border-radius: 999px; }
+.vid-tag svg { width: 12px; height: 12px; }
+.heart-burst { position: absolute; left: 50%; top: 50%; width: 96px; height: 96px; margin: -48px 0 0 -48px; z-index: 3; color: #fff; filter: drop-shadow(0 4px 14px rgba(0,0,0,.4)); pointer-events: none; animation: burst .8s ease forwards; }
+.dots { display: flex; justify-content: center; gap: 5px; position: absolute; left: 0; right: 0; bottom: -22px; }
+.dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--line); transition: background .2s; }
 .dots i.on { background: var(--accent); }
 
-/* --- Drawer menu --- */
-.drawer-wrap { position: fixed; inset: 0; z-index: 900; background: var(--scrim); animation: fade .18s ease; }
+.actions { display: flex; align-items: center; gap: 2px; padding: 6px 8px 0; }
+.act { width: 42px; height: 42px; border: 0; background: none; border-radius: 10px; display: grid; place-items: center; color: var(--fg); }
+.act:hover { background: color-mix(in srgb, var(--fg) 6%, transparent); }
+.act svg { width: 25px; height: 25px; }
+.act.liked { color: var(--like); }
+.act.liked svg path { fill: currentColor; }
+.act.saved svg path { fill: currentColor; }
+.act.save { margin-left: auto; }
+.act.pop svg { animation: pop-icon .3s ease; }
+.post-meta { padding: 2px 16px 14px; display: grid; gap: 2px; }
+.likes { font-weight: 700; font-size: .92rem; font-variant-numeric: tabular-nums; }
+.more-comments { border: 0; background: none; padding: 0; text-align: left; color: var(--muted); font-size: .9rem; justify-self: start; }
+
+/* --- Detay sayfası --- */
+.detail { background: var(--surface); padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
+.detail .post-meta { padding-bottom: 6px; }
+.caption { margin: 4px 0 0; font-size: .95rem; }
+.caption b { margin-right: 6px; }
+.credits { padding: 0 16px; font-size: .78rem; color: var(--muted); }
+.credits summary { cursor: pointer; padding: 6px 0; }
+.credits ul { margin: 0 0 8px; padding-left: 18px; display: grid; gap: 4px; }
+.sec { padding: 20px 16px 4px; border-top: 1px solid var(--line); margin-top: 14px; }
+.sec h2 { margin: 0 0 4px; font-family: var(--font-display); font-weight: 400; font-size: 1.55rem; line-height: 1.2; text-wrap: balance; }
+.sec h3 { margin: 0 0 10px; font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
+.sec p { margin: 0 0 12px; max-width: 65ch; }
+.loc-line { color: var(--muted); font-size: .9rem; margin: 0 0 14px !important; }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+.facts div { background: var(--surface); padding: 10px 12px; display: grid; }
+.facts dt { font-size: .75rem; color: var(--muted); }
+.facts dd { margin: 0; font-weight: 600; }
+.timeline { list-style: none; margin: 0 0 8px; padding: 0; display: grid; }
+.timeline li { display: grid; grid-template-columns: 100px 1fr; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.timeline li:last-child { border-bottom: 0; }
+.timeline .yr { font-weight: 700; font-size: .88rem; color: var(--accent); font-variant-numeric: tabular-nums; }
+.timeline .ev { min-width: 0; font-size: .93rem; }
+.mapbox { height: 260px; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--sea); position: relative; }
+.mapbox iframe { width: 100%; height: 100%; border: 0; display: block; }
+.map-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0 6px; font-size: .85rem; color: var(--muted); }
+.pill-link { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--line); text-decoration: none; color: var(--fg); font-weight: 600; font-size: .85rem; }
+.pill-link:hover { border-color: var(--muted); }
+.pill-link svg { width: 16px; height: 16px; color: var(--accent); }
+.coords { font-variant-numeric: tabular-nums; }
+.similar { list-style: none; margin: 12px 0 0; padding: 0; display: grid; }
+.similar li { display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: start; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.similar li:last-child { border-bottom: 0; }
+.num { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--fg); color: var(--surface); font-size: .78rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.similar .info { min-width: 0; }
+.similar button.name { border: 0; background: none; padding: 0; font-weight: 700; text-align: left; }
+.similar button.name:hover { text-decoration: underline; }
+.similar .desc { margin: 0; color: var(--muted); font-size: .86rem; }
+.similar .side { display: grid; justify-items: end; gap: 2px; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.similar .side a { font-weight: 600; text-decoration: none; }
+.comments { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.comment { display: grid; grid-template-columns: 34px 1fr; gap: 10px; }
+.comment .avatar { width: 34px; height: 34px; font-size: .74rem; }
+.comment .body { min-width: 0; }
+.comment p { margin: 0; overflow-wrap: anywhere; }
+.comment .meta { display: flex; gap: 12px; font-size: .78rem; color: var(--muted); margin-top: 2px; }
+.comment .meta button { border: 0; background: none; padding: 0; color: var(--muted); font-size: .78rem; font-weight: 600; }
+.comment-bar {
+  position: fixed; bottom: 0; z-index: 25;
+  left: 50%; transform: translateX(-50%); width: min(100%, var(--app-w)); box-sizing: border-box;
+  display: flex; align-items: center; gap: 10px;
+  padding-top: 10px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  padding-left: max(14px, env(safe-area-inset-left, 0px));
+  padding-right: max(14px, env(safe-area-inset-right, 0px));
+  background: var(--surface); border-top: 1px solid var(--line);
+}
+.comment-bar .avatar { width: 34px; height: 34px; font-size: .74rem; }
+.comment-bar input { flex: 1; min-width: 0; border: 1.5px solid var(--line); border-radius: 999px; padding: 10px 14px; background: var(--bg); }
+.comment-bar input:focus { outline: none; border-color: var(--accent); }
+.comment-bar button { border: 0; background: none; color: var(--accent); font-weight: 700; padding: 8px 4px; }
+.comment-bar button[disabled] { opacity: .4; cursor: default; }
+
+/* Harita işaretleri */
+.pin-main { width: 30px; height: 30px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--like); border: 3px solid #fff; box-shadow: 0 3px 10px rgba(0,0,0,.4); }
+.pin-num { width: 24px; height: 24px; border-radius: 50%; background: #16212b; color: #fff; border: 2px solid #fff; display: grid; place-items: center; font: 700 12px/1 var(--font-body); box-shadow: 0 2px 6px rgba(0,0,0,.35); }
+.leaflet-popup-content { font-family: var(--font-body); font-size: 13px; margin: 10px 12px; }
+.leaflet-container { font-family: var(--font-body); }
+
+/* --- Çekmece menü --- */
+.drawer-wrap { position: fixed; inset: 0; z-index: 900; background: var(--scrim); animation: fade .16s ease; }
 .drawer {
-  position: absolute; top: 0; bottom: 0; left: 0;
-  width: min(84vw, 320px);
-  background: var(--surface);
-  display: flex; flex-direction: column;
-  padding-top: calc(14px + env(safe-area-inset-top, 0px));
-  padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  position: absolute; top: 0; bottom: 0; left: 0; width: min(84vw, 310px);
+  background: var(--surface); display: flex; flex-direction: column; overflow-y: auto;
+  padding-top: calc(12px + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
   padding-left: env(safe-area-inset-left, 0px);
-  box-shadow: var(--shadow);
-  animation: slide .22s cubic-bezier(.2,.8,.2,1);
+  box-shadow: var(--shadow); animation: slide .2s cubic-bezier(.2,.8,.2,1);
 }
-.drawer-top { display: flex; align-items: center; justify-content: space-between; padding: 0 12px 10px 20px; }
-.drawer-top .logo { font-family: var(--font-display); font-weight: 800; font-size: 1.25rem; letter-spacing: .04em; }
-.drawer-top .logo span { color: var(--gold); }
-.menu { list-style: none; margin: 0; padding: 6px 12px; display: grid; gap: 2px; }
-.menu button {
-  width: 100%; display: flex; align-items: center; gap: 14px;
-  padding: 12px 12px; border: 0; border-radius: 12px; background: transparent;
-  font-weight: 600; font-size: 1rem; text-align: left;
-}
-.menu button:hover { background: color-mix(in srgb, var(--fg) 7%, transparent); }
-.menu button[aria-current="page"] { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+.drawer-top { display: flex; align-items: center; justify-content: space-between; padding: 0 14px 8px 20px; }
+.drawer-top .wm { font-family: var(--font-display); font-size: 1.35rem; }
+.menu { list-style: none; margin: 0; padding: 4px 12px; display: grid; gap: 2px; }
+.menu button { width: 100%; display: flex; align-items: center; gap: 14px; padding: 11px 12px; border: 0; border-radius: 10px; background: transparent; font-weight: 600; font-size: 1rem; text-align: left; }
+.menu button:hover { background: color-mix(in srgb, var(--fg) 6%, transparent); }
+.menu button[aria-current="page"] { color: var(--accent); background: color-mix(in srgb, var(--accent) 11%, transparent); }
 .menu svg { width: 22px; height: 22px; flex: none; }
-.menu .share-btn { background: var(--accent); color: var(--accent-ink); margin-bottom: 8px; justify-content: center; }
-.menu .share-btn:hover { background: var(--accent); filter: brightness(1.08); }
-.me {
-  margin-top: auto; margin-inline: 12px;
-  border-top: 1px solid var(--line);
-  padding: 14px 8px 2px;
-  display: grid; gap: 12px;
-}
+.menu .share-btn { background: var(--accent); color: var(--accent-ink); justify-content: center; margin-bottom: 8px; }
+.menu .share-btn:hover { background: var(--accent); filter: brightness(1.07); }
+.me { margin: auto 12px 0; border-top: 1px solid var(--line); padding: 14px 8px 2px; display: grid; gap: 12px; }
 .me-row { display: flex; align-items: center; gap: 12px; min-width: 0; }
-.me-row .avatar { width: 48px; height: 48px; font-size: 1rem; }
-.me-id { min-width: 0; display: flex; flex-direction: column; }
+.me-row .avatar { width: 48px; height: 48px; font-size: .95rem; }
+.me-id { min-width: 0; display: flex; flex-direction: column; line-height: 1.35; }
 .me-id strong { font-size: 1rem; }
-.me-id span { color: var(--muted); font-size: .82rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.me-id span { color: var(--muted); font-size: .8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; }
-.stats div { display: flex; flex-direction: column; }
+.stats div { display: grid; }
 .stats b { font-size: 1.05rem; font-variant-numeric: tabular-nums; }
-.stats span { color: var(--muted); font-size: .75rem; }
+.stats span { color: var(--muted); font-size: .74rem; }
 
-/* --- Settings sheet rows --- */
-.seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--bg); padding: 4px; border-radius: 12px; }
-.seg button { border: 0; background: transparent; padding: 9px 6px; border-radius: 9px; font-weight: 600; font-size: .9rem; }
-.seg button[aria-pressed="true"] { background: var(--surface); box-shadow: 0 1px 4px rgba(0,0,0,.12); }
-.set-label { font-size: .78rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 700; margin: 0 0 8px; }
-.danger { width: 100%; margin-top: 18px; border: 1.5px solid var(--line); background: transparent; color: #c0392b; border-radius: 12px; padding: 13px; font-weight: 700; }
+/* --- Alt sayfalar (Ayarlar, Gönder) --- */
+.sheet-wrap { position: fixed; inset: 0; z-index: 950; display: flex; align-items: flex-end; justify-content: center; background: var(--scrim); animation: fade .16s ease; }
+.sheet { width: min(100%, var(--app-w)); box-sizing: border-box; background: var(--surface); border-radius: 18px 18px 0 0; padding: 10px 20px calc(22px + env(safe-area-inset-bottom, 0px)); box-shadow: var(--shadow); animation: rise .2s cubic-bezier(.2,.8,.2,1); max-height: 85vh; overflow-y: auto; }
+.grip { width: 38px; height: 4px; border-radius: 2px; background: var(--line); margin: 0 auto 12px; }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; }
+.sheet h2 { margin: 0; font-size: 1.15rem; }
+.set-label { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; margin: 18px 0 8px; }
+.seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: var(--bg); padding: 4px; border-radius: 10px; }
+.seg button { border: 0; background: transparent; padding: 9px 6px; border-radius: 8px; font-weight: 600; font-size: .9rem; }
+.seg button[aria-pressed="true"] { background: var(--surface); box-shadow: 0 1px 4px rgba(0,0,0,.14); }
+.account { display: flex; gap: 12px; align-items: center; padding: 12px; border: 1px solid var(--line); border-radius: 12px; margin-top: 12px; }
+.account .avatar { width: 44px; height: 44px; }
+.account div { min-width: 0; display: grid; line-height: 1.35; }
+.account span { color: var(--muted); font-size: .82rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.danger { width: 100%; margin-top: 20px; border: 1.5px solid var(--line); background: transparent; color: var(--like); border-radius: 12px; padding: 12px; font-weight: 700; }
+.send-list { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 10px; }
+.send-list li { display: flex; align-items: center; gap: 12px; }
+.send-list .who { flex: 1; }
+.send-list .who span { color: var(--muted); font-size: .82rem; }
+.chip-btn { border: 0; border-radius: 9px; padding: 8px 14px; font-weight: 700; font-size: .85rem; background: var(--accent); color: var(--accent-ink); }
+.chip-btn.done { background: var(--bg); color: var(--muted); }
+.copy-row { display: flex; gap: 8px; margin-top: 16px; }
+.copy-row input { flex: 1; min-width: 0; border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--bg); font-size: .85rem; }
 
-.toast {
-  position: fixed; left: 50%; z-index: 1200;
-  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
-  transform: translateX(-50%);
-  background: var(--fg); color: var(--bg);
-  padding: 10px 16px; border-radius: 999px; font-weight: 600; font-size: .9rem;
-  box-shadow: var(--shadow); max-width: calc(100% - 32px); text-align: center;
-  animation: rise .2s ease;
-}
+.toast { position: fixed; left: 50%; z-index: 1200; bottom: calc(88px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 10px 16px; border-radius: 12px; font-weight: 600; font-size: .9rem; box-shadow: var(--shadow); width: max-content; max-width: calc(100% - 40px); text-align: center; animation: rise .2s ease; }
 
 @keyframes fade { from { opacity: 0 } }
-@keyframes rise { from { transform: translateY(24px); opacity: 0 } }
+@keyframes pop { from { transform: scale(.96); opacity: 0 } }
+@keyframes rise { from { transform: translateY(20px); opacity: 0 } }
 @keyframes slide { from { transform: translateX(-100%) } }
-@keyframes spin { to { transform: rotate(360deg) } }
+@keyframes burst { 0% { transform: scale(.3); opacity: 0 } 25% { transform: scale(1.1); opacity: 1 } 45% { transform: scale(.95) } 80% { opacity: 1 } 100% { transform: scale(1); opacity: 0 } }
+@keyframes pop-icon { 50% { transform: scale(1.25) } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 
 <!-- ================= GİRİŞ EKRANI ================= -->
 <section class="login" id="login" aria-label="Giriş ekranı">
-  <div id="map" aria-hidden="true"></div>
+  <div id="login-map" aria-hidden="true"></div>
   <div class="login-center">
-    <div class="brand">
-      <div class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 48 48" fill="none" stroke="#2a1a05" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
-          <path d="M6 18 L24 8 L42 18 Z" fill="#fbe3a6"/>
-          <path d="M9 18 H39"/><path d="M12 22 V36 M20 22 V36 M28 22 V36 M36 22 V36"/>
-          <path d="M8 38 H40 M6 42 H42"/>
-        </svg>
-      </div>
-      <h1>Tarih<span>Gram</span></h1>
-      <p>Gezdiğin tarihi yerleri paylaş, dünyayı keşfet.</p>
+    <div>
+      <h1 class="wordmark">TarihGram</h1>
+      <p class="tagline">Gezdiğin tarihi yerleri paylaş.</p>
     </div>
     <div class="login-actions">
-      <button class="btn btn-primary" id="btn-signup" type="button">Kayıt Ol</button>
-      <button class="btn btn-ghost" id="btn-signin" type="button">Giriş Yap</button>
+      <button class="btn btn-light" id="btn-signup" type="button">Kayıt Ol</button>
+      <button class="btn btn-outline" id="btn-signin" type="button">Giriş Yap</button>
     </div>
   </div>
+  <div class="map-credit">Harita: NASA Blue Marble</div>
   <div class="version">1.0 E</div>
 </section>
 
-<!-- ================= ANA EKRAN ================= -->
+<!-- ================= UYGULAMA ================= -->
 <div class="app" id="app" hidden>
   <header class="topbar">
-    <button class="icon-btn" id="btn-menu" type="button" aria-label="Menüyü aç" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-    </button>
-    <p class="logo">Tarih<span>Gram</span></p>
-    <button class="settings-btn" id="btn-settings" type="button" aria-label="Ayarlar">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    <button class="icon-btn" id="btn-left" type="button" aria-label="Menüyü aç"></button>
+    <p class="topbar-title" id="top-title">TarihGram</p>
+    <button class="settings-btn" id="btn-settings" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       <span>Ayarlar</span>
     </button>
   </header>
-
-  <main class="feed" id="feed" aria-label="Ana sayfa akışı">
-    <p class="feed-note">Örnek gönderiler</p>
-  </main>
+  <main id="view"></main>
 </div>
 
-<!-- Menü (çekmece) -->
+<!-- Menü -->
 <div class="drawer-wrap" id="drawer" hidden>
   <nav class="drawer" aria-label="Ana menü">
     <div class="drawer-top">
-      <span class="logo">Tarih<span>Gram</span></span>
-      <button class="icon-btn" id="btn-menu-close" type="button" aria-label="Menüyü kapat">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
+      <span class="wm">TarihGram</span>
+      <button class="icon-btn" data-close="drawer" type="button" aria-label="Menüyü kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
     <ul class="menu" id="menu-list"></ul>
     <div class="me" id="me"></div>
   </nav>
 </div>
 
-<!-- Google ile giriş modalı -->
-<div class="sheet-wrap" id="auth" hidden>
-  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="auth-title">
-    <div class="sheet-grip"></div>
-    <div class="sheet-head">
+<!-- Giriş / Kayıt penceresi -->
+<div class="modal-wrap" id="auth" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <div class="modal-head">
       <h2 id="auth-title">Giriş Yap</h2>
-      <button class="icon-btn" id="auth-close" type="button" aria-label="Kapat">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
+      <button class="icon-btn" data-close="auth" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
-    <p class="sub" id="auth-sub">Hesabına Google ile giriş yap.</p>
-    <button class="google-btn" id="google-btn" type="button">
+    <p class="lead" id="auth-lead"></p>
+    <form class="form" id="auth-form" novalidate>
+      <div class="field" id="f-name-wrap">
+        <label for="f-name">Ad Soyad</label>
+        <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Örn. Ayşe Yılmaz">
+      </div>
+      <div class="field">
+        <label for="f-email">E-posta adresi</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="ornek@eposta.com">
+      </div>
+      <div class="field">
+        <label for="f-pass">Şifre</label>
+        <div class="pw">
+          <input id="f-pass" name="password" type="password" autocomplete="current-password" placeholder="En az 6 karakter">
+          <button type="button" id="pw-toggle" aria-label="Şifreyi göster">Göster</button>
+        </div>
+      </div>
+      <button type="button" class="link-btn forgot" id="btn-forgot">Şifremi unuttum</button>
+      <p class="form-error" id="auth-error" role="alert" hidden></p>
+      <p class="form-info" id="auth-info" role="status" hidden></p>
+      <button class="btn btn-primary" id="auth-submit" type="submit">Giriş Yap</button>
+    </form>
+    <div class="or">veya</div>
+    <button class="gbtn" id="google-btn" type="button">
       <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
       <span id="google-label">Google ile Giriş Yap</span>
     </button>
-    <p class="fine" id="auth-switch"></p>
-    <p class="fine">Bu sürüm bir prototiptir: Google girişi örnek bir hesapla taklit edilir.</p>
+    <p class="modal-foot" id="auth-switch"></p>
+    <p class="local-note" id="local-note" hidden>Önizleme modu: Site henüz Firebase'e bağlı olmadığı için hesaplar yalnızca bu tarayıcıda saklanır. Google ile giriş, Firebase ayarları eklenince çalışır.</p>
   </div>
 </div>
 
 <!-- Ayarlar -->
 <div class="sheet-wrap" id="settings" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="settings-title">
-    <div class="sheet-grip"></div>
+    <div class="grip"></div>
     <div class="sheet-head">
       <h2 id="settings-title">Ayarlar</h2>
-      <button class="icon-btn" id="settings-close" type="button" aria-label="Kapat">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-      </button>
+      <button class="icon-btn" data-close="settings" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
-    <p class="sub">Uygulama görünümünü seç.</p>
+    <div class="account" id="account"></div>
     <p class="set-label">Tema</p>
     <div class="seg" id="theme-seg">
-      <button type="button" data-theme-choice="system">Sistem</button>
-      <button type="button" data-theme-choice="light">Açık</button>
-      <button type="button" data-theme-choice="dark">Koyu</button>
+      <button type="button" data-t="system">Sistem</button>
+      <button type="button" data-t="light">Açık</button>
+      <button type="button" data-t="dark">Koyu</button>
     </div>
     <button class="danger" id="btn-logout" type="button">Çıkış Yap</button>
+  </div>
+</div>
+
+<!-- Gönder -->
+<div class="sheet-wrap" id="send" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="send-title">
+    <div class="grip"></div>
+    <div class="sheet-head">
+      <h2 id="send-title">Gönder</h2>
+      <button class="icon-btn" data-close="send" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <ul class="send-list" id="send-list"></ul>
+    <div class="copy-row">
+      <label class="sr" for="send-link">Gönderi bağlantısı</label>
+      <input id="send-link" type="text" readonly>
+      <button class="chip-btn" id="copy-btn" type="button">Kopyala</button>
+    </div>
   </div>
 </div>
 
@@ -415,253 +1132,621 @@ body::before {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
 <script>
+/* =====================================================================
+   FIREBASE AYARLARI
+   Gerçek hesaplar ve "Google ile Giriş" için Firebase konsolundan
+   (Proje ayarları > Web uygulaması) aldığınız yapılandırmayı buraya
+   yapıştırın. Boş (null) kalırsa uygulama "önizleme modunda" çalışır:
+   e-posta ile kayıt yalnızca bu tarayıcıda saklanır.
+   ===================================================================== */
+var FIREBASE_CONFIG = null;
+/* Örnek:
+var FIREBASE_CONFIG = {
+  apiKey: "AIza...",
+  authDomain: "tarihgram.firebaseapp.com",
+  projectId: "tarihgram",
+  appId: "1:123:web:abc"
+};
+*/
+
 (function () {
   "use strict";
   var $ = function (id) { return document.getElementById(id); };
   var store = {
-    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
-    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+    get: function (k, d) { try { var v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
     del: function (k) { try { localStorage.removeItem(k); } catch (e) {} }
   };
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function initials(name) { return String(name || "?").trim().split(/\s+/).slice(0, 2).map(function (w) { return w.charAt(0).toLocaleUpperCase("tr"); }).join(""); }
 
-  /* ---------- Örnek veri ---------- */
-  var USER = {
-    name: "Deniz Arslan", handle: "@denizarslan", email: "Google hesabı (örnek)",
-    initials: "DA", color: "#1d6fa3",
-    posts: 12, followers: 248, following: 180
+  var ICON = {
+    menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
+    back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+    pin: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>',
+    heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-9.4-9.3C1.4 8 3.4 4.5 6.9 4.5c2.1 0 3.8 1.2 5.1 3 1.3-1.8 3-3 5.1-3 3.5 0 5.5 3.5 4.3 6.7-1.9 4.7-9.4 9.3-9.4 9.3z"/></svg>',
+    heartFill: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 20.5s-7.5-4.6-9.4-9.3C1.4 8 3.4 4.5 6.9 4.5c2.1 0 3.8 1.2 5.1 3 1.3-1.8 3-3 5.1-3 3.5 0 5.5 3.5 4.3 6.7-1.9 4.7-9.4 9.3-9.4 9.3z"/></svg>',
+    comment: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.3 7.5L3.5 20.5l1.4-4.5A8.4 8.4 0 1 1 20.5 11.6z"/></svg>',
+    send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M21.5 3 10 14.5M21.5 3l-7 18-4.5-6.5L3 10z"/></svg>',
+    save: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M6 3.5h12v17.5l-6-4.5-6 4.5z"/></svg>',
+    play: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12.5-7.5z"/></svg>',
+    gmaps: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>'
   };
-  var POSTS = [
-    { who: "Ayşe Yılmaz", initials: "AY", color: "#c9714f", place: "Ephesus (Efes), İzmir",
-      images: [
-        { src: "assets/efes-celsus.svg", alt: "Efes'teki Celsus Kütüphanesi'nin iki katlı sütunlu cephesi" },
-        { src: "assets/efes-tiyatro.svg", alt: "Efes Büyük Tiyatrosu'nun yarım daire oturma basamakları" }
-      ] },
-    { who: "Mehmet Kaya", initials: "MK", color: "#6f8f3e", place: "Göreme, Kapadokya",
-      images: [ { src: "assets/kapadokya.svg", alt: "Peri bacalarının üzerinde uçan sıcak hava balonları" } ] },
-    { who: "Elif Demir", initials: "ED", color: "#8b6bb8", place: "Galata Kulesi, İstanbul",
-      images: [ { src: "assets/galata.svg", alt: "Gün batımında Galata Kulesi ve Haliç" } ] }
-  ];
   var MENU = [
-    { id: "share", label: "+ Paylaş", cls: "share-btn",
-      icon: '' },
-    { id: "home", label: "Ana Sayfa",
-      icon: '<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>' },
-    { id: "explore", label: "Keşfet",
-      icon: '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>' },
-    { id: "history", label: "Geçmiş",
-      icon: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' },
-    { id: "maps", label: "Haritalar",
-      icon: '<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>' },
-    { id: "saved", label: "Kaydedilenler",
-      icon: '<path d="M6 3h12v18l-6-4-6 4z"/>' },
-    { id: "profile", label: "Profil",
-      icon: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>' }
+    { id: "share", label: "+ Paylaş", cls: "share-btn" },
+    { id: "home", label: "Ana Sayfa", icon: '<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>' },
+    { id: "explore", label: "Keşfet", icon: '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>' },
+    { id: "history", label: "Geçmiş", icon: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' },
+    { id: "maps", label: "Haritalar", icon: '<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>' },
+    { id: "saved", label: "Kaydedilenler", icon: '<path d="M6 3.5h12v17.5l-6-4.5-6 4.5z"/>' },
+    { id: "profile", label: "Profil", icon: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>' }
   ];
-  var current = "home";
 
-  /* ---------- Harita (Leaflet) ---------- */
-  var LAND = ["--land-0", "--land-1", "--land-2", "--land-3", "--land-4"];
-  var css = getComputedStyle(document.documentElement);
-  function tok(n) { return css.getPropertyValue(n).trim(); }
-  var map = null;
+  /* ===================== KİMLİK DOĞRULAMA ===================== */
+  var ERR = {
+    "auth/email-already-in-use": "Bu e-posta adresiyle zaten bir hesap var. Giriş yapmayı dene.",
+    "auth/invalid-email": "E-posta adresi geçerli görünmüyor.",
+    "auth/weak-password": "Şifre en az 6 karakter olmalı.",
+    "auth/user-not-found": "Bu e-posta adresiyle kayıtlı bir hesap bulunamadı.",
+    "auth/wrong-password": "Şifre yanlış. Tekrar dene ya da şifreni sıfırla.",
+    "auth/invalid-credential": "E-posta veya şifre yanlış.",
+    "auth/invalid-login-credentials": "E-posta veya şifre yanlış.",
+    "auth/too-many-requests": "Çok fazla deneme yapıldı. Birkaç dakika sonra tekrar dene.",
+    "auth/popup-closed-by-user": "Google penceresi kapatıldı. Tekrar denemek için butona bas.",
+    "auth/cancelled-popup-request": "Google penceresi kapatıldı.",
+    "auth/network-request-failed": "İnternet bağlantısı kurulamadı. Bağlantını kontrol edip tekrar dene.",
+    "auth/unauthorized-domain": "Bu alan adı Firebase'de yetkili değil. Firebase konsolunda Authentication > Settings > Authorized domains bölümüne ekle.",
+    "auth/operation-not-allowed": "Bu giriş yöntemi Firebase konsolunda açık değil.",
+    "tg/no-config": "Google ile giriş için site Firebase'e bağlanmalı. Şimdilik e-posta ile kayıt olabilirsin.",
+    "tg/no-crypto": "Tarayıcın bu önizleme için gereken şifreleme özelliğini desteklemiyor."
+  };
+  function errText(e) { return ERR[e && e.code] || (e && e.message) || "Bir sorun oluştu. Tekrar dene."; }
+  function fail(code) { var e = new Error(code); e.code = code; return e; }
 
-  function initMap() {
-    if (!window.L || map) return;
-    var portrait = window.innerHeight > window.innerWidth;
-    map = L.map("map", {
-      zoomControl: false, attributionControl: false,
-      dragging: false, scrollWheelZoom: false, doubleClickZoom: false,
-      boxZoom: false, keyboard: false, touchZoom: false, tap: false,
-      zoomSnap: 0.25, worldCopyJump: false
-    }).setView(portrait ? [34, 34] : [28, 20], portrait ? 2 : 2.25);
-
-    fetch("data/world.json").then(function (r) {
-      if (!r.ok) throw new Error(r.status);
-      return r.json();
-    }).then(function (geo) {
-      var style = function (f) {
-        return { fillColor: tok(LAND[f.properties.c % LAND.length]), fillOpacity: 1,
-                 color: tok("--border-land"), weight: 0.8, opacity: 0.9 };
-      };
-      // Dünya üç kopya çizilir; böylece yatay kaydırmada boşluk kalmaz.
-      [-360, 0, 360].forEach(function (shift) {
-        L.geoJSON(shift ? shiftGeo(geo, shift) : geo, { style: style, interactive: false }).addTo(map);
-      });
-      drift();
-    }).catch(function () {
-      // Yerel veri yüklenemezse (ör. dosya doğrudan açıldıysa) çevrim içi harita katmanına geç.
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 6 }).addTo(map);
+  function loadScript(src) {
+    return new Promise(function (res, rej) {
+      var s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = function () { rej(fail("auth/network-request-failed")); };
+      document.head.appendChild(s);
     });
   }
-  function shiftGeo(geo, dx) {
-    var mv = function (c) { return typeof c[0] === "number" ? [c[0] + dx, c[1]] : c.map(mv); };
-    return { type: "FeatureCollection", features: geo.features.map(function (f) {
-      return { type: "Feature", properties: f.properties, geometry: { type: f.geometry.type, coordinates: mv(f.geometry.coordinates) } };
-    }) };
-  }
-  var driftTimer = null;
-  function drift() {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    var dir = 1, steps = 0;
-    clearInterval(driftTimer);
-    driftTimer = setInterval(function () {
-      if ($("login").hidden) return;
-      map.panBy([dir * 0.6, 0], { animate: false });
-      if (++steps > 900) { steps = 0; dir = -dir; }
-    }, 40);
+
+  var Auth = FIREBASE_CONFIG ? firebaseAuth() : localAuth();
+
+  function firebaseAuth() {
+    var fb, auth, listener;
+    var V = "https://cdn.jsdelivr.net/npm/firebase@10.12.2/";
+    function map(u) { return u && { uid: u.uid, name: u.displayName || u.email.split("@")[0], email: u.email, photo: u.photoURL || "", method: (u.providerData[0] && u.providerData[0].providerId === "google.com") ? "Google" : "E-posta" }; }
+    var ready = loadScript(V + "firebase-app-compat.js").then(function () { return loadScript(V + "firebase-auth-compat.js"); }).then(function () {
+      fb = window.firebase; fb.initializeApp(FIREBASE_CONFIG); auth = fb.auth(); auth.languageCode = "tr";
+      auth.getRedirectResult().catch(function () {});
+    });
+    return {
+      mode: "firebase",
+      onChange: function (cb) { listener = cb; ready.then(function () { auth.onAuthStateChanged(function (u) { cb(map(u)); }); }).catch(function () { cb(null); }); },
+      signUp: function (name, email, pw) {
+        return ready.then(function () { return auth.createUserWithEmailAndPassword(email, pw); })
+          .then(function (c) { return c.user.updateProfile({ displayName: name }).then(function () { listener && listener(map(auth.currentUser)); }); });
+      },
+      signIn: function (email, pw) { return ready.then(function () { return auth.signInWithEmailAndPassword(email, pw); }); },
+      google: function () {
+        return ready.then(function () {
+          var p = new fb.auth.GoogleAuthProvider(); p.setCustomParameters({ prompt: "select_account" });
+          return auth.signInWithPopup(p).catch(function (e) {
+            if (e.code === "auth/popup-blocked" || e.code === "auth/operation-not-supported-in-this-environment") return auth.signInWithRedirect(p);
+            throw e;
+          });
+        });
+      },
+      reset: function (email) { return ready.then(function () { return auth.sendPasswordResetEmail(email); }); },
+      signOut: function () { return ready.then(function () { return auth.signOut(); }); }
+    };
   }
 
-  /* ---------- Ekran geçişleri ---------- */
+  function localAuth() {
+    var cb = function () {};
+    function hash(pw, salt) {
+      if (!(window.crypto && crypto.subtle && window.TextEncoder)) return Promise.reject(fail("tg/no-crypto"));
+      return crypto.subtle.digest("SHA-256", new TextEncoder().encode(salt + ":" + pw)).then(function (b) {
+        return Array.prototype.map.call(new Uint8Array(b), function (x) { return ("0" + x.toString(16)).slice(-2); }).join("");
+      });
+    }
+    function users() { return store.get("tg_kullanicilar", {}); }
+    function toUser(email, u) { return { uid: "yerel-" + email, name: u.name, email: email, photo: "", method: "Önizleme (bu tarayıcı)" }; }
+    function emit() { var e = store.get("tg_oturum", null), u = e && users()[e]; cb(u ? toUser(e, u) : null); }
+    return {
+      mode: "local",
+      onChange: function (f) { cb = f; emit(); },
+      signUp: function (name, email, pw) {
+        var all = users();
+        if (all[email]) return Promise.reject(fail("auth/email-already-in-use"));
+        var salt = Math.random().toString(36).slice(2);
+        return hash(pw, salt).then(function (h) {
+          all[email] = { name: name, salt: salt, hash: h, created: Date.now() };
+          store.set("tg_kullanicilar", all); store.set("tg_oturum", email); emit();
+        });
+      },
+      signIn: function (email, pw) {
+        var u = users()[email];
+        if (!u) return Promise.reject(fail("auth/user-not-found"));
+        return hash(pw, u.salt).then(function (h) {
+          if (h !== u.hash) throw fail("auth/wrong-password");
+          store.set("tg_oturum", email); emit();
+        });
+      },
+      google: function () { return Promise.reject(fail("tg/no-config")); },
+      reset: function () { return Promise.reject(fail("tg/no-config-reset")); },
+      signOut: function () { store.del("tg_oturum"); emit(); return Promise.resolve(); }
+    };
+  }
+  ERR["tg/no-config-reset"] = "Önizleme modunda şifre sıfırlama e-postası gönderilemez. Yeni bir hesap açabilirsin.";
+
+  /* ===================== DURUM ===================== */
+  var DATA = null, USER = null, ST = null, route = "home";
+  function stKey() { return "tg_durum_" + USER.uid; }
+  function loadState() { ST = store.get(stKey(), null) || { liked: {}, saved: {}, comments: {} }; }
+  function saveState() { store.set(stKey(), ST); }
+  function postById(id) { for (var i = 0; i < DATA.gonderiler.length; i++) if (DATA.gonderiler[i].id === id) return DATA.gonderiler[i]; return null; }
+  function person(k) { return DATA.kullanicilar[k]; }
+  function likeCount(p) { return p.begeni + (ST.liked[p.id] ? 1 : 0); }
+  function allComments(p) {
+    var seed = p.yorumlar.map(function (c) { var u = person(c.kim); return { name: u.ad, color: u.renk, text: c.metin, when: c.zaman }; });
+    var mine = (ST.comments[p.id] || []).map(function (c) { return { id: c.id, mine: true, name: USER.name, photo: USER.photo, color: "var(--accent)", text: c.text, when: ago(c.t) }; });
+    return seed.concat(mine);
+  }
+  function ago(t) {
+    var s = (Date.now() - t) / 1000;
+    if (s < 60) return "şimdi"; if (s < 3600) return Math.floor(s / 60) + " dk önce"; if (s < 86400) return Math.floor(s / 3600) + " saat önce";
+    return new Date(t).toLocaleDateString("tr-TR", { day: "numeric", month: "long" });
+  }
+  function fmt(n) { return n.toLocaleString("tr-TR"); }
+  function avatarHTML(name, color, photo) {
+    return '<div class="avatar" style="background:' + color + '" aria-hidden="true">' + (photo ? '<img src="' + esc(photo) + '" alt="" referrerpolicy="no-referrer">' : esc(initials(name))) + '</div>';
+  }
+  function mediaSrc(m) { return m.tur === "video" ? "assets/video/" + m.kaynak + ".mp4" : "assets/foto/" + m.kaynak + ".jpg"; }
+  function posterSrc(m) { return "assets/video/" + m.kaynak + ".jpg"; }
+
+  /* ===================== GİRİŞ EKRANI HARİTASI ===================== */
+  var WORLD = [[-85.0511, -180], [85.0511, 180]];
+  function worldImage(map, shift) {
+    return L.imageOverlay("assets/fiziki-harita.jpg", [[WORLD[0][0], WORLD[0][1] + shift], [WORLD[1][0], WORLD[1][1] + shift]], { interactive: false }).addTo(map);
+  }
+  var loginMap = null, raf = 0;
+  function initLoginMap() {
+    if (!window.L || loginMap) return;
+    loginMap = L.map("login-map", { zoomControl: false, attributionControl: false, dragging: false, scrollWheelZoom: false, doubleClickZoom: false, boxZoom: false, keyboard: false, touchZoom: false, zoomSnap: 0.1 });
+    [-360, 0, 360].forEach(function (s) { worldImage(loginMap, s); });
+    var w = window.innerWidth, h = window.innerHeight;
+    var z = Math.max(Math.log2(h / 256) + 0.35, Math.log2(w / 256 / 1.4));
+    loginMap.setView([24, 28], z, { animate: false });
+    drift();
+  }
+  function drift() {
+    cancelAnimationFrame(raf);
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var last = 0;
+    (function step(t) {
+      raf = requestAnimationFrame(step);
+      if ($("login").hidden || t - last < 33) return; last = t;
+      loginMap.panBy([0.35, 0], { animate: false });
+      var c = loginMap.getCenter();
+      if (c.lng > 200) loginMap.setView([c.lat, c.lng - 360], loginMap.getZoom(), { animate: false });
+    })(0);
+  }
+
+  /* ===================== EKRANLAR ===================== */
   function showLogin() {
+    document.body.classList.remove("in-app");
     $("app").hidden = true; $("login").hidden = false;
-    initMap();
-    if (map) setTimeout(function () { map.invalidateSize(); }, 0);
+    initLoginMap(); if (loginMap) setTimeout(function () { loginMap.invalidateSize(); }, 0);
   }
   function showApp() {
-    $("login").hidden = true; $("app").hidden = false;
-    renderFeed(); renderMenu(); renderMe();
+    document.body.classList.add("in-app");
+    $("login").hidden = true; $("app").hidden = false; closeAll();
+    router();
+  }
+
+  /* ===================== GİRİŞ / KAYIT PENCERESİ ===================== */
+  var authMode = "signin";
+  function openAuth(m) {
+    authMode = m; var up = m === "signup";
+    $("auth-title").textContent = up ? "Kayıt Ol" : "Giriş Yap";
+    $("auth-lead").textContent = up ? "TarihGram hesabını oluştur, gezdiğin yerleri paylaşmaya başla." : "Tekrar hoş geldin. Hesabına giriş yap.";
+    $("f-name-wrap").hidden = !up;
+    $("f-pass").setAttribute("autocomplete", up ? "new-password" : "current-password");
+    $("btn-forgot").hidden = up;
+    $("auth-submit").textContent = up ? "Kayıt Ol" : "Giriş Yap";
+    $("google-label").textContent = up ? "Google ile Kayıt Ol" : "Google ile Giriş Yap";
+    $("auth-switch").innerHTML = up ? 'Zaten hesabın var mı? <button type="button" class="link-btn" data-mode="signin">Giriş Yap</button>' : 'Hesabın yok mu? <button type="button" class="link-btn" data-mode="signup">Kayıt Ol</button>';
+    $("local-note").hidden = Auth.mode !== "local";
+    msg("", ""); ["f-name", "f-email", "f-pass"].forEach(function (i) { $(i).removeAttribute("aria-invalid"); });
+    $("auth").hidden = false;
+    setTimeout(function () { (up ? $("f-name") : $("f-email")).focus(); }, 50);
+  }
+  function msg(err, info) {
+    $("auth-error").textContent = err; $("auth-error").hidden = !err;
+    $("auth-info").textContent = info; $("auth-info").hidden = !info;
+  }
+  function busy(b) { $("auth-submit").disabled = b; $("google-btn").disabled = b; }
+  $("btn-signup").addEventListener("click", function () { openAuth("signup"); });
+  $("btn-signin").addEventListener("click", function () { openAuth("signin"); });
+  $("auth-switch").addEventListener("click", function (e) { var b = e.target.closest("[data-mode]"); if (b) openAuth(b.dataset.mode); });
+  $("pw-toggle").addEventListener("click", function () {
+    var i = $("f-pass"), show = i.type === "password"; i.type = show ? "text" : "password";
+    this.textContent = show ? "Gizle" : "Göster"; this.setAttribute("aria-label", show ? "Şifreyi gizle" : "Şifreyi göster");
+  });
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  $("auth-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var up = authMode === "signup";
+    var name = $("f-name").value.trim(), email = $("f-email").value.trim().toLowerCase(), pw = $("f-pass").value;
+    ["f-name", "f-email", "f-pass"].forEach(function (i) { $(i).removeAttribute("aria-invalid"); });
+    var bad = null, text = "";
+    if (up && name.length < 2) { bad = "f-name"; text = "Adını ve soyadını yaz."; }
+    else if (!EMAIL_RE.test(email)) { bad = "f-email"; text = "Geçerli bir e-posta adresi yaz."; }
+    else if (pw.length < 6) { bad = "f-pass"; text = "Şifre en az 6 karakter olmalı."; }
+    if (bad) { $(bad).setAttribute("aria-invalid", "true"); $(bad).focus(); return msg(text, ""); }
+    msg("", ""); busy(true);
+    (up ? Auth.signUp(name, email, pw) : Auth.signIn(email, pw))
+      .then(function () { welcome = up ? "Hesabın oluşturuldu. Hoş geldin!" : "Giriş yapıldı."; })
+      .catch(function (err) { msg(errText(err), ""); })
+      .then(function () { busy(false); });
+  });
+  $("google-btn").addEventListener("click", function () {
+    msg("", ""); busy(true);
+    Auth.google().then(function () { welcome = "Google hesabınla giriş yapıldı."; })
+      .catch(function (err) { msg(errText(err), ""); })
+      .then(function () { busy(false); });
+  });
+  $("btn-forgot").addEventListener("click", function () {
+    var email = $("f-email").value.trim().toLowerCase();
+    if (!EMAIL_RE.test(email)) { $("f-email").setAttribute("aria-invalid", "true"); $("f-email").focus(); return msg("Şifre sıfırlama bağlantısı için önce e-posta adresini yaz.", ""); }
+    Auth.reset(email).then(function () { msg("", email + " adresine şifre sıfırlama bağlantısı gönderildi."); }).catch(function (err) { msg(errText(err), ""); });
+  });
+
+  /* ===================== YÖNLENDİRME ===================== */
+  function router() {
+    if (!USER || !DATA) return;
+    var h = location.hash.replace("#", "");
+    stopMaps();
+    if (h.indexOf("gonderi-") === 0 && postById(h.slice(8))) return renderDetail(postById(h.slice(8)));
+    if (h === "kaydedilenler") return renderFeed("saved");
+    renderFeed("home");
+  }
+  window.addEventListener("hashchange", router);
+  function go(hash) { if (location.hash.replace("#", "") === hash) router(); else location.hash = hash; }
+
+  function setTop(mode, title) {
+    var b = $("btn-left");
+    if (mode === "back") { b.innerHTML = ICON.back; b.setAttribute("aria-label", "Geri dön"); b.dataset.act = "back"; b.removeAttribute("aria-expanded"); }
+    else { b.innerHTML = ICON.menu; b.setAttribute("aria-label", "Menüyü aç"); b.dataset.act = "menu"; b.setAttribute("aria-expanded", "false"); }
+    $("top-title").textContent = title || "TarihGram";
+    $("top-title").classList.toggle("small", mode === "back");
+  }
+
+  /* ===================== AKIŞ ===================== */
+  function mediaHTML(p, detail) {
+    var multi = p.medya.length > 1;
+    return '<div class="media">' +
+      '<div class="slides" tabindex="0" aria-label="' + esc(p.yer) + ' fotoğraf ve videoları">' +
+      p.medya.map(function (m, i) {
+        if (m.tur === "video") return '<div class="slide" data-i="' + i + '"><span class="vid-tag">' + ICON.play + 'Video</span><video src="' + mediaSrc(m) + '" poster="' + posterSrc(m) + '" muted loop playsinline preload="none"' + (detail ? ' controls' : '') + ' aria-label="' + esc(m.alt) + '"></video></div>';
+        return '<div class="slide" data-i="' + i + '"><img src="' + mediaSrc(m) + '" alt="' + esc(m.alt) + '" loading="' + (i ? "lazy" : "eager") + '" draggable="false"></div>';
+      }).join("") + '</div>' +
+      (multi ? '<span class="badge">1/' + p.medya.length + '</span>' : '') +
+      (multi ? '<div class="dots" aria-hidden="true">' + p.medya.map(function (_, i) { return '<i class="' + (i ? "" : "on") + '"></i>'; }).join("") + '</div>' : '') +
+      '</div>';
+  }
+  function actionsHTML(p) {
+    var liked = !!ST.liked[p.id], saved = !!ST.saved[p.id];
+    return '<div class="actions">' +
+      '<button class="act like' + (liked ? " liked" : "") + '" data-a="like" type="button" aria-pressed="' + liked + '" aria-label="Beğen">' + ICON.heart + '</button>' +
+      '<button class="act" data-a="comment" type="button" aria-label="Yorum yap">' + ICON.comment + '</button>' +
+      '<button class="act" data-a="send" type="button" aria-label="Gönder">' + ICON.send + '</button>' +
+      '<button class="act save' + (saved ? " saved" : "") + '" data-a="save" type="button" aria-pressed="' + saved + '" aria-label="Kaydet">' + ICON.save + '</button>' +
+      '</div>';
+  }
+  function headHTML(p) {
+    var a = person(p.yazar);
+    return '<header class="post-head">' + avatarHTML(a.ad, a.renk) +
+      '<div class="who"><strong>' + esc(a.ad) + '</strong>' +
+      '<button class="place-link" data-a="open" type="button">' + ICON.pin + '<span>' + esc(p.yer) + '</span></button></div>' +
+      '<span class="when">' + esc(p.zaman) + '</span></header>';
+  }
+  function renderFeed(kind) {
+    route = kind; setTop("menu");
+    var list = DATA.gonderiler.filter(function (p) { return kind !== "saved" || ST.saved[p.id]; });
+    var html = (kind === "saved" ? '<h1 class="view-head">Kaydedilenler</h1>' : '<h1 class="sr">Ana sayfa</h1>') + '<div class="feed">';
+    if (!list.length) html += '<p class="empty">Henüz kaydettiğin bir gönderi yok. Bir gönderinin altındaki kaydet simgesine dokunarak buraya ekleyebilirsin.</p>';
+    list.forEach(function (p) {
+      var n = allComments(p).length;
+      html += '<article class="post" data-id="' + p.id + '">' + headHTML(p) + mediaHTML(p, false) + actionsHTML(p) +
+        '<div class="post-meta"><span class="likes" data-likes>' + fmt(likeCount(p)) + ' beğenme</span>' +
+        '<button class="more-comments" data-a="open-comments" type="button">' + (n ? n + " yorumun tümünü gör" : "İlk yorumu sen yap") + '</button></div></article>';
+    });
+    $("view").innerHTML = html + '</div>';
+    wireMedia($("view"), false);
     window.scrollTo(0, 0);
   }
 
-  /* ---------- Modal: Google ile giriş ---------- */
-  var mode = "signin";
-  function openAuth(m) {
-    mode = m;
-    var signup = m === "signup";
-    $("auth-title").textContent = signup ? "Kayıt Ol" : "Giriş Yap";
-    $("auth-sub").textContent = signup ? "TarihGram hesabını Google ile saniyeler içinde oluştur." : "Hesabına Google ile giriş yap.";
-    $("google-label").textContent = signup ? "Google ile Kayıt Ol" : "Google ile Giriş Yap";
-    $("auth-switch").innerHTML = signup
-      ? 'Zaten hesabın var mı? <button type="button" class="switch-mode" data-to="signin">Giriş Yap</button>'
-      : 'Hesabın yok mu? <button type="button" class="switch-mode" data-to="signup">Kayıt Ol</button>';
-    resetGoogleBtn();
-    $("auth").hidden = false;
-    $("google-btn").focus();
-  }
-  function closeAuth() { $("auth").hidden = true; }
-  function resetGoogleBtn() {
-    var b = $("google-btn"); b.disabled = false;
-    var s = b.querySelector(".spinner"); if (s) s.remove();
-    b.querySelector("svg").hidden = false;
-  }
-  $("btn-signup").addEventListener("click", function () { openAuth("signup"); });
-  $("btn-signin").addEventListener("click", function () { openAuth("signin"); });
-  $("auth-close").addEventListener("click", closeAuth);
-  $("auth").addEventListener("click", function (e) {
-    if (e.target === this) closeAuth();
-    var sw = e.target.closest(".switch-mode"); if (sw) openAuth(sw.dataset.to);
-  });
-  $("google-btn").addEventListener("click", function () {
-    var b = this; b.disabled = true;
-    b.querySelector("svg").hidden = true;
-    var sp = document.createElement("span"); sp.className = "spinner"; b.prepend(sp);
-    $("google-label").textContent = "Google hesabına bağlanılıyor…";
-    setTimeout(function () {
-      store.set("tg_session", "1");
-      closeAuth(); showApp();
-      toast(mode === "signup" ? "Hoş geldin, " + USER.name.split(" ")[0] + "! Hesabın oluşturuldu." : "Giriş yapıldı. Hoş geldin, " + USER.name.split(" ")[0] + "!");
-    }, 900);
-  });
-
-  /* ---------- Akış ---------- */
-  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  var PIN = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>';
-  function renderFeed() {
-    var feed = $("feed");
-    feed.querySelectorAll(".post").forEach(function (n) { n.remove(); });
-    POSTS.forEach(function (p) {
-      var multi = p.images.length > 1;
-      var el = document.createElement("article");
-      el.className = "post";
-      el.innerHTML =
-        '<header class="post-head">' +
-          '<div class="avatar" style="background:' + p.color + '" aria-hidden="true">' + p.initials + '</div>' +
-          '<div class="post-who"><strong>' + esc(p.who) + '</strong>' +
-          '<span class="post-place">' + PIN + esc(p.place) + '</span></div>' +
-        '</header>' +
-        '<div class="media">' +
-          '<div class="slides" tabindex="0" aria-label="' + esc(p.place) + ' görselleri">' +
-            p.images.map(function (im) { return '<img src="' + im.src + '" alt="' + esc(im.alt) + '" loading="lazy">'; }).join("") +
-          '</div>' +
-          (multi ? '<span class="count">1/' + p.images.length + '</span>' : '') +
-        '</div>' +
-        (multi ? '<div class="dots">' + p.images.map(function (_, i) { return '<i class="' + (i ? '' : 'on') + '"></i>'; }).join("") + '</div>' : '');
-      feed.appendChild(el);
-      if (multi) {
-        var sl = el.querySelector(".slides"), dots = el.querySelectorAll(".dots i"), cnt = el.querySelector(".count");
-        sl.addEventListener("scroll", function () {
-          var i = Math.round(sl.scrollLeft / sl.clientWidth);
-          dots.forEach(function (d, j) { d.classList.toggle("on", i === j); });
-          cnt.textContent = (i + 1) + "/" + p.images.length;
-        }, { passive: true });
-      }
+  /* Medya: kaydırma sayacı, çift dokunuşla beğenme, tek dokunuşla detaya git, görünürken video oynat */
+  var io = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { var v = e.target; if (e.isIntersecting && e.intersectionRatio > .6) { v.preload = "auto"; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } else v.pause(); });
+  }, { threshold: [0, .6, 1] }) : null;
+  function wireMedia(root, detail) {
+    root.querySelectorAll(".media").forEach(function (m) {
+      var sl = m.querySelector(".slides"), dots = m.querySelectorAll(".dots i"), badge = m.querySelector(".badge");
+      var n = sl.children.length;
+      sl.addEventListener("scroll", function () {
+        var i = Math.round(sl.scrollLeft / sl.clientWidth);
+        dots.forEach(function (d, j) { d.classList.toggle("on", i === j); });
+        if (badge) badge.textContent = (i + 1) + "/" + n;
+      }, { passive: true });
+      var timer = null;
+      sl.addEventListener("click", function (e) {
+        if (detail && e.target.tagName === "VIDEO") return;
+        var post = m.closest("[data-id]"), id = post.dataset.id;
+        if (timer) { clearTimeout(timer); timer = null; doubleLike(post, e.target.closest(".slide")); return; }
+        timer = setTimeout(function () { timer = null; if (!detail) go("gonderi-" + id); }, 260);
+      });
     });
+    if (io) root.querySelectorAll("video").forEach(function (v) { io.observe(v); });
   }
+  function doubleLike(post, slide) {
+    var id = post.dataset.id;
+    if (!ST.liked[id]) toggleLike(post);
+    if (slide) { var h = document.createElement("div"); h.className = "heart-burst"; h.innerHTML = ICON.heartFill; slide.appendChild(h); setTimeout(function () { h.remove(); }, 850); }
+  }
+  function toggleLike(post) {
+    var id = post.dataset.id, p = postById(id);
+    ST.liked[id] = !ST.liked[id]; if (!ST.liked[id]) delete ST.liked[id]; saveState();
+    var b = post.querySelector('[data-a="like"]'); b.classList.toggle("liked", !!ST.liked[id]); b.setAttribute("aria-pressed", String(!!ST.liked[id]));
+    b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop");
+    post.querySelector("[data-likes]").textContent = fmt(likeCount(p)) + " beğenme";
+  }
+  function toggleSave(post) {
+    var id = post.dataset.id;
+    ST.saved[id] = !ST.saved[id]; if (!ST.saved[id]) delete ST.saved[id]; saveState();
+    var b = post.querySelector('[data-a="save"]'); b.classList.toggle("saved", !!ST.saved[id]); b.setAttribute("aria-pressed", String(!!ST.saved[id]));
+    toast(ST.saved[id] ? "Kaydedilenler'e eklendi." : "Kaydedilenler'den çıkarıldı.");
+    if (route === "saved" && !ST.saved[id]) setTimeout(function () { renderFeed("saved"); }, 300);
+  }
+  $("view").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-a]"); if (!b) return;
+    var post = b.closest("[data-id]"), id = post && post.dataset.id;
+    switch (b.dataset.a) {
+      case "like": toggleLike(post); break;
+      case "save": toggleSave(post); break;
+      case "send": openSend(postById(id)); break;
+      case "open": go("gonderi-" + id); break;
+      case "open-comments": case "comment":
+        if (route === "detail") { $("c-input").focus(); break; }
+        pendingFocus = true; go("gonderi-" + id); break;
+      case "fly": flyTo(+b.dataset.i); break;
+      case "del-comment": deleteComment(id, b.dataset.cid); break;
+    }
+  });
+  var pendingFocus = false;
 
-  /* ---------- Menü ---------- */
-  function renderMenu() {
-    $("menu-list").innerHTML = MENU.map(function (m) {
-      var icon = m.icon ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + m.icon + '</svg>' : '';
-      return '<li><button type="button" data-id="' + m.id + '"' + (m.cls ? ' class="' + m.cls + '"' : '') +
-        (m.id === current ? ' aria-current="page"' : '') + '>' + icon + '<span>' + m.label + '</span></button></li>';
+  /* ===================== GÖNDERİ DETAYI ===================== */
+  var maps = [], simMap = null, simMarkers = [];
+  function stopMaps() { maps.forEach(function (m) { try { m.remove(); } catch (e) {} }); maps = []; simMap = null; simMarkers = []; $("comment-bar") && $("comment-bar").remove(); }
+  function km(a, b) {
+    var R = 6371, r = Math.PI / 180, dLat = (b[0] - a[0]) * r, dLon = (b[1] - a[1]) * r;
+    var x = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return Math.round(R * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x)));
+  }
+  function gmapsLink(c, q) { return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(c[0] + "," + c[1]) + (q ? "" : ""); }
+  function renderDetail(p) {
+    route = "detail"; setTop("back", p.yer);
+    var a = person(p.yazar), shortName = p.yer.split(" (")[0];
+    var credits = p.medya.map(function (m) {
+      var c = DATA.kaynaklar && DATA.kaynaklar[m.kaynak]; if (!c) return "";
+      return '<li>' + (m.tur === "video" ? "Video" : "Fotoğraf") + ': <a href="' + esc(c.page) + '" target="_blank" rel="noopener">' + esc(c.artist || c.title) + '</a>, ' + esc(c.license) + '</li>';
     }).join("");
-  }
-  function renderMe() {
-    $("me").innerHTML =
-      '<div class="me-row"><div class="avatar" style="background:' + USER.color + '" aria-hidden="true">' + USER.initials + '</div>' +
-      '<div class="me-id"><strong>' + esc(USER.name) + '</strong><span>' + esc(USER.handle) + '</span><span>' + esc(USER.email) + '</span></div></div>' +
-      '<div class="stats">' +
-        '<div><b>' + USER.posts + '</b><span>Gönderi</span></div>' +
-        '<div><b>' + USER.followers + '</b><span>Takipçi</span></div>' +
-        '<div><b>' + USER.following + '</b><span>Takip</span></div>' +
-      '</div>';
-  }
-  function openMenu() { renderMenu(); $("drawer").hidden = false; $("btn-menu").setAttribute("aria-expanded", "true"); }
-  function closeMenu() { $("drawer").hidden = true; $("btn-menu").setAttribute("aria-expanded", "false"); }
-  $("btn-menu").addEventListener("click", openMenu);
-  $("btn-menu-close").addEventListener("click", closeMenu);
-  $("drawer").addEventListener("click", function (e) {
-    if (e.target === this) return closeMenu();
-    var b = e.target.closest("button[data-id]"); if (!b) return;
-    var item = MENU.filter(function (m) { return m.id === b.dataset.id; })[0];
-    closeMenu();
-    if (item.id === "home") { current = "home"; window.scrollTo({ top: 0, behavior: "smooth" }); return; }
-    toast((item.id === "share" ? "Paylaş" : item.label) + " bölümü bir sonraki aşamada eklenecek.");
-  });
+    var html = '<article class="detail" data-id="' + p.id + '">' + headHTML(p) + mediaHTML(p, true) + actionsHTML(p) +
+      '<div class="post-meta"><span class="likes" data-likes>' + fmt(likeCount(p)) + ' beğenme</span>' +
+      '<p class="caption"><b>' + esc(a.ad) + '</b>' + esc(p.not) + '</p></div>' +
+      (credits ? '<details class="credits"><summary>Fotoğraf ve video kaynakları (Wikimedia Commons)</summary><ul>' + credits + '</ul></details>' : '') +
 
-  /* ---------- Ayarlar ---------- */
-  function applyTheme(t) {
-    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
-    else document.documentElement.removeAttribute("data-theme");
-    document.querySelectorAll("#theme-seg button").forEach(function (b) {
-      b.setAttribute("aria-pressed", String(b.dataset.themeChoice === (t || "system")));
+      '<section class="sec" aria-labelledby="h-about"><h2 id="h-about">' + esc(p.yer) + '</h2><p class="loc-line">' + esc(p.konum) + '</p>' +
+      '<dl class="facts">' + p.bilgiler.map(function (f) { return '<div><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join("") + '</dl>' +
+      '<h3>Hakkında</h3><p>' + esc(p.hakkinda) + '</p></section>' +
+
+      '<section class="sec" aria-labelledby="h-hist"><h3 id="h-hist">Tarihçe</h3><ol class="timeline">' +
+      p.tarihce.map(function (t) { return '<li><span class="yr">' + esc(t[0]) + '</span><span class="ev">' + esc(t[1]) + '</span></li>'; }).join("") + '</ol></section>' +
+
+      '<section class="sec" aria-labelledby="h-loc"><h3 id="h-loc">Tam konum</h3>' +
+      '<div class="mapbox" id="loc-map"></div>' +
+      '<div class="map-actions"><a class="pill-link" href="' + gmapsLink(p.koordinat) + '" target="_blank" rel="noopener">' + ICON.gmaps + 'Google Haritalar\'da aç</a>' +
+      '<span class="coords">' + p.koordinat[0].toFixed(4) + '° K, ' + p.koordinat[1].toFixed(4) + '° D</span></div></section>' +
+
+      '<section class="sec" aria-labelledby="h-sim"><h3 id="h-sim">Benzer mekânlar</h3>' +
+      '<div class="mapbox" id="sim-map"></div>' +
+      '<ul class="similar">' + p.benzer.map(function (s, i) {
+        return '<li><span class="num">' + (i + 1) + '</span><div class="info"><button class="name" data-a="fly" data-i="' + i + '" type="button">' + esc(s.ad) + '</button><p class="desc">' + esc(s.aciklama) + '</p></div>' +
+          '<div class="side"><span>' + fmt(km(p.koordinat, s.koordinat)) + ' km</span><a href="' + gmapsLink(s.koordinat) + '" target="_blank" rel="noopener">Haritada aç</a></div></li>';
+      }).join("") + '</ul><p class="map-actions">Uzaklıklar ' + esc(shortName) + '\'e kuş uçuşu olarak hesaplanmıştır.</p></section>' +
+
+      '<section class="sec" aria-labelledby="h-com"><h3 id="h-com">Yorumlar</h3><ul class="comments" id="comments"></ul></section>' +
+      '</article>';
+    $("view").innerHTML = html;
+    renderComments(p);
+    var bar = document.createElement("form");
+    bar.className = "comment-bar"; bar.id = "comment-bar";
+    bar.innerHTML = avatarHTML(USER.name, "var(--accent)", USER.photo) + '<label class="sr" for="c-input">Yorum ekle</label><input id="c-input" type="text" maxlength="500" placeholder="Yorum ekle…" autocomplete="off"><button type="submit" disabled>Paylaş</button>';
+    document.body.appendChild(bar);
+    var inp = bar.querySelector("input"), btn = bar.querySelector("button");
+    inp.addEventListener("input", function () { btn.disabled = !inp.value.trim(); });
+    bar.addEventListener("submit", function (e) {
+      e.preventDefault(); var t = inp.value.trim(); if (!t) return;
+      (ST.comments[p.id] = ST.comments[p.id] || []).push({ id: Date.now().toString(36), text: t, t: Date.now() }); saveState();
+      inp.value = ""; btn.disabled = true; renderComments(p);
+      var list = $("comments"); list.lastElementChild && list.lastElementChild.scrollIntoView({ behavior: "smooth", block: "center" });
     });
+    wireMedia($("view"), true);
+    window.scrollTo(0, 0);
+    setTimeout(function () { buildLocationMap(p); buildSimilarMap(p); }, 30);
+    if (pendingFocus) { pendingFocus = false; setTimeout(function () { $("h-com").scrollIntoView({ block: "start" }); inp.focus({ preventScroll: true }); }, 120); }
   }
-  $("btn-settings").addEventListener("click", function () { $("settings").hidden = false; });
-  $("settings-close").addEventListener("click", function () { $("settings").hidden = true; });
-  $("settings").addEventListener("click", function (e) { if (e.target === this) this.hidden = true; });
-  $("theme-seg").addEventListener("click", function (e) {
-    var b = e.target.closest("button"); if (!b) return;
-    var t = b.dataset.themeChoice; store.set("tg_theme", t); applyTheme(t);
+  function renderComments(p) {
+    var list = allComments(p);
+    $("comments").innerHTML = list.length ? list.map(function (c) {
+      return '<li class="comment">' + avatarHTML(c.name, c.color, c.photo) + '<div class="body"><p><b>' + esc(c.name) + '</b> ' + esc(c.text) + '</p>' +
+        '<div class="meta"><span>' + esc(c.when) + '</span>' + (c.mine ? '<button type="button" data-a="del-comment" data-cid="' + c.id + '">Sil</button>' : '') + '</div></div></li>';
+    }).join("") : '<li class="comment" style="grid-template-columns:1fr;color:var(--muted)">Henüz yorum yok. İlk yorumu sen yaz.</li>';
+  }
+  function deleteComment(pid, cid) {
+    ST.comments[pid] = (ST.comments[pid] || []).filter(function (c) { return c.id !== cid; }); saveState(); renderComments(postById(pid)); toast("Yorum silindi.");
+  }
+
+  /* Haritalar: çevrim içi katman (OpenStreetMap / Google) yüklenemezse yerel fiziki haritaya geçer */
+  var coastCache = null;
+  function coasts() { return coastCache || (coastCache = fetch("data/kiyilar.json").then(function (r) { return r.json(); }).catch(function () { return null; })); }
+  function localBase(map) {
+    // İnternet katmanı yoksa: uzak zoomda fiziki dünya görüntüsü, yakında net kıyı çizgileriyle çizilmiş kara/deniz.
+    map.getContainer().style.background = "#9fc5de";
+    var img = worldImage(map, 0), land = null;
+    function sync() { var z = map.getZoom(); img.setOpacity(z >= 5 ? 0 : 1); if (land) land.setStyle({ fillOpacity: z >= 5 ? 1 : 0, opacity: z >= 5 ? 1 : .8 }); }
+    coasts().then(function (g) {
+      if (!g || maps.indexOf(map) < 0) return;
+      land = L.geoJSON(g, { interactive: false, style: { color: "#8f8a6e", weight: 1, fillColor: "#e6e0c6", fillOpacity: 1 } }).addTo(map);
+      sync();
+    });
+    map.on("zoomend", sync); sync();
+  }
+  function onlineBase(map) {
+    var failed = false;
+    var tl = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: "© OpenStreetMap" }).addTo(map);
+    tl.on("tileerror", function () { if (failed) return; failed = true; map.removeLayer(tl); localBase(map); map.setMaxZoom(9); });
+  }
+  function newMap(id, opts) {
+    var m = L.map(id, Object.assign({ zoomControl: true, attributionControl: true, scrollWheelZoom: false, tap: true }, opts || {}));
+    m.attributionControl.setPrefix(false);
+    maps.push(m); return m;
+  }
+  function mainPin() { return L.divIcon({ className: "", html: '<div class="pin-main"></div>', iconSize: [30, 30], iconAnchor: [15, 30], popupAnchor: [0, -28] }); }
+  function buildLocationMap(p) {
+    var box = $("loc-map"); if (!box) return;
+    var c = p.koordinat;
+    // Önce Google Haritalar gömülü görünümü denenir; tarayıcı/sunucu engellerse Leaflet haritası gösterilir.
+    var ifr = document.createElement("iframe");
+    ifr.title = p.yer + " Google Haritalar'da"; ifr.loading = "lazy"; ifr.referrerPolicy = "no-referrer-when-downgrade";
+    ifr.src = "https://maps.google.com/maps?q=" + c[0] + "," + c[1] + "&z=15&t=k&hl=tr&output=embed";
+    var fellBack = false;
+    function fallback() {
+      if (fellBack || !document.body.contains(box)) return; fellBack = true;
+      box.innerHTML = "";
+      var m = newMap(box, { maxZoom: 9 }); localBase(m); m.setView(c, 8);
+      L.marker(c, { icon: mainPin() }).addTo(m).bindPopup("<b>" + esc(p.yer) + "</b>");
+    }
+    function onCsp(e) { if (/google/.test(e.blockedURI || "")) { document.removeEventListener("securitypolicyviolation", onCsp); fallback(); } }
+    document.addEventListener("securitypolicyviolation", onCsp);
+    box.appendChild(ifr);
+  }
+  function buildSimilarMap(p) {
+    var box = $("sim-map"); if (!box) return;
+    simMap = newMap(box); onlineBase(simMap);
+    L.marker(p.koordinat, { icon: mainPin(), zIndexOffset: 1000 }).addTo(simMap).bindPopup("<b>" + esc(p.yer) + "</b>");
+    simMarkers = p.benzer.map(function (s, i) {
+      return L.marker(s.koordinat, { icon: L.divIcon({ className: "", html: '<div class="pin-num">' + (i + 1) + '</div>', iconSize: [24, 24], iconAnchor: [12, 12], popupAnchor: [0, -12] }) })
+        .addTo(simMap).bindPopup("<b>" + esc(s.ad) + "</b><br>" + esc(s.aciklama));
+    });
+    // Bölgedeki mekânlar ekrana sığar; çok uzaktakiler (ör. başka ülkeler) listeden seçilince gösterilir.
+    var near = p.benzer.filter(function (s) { return km(p.koordinat, s.koordinat) < 400; }).map(function (s) { return s.koordinat; });
+    simMap.fitBounds(L.latLngBounds(near.concat([p.koordinat])), { padding: [28, 28], maxZoom: 11 });
+  }
+  function flyTo(i) {
+    if (!simMap) return; var mk = simMarkers[i];
+    $("sim-map").scrollIntoView({ behavior: "smooth", block: "center" });
+    simMap.flyTo(mk.getLatLng(), Math.min(simMap.getMaxZoom(), 9), { duration: .8 });
+    setTimeout(function () { mk.openPopup(); }, 850);
+  }
+
+  /* ===================== GÖNDER ===================== */
+  var sendPost = null;
+  function openSend(p) {
+    sendPost = p;
+    var link = location.href.split("#")[0] + "#gonderi-" + p.id;
+    $("send-link").value = link;
+    $("send-list").innerHTML = Object.keys(DATA.kullanicilar).map(function (k) {
+      var u = DATA.kullanicilar[k];
+      return '<li>' + avatarHTML(u.ad, u.renk) + '<div class="who"><strong>' + esc(u.ad) + '</strong><span>@' + esc(u.kullanici) + '</span></div><button class="chip-btn" type="button" data-u="' + k + '">Gönder</button></li>';
+    }).join("");
+    $("send").hidden = false;
+  }
+  $("send-list").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-u]"); if (!b || b.classList.contains("done")) return;
+    b.classList.add("done"); b.textContent = "Gönderildi";
   });
-  $("btn-logout").addEventListener("click", function () {
-    store.del("tg_session"); $("settings").hidden = true; showLogin(); toast("Çıkış yapıldı.");
+  $("copy-btn").addEventListener("click", function () {
+    var i = $("send-link"), btn = this;
+    function ok() { btn.textContent = "Kopyalandı"; setTimeout(function () { btn.textContent = "Kopyala"; }, 1600); }
+    try { navigator.clipboard.writeText(i.value).then(ok, function () { i.select(); toast("Bağlantıyı seçtim, kopyalayabilirsin."); }); }
+    catch (err) { i.select(); toast("Bağlantıyı seçtim, kopyalayabilirsin."); }
   });
 
-  document.addEventListener("keydown", function (e) {
-    if (e.key !== "Escape") return;
-    closeAuth(); closeMenu(); $("settings").hidden = true;
+  /* ===================== MENÜ ===================== */
+  function renderMenu() {
+    var cur = route === "saved" ? "saved" : (route === "home" ? "home" : "");
+    $("menu-list").innerHTML = MENU.map(function (m) {
+      var ic = m.icon ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + m.icon + '</svg>' : "";
+      return '<li><button type="button" data-id="' + m.id + '"' + (m.cls ? ' class="' + m.cls + '"' : "") + (m.id === cur ? ' aria-current="page"' : "") + '>' + ic + '<span>' + m.label + '</span></button></li>';
+    }).join("");
+    var mine = 0; Object.keys(ST.comments).forEach(function (k) { mine += ST.comments[k].length; });
+    $("me").innerHTML = '<div class="me-row">' + avatarHTML(USER.name, "var(--accent)", USER.photo) +
+      '<div class="me-id"><strong>' + esc(USER.name) + '</strong><span>' + esc(USER.email) + '</span><span>Giriş: ' + esc(USER.method) + '</span></div></div>' +
+      '<div class="stats"><div><b>' + Object.keys(ST.liked).length + '</b><span>Beğeni</span></div><div><b>' + Object.keys(ST.saved).length + '</b><span>Kayıtlı</span></div><div><b>' + mine + '</b><span>Yorum</span></div></div>';
+  }
+  $("btn-left").addEventListener("click", function () {
+    if (this.dataset.act === "back") { go(""); return; }
+    renderMenu(); $("drawer").hidden = false; this.setAttribute("aria-expanded", "true");
+  });
+  $("drawer").addEventListener("click", function (e) {
+    if (e.target === this) return closeAll();
+    var b = e.target.closest("button[data-id]"); if (!b) return;
+    closeAll();
+    var id = b.dataset.id;
+    if (id === "home") return go("");
+    if (id === "saved") return go("kaydedilenler");
+    var item = MENU.filter(function (m) { return m.id === id; })[0];
+    toast((id === "share" ? "Paylaş" : item.label) + " bölümü bir sonraki aşamada eklenecek.");
   });
 
+  /* ===================== AYARLAR ===================== */
+  function applyTheme(t) {
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t); else document.documentElement.removeAttribute("data-theme");
+    document.querySelectorAll("#theme-seg button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.t === (t || "system"))); });
+  }
+  $("btn-settings").addEventListener("click", function () {
+    $("account").innerHTML = avatarHTML(USER.name, "var(--accent)", USER.photo) + '<div><strong>' + esc(USER.name) + '</strong><span>' + esc(USER.email) + '</span><span>Giriş yöntemi: ' + esc(USER.method) + '</span></div>';
+    $("settings").hidden = false;
+  });
+  $("theme-seg").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; store.set("tg_tema", b.dataset.t); applyTheme(b.dataset.t); });
+  $("btn-logout").addEventListener("click", function () { closeAll(); Auth.signOut(); });
+
+  /* ===================== GENEL ===================== */
+  function closeAll() { ["auth", "drawer", "settings", "send"].forEach(function (id) { $(id).hidden = true; }); $("btn-left").getAttribute("aria-expanded") && $("btn-left").setAttribute("aria-expanded", "false"); }
+  document.addEventListener("click", function (e) {
+    var c = e.target.closest("[data-close]"); if (c) { $(c.dataset.close).hidden = true; return; }
+    if (e.target.classList && (e.target.classList.contains("modal-wrap") || e.target.classList.contains("sheet-wrap"))) e.target.hidden = true;
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
   var toastTimer;
-  function toast(msg) {
-    var t = $("toast"); t.textContent = msg; t.hidden = false;
-    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 2600);
-  }
+  function toast(m) { var t = $("toast"); t.textContent = m; t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.hidden = true; }, 2600); }
 
-  /* ---------- Başlat ---------- */
-  applyTheme(store.get("tg_theme") || "system");
-  if (store.get("tg_session") === "1") { showApp(); initMap(); } else showLogin();
-  window.addEventListener("resize", function () { if (map) map.invalidateSize(); });
+  /* ===================== BAŞLAT ===================== */
+  var welcome = "";
+  applyTheme(store.get("tg_tema", "system"));
+  var dataReady = fetch("data/gonderiler.json").then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
+  Auth.onChange(function (u) {
+    USER = u;
+    if (!u) { ST = null; stopMaps(); if (location.hash) history.replaceState(null, "", location.pathname + location.search); showLogin(); return; }
+    loadState();
+    dataReady.then(function (d) {
+      DATA = d; showApp();
+      if (welcome) { toast(welcome); welcome = ""; }
+    }).catch(function () { toast("Gönderiler yüklenemedi. Sayfayı yenile."); });
+  });
+  window.addEventListener("resize", function () { if (loginMap) loginMap.invalidateSize(); });
 })();
 </script>

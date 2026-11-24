@@ -1,0 +1,130 @@
+{
+  "kullanicilar": {
+    "ayse": { "ad": "Ayşe Yılmaz", "kullanici": "aysegezer", "renk": "#b4553a" },
+    "mehmet": { "ad": "Mehmet Kaya", "kullanici": "mehmetkaya", "renk": "#4f7a3a" },
+    "elif": { "ad": "Elif Demir", "kullanici": "elifdemir", "renk": "#6b5aa8" }
+  },
+  "gonderiler": [
+    {
+      "id": "efes",
+      "yazar": "ayse",
+      "zaman": "2 saat önce",
+      "begeni": 128,
+      "yer": "Ephesus (Efes Antik Kenti)",
+      "konum": "Selçuk, İzmir · Türkiye",
+      "koordinat": [37.9395, 27.3417],
+      "not": "Sabah 8'de kapı açılır açılmaz girdik, Celsus Kütüphanesi'nin önünde neredeyse kimse yoktu.",
+      "medya": [
+        { "tur": "foto", "kaynak": "efes-celsus", "alt": "Celsus Kütüphanesi'nin iki katlı mermer cephesi" },
+        { "tur": "foto", "kaynak": "efes-tiyatro", "alt": "Efes Büyük Tiyatrosu'nun yarım daire oturma basamakları" },
+        { "tur": "video", "kaynak": "efes-video", "alt": "Celsus Kütüphanesi çevresinde kısa bir yürüyüş videosu" },
+        { "tur": "foto", "kaynak": "efes-kuretler", "alt": "Mermer döşeli Kuretler Caddesi ve iki yanındaki kalıntılar" }
+      ],
+      "bilgiler": [["Tür", "Antik kent"], ["Kuruluş", "MÖ 10. yüzyıl"], ["UNESCO", "2015"], ["Büyük Tiyatro", "~25.000 kişilik"]],
+      "hakkinda": "Efes, Ege kıyısındaki en büyük antik kentlerden biridir. Bugün Selçuk ilçesinin hemen yanında yer alır ve bir zamanlar denize açılan limanı, nehrin taşıdığı alüvyon yüzünden artık kilometrelerce içeride kalmıştır. Celsus Kütüphanesi, Büyük Tiyatro ve mermer döşeli Kuretler Caddesi kentin en çok ziyaret edilen yapılarıdır. Yakınındaki Artemis Tapınağı, antik dünyanın yedi harikasından biri sayılıyordu.",
+      "tarihce": [
+        ["MÖ 10. yy", "İyonyalı göçmenler kenti Küçük Menderes'in ağzına yakın bir yerde kurar."],
+        ["MÖ 6. yy", "Lidya kralı Kroisos'un desteğiyle Artemis Tapınağı inşa edilir."],
+        ["MÖ 3. yy başı", "Lysimakhos kenti bugünkü yerine taşır ve surlarla çevirir."],
+        ["MÖ 1. yy", "Roma'nın Asya eyaletinin başkenti olur; nüfusu yüz binleri bulur."],
+        ["MS 2. yy başı", "Celsus Kütüphanesi, Tiberius Julius Aquila tarafından babası Celsus'un anısına yaptırılır."],
+        ["MS 262-263", "Gotların saldırısında Artemis Tapınağı ağır hasar görür."],
+        ["MS 431", "Üçüncü Ekümenik Konsil Efes'te toplanır."],
+        ["Orta Çağ", "Liman dolar; yerleşim Ayasuluk tepesine, bugünkü Selçuk'a kayar."],
+        ["1895", "Avusturyalı arkeologlar bugün de süren sistemli kazılara başlar."],
+        ["2015", "UNESCO Dünya Mirası Listesi'ne alınır."]
+      ],
+      "benzer": [
+        { "ad": "Bergama (Pergamon)", "koordinat": [39.1325, 27.1844], "aciklama": "Dik yamaçtaki tiyatrosu ve Zeus Sunağı'yla Helenistik başkent." },
+        { "ad": "Afrodisias", "koordinat": [37.7086, 28.7238], "aciklama": "Heykel atölyeleri ve iyi korunmuş stadyumuyla ünlü antik kent." },
+        { "ad": "Hierapolis (Pamukkale)", "koordinat": [37.9257, 29.1260], "aciklama": "Travertenlerin üzerinde kurulmuş Roma dönemi şifa kenti." },
+        { "ad": "Priene", "koordinat": [37.6597, 27.2975], "aciklama": "Izgara planlı sokaklarıyla küçük ve düzenli bir İyon kenti." },
+        { "ad": "Milet", "koordinat": [37.5303, 27.2781], "aciklama": "Thales'in kenti; büyük tiyatrosu hâlâ ayakta." },
+        { "ad": "Troya", "koordinat": [39.9575, 26.2389], "aciklama": "Dokuz ayrı yerleşim katmanıyla efsanevi kent." },
+        { "ad": "Pompeii (İtalya)", "koordinat": [40.7489, 14.4848], "aciklama": "MS 79'da Vezüv'ün külleri altında kalan Roma kenti." },
+        { "ad": "Ceraş (Ürdün)", "koordinat": [32.2808, 35.8917], "aciklama": "Sütunlu caddeleriyle Orta Doğu'nun en iyi korunmuş Roma kentlerinden." }
+      ],
+      "yorumlar": [
+        { "kim": "mehmet", "metin": "Kütüphanenin önünde sabah erken saatte olmak bambaşka. Kalabalık gelmeden gidin derim.", "zaman": "1 saat önce" },
+        { "kim": "elif", "metin": "Büyük Tiyatro'da ses hâlâ inanılmaz net yayılıyor, biz de denemiştik.", "zaman": "45 dk önce" }
+      ]
+    },
+    {
+      "id": "kapadokya",
+      "yazar": "mehmet",
+      "zaman": "dün",
+      "begeni": 342,
+      "yer": "Göreme, Kapadokya",
+      "konum": "Göreme, Nevşehir · Türkiye",
+      "koordinat": [38.6431, 34.8289],
+      "not": "Balonlar 05.30 gibi havalanmaya başladı. Uçmasanız bile izlemek için erken kalkmaya değer.",
+      "medya": [
+        { "tur": "foto", "kaynak": "kapadokya-balon", "alt": "Göreme vadilerinin üzerinde süzülen sıcak hava balonları" },
+        { "tur": "video", "kaynak": "kapadokya-video", "alt": "Kapadokya'nın vadilerinden kısa bir video" },
+        { "tur": "foto", "kaynak": "kapadokya-gundogumu", "alt": "Gün doğarken Göreme kasabası ve balonlar" },
+        { "tur": "foto", "kaynak": "kapadokya-peribacalari", "alt": "Şapkalı peri bacaları" }
+      ],
+      "bilgiler": [["Tür", "Doğal ve kültürel alan"], ["Oluşum", "Volkanik tüf"], ["UNESCO", "1985"], ["Rakım", "~1.000 m"]],
+      "hakkinda": "Göreme, Kapadokya'nın ortasında, volkanik tüfün rüzgâr ve yağmurla aşınmasıyla oluşan peri bacalarının arasında kurulmuş bir kasabadır. Kayaya oyulmuş kiliseler, evler ve güvercinlikler bölgenin en tanıdık görüntüleridir. Göreme Açık Hava Müzesi'ndeki kaya kiliselerinin freskleri yüzyıllardır yerinde durur. Sabahları hava uygunsa yüzlerce sıcak hava balonu vadilerin üzerinde süzülür.",
+      "tarihce": [
+        ["Milyonlarca yıl önce", "Erciyes, Hasandağı ve Göllüdağ'ın püskürttüğü kül kalın tüf katmanlarına dönüşür; erozyon peri bacalarını biçimlendirir."],
+        ["MÖ 2. binyıl", "Bölge Hitit egemenliğine girer."],
+        ["MS 4. yy", "Kapadokyalı kilise babaları bölgede manastır yaşamını yaygınlaştırır."],
+        ["10.-12. yy", "Karanlık Kilise gibi fresklerle süslü kaya kiliseleri oyulur."],
+        ["1985", "\"Göreme Milli Parkı ve Kapadokya Kayalık Alanları\" UNESCO Dünya Mirası Listesi'ne girer."],
+        ["1990'ların başı", "İlk ticari balon uçuşları başlar; Göreme balon turizminin merkezi olur."]
+      ],
+      "benzer": [
+        { "ad": "Uçhisar Kalesi", "koordinat": [38.6297, 34.8044], "aciklama": "Bölgenin en yüksek noktasındaki oyma kaya kalesi." },
+        { "ad": "Zelve Açık Hava Müzesi", "koordinat": [38.6717, 34.8611], "aciklama": "1950'lere kadar yaşanan, terk edilmiş kaya köyü." },
+        { "ad": "Kaymaklı Yeraltı Şehri", "koordinat": [38.4617, 34.7514], "aciklama": "Dar tünellerle birbirine bağlanan yeraltı katları." },
+        { "ad": "Derinkuyu Yeraltı Şehri", "koordinat": [38.3735, 34.7346], "aciklama": "Binlerce kişiyi barındırabilen çok katlı yeraltı kenti." },
+        { "ad": "Ihlara Vadisi", "koordinat": [38.2483, 34.2989], "aciklama": "Melendiz Çayı boyunca kaya kiliseleriyle dolu kanyon." },
+        { "ad": "Soğanlı Vadisi", "koordinat": [38.3381, 35.0711], "aciklama": "Kalabalıktan uzak, kaya kiliseleriyle sessiz bir vadi." },
+        { "ad": "Meteora (Yunanistan)", "koordinat": [39.7217, 21.6306], "aciklama": "Kaya sütunlarının tepesine kurulmuş manastırlar." }
+      ],
+      "yorumlar": [
+        { "kim": "ayse", "metin": "Kalkışı izlemek için Aşk Vadisi'nin tepesi harika bir nokta.", "zaman": "20 saat önce" },
+        { "kim": "elif", "metin": "Fotoğraflar çok güzel olmuş! Hangi ayda gittiniz?", "zaman": "18 saat önce" }
+      ]
+    },
+    {
+      "id": "galata",
+      "yazar": "elif",
+      "zaman": "3 gün önce",
+      "begeni": 96,
+      "yer": "Galata Kulesi",
+      "konum": "Beyoğlu, İstanbul · Türkiye",
+      "koordinat": [41.0256, 28.9741],
+      "not": "Gün batımına doğru çıktık, Haliç ve tarihi yarımada tam karşımızdaydı.",
+      "medya": [
+        { "tur": "foto", "kaynak": "galata-kule", "alt": "Galata Kulesi'nin taş gövdesi ve konik külahı" },
+        { "tur": "foto", "kaynak": "galata-gunbatimi", "alt": "Gün batımında Karaköy silueti ve Galata Kulesi" },
+        { "tur": "video", "kaynak": "galata-video", "alt": "Galata Kulesi çevresinden kısa bir video" },
+        { "tur": "foto", "kaynak": "galata-halic", "alt": "Haliç, Metro Köprüsü ve arkada Galata Kulesi" }
+      ],
+      "bilgiler": [["Tür", "Ortaçağ kulesi"], ["Yapım", "1348"], ["Yükseklik", "~63 m"], ["Bugün", "Müze"]],
+      "hakkinda": "Galata Kulesi, Beyoğlu'nun yokuşlarından Haliç'e ve tarihi yarımadaya bakan, İstanbul siluetinin en tanıdık yapılarından biridir. Cenevizliler tarafından Galata surlarının en yüksek noktası olarak yapıldı. Yaklaşık 63 metre yüksekliğindeki kulenin üst katındaki seyir terası, şehri dört bir yandan görmeyi sağlar. 2020'deki restorasyondan sonra müze olarak ziyarete açıldı.",
+      "tarihce": [
+        ["1348", "Cenevizliler kuleyi \"Christea Turris\" (İsa Kulesi) adıyla Galata surlarının parçası olarak inşa eder."],
+        ["1453", "İstanbul'un fethinden sonra Galata Osmanlı'ya geçer; kule zamanla zindan ve depo olarak kullanılır."],
+        ["17. yy", "Evliya Çelebi'ye göre Hezarfen Ahmed Çelebi, yaptığı kanatlarla kuleden Üsküdar'a uçar."],
+        ["1717", "Kule yangın gözetleme kulesi olarak kullanılmaya başlar."],
+        ["1794 ve 1831", "Büyük yangınlarda zarar görür ve onarılır."],
+        ["1965-1967", "Kapsamlı bir restorasyonla bugünkü konik külahına kavuşur."],
+        ["2020", "Yeni restorasyonun ardından müze olarak yeniden açılır."]
+      ],
+      "benzer": [
+        { "ad": "Kız Kulesi", "koordinat": [41.0211, 29.0041], "aciklama": "Üsküdar açığında küçük bir adacık üzerindeki kule." },
+        { "ad": "Beyazıt Yangın Kulesi", "koordinat": [41.0115, 28.9640], "aciklama": "İstanbul Üniversitesi bahçesindeki 85 metrelik gözetleme kulesi." },
+        { "ad": "Rumeli Hisarı", "koordinat": [41.0847, 29.0569], "aciklama": "Fetihten önce Boğaz'ın en dar yerine yapılan kale." },
+        { "ad": "Anadolu Hisarı", "koordinat": [41.0822, 29.0675], "aciklama": "Boğaz'ın Anadolu yakasındaki ilk Osmanlı kalesi." },
+        { "ad": "Yedikule Hisarı", "koordinat": [40.9934, 28.9229], "aciklama": "Kara surlarının ucundaki yedi kuleli hisar." }
+      ],
+      "yorumlar": [
+        { "kim": "ayse", "metin": "Gün batımı saatinde sıra çok uzun oluyor, bilet için erken gidin.", "zaman": "2 gün önce" },
+        { "kim": "mehmet", "metin": "Hezarfen hikâyesini her duyduğumda tüylerim diken diken oluyor.", "zaman": "2 gün önce" }
+      ]
+    }
+  ]
+}

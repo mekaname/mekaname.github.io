@@ -1,10 +1,10 @@
-# Siteyi GitHub Pages'te yayınlar. main dalına her gönderimde otomatik çalışır.
+# Siteyi GitHub Pages'te yayınlar. Aşağıdaki dallara her gönderimde otomatik çalışır.
 # İlk kez: depo Settings > Pages > Build and deployment > Source: "GitHub Actions" seçilmeli.
 name: Siteyi yayınla
 
 on:
   push:
-    branches: [main]
+    branches: [main, claude/site-yapimi-596xqf]
   workflow_dispatch:
 
 permissions:

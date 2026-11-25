@@ -1134,6 +1134,12 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
 .map-search input { flex: 1; min-width: 0; border: 0; background: none; padding: 11px 0; font-size: 1rem; }
 .map-search input:focus { outline: none; }
 /* Dosya seçme: gerçek dosya girişi görünmez şekilde alanın üstünü kaplar (her tarayıcıda dokunma doğrudan ona gider) */
+.add-wrap { position: relative; aspect-ratio: 1; }
+.add-wrap .add-tile { width: 100%; height: 100%; font: inherit; }
+.add-menu { position: absolute; z-index: 50; top: calc(100% + 6px); left: 0; min-width: 180px; padding: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); display: grid; gap: 2px; }
+.add-opt { position: relative; display: flex; align-items: center; gap: 10px; padding: 11px 12px; border-radius: 8px; font-weight: 600; cursor: pointer; overflow: hidden; }
+.add-opt:hover, .add-opt:focus-within { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.add-opt svg { width: 20px; height: 20px; color: var(--accent); flex: none; }
 .add-tile, .file-btn { position: relative; overflow: hidden; }
 .file-btn { display: inline-flex; align-items: center; cursor: pointer; }
 .file-over { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; font-size: 0; }
@@ -1217,11 +1223,11 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
     <form class="form" id="auth-form" novalidate>
       <div class="field" id="f-name-wrap">
         <label for="f-name">Ad Soyad</label>
-        <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Örn. Ayşe Yılmaz">
+        <input id="f-name" name="name" type="text" autocomplete="name" >
       </div>
       <div class="field" id="f-email-wrap">
         <label for="f-email">E-posta adresi</label>
-        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="ornek@eposta.com">
+        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" >
       </div>
       <div class="field">
         <label for="f-pass">Şifre</label>
@@ -1241,7 +1247,7 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
       <span id="google-label">Google ile Giriş Yap</span>
     </button>
     <p class="modal-foot" id="auth-switch"></p>
-    <p class="local-note" id="local-note" hidden>Önizleme modu: Site henüz Supabase'e bağlı olmadığı için hesaplar ve gönderiler yalnızca bu tarayıcıda saklanır. Google ile giriş ve herkese açık paylaşım, Supabase ayarları eklenince çalışır.</p>
+    <p class="local-note" id="local-note" hidden>Önizleme: hesaplar bu tarayıcıda saklanır.</p>
   </div>
 </div>
 
@@ -1708,12 +1714,13 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     authMode = m; var up = m === "signup", np = m === "newpass";
     ["f-email-wrap", "auth-or", "google-btn", "auth-switch"].forEach(function (id) { $(id).hidden = np; });
     $("auth-title").textContent = up ? "Kayıt Ol" : "Giriş Yap";
-    $("auth-lead").textContent = up ? "TarihGram hesabını oluştur, gezdiğin yerleri paylaşmaya başla." : "Tekrar hoş geldin. Hesabına giriş yap.";
+    $("auth-lead").textContent = "";
     $("f-name-wrap").hidden = !up;
     $("f-pass").setAttribute("autocomplete", up ? "new-password" : "current-password");
     $("btn-forgot").hidden = up || np;
     $("auth-submit").textContent = up ? "Kayıt Ol" : "Giriş Yap";
     if (np) { $("auth-title").textContent = "Yeni şifre"; $("auth-lead").textContent = "Hesabın için yeni bir şifre belirle."; $("auth-submit").textContent = "Şifreyi güncelle"; $("f-pass").setAttribute("autocomplete", "new-password"); }
+    $("auth-lead").hidden = !$("auth-lead").textContent;
     $("google-label").textContent = up ? "Google ile Kayıt Ol" : "Google ile Giriş Yap";
     $("auth-switch").innerHTML = up ? 'Zaten hesabın var mı? <button type="button" class="link-btn" data-mode="signin">Giriş Yap</button>' : 'Hesabın yok mu? <button type="button" class="link-btn" data-mode="signup">Kayıt Ol</button>';
     $("local-note").hidden = Veri.mode !== "local";
@@ -1752,7 +1759,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     else if (pw.length < 6) { bad = "f-pass"; text = "Şifre en az 6 karakter olmalı."; }
     if (bad) { $(bad).setAttribute("aria-invalid", "true"); $(bad).focus(); return msg(text, ""); }
     msg("", ""); busy(true);
-    welcome = up ? "Hesabın oluşturuldu. Hoş geldin!" : "Giriş yapıldı.";
+    welcome = up ? "Hesap oluşturuldu." : "Giriş yapıldı.";
     (up ? Veri.signUp(name, email, pw) : Veri.signIn(email, pw))
       .then(function (r) {
         if (r && r.confirm) { welcome = ""; openAuth("signin"); $("f-email").value = email; msg("", email + " adresine bir onay bağlantısı gönderdik. Bağlantıya tıkladıktan sonra buradan giriş yap."); }
@@ -1762,7 +1769,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   });
   $("google-btn").addEventListener("click", function () {
     msg("", ""); busy(true);
-    welcome = "Google hesabınla giriş yapıldı.";
+    welcome = "Giriş yapıldı.";
     Veri.google().catch(function (err) { welcome = ""; msg(errText(err), ""); })
       .then(function () { busy(false); });
   });
@@ -1831,12 +1838,12 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     route = kind; setTop("menu");
     var list = DATA.gonderiler.filter(function (p) { return kind !== "saved" || ST.saved[p.id]; });
     var html = (kind === "saved" ? '<h1 class="view-head">Kaydedilenler</h1>' : '<h1 class="sr">Ana sayfa</h1>') + '<div class="feed">';
-    if (!list.length) html += '<p class="empty">Henüz kaydettiğin bir gönderi yok. Bir gönderinin altındaki kaydet simgesine dokunarak buraya ekleyebilirsin.</p>';
+    if (!list.length) html += '<p class="empty">Kaydedilen gönderi yok.</p>';
     list.forEach(function (p) {
       var n = commentCount(p);
       html += '<article class="post" data-id="' + p.id + '">' + headHTML(p) + mediaHTML(p, false) + actionsHTML(p) +
         '<div class="post-meta"><span class="likes" data-likes>' + fmt(likeCount(p)) + ' beğenme</span>' +
-        '<button class="more-comments" data-a="open-comments" type="button">' + (n ? n + " yorumun tümünü gör" : "İlk yorumu sen yap") + '</button></div></article>';
+        '<button class="more-comments" data-a="open-comments" type="button">' + (n ? n + " yorumun tümünü gör" : "Yorum yap") + '</button></div></article>';
     });
     $("view").innerHTML = html + '</div>';
     wireMedia($("view"), false);
@@ -1950,7 +1957,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       '<ul class="similar">' + p.benzer.map(function (s, i) {
         return '<li><span class="num">' + (i + 1) + '</span><div class="info"><button class="name" data-a="fly" data-i="' + i + '" type="button">' + esc(s.ad) + '</button><p class="desc">' + esc(s.aciklama) + '</p></div>' +
           '<div class="side"><span>' + fmt(km(p.koordinat, s.koordinat)) + ' km</span><a href="' + gmapsLink(s.koordinat) + '" target="_blank" rel="noopener">Haritada aç</a></div></li>';
-      }).join("") + '</ul><p class="map-actions">Uzaklıklar bu mekâna kuş uçuşu olarak hesaplanmıştır.</p></section>' : '') +
+      }).join("") + '</ul><p class="map-actions">Kuş uçuşu uzaklık.</p></section>' : '') +
 
       '<section class="sec" aria-labelledby="h-com"><h3 id="h-com">Yorumlar</h3><ul class="comments" id="comments"></ul></section>' +
       '</article>';
@@ -1988,7 +1995,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     $("comments").innerHTML = list.length ? list.map(function (c) {
       return '<li class="comment">' + avatarHTML(c.name, c.color, c.photo) + '<div class="body"><p><b>' + esc(c.name) + '</b> ' + esc(c.text) + '</p>' +
         '<div class="meta"><span>' + esc(c.when) + '</span>' + (c.canDel ? '<button type="button" data-a="del-comment" data-cid="' + c.id + '">Sil</button>' : '') + '</div></div></li>';
-    }).join("") : '<li class="comment" style="grid-template-columns:1fr;color:var(--muted)">Henüz yorum yok. İlk yorumu sen yaz.</li>';
+    }).join("") : '<li class="comment" style="grid-template-columns:1fr;color:var(--muted)">Henüz yorum yok.</li>';
   }
   function deleteComment(pid, cid) {
     if (Veri.mode === "cloud") {
@@ -2075,6 +2082,8 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   function thumbOf(p) { var m = p && p.medya[0]; if (!m) return ""; return m.tur === "foto" ? mediaSrc(m) : posterSrc(m); }
 
   var MEKANLAR = [], SEHIRLER = [];
+  ICON.photos = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>';
+  ICON.folder = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>';
   ICON.city = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 21V9l5-3v15M9 21V4l7 3v14M16 21v-9l4 2v7M2 21h20"/></svg>';
   function buildCatalog() {
     var seen = {}; CATALOG = [];
@@ -2108,11 +2117,11 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     if (s.indexOf(q) === 0) return 0;
     var words = s.split(/[\s,().'’\-\/]+/).filter(Boolean);
     for (var i = 0; i < words.length; i++) if (words[i].indexOf(q) === 0) return 1;
-    if (q.length >= 3 && s.indexOf(q) >= 0) return 2;
-    if (q.length < 3) return 99;
-    var tol = q.length >= 7 ? 2 : 1, best = 99;
+    if (q.length >= 4 && s.indexOf(q) >= 0) return 2;
+    if (q.length < 4) return 99;
+    var tol = q.length >= 8 ? 2 : 1, best = 99;
     [s.replace(/\s+/g, "")].concat(words).forEach(function (w) {
-      if (w.length < q.length - 1 || w[0] !== q[0]) return;
+      if (w.length < q.length - 1 || w.slice(0, 2) !== q.slice(0, 2)) return;
       var d = lev(q, w.slice(0, q.length)); if (d <= tol) best = Math.min(best, 3 + d);
     });
     return best;
@@ -2129,7 +2138,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     if (kinds.indexOf("sehir") >= 0) SEHIRLER.forEach(function (s) {
       var sc = scoreText(q, s.ad);
       if (sc < 99) sc += s.tur === "il" ? -0.3 : s.tur === "ilce" ? 0.3 : 0.1;
-      if (s.tur === "sehir") sc = Math.min(sc, scoreText(q, s.ust) + 2);
+      if (s.tur === "sehir") { var su = scoreText(q, s.ust); if (su <= 1) sc = Math.min(sc, su + 2); }
       if (sc < 99) out.push({ tur: "sehir", x: s, sc: sc });
     });
     out.sort(function (a, b) { return a.sc - b.sc || a.x.ad.length - b.x.ad.length; });
@@ -2144,7 +2153,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     function draw() {
       items = searchAll(input.value, kinds);
       if (!items.length) {
-        if (input.value.trim().length >= 2 && onEnter) { ul.innerHTML = '<li class="sg-none">Listede yok. Enter\'a basarak internette ara.</li>'; ul.hidden = false; input.setAttribute("aria-expanded", "true"); items = []; return; }
+        if (input.value.trim().length >= 2 && onEnter) { ul.innerHTML = '<li class="sg-none">Sonuç yok</li>'; ul.hidden = false; input.setAttribute("aria-expanded", "true"); items = []; return; }
         return close();
       }
       ul.innerHTML = items.map(function (r, i) {
@@ -2290,18 +2299,18 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     $("view").innerHTML = '<form class="share page" id="sh-form" novalidate>' +
       (USER.yasakli ? '<p class="empty">Hesabın yönetici tarafından kısıtlandığı için şu an gönderi paylaşamazsın.</p>' : '') +
       '<section class="sec first"><h3>Fotoğraf ve videolar</h3><div class="picks" id="sh-picks"></div>' +
-      '<p class="hint">En fazla 10 dosya. Fotoğrafları buraya sürükleyip bırakabilir ya da yapıştırabilirsin. Seçim penceresi açılmıyorsa sayfayı Safari veya Chrome\'da aç.</p></section>' +
+      '<p class="hint">En fazla 10 dosya</p></section>' +
       '<section class="sec"><h3>Mekân</h3><div class="form">' +
-      '<div class="field"><label for="sh-yer">Mekân adı</label><div class="sg-wrap"><input id="sh-yer" autocomplete="off" maxlength="80" placeholder="Yazmaya başla: top → Topkapı Sarayı"></div>' +
-      '<span class="hint" style="margin:0">Listede yoksa yazdığın ad kullanılır.</span></div>' +
-      '<div class="field"><label for="sh-konum">Şehir / ülke</label><div class="sg-wrap"><input id="sh-konum" autocomplete="off" maxlength="80" placeholder="Yazmaya başla: ist → İstanbul, Türkiye"></div></div>' +
+      '<div class="field"><label for="sh-yer">Mekân adı</label><div class="sg-wrap"><input id="sh-yer" autocomplete="off" maxlength="80" ></div>' +
+      '</div>' +
+      '<div class="field"><label for="sh-konum">Şehir / ülke</label><div class="sg-wrap"><input id="sh-konum" autocomplete="off" maxlength="80" ></div></div>' +
       '<div class="field"><label for="sh-kat">Tür</label><select id="sh-kat">' + KATEGORILER.map(function (k) { return '<option>' + k + '</option>'; }).join("") + '</select></div>' +
       '<div class="field"><span class="flabel">Haritadaki yeri</span>' +
-      '<div class="sg-wrap map-search">' + ICON.search + '<label class="sr" for="sh-ara">Haritada ara</label><input id="sh-ara" type="search" autocomplete="off" placeholder="Haritada ara: mekân, şehir, ülke"></div>' +
+      '<div class="sg-wrap map-search">' + ICON.search + '<label class="sr" for="sh-ara">Haritada ara</label><input id="sh-ara" type="search" autocomplete="off" placeholder="Haritada ara"></div>' +
       '<div class="mapbox" id="sh-map"></div>' +
-      '<div class="map-actions"><button type="button" class="pill-link" id="sh-geo">' + ICON.pin + 'Konumumu kullan</button><span class="coords" id="sh-coords">Ara, seç ya da haritaya dokunarak işaretle.</span></div></div>' +
+      '<div class="map-actions"><button type="button" class="pill-link" id="sh-geo">' + ICON.pin + 'Konumumu kullan</button><span class="coords" id="sh-coords">Konum seçilmedi</span></div></div>' +
       '</div></section>' +
-      '<section class="sec"><div class="form"><div class="field"><label for="sh-not">Not</label><textarea id="sh-not" maxlength="500" placeholder="Bu yerde neler gördün, gidecekler nelere dikkat etmeli?"></textarea><span class="counter" id="sh-count">0/500</span></div></div></section>' +
+      '<section class="sec"><div class="form"><div class="field"><label for="sh-not">Not</label><textarea id="sh-not" maxlength="500" ></textarea><span class="counter" id="sh-count">0/500</span></div></div></section>' +
       '<div class="share-foot page-pad"><p class="form-error" id="sh-err" role="alert" hidden></p><button class="btn btn-primary" id="sh-submit" type="submit"' + (USER.yasakli ? ' disabled' : '') + '>Paylaş</button></div></form>';
     drawPicks();
     var form = $("sh-form");
@@ -2323,7 +2332,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     attachSuggest($("sh-ara"), ["mekan", "sehir"], function (r) {
       $("sh-ara").value = r.x.ad;
       if (r.tur === "mekan") pickPlace(r);
-      else { flyMap(r.x.koordinat, r.x.tur === "ilce" ? 12 : 10); if (!$("sh-konum").value.trim()) $("sh-konum").value = cityLabel(r.x); toast(r.x.ad + " gösteriliyor. Tam yere dokunarak işaretle."); }
+      else { flyMap(r.x.koordinat, r.x.tur === "ilce" ? 12 : 10); if (!$("sh-konum").value.trim()) $("sh-konum").value = cityLabel(r.x); }
     }, function (q) { onlineAra(q, true); });
     // Mekân adı yazılıp alandan çıkılınca: listede tam eşleşme varsa ya da internette bulunursa kendiliğinden işaretle
     $("sh-yer").addEventListener("change", function () {
@@ -2333,10 +2342,10 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       if (!shPoint) onlineAra(this.value.trim() + ($("sh-konum").value ? ", " + $("sh-konum").value : ""), false);
     });
     $("sh-geo").addEventListener("click", function () {
-      if (!navigator.geolocation) return shErr("Bu tarayıcı konum paylaşmayı desteklemiyor. Haritada ara ya da dokunarak işaretle.");
+      if (!navigator.geolocation) return shErr("Bu tarayıcı konum paylaşmayı desteklemiyor.");
       $("sh-coords").textContent = "Konum alınıyor…";
       navigator.geolocation.getCurrentPosition(function (pos) { shErr(""); setPoint([pos.coords.latitude, pos.coords.longitude], true); },
-        function () { $("sh-coords").textContent = shPoint ? coordText(shPoint) : "Ara, seç ya da haritaya dokunarak işaretle."; shErr("Konum izni alınamadı. Haritada ara ya da dokunarak işaretle."); },
+        function () { $("sh-coords").textContent = shPoint ? coordText(shPoint) : "Konum seçilmedi"; shErr("Konum izni alınamadı."); },
         { timeout: 10000, maximumAge: 60000 });
     });
     form.addEventListener("submit", submitShare);
@@ -2362,11 +2371,11 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       .then(function (js) {
         if (!js.length) throw new Error("yok");
         setPoint([+js[0].lat, +js[0].lon], true); shErr("");
-        toast(js[0].display_name.split(",").slice(0, 2).join(",") + " işaretlendi. Gerekirse işareti sürükle.");
+        toast(js[0].display_name.split(",").slice(0, 2).join(","));
       })
       .catch(function () {
         $("sh-coords").textContent = shPoint ? coordText(shPoint) : prev;
-        if (loud) shErr("“" + q + "” bulunamadı. Listeden bir yer seç ya da haritaya dokunarak işaretle.");
+        if (loud) shErr("“" + q + "” bulunamadı.");
       });
   }
   function coordText(c) { return c[0].toFixed(4) + "° K, " + c[1].toFixed(4) + "° D"; }
@@ -2384,8 +2393,16 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     box.innerHTML = picks.map(function (p, i) {
       return '<div class="pick">' + (p.tur === "video" ? '<video src="' + p.url + '#t=0.5" muted playsinline preload="metadata"></video><span class="vid-tag">' + ICON.play + 'Video</span>' : '<img src="' + p.url + '" alt="Seçilen fotoğraf ' + (i + 1) + '">') +
         '<button type="button" class="x" data-rm="' + i + '" aria-label="Kaldır">×</button></div>';
-    }).join("") + (picks.length < 10 ? '<div class="add-tile"><span>+ Ekle</span><small>Fotoğraf veya video</small><input id="sh-file" class="file-over" type="file" accept="image/*,video/*" multiple aria-label="Fotoğraf veya video seç"></div>' : '');
-    var f = $("sh-file"); if (f) f.addEventListener("change", function () { addFiles(f.files); f.value = ""; });
+    }).join("") + (picks.length < 10 ? '<div class="add-wrap"><button type="button" class="add-tile" id="sh-add" aria-haspopup="true" aria-expanded="false"><span>+ Ekle</span></button>' +
+      '<div class="add-menu" id="sh-add-menu" hidden>' +
+      '<span class="add-opt">' + ICON.photos + 'Fotoğraflar<input class="file-over" type="file" accept="image/*,video/*" multiple aria-label="Fotoğraflardan seç"></span>' +
+      '<span class="add-opt">' + ICON.folder + 'Dosyalar<input class="file-over" type="file" accept=".jpg,.jpeg,.png,.webp,.gif,.heic,.heif,.mp4,.mov,.m4v,.webm" multiple aria-label="Dosyalardan seç"></span>' +
+      '</div></div>' : '');
+    var add = $("sh-add"), menu = $("sh-add-menu");
+    if (add) {
+      add.addEventListener("click", function () { menu.hidden = !menu.hidden; add.setAttribute("aria-expanded", String(!menu.hidden)); });
+      menu.querySelectorAll("input").forEach(function (f) { f.addEventListener("change", function () { menu.hidden = true; addFiles(f.files); f.value = ""; }); });
+    }
   }
   function addFiles(list) {
     var err = "";
@@ -2404,7 +2421,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     var yer = $("sh-yer").value.trim(), btn = $("sh-submit");
     if (!picks.length) return shErr("En az bir fotoğraf ya da video ekle.");
     if (yer.length < 2) { $("sh-yer").focus(); return shErr("Mekânın adını yaz."); }
-    if (!shPoint) { $("sh-map").scrollIntoView({ block: "center", behavior: "smooth" }); return shErr("Haritada ara ya da dokunarak mekânın yerini işaretle."); }
+    if (!shPoint) { $("sh-map").scrollIntoView({ block: "center", behavior: "smooth" }); return shErr("Haritada konum seç."); }
     shErr(""); btn.disabled = true; btn.textContent = "Paylaşılıyor…";
     var tur = picks.map(function (p) { return p.tur; });
     Promise.all(picks.map(function (p) { return p.tur === "foto" ? shrinkImage(p.file, 1440, false) : Promise.resolve(p.file); }))
@@ -2428,7 +2445,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     CATALOG.concat(DATA.gonderiler).forEach(function (x) { if (x.kategori && cats.indexOf(x.kategori) < 0) cats.push(x.kategori); });
     if (cats.indexOf(exCat) < 0) exCat = "Tümü";
     $("view").innerHTML = '<div class="page page-pad">' +
-      '<label class="search" for="ex-q">' + ICON.search + '<span class="sr">Ara</span><input id="ex-q" type="search" autocomplete="off" placeholder="Mekân, şehir veya tür ara" value="' + esc(exQ) + '"></label>' +
+      '<label class="search" for="ex-q">' + ICON.search + '<span class="sr">Ara</span><input id="ex-q" type="search" autocomplete="off" placeholder="Ara" value="' + esc(exQ) + '"></label>' +
       chipsHTML("ex-chips", cats.map(function (c) { return [c, c]; }), exCat) + '<div id="ex-res"></div></div>';
     $("ex-q").addEventListener("input", function () { exQ = this.value; exLimit = 30; drawExplore(); });
     $("ex-res").addEventListener("click", function (e) { if (e.target.closest("#ex-more")) { exLimit += 40; drawExplore(); } });
@@ -2481,7 +2498,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   function drawHistory() {
     var evs = ST.gecmis.filter(function (e) { return hiFilter === "hepsi" || e.tur === hiFilter; });
     if (!evs.length) {
-      $("hi-list").innerHTML = '<p class="empty">' + (ST.gecmis.length ? "Bu türde bir hareket yok." : "Henüz bir hareket yok. Gönderileri açtıkça, beğendikçe, kaydettikçe ve yorum yaptıkça burada gün gün listelenecek.") + '</p>';
+      $("hi-list").innerHTML = '<p class="empty">' + (ST.gecmis.length ? "Bu türde bir hareket yok." : "Henüz bir hareket yok.") + '</p>';
       return;
     }
     var html = "", last = "";
@@ -2565,7 +2582,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     }
     mapFocus = null;
     if (!fit) return;
-    if (!pts.length) { bigMap.setView([39, 34], 5); toast(mpFilter === "kayitli" ? "Henüz kaydettiğin bir gönderi yok." : "Haritada gösterilecek bir şey yok."); return; }
+    if (!pts.length) { bigMap.setView([39, 34], 5); toast(mpFilter === "kayitli" ? "Kaydedilen gönderi yok." : "Haritada gösterilecek bir şey yok."); return; }
     var tr = pts.filter(function (c) { return c[1] > 25 && c[1] < 45 && c[0] > 35 && c[0] < 43; });
     bigMap.fitBounds(L.latLngBounds(tr.length ? tr : pts), { padding: [36, 36], maxZoom: 10 });
   }
@@ -2597,12 +2614,12 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       '<div class="pf-head">' + avatarHTML(USER.name, "var(--accent)", USER.photo) +
       '<div class="pf-stats"><div><b>' + mine.length + '</b><span>Gönderi</span></div><div><b>' + Object.keys(ST.liked).length + '</b><span>Beğeni</span></div><div><b>' + nSaved + '</b><span>Kayıtlı</span></div></div></div>' +
       '<div class="pf-info"><strong>' + esc(USER.name) + '</strong><span class="handle">' + esc(handleOf(USER.email)) + ' · ' + esc(USER.method) + '</span>' +
-      '<p class="bio' + (USER.bio ? '' : ' empty-bio') + '">' + esc(USER.bio || "Kendinden kısaca bahset: en sevdiğin dönem, gezmek istediğin yerler…") + '</p></div>' +
+      (USER.bio ? '<p class="bio">' + esc(USER.bio) + '</p>' : '') + '</div>' +
       '<div class="pf-actions" id="pf-actions"><button class="btn-sec" id="pf-edit-btn" type="button">Profili düzenle</button><button class="btn-sec" type="button" data-go="paylas">+ Yeni gönderi</button></div>' +
       '<form class="pf-edit form" id="pf-form" hidden novalidate>' +
       '<div class="pf-photo-row"><span id="pf-av">' + avatarHTML(USER.name, "var(--accent)", USER.photo) + '</span><span class="btn-sec file-btn">Fotoğraf seç<input id="pf-photo" class="file-over" type="file" accept="image/*" aria-label="Profil fotoğrafı seç"></span><button type="button" class="link-btn" id="pf-photo-rm">Kaldır</button></div>' +
       '<div class="field"><label for="pf-name">Ad Soyad</label><input id="pf-name" maxlength="60" autocomplete="name" value="' + esc(USER.name) + '"></div>' +
-      '<div class="field"><label for="pf-bio">Hakkımda</label><textarea id="pf-bio" maxlength="150" placeholder="Örn. Antik kent meraklısı, Ege kıyılarını geziyorum.">' + esc(USER.bio) + '</textarea><span class="counter" id="pf-count">' + USER.bio.length + '/150</span></div>' +
+      '<div class="field"><label for="pf-bio">Hakkımda</label><textarea id="pf-bio" maxlength="150" >' + esc(USER.bio) + '</textarea><span class="counter" id="pf-count">' + USER.bio.length + '/150</span></div>' +
       '<p class="form-error" id="pf-err" role="alert" hidden></p>' +
       '<div class="pf-actions"><button class="btn-sec" type="button" id="pf-cancel">Vazgeç</button><button class="btn btn-primary" type="submit" style="margin:0">Kaydet</button></div></form>' +
       '<div class="tabs" role="tablist"><button type="button" role="tab" data-tab="gonderi" aria-selected="' + (pfTab === "gonderi") + '">Gönderilerim</button><button type="button" role="tab" data-tab="kayitli" aria-selected="' + (pfTab === "kayitli") + '">Kaydedilenler</button></div>' +
@@ -2639,8 +2656,8 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     $("pf-grid").innerHTML = list.length
       ? '<div class="grid" style="margin-top:3px">' + list.map(function (p) { return tileHTML(p, p.medya[0]); }).join("") + '</div>'
       : (pfTab === "gonderi"
-        ? '<div class="tab-empty"><p>Henüz bir gönderi paylaşmadın. Gezdiğin ilk tarihi yeri paylaş.</p><button class="btn btn-primary" type="button" data-go="paylas" style="width:auto">+ İlk gönderini paylaş</button></div>'
-        : '<div class="tab-empty"><p>Kaydettiğin gönderiler burada görünür.</p></div>');
+        ? '<div class="tab-empty"><p>Henüz gönderi yok.</p><button class="btn btn-primary" type="button" data-go="paylas" style="width:auto">+ Paylaş</button></div>'
+        : '<div class="tab-empty"><p>Kaydedilen gönderi yok.</p></div>');
   }
 
   /* ===================== YÖNETİM (yalnızca yöneticiler) ===================== */
@@ -2649,7 +2666,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     if (!USER || USER.rol !== "admin") { toast("Bu sayfa yalnızca yöneticilere açık."); return go(""); }
     route = "admin"; setTop("menu", "Yönetim");
     $("view").innerHTML = '<div class="page page-pad">' +
-      (Veri.mode === "local" ? '<p class="local-note" style="margin-top:14px">Önizleme modu: Bu paneldeki veriler yalnızca bu tarayıcıdaki hesap ve gönderilerdir. Site Supabase\'e bağlanınca tüm üyeleri ve gönderileri buradan yönetirsin.</p>' : '') +
+      (Veri.mode === "local" ? '<p class="local-note" style="margin-top:14px">Önizleme: yalnızca bu tarayıcıdaki veriler.</p>' : '') +
       '<div class="ad-stats" id="ad-stats"><div><b>…</b><span>Üye</span></div><div><b>…</b><span>Gönderi</span></div><div><b>…</b><span>Yorum</span></div></div>' +
       '<div class="tabs three" role="tablist">' +
       [["gonderi", "Gönderiler"], ["yorum", "Yorumlar"], ["uye", "Üyeler"]].map(function (t) { return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (adTab === t[0]) + '">' + t[1] + '</button>'; }).join("") +
@@ -2681,7 +2698,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
           '<div class="ad-main"><strong>' + esc(p.yer) + '</strong><small>' + esc(person(p.yazar).ad) + ' · ' + fmtDate(p.t) + ' · ' + p.medya.length + ' medya</small></div>' +
           '<div class="ad-acts"><button class="btn-sec" type="button" data-open="' + p.id + '">Aç</button><button class="btn-sec danger-txt" type="button" data-ad="post" data-id="' + p.id + '">Sil</button></div></li>';
       }).join("") + '</ul>' : '<p class="empty">Henüz üyelerin paylaştığı bir gönderi yok.</p>') +
-        (ORNEK_GONDERILER ? '<p class="hint">Ayşe, Mehmet ve Elif\'in örnek gönderileri burada listelenmez. Akıştan kaldırmak için index.html\'de ORNEK_GONDERILER = false yap.</p>' : '');
+        (ORNEK_GONDERILER ? '<p class="hint">Örnek gönderiler bu listede yer almaz.</p>' : '');
     } else if (adTab === "yorum") {
       b.innerHTML = adComments.length ? '<ul class="ad-list">' + adComments.map(function (c) {
         var p = postById(c.postId);
@@ -2782,6 +2799,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   /* ===================== GENEL ===================== */
   function closeAll() { ["auth", "drawer", "settings", "send"].forEach(function (id) { $(id).hidden = true; }); $("btn-left").getAttribute("aria-expanded") && $("btn-left").setAttribute("aria-expanded", "false"); }
   document.addEventListener("click", function (e) {
+    var am = $("sh-add-menu"); if (am && !am.hidden && !e.target.closest(".add-wrap")) { am.hidden = true; $("sh-add") && $("sh-add").setAttribute("aria-expanded", "false"); }
     var c = e.target.closest("[data-close]"); if (c) { $(c.dataset.close).hidden = true; return; }
     if (e.target.classList && (e.target.classList.contains("modal-wrap") || e.target.classList.contains("sheet-wrap"))) e.target.hidden = true;
   });

@@ -49,11 +49,11 @@ Gerekirse bir hesabı elle yönetici yapmak için `supabase/kurulum.sql` dosyas�
 - **Google ile giriş** için: Google Cloud Console'da (https://console.cloud.google.com) bir OAuth istemcisi (Web application) oluştur. "Authorized redirect URIs" alanına Supabase'in **Authentication > Providers > Google** sayfasında yazan geri dönüş adresini ekle. Oradan aldığın Client ID ve Client Secret'ı aynı Supabase sayfasına yapıştırıp Google'ı etkinleştir.
 
 ### 4. Yayınlama (GitHub Pages)
-1. Değişiklikleri `main` dalına birleştir.
-2. Depo **Settings > Pages > Build and deployment > Source** alanında **GitHub Actions**'ı seç.
-3. `.github/workflows/yayinla.yml` her `main` gönderiminde siteyi otomatik yayınlar. Adres: `https://<kullanıcı-adı>.github.io/<depo-adı>/`.
+1. Depo **Settings > Pages** sayfasında **Source** olarak **Deploy from a branch**'i seç.
+2. **Branch** olarak `claude/site-yapimi-596xqf` ve klasör olarak `/ (root)` seç, **Save**'e bas.
+3. 1-2 dakika sonra site açılır: `https://mustafamertayan.github.io/Claude-code-/`. Bu dala yapılan her gönderim siteyi kendiliğinden günceller.
 
-GitHub Pages, ücretsiz hesaplarda yalnızca herkese açık (public) depolarda çalışır. Depo gizliyse ya herkese açık yap ya da klasörü Netlify (https://app.netlify.com/drop) gibi bir servise sürükleyip bırak.
+Supabase bağlanmadan yayınlanırsa site çalışır ama önizleme modundadır: her ziyaretçinin hesabı ve gönderileri yalnızca kendi tarayıcısında kalır.
 
 ### Ücretsiz sınırlar
 Supabase ücretsiz planında 500 MB veritabanı ve 1 GB dosya deposu vardır; video başına en fazla 50 MB yüklenebilir. Kullanılmayan ücretsiz projeler bir hafta hareketsiz kalınca duraklatılır, panelden tek tıkla yeniden açılır.
@@ -69,7 +69,6 @@ Paylaşım sırasında mekân ve şehir alanları yazarken öneri verir ("top" �
 - `index.html`: Uygulamanın tamamı (HTML, CSS, JS)
 - `tools/tek-dosya.py`: Her şeyi içine gömen tek dosyalık sürümü üretir (`python3 tools/tek-dosya.py cikti.html`)
 - `supabase/kurulum.sql`: Veritabanı, güvenlik kuralları ve dosya deposu kurulumu
-- `.github/workflows/yayinla.yml`: GitHub Pages'e otomatik yayın
 - `data/mekanlar.json`, `data/sehirler.json`: Arama önerileri için mekân ve şehir listeleri (`tools/mekanlar_uret.py` üretir)
 - `data/gonderiler.json`: Örnek gönderiler, mekân açıklamaları, tarihçeler, benzer mekânlar, fotoğraf kaynakları
 - `data/kiyilar.json`: Türkiye ve çevresinin kıyı çizgileri (Natural Earth 1:10m), internet haritası yüklenemezse kullanılır

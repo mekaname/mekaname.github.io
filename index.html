@@ -1649,6 +1649,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   }
   function fmt(n) { return n.toLocaleString("tr-TR"); }
   function avatarHTML(name, color, photo) {
+    if (photo && !/^(https:\/\/|data:image\/)/.test(photo)) photo = "";
     return '<div class="avatar" style="background:' + color + '" aria-hidden="true">' + (photo ? '<img src="' + esc(photo) + '" alt="" referrerpolicy="no-referrer">' : esc(initials(name))) + '</div>';
   }
   /* Dosya çözümleyici: tek dosyalık sürümde (önizleme) tüm dosyalar sayfanın içine gömülüdür (window.TG_GOMULU). */
@@ -1669,8 +1670,15 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     if (GOMULU && GOMULU[path]) return Promise.resolve(GOMULU[path]);
     return fetch(path).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
   }
-  function mediaSrc(m) { if (m.url) return m.url; return asset(m.tur === "video" ? "assets/video/" + m.kaynak + ".mp4" : "assets/foto/" + m.kaynak + ".jpg"); }
-  function posterSrc(m) { if (m.url) return m.poster || ""; return asset("assets/video/" + m.kaynak + ".jpg"); }
+  // Güvenlik: kullanıcıdan gelen medya adresleri yalnızca kendi depomuzdan, tarayıcı içi (blob) ya da gömülü (data) kaynaklardan kabul edilir ve kaçışlanır.
+  function safeUrl(u) {
+    u = String(u || "");
+    var ok = /^(blob:|data:(image|video)\/|assets\/)/.test(u) ||
+      (SUPABASE_URL && u.indexOf(SUPABASE_URL.replace(/\/+$/, "") + "/storage/v1/object/public/medya/") === 0);
+    return ok && !/["'<>\s\\]/.test(u) ? esc(u) : "";
+  }
+  function mediaSrc(m) { if (m.url) return safeUrl(m.url); return asset(m.tur === "video" ? "assets/video/" + m.kaynak + ".mp4" : "assets/foto/" + m.kaynak + ".jpg"); }
+  function posterSrc(m) { if (m.url) return m.poster ? safeUrl(m.poster) : ""; return asset("assets/video/" + m.kaynak + ".jpg"); }
 
   /* ===================== GİRİŞ EKRANI HARİTASI ===================== */
   var WORLD = [[-85.0511, -180], [85.0511, 180]];
@@ -2565,7 +2573,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       var th = thumbOf(p);
       var mk = L.marker(p.koordinat, { zIndexOffset: 500, icon: L.divIcon({ className: "", html: '<div class="pin-photo' + (p.kendi ? " mine" : "") + '">' + (th ? '<img src="' + th + '" alt="">' : '') + '</div>', iconSize: [44, 44], iconAnchor: [22, 22] }) })
         .addTo(mpLayer).on("click", function () { showCard({ post: p }, mk); });
-      mk.bindTooltip(p.yer, { direction: "top", offset: [0, -22] });
+      mk.bindTooltip(esc(p.yer), { direction: "top", offset: [0, -22] });
       mpMarkers["p:" + p.id] = mk; pts.push(p.koordinat); n++;
       if (fx && fx.postId === p.id) focus = { post: p, mk: mk };
     });
@@ -2573,7 +2581,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       if (mpFilter === "hepsi" && x.postId) return;
       var mk = L.marker(x.koordinat, { icon: L.divIcon({ className: "", html: '<div class="pin-dot"></div>', iconSize: [14, 14], iconAnchor: [7, 7] }) })
         .addTo(mpLayer).on("click", function () { showCard({ place: x }, mk); });
-      mk.bindTooltip(x.ad, { direction: "top", offset: [0, -8] });
+      mk.bindTooltip(esc(x.ad), { direction: "top", offset: [0, -8] });
       mpMarkers[x.id] = mk; pts.push(x.koordinat); n++;
       if (mapFocus === x.id) focus = { place: x, mk: mk };
     });

@@ -1,5 +1,5 @@
 -- =====================================================================
--- TarihGram veritabanı kurulumu
+-- Mekaname veritabanı kurulumu
 -- Supabase panelinde: SQL Editor > New query > bu dosyanın tamamını yapıştır > Run
 -- Birden fazla kez çalıştırmak güvenlidir.
 --

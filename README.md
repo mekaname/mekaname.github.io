@@ -1,10 +1,10 @@
-# TarihGram
+# Mekaname
 
 Gezilen tarihi yerlerin paylaşıldığı, mobil öncelikli bir web uygulaması (sürüm 1.0 E).
 
 ## Neler çalışıyor
 
-- **Giriş ekranı:** Arka planda Leaflet ile gösterilen fiziki dünya haritası (NASA Blue Marble görüntüsünden üretildi), ortada TarihGram yazısı, "Kayıt Ol" ve "Giriş Yap" butonları, sağ altta "1.0 E".
+- **Giriş ekranı:** Arka planda Leaflet ile gösterilen fiziki dünya haritası (NASA Blue Marble görüntüsünden üretildi), ortada Mekaname yazısı, "Kayıt Ol" ve "Giriş Yap" butonları, sağ altta "1.0 E".
 - **Kayıt / giriş penceresi:** Ad soyad, e-posta ve şifre ile kayıt; e-posta ve şifre ile giriş; şifremi unuttum (e-postayla yeni şifre); altında "Google ile Giriş Yap" butonu.
 - **Ana ekran:** Sol üstte menü, sağ üstte Ayarlar (tema, çıkış).
 - **Gönderiler:** Gerçek fotoğraflar ve videolar. Beğen (çift dokunuşla da), yorum yap, gönder, kaydet.
@@ -26,7 +26,7 @@ Gezilen tarihi yerlerin paylaşıldığı, mobil öncelikli bir web uygulaması 
 Ayar yapılmadan uygulama **önizleme modunda** çalışır: hesaplar ve gönderiler yalnızca o tarayıcıda durur. Herkesin birbirinin gönderisini (fotoğraf ve videolar dahil) görmesi için ücretsiz bir Supabase projesi bağlanır. Supabase; giriş (Google dahil), veritabanı ve dosya deposunu tek yerde, kredi kartı istemeden sunar.
 
 ### 1. Supabase projesi aç (5 dakika)
-1. https://supabase.com adresinde ücretsiz hesap aç, **New project** ile proje oluştur (ör. `tarihgram`, bölge: Frankfurt).
+1. https://supabase.com adresinde ücretsiz hesap aç, **New project** ile proje oluştur (ör. `mekaname`, bölge: Frankfurt).
 2. Sol menüden **SQL Editor > New query**: `supabase/kurulum.sql` dosyasının tamamını yapıştır ve **Run**'a bas. Tablolar, güvenlik kuralları ve `medya` adlı fotoğraf/video deposu kurulur.
 3. Proje ana sayfasındaki **Connect** düğmesinden (ya da **Project Settings > API Keys**) **Project URL** ile **Publishable key**'i kopyala. Eski projelerde bu anahtarın adı **anon public**'tir; ikisi de olur.
 4. `index.html` dosyasının en üstündeki betikte şu iki satırı doldur:

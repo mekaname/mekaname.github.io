@@ -26,7 +26,7 @@ def veri_uri(yol):
 
 def main(cikti):
     gomulu = {}
-    for ad in ("data/gonderiler.json", "data/kiyilar.json"):
+    for ad in ("data/gonderiler.json", "data/kiyilar.json", "data/mekanlar.json", "data/sehirler.json"):
         gomulu[ad] = json.load(open(os.path.join(KOK, ad), encoding="utf-8"))
     gomulu["assets/fiziki-harita.jpg"] = veri_uri("assets/fiziki-harita.jpg")
     for klasor in ("assets/foto", "assets/video"):

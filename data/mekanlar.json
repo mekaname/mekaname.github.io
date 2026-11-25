@@ -1,0 +1,2651 @@
+[
+{
+"ad": "Topkapı Sarayı",
+"alt": [
+"Topkapi Palace",
+"Topkapı Müzesi"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Saray",
+"koordinat": [
+41.0115,
+28.9834
+],
+"aciklama": "Osmanlı padişahlarının yaklaşık 400 yıl yaşadığı saray."
+},
+{
+"ad": "Ayasofya",
+"alt": [
+"Hagia Sophia",
+"Ayasofya Camii",
+"Ayasofya-i Kebir"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+41.0086,
+28.9802
+],
+"aciklama": "537'de tamamlanan dev kubbeli Bizans bazilikası, bugün cami."
+},
+{
+"ad": "Sultanahmet Camii",
+"alt": [
+"Mavi Cami",
+"Blue Mosque"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+41.0054,
+28.9768
+],
+"aciklama": "Altı minareli, mavi çinileriyle 17. yüzyıl camisi."
+},
+{
+"ad": "Sultanahmet Meydanı (Hipodrom)",
+"alt": [
+"Hipodrom",
+"At Meydanı",
+"Dikilitaş"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Tarihi yapı",
+"koordinat": [
+41.0063,
+28.9753
+],
+"aciklama": "Bizans'ın araba yarışı alanı; Dikilitaş ve Yılanlı Sütun burada."
+},
+{
+"ad": "Yerebatan Sarnıcı",
+"alt": [
+"Basilica Cistern",
+"Yerebatan"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Tarihi yapı",
+"koordinat": [
+41.0084,
+28.9779
+],
+"aciklama": "336 sütunlu, 6. yüzyıldan kalma yeraltı su deposu."
+},
+{
+"ad": "Dolmabahçe Sarayı",
+"alt": [
+"Dolmabahce Palace"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Saray",
+"koordinat": [
+41.0392,
+29.0004
+],
+"aciklama": "Boğaz kıyısındaki 19. yüzyıl Osmanlı sarayı."
+},
+{
+"ad": "Beylerbeyi Sarayı",
+"alt": [
+"Beylerbeyi Palace"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Saray",
+"koordinat": [
+41.0425,
+29.0397
+],
+"aciklama": "Anadolu yakasında, Sultan Abdülaziz'in yazlık sarayı."
+},
+{
+"ad": "Çırağan Sarayı",
+"alt": [
+"Ciragan Palace"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Saray",
+"koordinat": [
+41.0436,
+29.0153
+],
+"aciklama": "Boğaz kıyısında, bugün otel olarak kullanılan saray."
+},
+{
+"ad": "Yıldız Sarayı",
+"alt": [
+"Yildiz Palace"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Saray",
+"koordinat": [
+41.049,
+29.011
+],
+"aciklama": "II. Abdülhamid'in korulukla çevrili saray kompleksi."
+},
+{
+"ad": "Süleymaniye Camii",
+"alt": [
+"Suleymaniye Mosque"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+41.0162,
+28.9639
+],
+"aciklama": "Mimar Sinan'ın Kanuni için yaptığı külliye."
+},
+{
+"ad": "Rüstem Paşa Camii",
+"alt": [
+"Rustem Pasha Mosque"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+41.0177,
+28.9699
+],
+"aciklama": "İznik çinileriyle kaplı küçük Sinan camisi."
+},
+{
+"ad": "Ortaköy Camii",
+"alt": [
+"Büyük Mecidiye Camii"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+41.0473,
+29.027
+],
+"aciklama": "Boğaz kıyısında barok üsluplu cami."
+},
+{
+"ad": "Eyüp Sultan Camii",
+"alt": [
+"Eyüpsultan"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+41.0477,
+28.9339
+],
+"aciklama": "Fetihten sonra yapılan ilk selatin camilerinden."
+},
+{
+"ad": "Kariye Camii",
+"alt": [
+"Khora",
+"Chora Kilisesi"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+41.0312,
+28.939
+],
+"aciklama": "Bizans mozaik ve freskleriyle ünlü yapı."
+},
+{
+"ad": "Aya İrini",
+"alt": [
+"Hagia Irene"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+41.0094,
+28.9813
+],
+"aciklama": "Topkapı Sarayı avlusundaki Bizans kilisesi."
+},
+{
+"ad": "Kapalıçarşı",
+"alt": [
+"Grand Bazaar",
+"Kapalı Çarşı"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Tarihi çarşı ve han",
+"koordinat": [
+41.0107,
+28.9681
+],
+"aciklama": "60'tan fazla sokağıyla dünyanın en eski kapalı çarşılarından."
+},
+{
+"ad": "Mısır Çarşısı",
+"alt": [
+"Spice Bazaar",
+"Baharatçılar Çarşısı"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Tarihi çarşı ve han",
+"koordinat": [
+41.0166,
+28.9706
+],
+"aciklama": "Eminönü'nde 17. yüzyıldan kalma baharat çarşısı."
+},
+{
+"ad": "Galata Kulesi",
+"alt": [
+"Galata Tower"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+41.0256,
+28.9741
+],
+"aciklama": "Cenevizlilerin 1348'de yaptığı kule."
+},
+{
+"ad": "Kız Kulesi",
+"alt": [
+"Maiden's Tower",
+"Leander"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+41.0211,
+29.0041
+],
+"aciklama": "Üsküdar açığında küçük bir adacık üzerindeki kule."
+},
+{
+"ad": "Rumeli Hisarı",
+"alt": [
+"Rumelihisarı"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+41.0847,
+29.0569
+],
+"aciklama": "Fetihten önce Boğaz'ın en dar yerine yapılan kale."
+},
+{
+"ad": "Anadolu Hisarı",
+"alt": [
+"Anadoluhisarı"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+41.0822,
+29.0675
+],
+"aciklama": "Boğaz'ın Anadolu yakasındaki ilk Osmanlı kalesi."
+},
+{
+"ad": "Yedikule Hisarı",
+"alt": [
+"Yedikule Zindanları"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+40.9934,
+28.9229
+],
+"aciklama": "Kara surlarının ucundaki yedi kuleli hisar."
+},
+{
+"ad": "Beyazıt Yangın Kulesi",
+"alt": [
+"Beyazıt Kulesi"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+41.0115,
+28.964
+],
+"aciklama": "İstanbul Üniversitesi bahçesindeki gözetleme kulesi."
+},
+{
+"ad": "Bozdoğan Su Kemeri",
+"alt": [
+"Valens Su Kemeri",
+"Valens Aqueduct"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Tarihi yapı",
+"koordinat": [
+41.0158,
+28.9558
+],
+"aciklama": "4. yüzyıldan kalma Roma su kemeri."
+},
+{
+"ad": "İstanbul Arkeoloji Müzeleri",
+"alt": [
+"Arkeoloji Müzesi"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Müze",
+"koordinat": [
+41.0117,
+28.9813
+],
+"aciklama": "İskender Lahdi'nin de bulunduğu müze kompleksi."
+},
+{
+"ad": "Pera Müzesi",
+"alt": [
+"Kaplumbağa Terbiyecisi"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Müze",
+"koordinat": [
+41.0317,
+28.9752
+],
+"aciklama": "Oryantalist resim koleksiyonuyla Beyoğlu'ndaki müze."
+},
+{
+"ad": "Selimiye Camii",
+"alt": [
+"Selimiye Mosque"
+],
+"il": "Edirne",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+41.6779,
+26.5594
+],
+"aciklama": "Mimar Sinan'ın \"ustalık eserim\" dediği cami."
+},
+{
+"ad": "Bursa Ulu Camii",
+"alt": [
+"Ulucami"
+],
+"il": "Bursa",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+40.184,
+29.0617
+],
+"aciklama": "20 kubbeli erken Osmanlı camisi."
+},
+{
+"ad": "Yeşil Türbe",
+"alt": [
+"Yesil Turbe"
+],
+"il": "Bursa",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+40.1817,
+29.0727
+],
+"aciklama": "Çelebi Mehmed'in yeşil çinili türbesi."
+},
+{
+"ad": "Koza Han",
+"alt": [
+"Kozahan"
+],
+"il": "Bursa",
+"ulke": "Türkiye",
+"kategori": "Tarihi çarşı ve han",
+"koordinat": [
+40.1836,
+29.0626
+],
+"aciklama": "İpek ticaretinin merkezi olan 15. yüzyıl hanı."
+},
+{
+"ad": "Cumalıkızık",
+"alt": [
+"Cumalikizik"
+],
+"il": "Bursa",
+"ulke": "Türkiye",
+"kategori": "Tarihi kent",
+"koordinat": [
+40.1752,
+29.1717
+],
+"aciklama": "Osmanlı kuruluş döneminden kalma köy."
+},
+{
+"ad": "Troya",
+"alt": [
+"Truva",
+"Troy"
+],
+"il": "Çanakkale",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+39.9575,
+26.2389
+],
+"aciklama": "Dokuz yerleşim katmanıyla efsanevi kent."
+},
+{
+"ad": "Assos",
+"alt": [
+"Behramkale"
+],
+"il": "Çanakkale",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+39.4897,
+26.3371
+],
+"aciklama": "Athena Tapınağı'yla Ege'ye bakan antik kent."
+},
+{
+"ad": "Çanakkale Şehitler Abidesi",
+"alt": [
+"Gelibolu",
+"Şehitler Abidesi"
+],
+"il": "Çanakkale",
+"ulke": "Türkiye",
+"kategori": "Anıt",
+"koordinat": [
+40.0496,
+26.2215
+],
+"aciklama": "Çanakkale Savaşı şehitleri anısına dikilen anıt."
+},
+{
+"ad": "Ephesus (Efes Antik Kenti)",
+"alt": [
+"Efes",
+"Ephesus"
+],
+"il": "İzmir",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.9395,
+27.3417
+],
+"aciklama": "Celsus Kütüphanesi ve Büyük Tiyatro'yla Ege'nin en büyük antik kenti."
+},
+{
+"ad": "Bergama (Pergamon)",
+"alt": [
+"Pergamon",
+"Bergama Akropolü"
+],
+"il": "İzmir",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+39.1325,
+27.1844
+],
+"aciklama": "Dik yamaçtaki tiyatrosu ve Zeus Sunağı'yla Helenistik başkent."
+},
+{
+"ad": "Meryem Ana Evi",
+"alt": [
+"Meryemana"
+],
+"il": "İzmir",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+37.9119,
+27.3335
+],
+"aciklama": "Bülbül Dağı'nda hac yeri olan küçük yapı."
+},
+{
+"ad": "Aziz Yuhanna Bazilikası",
+"alt": [
+"St. Jean",
+"Ayasuluk"
+],
+"il": "İzmir",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+37.952,
+27.3684
+],
+"aciklama": "Selçuk'ta Ayasuluk Tepesi'ndeki Bizans bazilikası."
+},
+{
+"ad": "İzmir Saat Kulesi",
+"alt": [
+"Konak Saat Kulesi"
+],
+"il": "İzmir",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+38.4189,
+27.1287
+],
+"aciklama": "Konak Meydanı'nın simgesi olan 1901 tarihli kule."
+},
+{
+"ad": "Kadifekale",
+"alt": [
+"Pagos"
+],
+"il": "İzmir",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+38.4136,
+27.1449
+],
+"aciklama": "Körfeze bakan Helenistik dönem kalesi."
+},
+{
+"ad": "Smyrna Agorası",
+"alt": [
+"İzmir Agorası"
+],
+"il": "İzmir",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+38.4183,
+27.1393
+],
+"aciklama": "Kent merkezindeki Roma dönemi pazar yeri."
+},
+{
+"ad": "Şirince",
+"alt": [
+"Sirince"
+],
+"il": "İzmir",
+"ulke": "Türkiye",
+"kategori": "Tarihi kent",
+"koordinat": [
+37.9441,
+27.4291
+],
+"aciklama": "Taş evleriyle Selçuk yakınındaki dağ köyü."
+},
+{
+"ad": "Afrodisias",
+"alt": [
+"Aphrodisias"
+],
+"il": "Aydın",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.7086,
+28.7238
+],
+"aciklama": "Heykel atölyeleri ve stadyumuyla antik kent."
+},
+{
+"ad": "Priene",
+"alt": [
+"Priene Antik Kenti"
+],
+"il": "Aydın",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.6597,
+27.2975
+],
+"aciklama": "Izgara planlı küçük bir İyon kenti."
+},
+{
+"ad": "Milet",
+"alt": [
+"Miletos"
+],
+"il": "Aydın",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.5303,
+27.2781
+],
+"aciklama": "Thales'in kenti; büyük tiyatrosu ayakta."
+},
+{
+"ad": "Didim Apollon Tapınağı",
+"alt": [
+"Didyma"
+],
+"il": "Aydın",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.385,
+27.2563
+],
+"aciklama": "Dev sütunlarıyla kehanet tapınağı."
+},
+{
+"ad": "Hierapolis (Pamukkale)",
+"alt": [
+"Hierapolis"
+],
+"il": "Denizli",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.9257,
+29.126
+],
+"aciklama": "Travertenlerin üzerinde Roma dönemi şifa kenti."
+},
+{
+"ad": "Pamukkale Travertenleri",
+"alt": [
+"Pamukkale"
+],
+"il": "Denizli",
+"ulke": "Türkiye",
+"kategori": "Doğal alan",
+"koordinat": [
+37.9214,
+29.1205
+],
+"aciklama": "Bembeyaz kireç taşı havuzları."
+},
+{
+"ad": "Laodikeia",
+"alt": [
+"Laodicea"
+],
+"il": "Denizli",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.8357,
+29.1076
+],
+"aciklama": "Kazılarla ortaya çıkan büyük Roma kenti."
+},
+{
+"ad": "Bodrum Kalesi",
+"alt": [
+"St. Peter Kalesi",
+"Sualtı Arkeoloji Müzesi"
+],
+"il": "Muğla",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+37.0319,
+27.429
+],
+"aciklama": "Rodos Şövalyeleri'nin kalesi, sualtı arkeoloji müzesi."
+},
+{
+"ad": "Halikarnas Mozolesi",
+"alt": [
+"Mausoleum",
+"Mozole"
+],
+"il": "Muğla",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.0379,
+27.4241
+],
+"aciklama": "Antik dünyanın yedi harikasından birinin kalıntıları."
+},
+{
+"ad": "Kaunos",
+"alt": [
+"Kaunos Kral Mezarları",
+"Dalyan"
+],
+"il": "Muğla",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+36.827,
+28.623
+],
+"aciklama": "Dalyan'daki kaya mezarları ve antik kent."
+},
+{
+"ad": "Knidos",
+"alt": [
+"Knidos Antik Kenti"
+],
+"il": "Muğla",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+36.6858,
+27.3746
+],
+"aciklama": "Datça Yarımadası'nın ucunda iki limanlı kent."
+},
+{
+"ad": "Amintas Kaya Mezarları",
+"alt": [
+"Fethiye Kaya Mezarları"
+],
+"il": "Muğla",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+36.6194,
+29.1236
+],
+"aciklama": "Fethiye'deki Likya kaya mezarları."
+},
+{
+"ad": "Kayaköy",
+"alt": [
+"Karmylassos",
+"Levissi"
+],
+"il": "Muğla",
+"ulke": "Türkiye",
+"kategori": "Tarihi kent",
+"koordinat": [
+36.5759,
+29.088
+],
+"aciklama": "Terk edilmiş taş evleriyle hayalet köy."
+},
+{
+"ad": "Saklıkent Kanyonu",
+"alt": [
+"Saklıkent"
+],
+"il": "Muğla",
+"ulke": "Türkiye",
+"kategori": "Doğal alan",
+"koordinat": [
+36.4697,
+29.406
+],
+"aciklama": "Buz gibi suyuyla derin kanyon."
+},
+{
+"ad": "Stratonikeia",
+"alt": [
+"Eskihisar"
+],
+"il": "Muğla",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.3147,
+28.0628
+],
+"aciklama": "Osmanlı köyüyle iç içe antik kent."
+},
+{
+"ad": "Aspendos",
+"alt": [
+"Aspendos Tiyatrosu"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+36.9389,
+31.1722
+],
+"aciklama": "Dünyanın en iyi korunmuş Roma tiyatrolarından."
+},
+{
+"ad": "Perge",
+"alt": [
+"Perge Antik Kenti"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+36.9614,
+30.8544
+],
+"aciklama": "Sütunlu caddesi ve stadyumuyla Pamfilya kenti."
+},
+{
+"ad": "Side Antik Kenti",
+"alt": [
+"Side",
+"Apollon Tapınağı"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+36.7673,
+31.3888
+],
+"aciklama": "Deniz kenarındaki Apollon Tapınağı'yla ünlü."
+},
+{
+"ad": "Termessos",
+"alt": [
+"Termessos Antik Kenti"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.0347,
+30.4656
+],
+"aciklama": "Dağın tepesinde, İskender'in alamadığı kent."
+},
+{
+"ad": "Olimpos",
+"alt": [
+"Olympos",
+"Çıralı"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+36.3965,
+30.4724
+],
+"aciklama": "Ormanın içinde Likya kenti."
+},
+{
+"ad": "Phaselis",
+"alt": [
+"Faselis"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+36.5244,
+30.5508
+],
+"aciklama": "Üç limanlı antik liman kenti."
+},
+{
+"ad": "Myra",
+"alt": [
+"Myra Kaya Mezarları",
+"Demre"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+36.2593,
+29.9853
+],
+"aciklama": "Likya kaya mezarları ve tiyatro."
+},
+{
+"ad": "Aziz Nikolaos Kilisesi",
+"alt": [
+"Noel Baba Kilisesi",
+"St. Nicholas"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+36.2427,
+29.9849
+],
+"aciklama": "Demre'de Noel Baba'nın kilisesi."
+},
+{
+"ad": "Patara",
+"alt": [
+"Patara Antik Kenti"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+36.26,
+29.3149
+],
+"aciklama": "Likya Birliği'nin meclis binasıyla antik kent."
+},
+{
+"ad": "Simena (Kaleköy)",
+"alt": [
+"Kaleköy",
+"Kekova"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+36.1928,
+29.863
+],
+"aciklama": "Kekova'da kalesi ve batık kentiyle köy."
+},
+{
+"ad": "Kaleiçi",
+"alt": [
+"Kaleiçi Antalya"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Tarihi kent",
+"koordinat": [
+36.8841,
+30.7056
+],
+"aciklama": "Antalya'nın surlarla çevrili eski kenti."
+},
+{
+"ad": "Hadrian Kapısı",
+"alt": [
+"Üçkapılar"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Tarihi yapı",
+"koordinat": [
+36.8854,
+30.7088
+],
+"aciklama": "MS 130'da yapılan Roma takı."
+},
+{
+"ad": "Alanya Kalesi",
+"alt": [
+"Alanya Castle"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+36.5389,
+31.9918
+],
+"aciklama": "Yarımadanın tepesindeki Selçuklu kalesi."
+},
+{
+"ad": "Kızıl Kule",
+"alt": [
+"Kızılkule"
+],
+"il": "Antalya",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+36.5414,
+32.0003
+],
+"aciklama": "Alanya limanındaki sekizgen Selçuklu kulesi."
+},
+{
+"ad": "Sagalassos",
+"alt": [
+"Sagalassos Antik Kenti"
+],
+"il": "Burdur",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.6766,
+30.5175
+],
+"aciklama": "Toros Dağları'nda anıtsal çeşmesiyle kent."
+},
+{
+"ad": "Kızkalesi",
+"alt": [
+"Korykos"
+],
+"il": "Mersin",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+36.4592,
+34.1531
+],
+"aciklama": "Denizin içindeki ortaçağ kalesi."
+},
+{
+"ad": "Cennet ve Cehennem Obrukları",
+"alt": [
+"Cennet Cehennem"
+],
+"il": "Mersin",
+"ulke": "Türkiye",
+"kategori": "Doğal alan",
+"koordinat": [
+36.4511,
+34.1047
+],
+"aciklama": "Silifke yakınındaki dev obruklar."
+},
+{
+"ad": "Kleopatra Kapısı",
+"alt": [
+"Tarsus"
+],
+"il": "Mersin",
+"ulke": "Türkiye",
+"kategori": "Tarihi yapı",
+"koordinat": [
+36.9157,
+34.8913
+],
+"aciklama": "Tarsus'taki antik kent kapısı."
+},
+{
+"ad": "Silifke Kalesi",
+"alt": [
+"Silifke"
+],
+"il": "Mersin",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+36.3769,
+33.9277
+],
+"aciklama": "Göksu vadisine bakan ortaçağ kalesi."
+},
+{
+"ad": "Adana Taşköprü",
+"alt": [
+"Taşköprü"
+],
+"il": "Adana",
+"ulke": "Türkiye",
+"kategori": "Köprü",
+"koordinat": [
+36.9852,
+35.3375
+],
+"aciklama": "Seyhan üzerindeki Roma köprüsü."
+},
+{
+"ad": "Yılankale",
+"alt": [
+"Yılan Kalesi"
+],
+"il": "Adana",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+37.0156,
+35.746
+],
+"aciklama": "Çukurova ovasına bakan Ermeni kalesi."
+},
+{
+"ad": "Aziz Petrus Kilisesi",
+"alt": [
+"St. Pierre Kilisesi"
+],
+"il": "Hatay",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+36.2126,
+36.1708
+],
+"aciklama": "Antakya'da kayaya oyulmuş erken Hristiyan kilisesi."
+},
+{
+"ad": "Zeugma Mozaik Müzesi",
+"alt": [
+"Zeugma Müzesi",
+"Çingene Kızı"
+],
+"il": "Gaziantep",
+"ulke": "Türkiye",
+"kategori": "Müze",
+"koordinat": [
+37.0767,
+37.3722
+],
+"aciklama": "Çingene Kızı mozaiğinin sergilendiği müze."
+},
+{
+"ad": "Zeugma Antik Kenti",
+"alt": [
+"Zeugma"
+],
+"il": "Gaziantep",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.0566,
+37.8701
+],
+"aciklama": "Fırat kıyısındaki Kommagene ve Roma kenti."
+},
+{
+"ad": "Gaziantep Kalesi",
+"alt": [
+"Antep Kalesi"
+],
+"il": "Gaziantep",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+37.0663,
+37.3833
+],
+"aciklama": "Kent merkezindeki tarihi kale."
+},
+{
+"ad": "Göbeklitepe",
+"alt": [
+"Gobekli Tepe"
+],
+"il": "Şanlıurfa",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.2232,
+38.9224
+],
+"aciklama": "Yaklaşık 11.600 yıllık dünyanın bilinen en eski tapınak alanı."
+},
+{
+"ad": "Balıklıgöl",
+"alt": [
+"Halil-ür Rahman Gölü"
+],
+"il": "Şanlıurfa",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+37.1458,
+38.7838
+],
+"aciklama": "Hz. İbrahim'in ateşe atıldığına inanılan yer."
+},
+{
+"ad": "Harran",
+"alt": [
+"Harran Ören Yeri",
+"Kümbet Evler"
+],
+"il": "Şanlıurfa",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+36.8628,
+39.031
+],
+"aciklama": "Kümbet evleri ve antik üniversitesiyle kent."
+},
+{
+"ad": "Nemrut Dağı",
+"alt": [
+"Nemrut"
+],
+"il": "Adıyaman",
+"ulke": "Türkiye",
+"kategori": "Anıt",
+"koordinat": [
+37.9808,
+38.7408
+],
+"aciklama": "Kommagene kralı Antiochos'un dev heykelli tümülüsü."
+},
+{
+"ad": "Mardin Eski Şehir",
+"alt": [
+"Mardin"
+],
+"il": "Mardin",
+"ulke": "Türkiye",
+"kategori": "Tarihi kent",
+"koordinat": [
+37.3129,
+40.735
+],
+"aciklama": "Mezopotamya ovasına bakan taş evli kent."
+},
+{
+"ad": "Deyrulzafaran Manastırı",
+"alt": [
+"Mor Hananyo"
+],
+"il": "Mardin",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+37.2919,
+40.7835
+],
+"aciklama": "Süryani Ortodoks manastırı."
+},
+{
+"ad": "Dara Antik Kenti",
+"alt": [
+"Dara"
+],
+"il": "Mardin",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.1767,
+40.9433
+],
+"aciklama": "Kayaya oyulmuş sarnıçlarıyla Bizans sınır kenti."
+},
+{
+"ad": "Midyat",
+"alt": [
+"Midyat Taş Evleri"
+],
+"il": "Mardin",
+"ulke": "Türkiye",
+"kategori": "Tarihi kent",
+"koordinat": [
+37.418,
+41.3389
+],
+"aciklama": "Taş konakları ve telkari ustalarıyla kent."
+},
+{
+"ad": "Hasankeyf",
+"alt": [
+"Hasankeyf Kalesi"
+],
+"il": "Batman",
+"ulke": "Türkiye",
+"kategori": "Tarihi kent",
+"koordinat": [
+37.713,
+41.414
+],
+"aciklama": "Dicle kıyısında binlerce yıllık yerleşim."
+},
+{
+"ad": "Diyarbakır Surları",
+"alt": [
+"Hevsel Bahçeleri",
+"Diyarbakır Kalesi"
+],
+"il": "Diyarbakır",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+37.9103,
+40.2367
+],
+"aciklama": "Dünyanın en uzun kent surlarından."
+},
+{
+"ad": "On Gözlü Köprü",
+"alt": [
+"Dicle Köprüsü"
+],
+"il": "Diyarbakır",
+"ulke": "Türkiye",
+"kategori": "Köprü",
+"koordinat": [
+37.8817,
+40.2462
+],
+"aciklama": "Dicle üzerindeki 11. yüzyıl köprüsü."
+},
+{
+"ad": "Akdamar Kilisesi",
+"alt": [
+"Akdamar Adası"
+],
+"il": "Van",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+38.3407,
+43.0333
+],
+"aciklama": "Van Gölü'ndeki adada 10. yüzyıl kilisesi."
+},
+{
+"ad": "Van Kalesi",
+"alt": [
+"Tuşpa"
+],
+"il": "Van",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+38.5044,
+43.3437
+],
+"aciklama": "Urartu başkenti Tuşpa'nın kalesi."
+},
+{
+"ad": "İshak Paşa Sarayı",
+"alt": [
+"Ishak Pasa Palace"
+],
+"il": "Ağrı",
+"ulke": "Türkiye",
+"kategori": "Saray",
+"koordinat": [
+39.5223,
+44.1286
+],
+"aciklama": "Doğubayazıt'ta 18. yüzyıl saray kompleksi."
+},
+{
+"ad": "Ağrı Dağı",
+"alt": [
+"Ararat"
+],
+"il": "Ağrı",
+"ulke": "Türkiye",
+"kategori": "Doğal alan",
+"koordinat": [
+39.7019,
+44.2983
+],
+"aciklama": "Türkiye'nin en yüksek dağı, 5.137 m."
+},
+{
+"ad": "Ani Ören Yeri",
+"alt": [
+"Ani",
+"Ani Harabeleri"
+],
+"il": "Kars",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+40.5075,
+43.5728
+],
+"aciklama": "\"Bin bir kiliseli\" ortaçağ başkenti."
+},
+{
+"ad": "Çifte Minareli Medrese",
+"alt": [
+"Erzurum Çifte Minare"
+],
+"il": "Erzurum",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+39.9046,
+41.277
+],
+"aciklama": "Erzurum'un simgesi olan Selçuklu medresesi."
+},
+{
+"ad": "Sümela Manastırı",
+"alt": [
+"Sumela",
+"Meryem Ana Manastırı"
+],
+"il": "Trabzon",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+40.6903,
+39.6581
+],
+"aciklama": "Sarp kayalığa kurulmuş Bizans manastırı."
+},
+{
+"ad": "Trabzon Ayasofya",
+"alt": [
+"Ayasofya Trabzon"
+],
+"il": "Trabzon",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+41.005,
+39.6867
+],
+"aciklama": "Freskleriyle 13. yüzyıl Bizans yapısı."
+},
+{
+"ad": "Uzungöl",
+"alt": [
+"Uzun Göl"
+],
+"il": "Trabzon",
+"ulke": "Türkiye",
+"kategori": "Doğal alan",
+"koordinat": [
+40.6197,
+40.2925
+],
+"aciklama": "Dağlar arasındaki göl ve köy."
+},
+{
+"ad": "Divriği Ulu Camii ve Darüşşifası",
+"alt": [
+"Divriği"
+],
+"il": "Sivas",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+39.3713,
+38.1203
+],
+"aciklama": "Taş işçiliğiyle UNESCO listesindeki yapı."
+},
+{
+"ad": "Sivas Gök Medrese",
+"alt": [
+"Gök Medrese"
+],
+"il": "Sivas",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+39.747,
+37.0193
+],
+"aciklama": "Çini kaplı Selçuklu medresesi."
+},
+{
+"ad": "Kültepe (Kaniş)",
+"alt": [
+"Kaniş",
+"Karum"
+],
+"il": "Kayseri",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+38.8503,
+35.635
+],
+"aciklama": "Anadolu'nun ilk yazılı belgelerinin bulunduğu höyük."
+},
+{
+"ad": "Göreme, Kapadokya",
+"alt": [
+"Göreme",
+"Kapadokya",
+"Cappadocia"
+],
+"il": "Nevşehir",
+"ulke": "Türkiye",
+"kategori": "Kaya yerleşimi",
+"koordinat": [
+38.6431,
+34.8289
+],
+"aciklama": "Peri bacaları ve balonlarıyla Kapadokya'nın kalbi."
+},
+{
+"ad": "Göreme Açık Hava Müzesi",
+"alt": [
+"Karanlık Kilise"
+],
+"il": "Nevşehir",
+"ulke": "Türkiye",
+"kategori": "Müze",
+"koordinat": [
+38.6398,
+34.8452
+],
+"aciklama": "Freskli kaya kiliselerinin bulunduğu müze."
+},
+{
+"ad": "Uçhisar Kalesi",
+"alt": [
+"Uçhisar"
+],
+"il": "Nevşehir",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+38.6297,
+34.8044
+],
+"aciklama": "Bölgenin en yüksek noktasındaki kaya kalesi."
+},
+{
+"ad": "Zelve Açık Hava Müzesi",
+"alt": [
+"Zelve"
+],
+"il": "Nevşehir",
+"ulke": "Türkiye",
+"kategori": "Kaya yerleşimi",
+"koordinat": [
+38.6717,
+34.8611
+],
+"aciklama": "1950'lere kadar yaşanan kaya köyü."
+},
+{
+"ad": "Kaymaklı Yeraltı Şehri",
+"alt": [
+"Kaymaklı"
+],
+"il": "Nevşehir",
+"ulke": "Türkiye",
+"kategori": "Kaya yerleşimi",
+"koordinat": [
+38.4617,
+34.7514
+],
+"aciklama": "Dar tünellerle bağlı yeraltı katları."
+},
+{
+"ad": "Derinkuyu Yeraltı Şehri",
+"alt": [
+"Derinkuyu"
+],
+"il": "Nevşehir",
+"ulke": "Türkiye",
+"kategori": "Kaya yerleşimi",
+"koordinat": [
+38.3735,
+34.7346
+],
+"aciklama": "Binlerce kişilik çok katlı yeraltı kenti."
+},
+{
+"ad": "Ihlara Vadisi",
+"alt": [
+"Ihlara"
+],
+"il": "Aksaray",
+"ulke": "Türkiye",
+"kategori": "Doğal alan",
+"koordinat": [
+38.2483,
+34.2989
+],
+"aciklama": "Kaya kiliseleriyle dolu kanyon."
+},
+{
+"ad": "Sultanhanı Kervansarayı",
+"alt": [
+"Sultanhanı"
+],
+"il": "Aksaray",
+"ulke": "Türkiye",
+"kategori": "Tarihi çarşı ve han",
+"koordinat": [
+38.2494,
+33.5465
+],
+"aciklama": "Anadolu'nun en büyük Selçuklu kervansaraylarından."
+},
+{
+"ad": "Soğanlı Vadisi",
+"alt": [
+"Soğanlı"
+],
+"il": "Kayseri",
+"ulke": "Türkiye",
+"kategori": "Doğal alan",
+"koordinat": [
+38.3381,
+35.0711
+],
+"aciklama": "Kaya kiliseleriyle sessiz bir vadi."
+},
+{
+"ad": "Mevlana Müzesi",
+"alt": [
+"Mevlana Türbesi",
+"Yeşil Kubbe"
+],
+"il": "Konya",
+"ulke": "Türkiye",
+"kategori": "Müze",
+"koordinat": [
+37.8708,
+32.5047
+],
+"aciklama": "Mevlana Celaleddin Rumi'nin türbesi."
+},
+{
+"ad": "Çatalhöyük",
+"alt": [
+"Catalhoyuk"
+],
+"il": "Konya",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+37.6676,
+32.8282
+],
+"aciklama": "9.000 yıllık Neolitik yerleşim."
+},
+{
+"ad": "Alaeddin Camii",
+"alt": [
+"Alaaddin Tepesi"
+],
+"il": "Konya",
+"ulke": "Türkiye",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+37.8738,
+32.4928
+],
+"aciklama": "Selçuklu başkentinin ulu camisi."
+},
+{
+"ad": "Anıtkabir",
+"alt": [
+"Atatürk'ün Anıt Mezarı"
+],
+"il": "Ankara",
+"ulke": "Türkiye",
+"kategori": "Anıt",
+"koordinat": [
+39.925,
+32.8369
+],
+"aciklama": "Mustafa Kemal Atatürk'ün anıt mezarı."
+},
+{
+"ad": "Ankara Kalesi",
+"alt": [
+"Hisar"
+],
+"il": "Ankara",
+"ulke": "Türkiye",
+"kategori": "Kale ve kule",
+"koordinat": [
+39.941,
+32.8645
+],
+"aciklama": "Ulus'ta kente bakan tarihi kale."
+},
+{
+"ad": "Anadolu Medeniyetleri Müzesi",
+"alt": [
+"Medeniyetler Müzesi"
+],
+"il": "Ankara",
+"ulke": "Türkiye",
+"kategori": "Müze",
+"koordinat": [
+39.9384,
+32.8616
+],
+"aciklama": "Paleolitikten Osmanlı'ya Anadolu eserleri."
+},
+{
+"ad": "Augustus Tapınağı",
+"alt": [
+"Monumentum Ancyranum"
+],
+"il": "Ankara",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+39.9447,
+32.8574
+],
+"aciklama": "İmparator Augustus'un vasiyetinin yazılı olduğu tapınak."
+},
+{
+"ad": "Gordion",
+"alt": [
+"Gordion Antik Kenti",
+"Midas Tümülüsü"
+],
+"il": "Ankara",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+39.654,
+31.976
+],
+"aciklama": "Frigya'nın başkenti, Midas Tümülüsü."
+},
+{
+"ad": "Hattuşa",
+"alt": [
+"Hattuşaş",
+"Boğazköy"
+],
+"il": "Çorum",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+40.0195,
+34.6153
+],
+"aciklama": "Hitit İmparatorluğu'nun başkenti."
+},
+{
+"ad": "Alacahöyük",
+"alt": [
+"Alaca Höyük"
+],
+"il": "Çorum",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+40.2352,
+34.6944
+],
+"aciklama": "Sfenksli kapısıyla Hitit yerleşimi."
+},
+{
+"ad": "Safranbolu",
+"alt": [
+"Safranbolu Evleri"
+],
+"il": "Karabük",
+"ulke": "Türkiye",
+"kategori": "Tarihi kent",
+"koordinat": [
+41.2447,
+32.6945
+],
+"aciklama": "Osmanlı konaklarıyla korunmuş kent."
+},
+{
+"ad": "Amasya Kral Kaya Mezarları",
+"alt": [
+"Pontus Kral Mezarları"
+],
+"il": "Amasya",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+40.6527,
+35.8288
+],
+"aciklama": "Yeşilırmak'a bakan Pontus kral mezarları."
+},
+{
+"ad": "Ahlat Selçuklu Mezarlığı",
+"alt": [
+"Ahlat"
+],
+"il": "Bitlis",
+"ulke": "Türkiye",
+"kategori": "Tarihi yapı",
+"koordinat": [
+38.7584,
+42.468
+],
+"aciklama": "Binlerce işlemeli mezar taşıyla mezarlık."
+},
+{
+"ad": "Odunpazarı",
+"alt": [
+"Odunpazarı Evleri"
+],
+"il": "Eskişehir",
+"ulke": "Türkiye",
+"kategori": "Tarihi kent",
+"koordinat": [
+39.7622,
+30.5254
+],
+"aciklama": "Renkli Osmanlı evleriyle eski mahalle."
+},
+{
+"ad": "Aizanoi",
+"alt": [
+"Zeus Tapınağı Çavdarhisar"
+],
+"il": "Kütahya",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+39.1997,
+29.6087
+],
+"aciklama": "Zeus Tapınağı'yla Frigya kenti."
+},
+{
+"ad": "Sardes",
+"alt": [
+"Sard",
+"Sardis"
+],
+"il": "Manisa",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+38.4883,
+28.04
+],
+"aciklama": "Lidya'nın başkenti, Artemis Tapınağı."
+},
+{
+"ad": "Harput",
+"alt": [
+"Harput Kalesi"
+],
+"il": "Elazığ",
+"ulke": "Türkiye",
+"kategori": "Tarihi kent",
+"koordinat": [
+38.7072,
+39.2556
+],
+"aciklama": "Kalesi ve camileriyle tarihi kent."
+},
+{
+"ad": "Arslantepe",
+"alt": [
+"Arslantepe Höyüğü"
+],
+"il": "Malatya",
+"ulke": "Türkiye",
+"kategori": "Antik kent",
+"koordinat": [
+38.3818,
+38.3613
+],
+"aciklama": "Devletin doğuşuna tanıklık eden höyük."
+},
+{
+"ad": "Kolezyum",
+"alt": [
+"Colosseum",
+"Kolosseum",
+"Colosseo"
+],
+"il": "Roma",
+"ulke": "İtalya",
+"kategori": "Antik kent",
+"koordinat": [
+41.8902,
+12.4922
+],
+"aciklama": "50.000 kişilik Roma amfitiyatrosu."
+},
+{
+"ad": "Pantheon",
+"alt": [
+"Panteon"
+],
+"il": "Roma",
+"ulke": "İtalya",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+41.8986,
+12.4769
+],
+"aciklama": "Dev kubbesiyle Roma tapınağı."
+},
+{
+"ad": "Roma Forumu",
+"alt": [
+"Forum Romanum"
+],
+"il": "Roma",
+"ulke": "İtalya",
+"kategori": "Antik kent",
+"koordinat": [
+41.8925,
+12.4853
+],
+"aciklama": "Antik Roma'nın kamusal merkezi."
+},
+{
+"ad": "Aziz Petrus Bazilikası",
+"alt": [
+"Vatikan",
+"St. Peter"
+],
+"il": "Vatikan",
+"ulke": "Vatikan",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+41.9022,
+12.4539
+],
+"aciklama": "Vatikan'daki Rönesans bazilikası."
+},
+{
+"ad": "Pompeii",
+"alt": [
+"Pompei"
+],
+"il": "Napoli",
+"ulke": "İtalya",
+"kategori": "Antik kent",
+"koordinat": [
+40.7489,
+14.4848
+],
+"aciklama": "MS 79'da Vezüv'ün külleri altında kalan kent."
+},
+{
+"ad": "Pisa Kulesi",
+"alt": [
+"Eğik Kule",
+"Torre di Pisa"
+],
+"il": "Pisa",
+"ulke": "İtalya",
+"kategori": "Kale ve kule",
+"koordinat": [
+43.723,
+10.3966
+],
+"aciklama": "Eğik duruşuyla ünlü çan kulesi."
+},
+{
+"ad": "Floransa Katedrali",
+"alt": [
+"Duomo",
+"Santa Maria del Fiore"
+],
+"il": "Floransa",
+"ulke": "İtalya",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+43.7731,
+11.256
+],
+"aciklama": "Brunelleschi'nin kubbesiyle katedral."
+},
+{
+"ad": "San Marco Bazilikası",
+"alt": [
+"San Marco"
+],
+"il": "Venedik",
+"ulke": "İtalya",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+45.4345,
+12.3397
+],
+"aciklama": "Altın mozaikli Venedik bazilikası."
+},
+{
+"ad": "Akropolis",
+"alt": [
+"Acropolis",
+"Parthenon"
+],
+"il": "Atina",
+"ulke": "Yunanistan",
+"kategori": "Antik kent",
+"koordinat": [
+37.9715,
+23.7257
+],
+"aciklama": "Parthenon'un bulunduğu kutsal tepe."
+},
+{
+"ad": "Delfi",
+"alt": [
+"Delphi"
+],
+"il": "Delfi",
+"ulke": "Yunanistan",
+"kategori": "Antik kent",
+"koordinat": [
+38.4824,
+22.501
+],
+"aciklama": "Antik dünyanın kehanet merkezi."
+},
+{
+"ad": "Meteora (Yunanistan)",
+"alt": [
+"Meteora"
+],
+"il": "Kalambaka",
+"ulke": "Yunanistan",
+"kategori": "Doğal alan",
+"koordinat": [
+39.7217,
+21.6306
+],
+"aciklama": "Kaya sütunlarının tepesinde manastırlar."
+},
+{
+"ad": "Knossos",
+"alt": [
+"Knosos"
+],
+"il": "Girit",
+"ulke": "Yunanistan",
+"kategori": "Antik kent",
+"koordinat": [
+35.298,
+25.1631
+],
+"aciklama": "Minos uygarlığının sarayı."
+},
+{
+"ad": "Giza Piramitleri",
+"alt": [
+"Keops Piramidi",
+"Sfenks",
+"Gize"
+],
+"il": "Kahire",
+"ulke": "Mısır",
+"kategori": "Anıt",
+"koordinat": [
+29.9792,
+31.1342
+],
+"aciklama": "Antik dünyanın yedi harikasından ayakta kalan tek eser."
+},
+{
+"ad": "Karnak Tapınağı",
+"alt": [
+"Karnak"
+],
+"il": "Luksor",
+"ulke": "Mısır",
+"kategori": "Antik kent",
+"koordinat": [
+25.7188,
+32.6573
+],
+"aciklama": "Dev sütun salonuyla tapınak kompleksi."
+},
+{
+"ad": "Abu Simbel",
+"alt": [
+"Ebu Simbel"
+],
+"il": "Asvan",
+"ulke": "Mısır",
+"kategori": "Anıt",
+"koordinat": [
+22.3372,
+31.6258
+],
+"aciklama": "II. Ramses'in kayaya oyulmuş tapınakları."
+},
+{
+"ad": "Petra",
+"alt": [
+"Petra Antik Kenti",
+"El Hazne"
+],
+"il": "Maan",
+"ulke": "Ürdün",
+"kategori": "Antik kent",
+"koordinat": [
+30.3285,
+35.4444
+],
+"aciklama": "Pembe kayalara oyulmuş Nebati kenti."
+},
+{
+"ad": "Ceraş (Ürdün)",
+"alt": [
+"Jerash",
+"Gerasa"
+],
+"il": "Ceraş",
+"ulke": "Ürdün",
+"kategori": "Antik kent",
+"koordinat": [
+32.2808,
+35.8917
+],
+"aciklama": "Sütunlu caddeleriyle Roma kenti."
+},
+{
+"ad": "Baalbek",
+"alt": [
+"Heliopolis"
+],
+"il": "Baalbek",
+"ulke": "Lübnan",
+"kategori": "Antik kent",
+"koordinat": [
+34.0069,
+36.2039
+],
+"aciklama": "Dev Roma tapınaklarıyla kent."
+},
+{
+"ad": "Kudüs Eski Şehir",
+"alt": [
+"Kudüs",
+"Jerusalem"
+],
+"il": "Kudüs",
+"ulke": "Filistin",
+"kategori": "Tarihi kent",
+"koordinat": [
+31.7767,
+35.2345
+],
+"aciklama": "Üç büyük dinin kutsal kenti."
+},
+{
+"ad": "Kubbetüs Sahra",
+"alt": [
+"Dome of the Rock",
+"Mescid-i Aksa"
+],
+"il": "Kudüs",
+"ulke": "Filistin",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+31.778,
+35.2354
+],
+"aciklama": "Altın kubbeli 7. yüzyıl yapısı."
+},
+{
+"ad": "Mescid-i Haram",
+"alt": [
+"Kabe",
+"Kâbe"
+],
+"il": "Mekke",
+"ulke": "Suudi Arabistan",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+21.4225,
+39.8262
+],
+"aciklama": "Kâbe'nin bulunduğu cami."
+},
+{
+"ad": "Persepolis",
+"alt": [
+"Taht-ı Cemşid"
+],
+"il": "Şiraz",
+"ulke": "İran",
+"kategori": "Antik kent",
+"koordinat": [
+29.9355,
+52.8916
+],
+"aciklama": "Pers İmparatorluğu'nun tören başkenti."
+},
+{
+"ad": "Nakş-ı Cihan Meydanı",
+"alt": [
+"İmam Meydanı"
+],
+"il": "İsfahan",
+"ulke": "İran",
+"kategori": "Tarihi yapı",
+"koordinat": [
+32.6575,
+51.6777
+],
+"aciklama": "Camileri ve sarayıyla dev meydan."
+},
+{
+"ad": "Registan Meydanı",
+"alt": [
+"Registan"
+],
+"il": "Semerkant",
+"ulke": "Özbekistan",
+"kategori": "Tarihi yapı",
+"koordinat": [
+39.6547,
+66.9758
+],
+"aciklama": "Üç medreseyle çevrili meydan."
+},
+{
+"ad": "Buhara Eski Şehir",
+"alt": [
+"Buhara"
+],
+"il": "Buhara",
+"ulke": "Özbekistan",
+"kategori": "Tarihi kent",
+"koordinat": [
+39.7747,
+64.4286
+],
+"aciklama": "İpek Yolu'nun medreseli kenti."
+},
+{
+"ad": "Bakü İçerişehir",
+"alt": [
+"Kız Kalesi Bakü",
+"İçeri Şehir"
+],
+"il": "Bakü",
+"ulke": "Azerbaycan",
+"kategori": "Tarihi kent",
+"koordinat": [
+40.3661,
+49.8372
+],
+"aciklama": "Kız Kalesi'yle surlu eski kent."
+},
+{
+"ad": "Tac Mahal",
+"alt": [
+"Taj Mahal"
+],
+"il": "Agra",
+"ulke": "Hindistan",
+"kategori": "Anıt",
+"koordinat": [
+27.1751,
+78.0421
+],
+"aciklama": "Beyaz mermerden Babür türbesi."
+},
+{
+"ad": "Çin Seddi",
+"alt": [
+"Great Wall",
+"Mutianyu"
+],
+"il": "Pekin",
+"ulke": "Çin",
+"kategori": "Kale ve kule",
+"koordinat": [
+40.4319,
+116.5704
+],
+"aciklama": "Binlerce kilometrelik savunma duvarı."
+},
+{
+"ad": "Yasak Şehir",
+"alt": [
+"Forbidden City"
+],
+"il": "Pekin",
+"ulke": "Çin",
+"kategori": "Saray",
+"koordinat": [
+39.9163,
+116.3972
+],
+"aciklama": "Çin imparatorlarının sarayı."
+},
+{
+"ad": "Angkor Wat",
+"alt": [
+"Angkor"
+],
+"il": "Siem Reap",
+"ulke": "Kamboçya",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+13.4125,
+103.867
+],
+"aciklama": "Dünyanın en büyük tapınak kompleksi."
+},
+{
+"ad": "Kinkaku-ji",
+"alt": [
+"Altın Köşk"
+],
+"il": "Kyoto",
+"ulke": "Japonya",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+35.0394,
+135.7292
+],
+"aciklama": "Altın kaplı Zen tapınağı."
+},
+{
+"ad": "Machu Picchu",
+"alt": [
+"Maçu Pikçu"
+],
+"il": "Cusco",
+"ulke": "Peru",
+"kategori": "Antik kent",
+"koordinat": [
+-13.1631,
+-72.545
+],
+"aciklama": "And Dağları'ndaki İnka kenti."
+},
+{
+"ad": "Chichén Itzá",
+"alt": [
+"Chichen Itza",
+"Kukulkan"
+],
+"il": "Yucatán",
+"ulke": "Meksika",
+"kategori": "Antik kent",
+"koordinat": [
+20.6843,
+-88.5678
+],
+"aciklama": "El Castillo piramidiyle Maya kenti."
+},
+{
+"ad": "Teotihuacan",
+"alt": [
+"Güneş Piramidi"
+],
+"il": "Meksiko",
+"ulke": "Meksika",
+"kategori": "Antik kent",
+"koordinat": [
+19.6925,
+-98.8438
+],
+"aciklama": "Güneş ve Ay piramitleriyle antik kent."
+},
+{
+"ad": "Özgürlük Heykeli",
+"alt": [
+"Statue of Liberty"
+],
+"il": "New York",
+"ulke": "ABD",
+"kategori": "Anıt",
+"koordinat": [
+40.6892,
+-74.0445
+],
+"aciklama": "1886'da Fransa'nın hediye ettiği heykel."
+},
+{
+"ad": "Stonehenge",
+"alt": [
+"Stonehenge"
+],
+"il": "Wiltshire",
+"ulke": "Birleşik Krallık",
+"kategori": "Anıt",
+"koordinat": [
+51.1789,
+-1.8262
+],
+"aciklama": "Dev taşlardan tarih öncesi anıt."
+},
+{
+"ad": "Londra Kulesi",
+"alt": [
+"Tower of London"
+],
+"il": "Londra",
+"ulke": "Birleşik Krallık",
+"kategori": "Kale ve kule",
+"koordinat": [
+51.5081,
+-0.0759
+],
+"aciklama": "Thames kıyısındaki ortaçağ kalesi."
+},
+{
+"ad": "Versay Sarayı",
+"alt": [
+"Versailles"
+],
+"il": "Versay",
+"ulke": "Fransa",
+"kategori": "Saray",
+"koordinat": [
+48.8049,
+2.1204
+],
+"aciklama": "XIV. Louis'nin görkemli sarayı."
+},
+{
+"ad": "Louvre Müzesi",
+"alt": [
+"Louvre",
+"Mona Lisa"
+],
+"il": "Paris",
+"ulke": "Fransa",
+"kategori": "Müze",
+"koordinat": [
+48.8606,
+2.3376
+],
+"aciklama": "Mona Lisa'nın sergilendiği müze."
+},
+{
+"ad": "Eyfel Kulesi",
+"alt": [
+"Eiffel Tower",
+"Eiffel"
+],
+"il": "Paris",
+"ulke": "Fransa",
+"kategori": "Kale ve kule",
+"koordinat": [
+48.8584,
+2.2945
+],
+"aciklama": "1889'da yapılan demir kule."
+},
+{
+"ad": "Notre-Dame Katedrali",
+"alt": [
+"Notre Dame"
+],
+"il": "Paris",
+"ulke": "Fransa",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+48.853,
+2.3499
+],
+"aciklama": "Gotik mimarinin simge katedrali."
+},
+{
+"ad": "Neuschwanstein Şatosu",
+"alt": [
+"Neuschwanstein"
+],
+"il": "Füssen",
+"ulke": "Almanya",
+"kategori": "Saray",
+"koordinat": [
+47.5576,
+10.7498
+],
+"aciklama": "Masal şatosu görünümlü 19. yüzyıl şatosu."
+},
+{
+"ad": "Brandenburg Kapısı",
+"alt": [
+"Brandenburger Tor"
+],
+"il": "Berlin",
+"ulke": "Almanya",
+"kategori": "Anıt",
+"koordinat": [
+52.5163,
+13.3777
+],
+"aciklama": "Berlin'in simgesi olan neoklasik kapı."
+},
+{
+"ad": "Elhamra Sarayı",
+"alt": [
+"Alhambra"
+],
+"il": "Granada",
+"ulke": "İspanya",
+"kategori": "Saray",
+"koordinat": [
+37.1761,
+-3.5881
+],
+"aciklama": "Endülüs'ün süslü saray ve kalesi."
+},
+{
+"ad": "Sagrada Familia",
+"alt": [
+"Sagrada Família"
+],
+"il": "Barselona",
+"ulke": "İspanya",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+41.4036,
+2.1744
+],
+"aciklama": "Gaudí'nin hâlâ süren bazilikası."
+},
+{
+"ad": "Kurtuba Camii",
+"alt": [
+"Mezquita",
+"Córdoba"
+],
+"il": "Kurtuba",
+"ulke": "İspanya",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+37.8789,
+-4.7794
+],
+"aciklama": "Çift kemerli sütun ormanıyla Endülüs camisi."
+},
+{
+"ad": "Prag Kalesi",
+"alt": [
+"Prague Castle"
+],
+"il": "Prag",
+"ulke": "Çekya",
+"kategori": "Kale ve kule",
+"koordinat": [
+50.0911,
+14.4016
+],
+"aciklama": "Dünyanın en büyük eski kale komplekslerinden."
+},
+{
+"ad": "Schönbrunn Sarayı",
+"alt": [
+"Schonbrunn"
+],
+"il": "Viyana",
+"ulke": "Avusturya",
+"kategori": "Saray",
+"koordinat": [
+48.1845,
+16.3122
+],
+"aciklama": "Habsburgların yazlık sarayı."
+},
+{
+"ad": "Kremlin ve Kızıl Meydan",
+"alt": [
+"Kremlin",
+"Kızıl Meydan"
+],
+"il": "Moskova",
+"ulke": "Rusya",
+"kategori": "Saray",
+"koordinat": [
+55.752,
+37.6175
+],
+"aciklama": "Rusya'nın yönetim merkezi ve meydanı."
+},
+{
+"ad": "Kış Sarayı (Ermitaj)",
+"alt": [
+"Ermitaj",
+"Hermitage"
+],
+"il": "St. Petersburg",
+"ulke": "Rusya",
+"kategori": "Saray",
+"koordinat": [
+59.9398,
+30.3146
+],
+"aciklama": "Çarların sarayı, bugün Ermitaj Müzesi."
+},
+{
+"ad": "Mostar Köprüsü",
+"alt": [
+"Stari Most"
+],
+"il": "Mostar",
+"ulke": "Bosna-Hersek",
+"kategori": "Köprü",
+"koordinat": [
+43.3373,
+17.815
+],
+"aciklama": "Mimar Hayreddin'in 1566 tarihli köprüsü."
+},
+{
+"ad": "Gazi Hüsrev Bey Camii",
+"alt": [
+"Gazi Husrev-beg"
+],
+"il": "Saraybosna",
+"ulke": "Bosna-Hersek",
+"kategori": "Cami ve dini yapı",
+"koordinat": [
+43.8594,
+18.4289
+],
+"aciklama": "Saraybosna'nın Osmanlı camisi."
+},
+{
+"ad": "Dubrovnik Surları",
+"alt": [
+"Dubrovnik"
+],
+"il": "Dubrovnik",
+"ulke": "Hırvatistan",
+"kategori": "Kale ve kule",
+"koordinat": [
+42.6407,
+18.1077
+],
+"aciklama": "Adriyatik'e bakan ortaçağ surları."
+}
+]

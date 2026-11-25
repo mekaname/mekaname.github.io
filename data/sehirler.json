@@ -1,0 +1,1469 @@
+[
+{
+"ad": "Adana",
+"ust": "Türkiye",
+"koordinat": [
+37.0,
+35.3213
+],
+"tur": "il"
+},
+{
+"ad": "Adıyaman",
+"ust": "Türkiye",
+"koordinat": [
+37.7648,
+38.2786
+],
+"tur": "il"
+},
+{
+"ad": "Afyonkarahisar",
+"ust": "Türkiye",
+"koordinat": [
+38.7638,
+30.5403
+],
+"tur": "il"
+},
+{
+"ad": "Ağrı",
+"ust": "Türkiye",
+"koordinat": [
+39.7191,
+43.0503
+],
+"tur": "il"
+},
+{
+"ad": "Aksaray",
+"ust": "Türkiye",
+"koordinat": [
+38.3687,
+34.037
+],
+"tur": "il"
+},
+{
+"ad": "Amasya",
+"ust": "Türkiye",
+"koordinat": [
+40.6499,
+35.8353
+],
+"tur": "il"
+},
+{
+"ad": "Ankara",
+"ust": "Türkiye",
+"koordinat": [
+39.9334,
+32.8597
+],
+"tur": "il"
+},
+{
+"ad": "Antalya",
+"ust": "Türkiye",
+"koordinat": [
+36.8969,
+30.7133
+],
+"tur": "il"
+},
+{
+"ad": "Ardahan",
+"ust": "Türkiye",
+"koordinat": [
+41.1105,
+42.7022
+],
+"tur": "il"
+},
+{
+"ad": "Artvin",
+"ust": "Türkiye",
+"koordinat": [
+41.1828,
+41.8183
+],
+"tur": "il"
+},
+{
+"ad": "Aydın",
+"ust": "Türkiye",
+"koordinat": [
+37.856,
+27.8416
+],
+"tur": "il"
+},
+{
+"ad": "Balıkesir",
+"ust": "Türkiye",
+"koordinat": [
+39.6484,
+27.8826
+],
+"tur": "il"
+},
+{
+"ad": "Bartın",
+"ust": "Türkiye",
+"koordinat": [
+41.6344,
+32.3375
+],
+"tur": "il"
+},
+{
+"ad": "Batman",
+"ust": "Türkiye",
+"koordinat": [
+37.8812,
+41.1351
+],
+"tur": "il"
+},
+{
+"ad": "Bayburt",
+"ust": "Türkiye",
+"koordinat": [
+40.2552,
+40.2249
+],
+"tur": "il"
+},
+{
+"ad": "Bilecik",
+"ust": "Türkiye",
+"koordinat": [
+40.1451,
+29.9799
+],
+"tur": "il"
+},
+{
+"ad": "Bingöl",
+"ust": "Türkiye",
+"koordinat": [
+38.8847,
+40.4983
+],
+"tur": "il"
+},
+{
+"ad": "Bitlis",
+"ust": "Türkiye",
+"koordinat": [
+38.4006,
+42.1095
+],
+"tur": "il"
+},
+{
+"ad": "Bolu",
+"ust": "Türkiye",
+"koordinat": [
+40.7392,
+31.6089
+],
+"tur": "il"
+},
+{
+"ad": "Burdur",
+"ust": "Türkiye",
+"koordinat": [
+37.7203,
+30.2908
+],
+"tur": "il"
+},
+{
+"ad": "Bursa",
+"ust": "Türkiye",
+"koordinat": [
+40.1885,
+29.061
+],
+"tur": "il"
+},
+{
+"ad": "Çanakkale",
+"ust": "Türkiye",
+"koordinat": [
+40.1553,
+26.4142
+],
+"tur": "il"
+},
+{
+"ad": "Çankırı",
+"ust": "Türkiye",
+"koordinat": [
+40.6013,
+33.6134
+],
+"tur": "il"
+},
+{
+"ad": "Çorum",
+"ust": "Türkiye",
+"koordinat": [
+40.5506,
+34.9556
+],
+"tur": "il"
+},
+{
+"ad": "Denizli",
+"ust": "Türkiye",
+"koordinat": [
+37.7765,
+29.0864
+],
+"tur": "il"
+},
+{
+"ad": "Diyarbakır",
+"ust": "Türkiye",
+"koordinat": [
+37.9144,
+40.2306
+],
+"tur": "il"
+},
+{
+"ad": "Düzce",
+"ust": "Türkiye",
+"koordinat": [
+40.8438,
+31.1565
+],
+"tur": "il"
+},
+{
+"ad": "Edirne",
+"ust": "Türkiye",
+"koordinat": [
+41.6818,
+26.5623
+],
+"tur": "il"
+},
+{
+"ad": "Elazığ",
+"ust": "Türkiye",
+"koordinat": [
+38.681,
+39.2264
+],
+"tur": "il"
+},
+{
+"ad": "Erzincan",
+"ust": "Türkiye",
+"koordinat": [
+39.75,
+39.5
+],
+"tur": "il"
+},
+{
+"ad": "Erzurum",
+"ust": "Türkiye",
+"koordinat": [
+39.9,
+41.27
+],
+"tur": "il"
+},
+{
+"ad": "Eskişehir",
+"ust": "Türkiye",
+"koordinat": [
+39.7767,
+30.5206
+],
+"tur": "il"
+},
+{
+"ad": "Gaziantep",
+"ust": "Türkiye",
+"koordinat": [
+37.0662,
+37.3833
+],
+"tur": "il"
+},
+{
+"ad": "Giresun",
+"ust": "Türkiye",
+"koordinat": [
+40.9128,
+38.3895
+],
+"tur": "il"
+},
+{
+"ad": "Gümüşhane",
+"ust": "Türkiye",
+"koordinat": [
+40.4386,
+39.5086
+],
+"tur": "il"
+},
+{
+"ad": "Hakkari",
+"ust": "Türkiye",
+"koordinat": [
+37.5833,
+43.7333
+],
+"tur": "il"
+},
+{
+"ad": "Hatay",
+"ust": "Türkiye",
+"koordinat": [
+36.2021,
+36.16
+],
+"tur": "il"
+},
+{
+"ad": "Iğdır",
+"ust": "Türkiye",
+"koordinat": [
+39.9237,
+44.045
+],
+"tur": "il"
+},
+{
+"ad": "Isparta",
+"ust": "Türkiye",
+"koordinat": [
+37.7648,
+30.5566
+],
+"tur": "il"
+},
+{
+"ad": "İstanbul",
+"ust": "Türkiye",
+"koordinat": [
+41.0082,
+28.9784
+],
+"tur": "il"
+},
+{
+"ad": "İzmir",
+"ust": "Türkiye",
+"koordinat": [
+38.4237,
+27.1428
+],
+"tur": "il"
+},
+{
+"ad": "Kahramanmaraş",
+"ust": "Türkiye",
+"koordinat": [
+37.5858,
+36.9371
+],
+"tur": "il"
+},
+{
+"ad": "Karabük",
+"ust": "Türkiye",
+"koordinat": [
+41.2061,
+32.6204
+],
+"tur": "il"
+},
+{
+"ad": "Karaman",
+"ust": "Türkiye",
+"koordinat": [
+37.1759,
+33.2287
+],
+"tur": "il"
+},
+{
+"ad": "Kars",
+"ust": "Türkiye",
+"koordinat": [
+40.6013,
+43.0975
+],
+"tur": "il"
+},
+{
+"ad": "Kastamonu",
+"ust": "Türkiye",
+"koordinat": [
+41.3887,
+33.7827
+],
+"tur": "il"
+},
+{
+"ad": "Kayseri",
+"ust": "Türkiye",
+"koordinat": [
+38.7312,
+35.4787
+],
+"tur": "il"
+},
+{
+"ad": "Kırıkkale",
+"ust": "Türkiye",
+"koordinat": [
+39.8468,
+33.5153
+],
+"tur": "il"
+},
+{
+"ad": "Kırklareli",
+"ust": "Türkiye",
+"koordinat": [
+41.7333,
+27.2167
+],
+"tur": "il"
+},
+{
+"ad": "Kırşehir",
+"ust": "Türkiye",
+"koordinat": [
+39.1425,
+34.1709
+],
+"tur": "il"
+},
+{
+"ad": "Kilis",
+"ust": "Türkiye",
+"koordinat": [
+36.7184,
+37.1212
+],
+"tur": "il"
+},
+{
+"ad": "Kocaeli",
+"ust": "Türkiye",
+"koordinat": [
+40.8533,
+29.8815
+],
+"tur": "il"
+},
+{
+"ad": "Konya",
+"ust": "Türkiye",
+"koordinat": [
+37.8746,
+32.4932
+],
+"tur": "il"
+},
+{
+"ad": "Kütahya",
+"ust": "Türkiye",
+"koordinat": [
+39.4167,
+29.9833
+],
+"tur": "il"
+},
+{
+"ad": "Malatya",
+"ust": "Türkiye",
+"koordinat": [
+38.3552,
+38.3095
+],
+"tur": "il"
+},
+{
+"ad": "Manisa",
+"ust": "Türkiye",
+"koordinat": [
+38.6191,
+27.4289
+],
+"tur": "il"
+},
+{
+"ad": "Mardin",
+"ust": "Türkiye",
+"koordinat": [
+37.3212,
+40.7245
+],
+"tur": "il"
+},
+{
+"ad": "Mersin",
+"ust": "Türkiye",
+"koordinat": [
+36.8,
+34.6333
+],
+"tur": "il"
+},
+{
+"ad": "Muğla",
+"ust": "Türkiye",
+"koordinat": [
+37.2153,
+28.3636
+],
+"tur": "il"
+},
+{
+"ad": "Muş",
+"ust": "Türkiye",
+"koordinat": [
+38.7432,
+41.5065
+],
+"tur": "il"
+},
+{
+"ad": "Nevşehir",
+"ust": "Türkiye",
+"koordinat": [
+38.6939,
+34.6857
+],
+"tur": "il"
+},
+{
+"ad": "Niğde",
+"ust": "Türkiye",
+"koordinat": [
+37.9667,
+34.6833
+],
+"tur": "il"
+},
+{
+"ad": "Ordu",
+"ust": "Türkiye",
+"koordinat": [
+40.9839,
+37.8764
+],
+"tur": "il"
+},
+{
+"ad": "Osmaniye",
+"ust": "Türkiye",
+"koordinat": [
+37.0742,
+36.2478
+],
+"tur": "il"
+},
+{
+"ad": "Rize",
+"ust": "Türkiye",
+"koordinat": [
+41.0201,
+40.5234
+],
+"tur": "il"
+},
+{
+"ad": "Sakarya",
+"ust": "Türkiye",
+"koordinat": [
+40.7569,
+30.3783
+],
+"tur": "il"
+},
+{
+"ad": "Samsun",
+"ust": "Türkiye",
+"koordinat": [
+41.2928,
+36.3313
+],
+"tur": "il"
+},
+{
+"ad": "Siirt",
+"ust": "Türkiye",
+"koordinat": [
+37.9333,
+41.95
+],
+"tur": "il"
+},
+{
+"ad": "Sinop",
+"ust": "Türkiye",
+"koordinat": [
+42.0231,
+35.1531
+],
+"tur": "il"
+},
+{
+"ad": "Sivas",
+"ust": "Türkiye",
+"koordinat": [
+39.7477,
+37.0179
+],
+"tur": "il"
+},
+{
+"ad": "Şanlıurfa",
+"ust": "Türkiye",
+"koordinat": [
+37.1591,
+38.7969
+],
+"tur": "il"
+},
+{
+"ad": "Şırnak",
+"ust": "Türkiye",
+"koordinat": [
+37.5164,
+42.4611
+],
+"tur": "il"
+},
+{
+"ad": "Tekirdağ",
+"ust": "Türkiye",
+"koordinat": [
+40.9833,
+27.5167
+],
+"tur": "il"
+},
+{
+"ad": "Tokat",
+"ust": "Türkiye",
+"koordinat": [
+40.3167,
+36.55
+],
+"tur": "il"
+},
+{
+"ad": "Trabzon",
+"ust": "Türkiye",
+"koordinat": [
+41.0015,
+39.7178
+],
+"tur": "il"
+},
+{
+"ad": "Tunceli",
+"ust": "Türkiye",
+"koordinat": [
+39.1079,
+39.5401
+],
+"tur": "il"
+},
+{
+"ad": "Uşak",
+"ust": "Türkiye",
+"koordinat": [
+38.6823,
+29.4082
+],
+"tur": "il"
+},
+{
+"ad": "Van",
+"ust": "Türkiye",
+"koordinat": [
+38.4891,
+43.4089
+],
+"tur": "il"
+},
+{
+"ad": "Yalova",
+"ust": "Türkiye",
+"koordinat": [
+40.65,
+29.2667
+],
+"tur": "il"
+},
+{
+"ad": "Yozgat",
+"ust": "Türkiye",
+"koordinat": [
+39.8181,
+34.8147
+],
+"tur": "il"
+},
+{
+"ad": "Zonguldak",
+"ust": "Türkiye",
+"koordinat": [
+41.4564,
+31.7987
+],
+"tur": "il"
+},
+{
+"ad": "Selçuk",
+"ust": "İzmir, Türkiye",
+"koordinat": [
+37.95,
+27.37
+],
+"tur": "ilce"
+},
+{
+"ad": "Bodrum",
+"ust": "Muğla, Türkiye",
+"koordinat": [
+37.0344,
+27.4305
+],
+"tur": "ilce"
+},
+{
+"ad": "Fethiye",
+"ust": "Muğla, Türkiye",
+"koordinat": [
+36.6217,
+29.1164
+],
+"tur": "ilce"
+},
+{
+"ad": "Marmaris",
+"ust": "Muğla, Türkiye",
+"koordinat": [
+36.855,
+28.2742
+],
+"tur": "ilce"
+},
+{
+"ad": "Datça",
+"ust": "Muğla, Türkiye",
+"koordinat": [
+36.7271,
+27.6871
+],
+"tur": "ilce"
+},
+{
+"ad": "Kaş",
+"ust": "Antalya, Türkiye",
+"koordinat": [
+36.202,
+29.6377
+],
+"tur": "ilce"
+},
+{
+"ad": "Alanya",
+"ust": "Antalya, Türkiye",
+"koordinat": [
+36.5444,
+31.9954
+],
+"tur": "ilce"
+},
+{
+"ad": "Side",
+"ust": "Antalya, Türkiye",
+"koordinat": [
+36.7675,
+31.3889
+],
+"tur": "ilce"
+},
+{
+"ad": "Kemer",
+"ust": "Antalya, Türkiye",
+"koordinat": [
+36.5978,
+30.5597
+],
+"tur": "ilce"
+},
+{
+"ad": "Demre",
+"ust": "Antalya, Türkiye",
+"koordinat": [
+36.2453,
+29.9864
+],
+"tur": "ilce"
+},
+{
+"ad": "Göreme",
+"ust": "Nevşehir, Türkiye",
+"koordinat": [
+38.6431,
+34.8289
+],
+"tur": "ilce"
+},
+{
+"ad": "Ürgüp",
+"ust": "Nevşehir, Türkiye",
+"koordinat": [
+38.6319,
+34.9122
+],
+"tur": "ilce"
+},
+{
+"ad": "Avanos",
+"ust": "Nevşehir, Türkiye",
+"koordinat": [
+38.715,
+34.8467
+],
+"tur": "ilce"
+},
+{
+"ad": "Uçhisar",
+"ust": "Nevşehir, Türkiye",
+"koordinat": [
+38.6297,
+34.8044
+],
+"tur": "ilce"
+},
+{
+"ad": "Pamukkale",
+"ust": "Denizli, Türkiye",
+"koordinat": [
+37.9137,
+29.1187
+],
+"tur": "ilce"
+},
+{
+"ad": "Kuşadası",
+"ust": "Aydın, Türkiye",
+"koordinat": [
+37.8579,
+27.261
+],
+"tur": "ilce"
+},
+{
+"ad": "Çeşme",
+"ust": "İzmir, Türkiye",
+"koordinat": [
+38.3236,
+26.3027
+],
+"tur": "ilce"
+},
+{
+"ad": "Bergama",
+"ust": "İzmir, Türkiye",
+"koordinat": [
+39.1214,
+27.1799
+],
+"tur": "ilce"
+},
+{
+"ad": "Ayvalık",
+"ust": "Balıkesir, Türkiye",
+"koordinat": [
+39.3194,
+26.6939
+],
+"tur": "ilce"
+},
+{
+"ad": "Safranbolu",
+"ust": "Karabük, Türkiye",
+"koordinat": [
+41.2508,
+32.6939
+],
+"tur": "ilce"
+},
+{
+"ad": "Midyat",
+"ust": "Mardin, Türkiye",
+"koordinat": [
+37.4188,
+41.3699
+],
+"tur": "ilce"
+},
+{
+"ad": "Doğubayazıt",
+"ust": "Ağrı, Türkiye",
+"koordinat": [
+39.5469,
+44.0839
+],
+"tur": "ilce"
+},
+{
+"ad": "Divriği",
+"ust": "Sivas, Türkiye",
+"koordinat": [
+39.3714,
+38.1131
+],
+"tur": "ilce"
+},
+{
+"ad": "Gelibolu",
+"ust": "Çanakkale, Türkiye",
+"koordinat": [
+40.4106,
+26.6708
+],
+"tur": "ilce"
+},
+{
+"ad": "Antakya",
+"ust": "Hatay, Türkiye",
+"koordinat": [
+36.2025,
+36.1606
+],
+"tur": "ilce"
+},
+{
+"ad": "Tarsus",
+"ust": "Mersin, Türkiye",
+"koordinat": [
+36.9177,
+34.8925
+],
+"tur": "ilce"
+},
+{
+"ad": "Silifke",
+"ust": "Mersin, Türkiye",
+"koordinat": [
+36.3778,
+33.9344
+],
+"tur": "ilce"
+},
+{
+"ad": "Beyoğlu",
+"ust": "İstanbul, Türkiye",
+"koordinat": [
+41.0369,
+28.9775
+],
+"tur": "ilce"
+},
+{
+"ad": "Fatih",
+"ust": "İstanbul, Türkiye",
+"koordinat": [
+41.0186,
+28.9397
+],
+"tur": "ilce"
+},
+{
+"ad": "Üsküdar",
+"ust": "İstanbul, Türkiye",
+"koordinat": [
+41.0226,
+29.0156
+],
+"tur": "ilce"
+},
+{
+"ad": "Kadıköy",
+"ust": "İstanbul, Türkiye",
+"koordinat": [
+40.9909,
+29.0303
+],
+"tur": "ilce"
+},
+{
+"ad": "Beşiktaş",
+"ust": "İstanbul, Türkiye",
+"koordinat": [
+41.043,
+29.0094
+],
+"tur": "ilce"
+},
+{
+"ad": "Roma",
+"ust": "İtalya",
+"koordinat": [
+41.9028,
+12.4964
+],
+"tur": "sehir"
+},
+{
+"ad": "Napoli",
+"ust": "İtalya",
+"koordinat": [
+40.8518,
+14.2681
+],
+"tur": "sehir"
+},
+{
+"ad": "Venedik",
+"ust": "İtalya",
+"koordinat": [
+45.4408,
+12.3155
+],
+"tur": "sehir"
+},
+{
+"ad": "Floransa",
+"ust": "İtalya",
+"koordinat": [
+43.7696,
+11.2558
+],
+"tur": "sehir"
+},
+{
+"ad": "Milano",
+"ust": "İtalya",
+"koordinat": [
+45.4642,
+9.19
+],
+"tur": "sehir"
+},
+{
+"ad": "Paris",
+"ust": "Fransa",
+"koordinat": [
+48.8566,
+2.3522
+],
+"tur": "sehir"
+},
+{
+"ad": "Londra",
+"ust": "Birleşik Krallık",
+"koordinat": [
+51.5072,
+-0.1276
+],
+"tur": "sehir"
+},
+{
+"ad": "Atina",
+"ust": "Yunanistan",
+"koordinat": [
+37.9838,
+23.7275
+],
+"tur": "sehir"
+},
+{
+"ad": "Selanik",
+"ust": "Yunanistan",
+"koordinat": [
+40.6401,
+22.9444
+],
+"tur": "sehir"
+},
+{
+"ad": "Kahire",
+"ust": "Mısır",
+"koordinat": [
+30.0444,
+31.2357
+],
+"tur": "sehir"
+},
+{
+"ad": "Luksor",
+"ust": "Mısır",
+"koordinat": [
+25.6872,
+32.6396
+],
+"tur": "sehir"
+},
+{
+"ad": "İskenderiye",
+"ust": "Mısır",
+"koordinat": [
+31.2001,
+29.9187
+],
+"tur": "sehir"
+},
+{
+"ad": "Berlin",
+"ust": "Almanya",
+"koordinat": [
+52.52,
+13.405
+],
+"tur": "sehir"
+},
+{
+"ad": "Münih",
+"ust": "Almanya",
+"koordinat": [
+48.1351,
+11.582
+],
+"tur": "sehir"
+},
+{
+"ad": "Madrid",
+"ust": "İspanya",
+"koordinat": [
+40.4168,
+-3.7038
+],
+"tur": "sehir"
+},
+{
+"ad": "Barselona",
+"ust": "İspanya",
+"koordinat": [
+41.3874,
+2.1686
+],
+"tur": "sehir"
+},
+{
+"ad": "Granada",
+"ust": "İspanya",
+"koordinat": [
+37.1773,
+-3.5986
+],
+"tur": "sehir"
+},
+{
+"ad": "Sevilla",
+"ust": "İspanya",
+"koordinat": [
+37.3891,
+-5.9845
+],
+"tur": "sehir"
+},
+{
+"ad": "Lizbon",
+"ust": "Portekiz",
+"koordinat": [
+38.7223,
+-9.1393
+],
+"tur": "sehir"
+},
+{
+"ad": "Amsterdam",
+"ust": "Hollanda",
+"koordinat": [
+52.3676,
+4.9041
+],
+"tur": "sehir"
+},
+{
+"ad": "Viyana",
+"ust": "Avusturya",
+"koordinat": [
+48.2082,
+16.3738
+],
+"tur": "sehir"
+},
+{
+"ad": "Prag",
+"ust": "Çekya",
+"koordinat": [
+50.0755,
+14.4378
+],
+"tur": "sehir"
+},
+{
+"ad": "Budapeşte",
+"ust": "Macaristan",
+"koordinat": [
+47.4979,
+19.0402
+],
+"tur": "sehir"
+},
+{
+"ad": "Varşova",
+"ust": "Polonya",
+"koordinat": [
+52.2297,
+21.0122
+],
+"tur": "sehir"
+},
+{
+"ad": "Moskova",
+"ust": "Rusya",
+"koordinat": [
+55.7558,
+37.6173
+],
+"tur": "sehir"
+},
+{
+"ad": "St. Petersburg",
+"ust": "Rusya",
+"koordinat": [
+59.9311,
+30.3609
+],
+"tur": "sehir"
+},
+{
+"ad": "Saraybosna",
+"ust": "Bosna-Hersek",
+"koordinat": [
+43.8563,
+18.4131
+],
+"tur": "sehir"
+},
+{
+"ad": "Mostar",
+"ust": "Bosna-Hersek",
+"koordinat": [
+43.3438,
+17.8078
+],
+"tur": "sehir"
+},
+{
+"ad": "Üsküp",
+"ust": "Kuzey Makedonya",
+"koordinat": [
+41.9981,
+21.4254
+],
+"tur": "sehir"
+},
+{
+"ad": "Dubrovnik",
+"ust": "Hırvatistan",
+"koordinat": [
+42.6507,
+18.0944
+],
+"tur": "sehir"
+},
+{
+"ad": "Sofya",
+"ust": "Bulgaristan",
+"koordinat": [
+42.6977,
+23.3219
+],
+"tur": "sehir"
+},
+{
+"ad": "Bakü",
+"ust": "Azerbaycan",
+"koordinat": [
+40.4093,
+49.8671
+],
+"tur": "sehir"
+},
+{
+"ad": "Tiflis",
+"ust": "Gürcistan",
+"koordinat": [
+41.7151,
+44.8271
+],
+"tur": "sehir"
+},
+{
+"ad": "Kudüs",
+"ust": "Filistin",
+"koordinat": [
+31.7683,
+35.2137
+],
+"tur": "sehir"
+},
+{
+"ad": "Amman",
+"ust": "Ürdün",
+"koordinat": [
+31.9454,
+35.9284
+],
+"tur": "sehir"
+},
+{
+"ad": "Beyrut",
+"ust": "Lübnan",
+"koordinat": [
+33.8938,
+35.5018
+],
+"tur": "sehir"
+},
+{
+"ad": "Tahran",
+"ust": "İran",
+"koordinat": [
+35.6892,
+51.389
+],
+"tur": "sehir"
+},
+{
+"ad": "İsfahan",
+"ust": "İran",
+"koordinat": [
+32.6546,
+51.668
+],
+"tur": "sehir"
+},
+{
+"ad": "Semerkant",
+"ust": "Özbekistan",
+"koordinat": [
+39.627,
+66.975
+],
+"tur": "sehir"
+},
+{
+"ad": "Buhara",
+"ust": "Özbekistan",
+"koordinat": [
+39.7681,
+64.4556
+],
+"tur": "sehir"
+},
+{
+"ad": "Delhi",
+"ust": "Hindistan",
+"koordinat": [
+28.6139,
+77.209
+],
+"tur": "sehir"
+},
+{
+"ad": "Agra",
+"ust": "Hindistan",
+"koordinat": [
+27.1767,
+78.0081
+],
+"tur": "sehir"
+},
+{
+"ad": "Pekin",
+"ust": "Çin",
+"koordinat": [
+39.9042,
+116.4074
+],
+"tur": "sehir"
+},
+{
+"ad": "Tokyo",
+"ust": "Japonya",
+"koordinat": [
+35.6762,
+139.6503
+],
+"tur": "sehir"
+},
+{
+"ad": "Kyoto",
+"ust": "Japonya",
+"koordinat": [
+35.0116,
+135.7681
+],
+"tur": "sehir"
+},
+{
+"ad": "New York",
+"ust": "ABD",
+"koordinat": [
+40.7128,
+-74.006
+],
+"tur": "sehir"
+},
+{
+"ad": "Washington",
+"ust": "ABD",
+"koordinat": [
+38.9072,
+-77.0369
+],
+"tur": "sehir"
+},
+{
+"ad": "Meksiko",
+"ust": "Meksika",
+"koordinat": [
+19.4326,
+-99.1332
+],
+"tur": "sehir"
+},
+{
+"ad": "Cusco",
+"ust": "Peru",
+"koordinat": [
+-13.5319,
+-71.9675
+],
+"tur": "sehir"
+},
+{
+"ad": "Rio de Janeiro",
+"ust": "Brezilya",
+"koordinat": [
+-22.9068,
+-43.1729
+],
+"tur": "sehir"
+}
+]

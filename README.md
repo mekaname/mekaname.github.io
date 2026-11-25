@@ -5,13 +5,14 @@ Gezilen tarihi yerlerin paylaşıldığı, mobil öncelikli bir web uygulaması 
 ## Neler çalışıyor
 
 - **Giriş ekranı:** Arka planda Leaflet ile gösterilen fiziki dünya haritası (NASA Blue Marble görüntüsünden üretildi), ortada TarihGram yazısı, "Kayıt Ol" ve "Giriş Yap" butonları, sağ altta "1.0 E".
-- **Kayıt / giriş penceresi:** Ad soyad, e-posta ve şifre ile kayıt; e-posta ve şifre ile giriş; şifremi unuttum; altında "Google ile Giriş Yap" butonu.
+- **Kayıt / giriş penceresi:** Ad soyad, e-posta ve şifre ile kayıt; e-posta ve şifre ile giriş; şifremi unuttum (e-postayla yeni şifre); altında "Google ile Giriş Yap" butonu.
 - **Ana ekran:** Sol üstte menü, sağ üstte Ayarlar (tema, çıkış).
 - **Gönderiler:** Gerçek fotoğraflar ve videolar. Beğen (çift dokunuşla da), yorum yap, gönder, kaydet.
 - **Gönderi sayfası:** Fotoğraflar ve videolar, mekânın açıklaması ve tarihçesi, Google Haritalar'da tam konumu, benzer mekânların haritası ve listesi, yorumlar.
 
 ### Menü
-- **+ Paylaş:** Telefondan/bilgisayardan fotoğraf ve video seç (en fazla 10), mekân adını yaz (bilinen mekânlar önerilir ve konumu otomatik dolar), haritaya dokunarak ya da "Konumumu kullan" ile yerini işaretle, not ekle, paylaş. Kendi gönderini silebilirsin.
+- **+ Paylaş:** Fotoğraf ve video seç (en fazla 10; sürükle-bırak ve yapıştır da olur). Mekân adını ve şehri yazarken akıllı öneriler gelir, harf hatalarını tolere eder. Mekân seçilince yeri haritada kendiliğinden işaretlenir. Haritanın üstündeki arama kutusuyla yer aranabilir; haritaya dokunarak ya da "Konumumu kullan" ile de işaretlenebilir. Kendi gönderini silebilirsin.
+- **Yönetim (yalnızca yöneticiler):** İstatistikler, tüm gönderiler ve yorumlar (silme), üyeler (kısıtlama, yönetici yapma).
 - **Ana Sayfa:** Tüm gönderilerin akışı.
 - **Keşfet:** Arama (mekân, şehir, tür), kategori filtreleri, fotoğraf ızgarası ve keşfedilecek mekânlar listesi.
 - **Geçmiş:** Görüntülediğin, beğendiğin, kaydettiğin, yorum yaptığın, paylaştığın ve gönderdiğin her şey gün gün; türe göre filtre ve geçmişi temizleme.
@@ -20,44 +21,56 @@ Gezilen tarihi yerlerin paylaşıldığı, mobil öncelikli bir web uygulaması 
 - **Profil:** Profil fotoğrafı, ad soyad ve "Hakkımda" düzenleme; gönderilerin ve kaydettiklerin.
 - **En altta:** Profil fotoğrafın, adın, e-postan ve gönderi/beğeni/kayıt sayıların.
 
-## Gerçek hesaplar ve "Google ile Giriş" için Firebase kurulumu
+## Siteyi herkese açık yapmak (Supabase + GitHub Pages)
 
-Firebase ayarı eklenmeden uygulama **önizleme modunda** çalışır: e-posta ile açılan hesaplar yalnızca o tarayıcıda saklanır, Google butonu bir uyarı gösterir. Gerçek hesaplar için (ücretsiz):
+Ayar yapılmadan uygulama **önizleme modunda** çalışır: hesaplar ve gönderiler yalnızca o tarayıcıda durur. Herkesin birbirinin gönderisini (fotoğraf ve videolar dahil) görmesi için ücretsiz bir Supabase projesi bağlanır. Supabase; giriş (Google dahil), veritabanı ve dosya deposunu tek yerde, kredi kartı istemeden sunar.
 
-1. https://console.firebase.google.com adresinde **Proje ekle** ile yeni bir proje aç (ör. `tarihgram`).
-2. **Build > Authentication > Get started**. **Sign-in method** sekmesinde **Email/Password** ve **Google** sağlayıcılarını etkinleştir.
-3. **Proje ayarları (dişli) > Genel > Uygulamalarınız > Web (`</>`)** ile bir web uygulaması ekle. Sana verilen `firebaseConfig` nesnesini kopyala.
-4. `index.html` içinde `var FIREBASE_CONFIG = null;` satırını bulup kopyaladığın nesneyle değiştir:
+### 1. Supabase projesi aç (5 dakika)
+1. https://supabase.com adresinde ücretsiz hesap aç, **New project** ile proje oluştur (ör. `tarihgram`, bölge: Frankfurt).
+2. Sol menüden **SQL Editor > New query**: `supabase/kurulum.sql` dosyasının tamamını yapıştır ve **Run**'a bas. Tablolar, güvenlik kuralları ve `medya` adlı fotoğraf/video deposu kurulur.
+3. Proje ana sayfasındaki **Connect** düğmesinden (ya da **Project Settings > API Keys**) **Project URL** ile **Publishable key**'i kopyala. Eski projelerde bu anahtarın adı **anon public**'tir; ikisi de olur.
+4. `index.html` dosyasının en üstündeki betikte şu iki satırı doldur:
    ```js
-   var FIREBASE_CONFIG = {
-     apiKey: "...",
-     authDomain: "tarihgram.firebaseapp.com",
-     projectId: "tarihgram",
-     appId: "..."
-   };
+   var SUPABASE_URL = "https://xxxxxxxx.supabase.co";
+   var SUPABASE_ANON_KEY = "eyJhbGciOi...";
    ```
-5. **Authentication > Settings > Authorized domains** bölümüne sitenin yayınlandığı adresi ekle (ör. `kullaniciadi.github.io`).
+   Bu iki değer gizli değildir; sitede bulunmaları normaldir. Veriyi veritabanındaki kurallar korur.
 
-Bu değerler gizli değildir; web sitelerinde açıkça bulunmaları normaldir.
+### 2. Yönetici (admin) olmak
+Siteye **ilk kayıt olan kişi otomatik olarak yönetici olur**. Kurulumdan hemen sonra siteye ilk sen kayıt ol. Menünün en altında **Yönetim** bölümü belirir:
+- Tüm gönderileri ve yorumları görür, istediğini silersin.
+- Üyeleri listeler (e-postaları yalnızca yöneticiye görünür), bir üyeyi **kısıtlayabilir** (paylaşım ve yorum yapamaz) ya da **yönetici yapabilirsin**.
 
-## Yayınlama (GitHub Pages)
+Gerekirse bir hesabı elle yönetici yapmak için `supabase/kurulum.sql` dosyasının en altındaki komutu kullan.
 
-Depo ayarlarında **Settings > Pages > Branch** olarak bu dalı ve `/ (root)` klasörünü seç. Birkaç dakika sonra site `https://<kullanıcı-adı>.github.io/<depo-adı>/` adresinde açılır.
+### 3. E-posta ve Google ile giriş
+- **Authentication > URL Configuration**: **Site URL** alanına sitenin adresini yaz (ör. `https://kullaniciadi.github.io/depo-adi/`) ve aynı adresi **Redirect URLs** listesine ekle.
+- E-posta ile kayıtta Supabase onay e-postası gönderir; kullanıcı bağlantıya tıkladıktan sonra giriş yapar.
+- **Google ile giriş** için: Google Cloud Console'da (https://console.cloud.google.com) bir OAuth istemcisi (Web application) oluştur. "Authorized redirect URIs" alanına Supabase'in **Authentication > Providers > Google** sayfasında yazan geri dönüş adresini ekle. Oradan aldığın Client ID ve Client Secret'ı aynı Supabase sayfasına yapıştırıp Google'ı etkinleştir.
 
-Yerelde denemek için dosyayı doğrudan açmak yerine bir sunucuyla aç (veriler `fetch` ile yüklenir):
+### 4. Yayınlama (GitHub Pages)
+1. Değişiklikleri `main` dalına birleştir.
+2. Depo **Settings > Pages > Build and deployment > Source** alanında **GitHub Actions**'ı seç.
+3. `.github/workflows/yayinla.yml` her `main` gönderiminde siteyi otomatik yayınlar. Adres: `https://<kullanıcı-adı>.github.io/<depo-adı>/`.
 
-```bash
-python3 -m http.server 8000   # sonra http://localhost:8000
-```
+GitHub Pages, ücretsiz hesaplarda yalnızca herkese açık (public) depolarda çalışır. Depo gizliyse ya herkese açık yap ya da klasörü Netlify (https://app.netlify.com/drop) gibi bir servise sürükleyip bırak.
 
-## Şimdilik yerel kalanlar
+### Ücretsiz sınırlar
+Supabase ücretsiz planında 500 MB veritabanı ve 1 GB dosya deposu vardır; video başına en fazla 50 MB yüklenebilir. Kullanılmayan ücretsiz projeler bir hafta hareketsiz kalınca duraklatılır, panelden tek tıkla yeniden açılır.
 
-Paylaştığın gönderiler (fotoğraf ve videolarıyla birlikte tarayıcının IndexedDB deposunda), beğeniler, kayıtlar, yorumlar, geçmiş ve profil bilgileri şu an tarayıcıda saklanır; başka kullanıcılar görmez. Bunları herkesle paylaşmak bir sonraki adımda Firebase Firestore ile yapılabilir. "Gönder" penceresindeki kişilere gönderim de mesajlaşma bölümü gelene kadar göstermeliktir; bağlantıyı kopyalama gerçekten çalışır.
+## Önizleme modu ve sınırlar
+
+Supabase bağlanmadan önce gönderiler (fotoğraf ve videolarıyla tarayıcının IndexedDB deposunda), beğeniler, kayıtlar, yorumlar ve profil yalnızca o tarayıcıda saklanır. Önizlemede o tarayıcıda ilk açılan hesap yöneticidir. Supabase bağlanınca gönderiler, yorumlar, beğeniler, kayıtlar ve profiller herkese açık veritabanına taşınır. **Geçmiş** her zaman cihazda kalır. "Gönder" penceresindeki kişilere gönderim, mesajlaşma bölümü gelene kadar göstermeliktir; bağlantıyı kopyalama gerçekten çalışır.
+
+Paylaşım sırasında mekân ve şehir alanları yazarken öneri verir ("top" → Topkapı Sarayı, "iskan" → İstanbul, Türkiye). Liste `data/mekanlar.json` (185 mekân) ve `data/sehirler.json` dosyalarından gelir; `tools/mekanlar_uret.py` içine satır ekleyip çalıştırarak yeni mekân eklenebilir. Listede olmayan bir yer haritada aranınca site yayındayken OpenStreetMap'te (Nominatim) aranır.
 
 ## Dosyalar
 
 - `index.html`: Uygulamanın tamamı (HTML, CSS, JS)
 - `tools/tek-dosya.py`: Her şeyi içine gömen tek dosyalık sürümü üretir (`python3 tools/tek-dosya.py cikti.html`)
+- `supabase/kurulum.sql`: Veritabanı, güvenlik kuralları ve dosya deposu kurulumu
+- `.github/workflows/yayinla.yml`: GitHub Pages'e otomatik yayın
+- `data/mekanlar.json`, `data/sehirler.json`: Arama önerileri için mekân ve şehir listeleri (`tools/mekanlar_uret.py` üretir)
 - `data/gonderiler.json`: Örnek gönderiler, mekân açıklamaları, tarihçeler, benzer mekânlar, fotoğraf kaynakları
 - `data/kiyilar.json`: Türkiye ve çevresinin kıyı çizgileri (Natural Earth 1:10m), internet haritası yüklenemezse kullanılır
 - `assets/fiziki-harita.jpg`: Fiziki dünya haritası (NASA Blue Marble, kamu malı)

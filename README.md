@@ -6,9 +6,19 @@ Gezilen tarihi yerlerin paylaşıldığı, mobil öncelikli bir web uygulaması 
 
 - **Giriş ekranı:** Arka planda Leaflet ile gösterilen fiziki dünya haritası (NASA Blue Marble görüntüsünden üretildi), ortada TarihGram yazısı, "Kayıt Ol" ve "Giriş Yap" butonları, sağ altta "1.0 E".
 - **Kayıt / giriş penceresi:** Ad soyad, e-posta ve şifre ile kayıt; e-posta ve şifre ile giriş; şifremi unuttum; altında "Google ile Giriş Yap" butonu.
-- **Ana ekran:** Sol üstte menü (+ Paylaş, Ana Sayfa, Keşfet, Geçmiş, Haritalar, Kaydedilenler, Profil, en altta kullanıcı bilgileri), sağ üstte Ayarlar (tema, çıkış).
-- **Gönderiler:** Gerçek fotoğraflar ve videolar. Beğen (çift dokunuşla da), yorum yap, gönder, kaydet. Kaydedilenler menüsü kaydettiğin gönderileri listeler.
-- **Gönderi sayfası:** Gönderiye dokununca açılır. Fotoğraflar ve videolar, mekânın açıklaması, tarihçesi, Google Haritalar'da tam konumu, benzer mekânların haritası ve listesi (uzaklıklarıyla), yorumlar.
+- **Ana ekran:** Sol üstte menü, sağ üstte Ayarlar (tema, çıkış).
+- **Gönderiler:** Gerçek fotoğraflar ve videolar. Beğen (çift dokunuşla da), yorum yap, gönder, kaydet.
+- **Gönderi sayfası:** Fotoğraflar ve videolar, mekânın açıklaması ve tarihçesi, Google Haritalar'da tam konumu, benzer mekânların haritası ve listesi, yorumlar.
+
+### Menü
+- **+ Paylaş:** Telefondan/bilgisayardan fotoğraf ve video seç (en fazla 10), mekân adını yaz (bilinen mekânlar önerilir ve konumu otomatik dolar), haritaya dokunarak ya da "Konumumu kullan" ile yerini işaretle, not ekle, paylaş. Kendi gönderini silebilirsin.
+- **Ana Sayfa:** Tüm gönderilerin akışı.
+- **Keşfet:** Arama (mekân, şehir, tür), kategori filtreleri, fotoğraf ızgarası ve keşfedilecek mekânlar listesi.
+- **Geçmiş:** Görüntülediğin, beğendiğin, kaydettiğin, yorum yaptığın, paylaştığın ve gönderdiğin her şey gün gün; türe göre filtre ve geçmişi temizleme.
+- **Haritalar:** Bütün gönderiler (fotoğraflı işaretler) ve mekânlar tek haritada; Gönderiler / Mekânlar / Kaydedilenler filtresi; işarete dokununca bilgi kartı.
+- **Kaydedilenler:** Kaydettiğin gönderiler.
+- **Profil:** Profil fotoğrafı, ad soyad ve "Hakkımda" düzenleme; gönderilerin ve kaydettiklerin.
+- **En altta:** Profil fotoğrafın, adın, e-postan ve gönderi/beğeni/kayıt sayıların.
 
 ## Gerçek hesaplar ve "Google ile Giriş" için Firebase kurulumu
 
@@ -42,11 +52,12 @@ python3 -m http.server 8000   # sonra http://localhost:8000
 
 ## Şimdilik yerel kalanlar
 
-Beğeniler, kayıtlar ve senin yazdığın yorumlar şu an tarayıcıda saklanır, başka kullanıcılar görmez. Bunları herkesle paylaşmak bir sonraki adımda Firebase Firestore ile yapılabilir. "Gönder" penceresindeki kişilere gönderim de mesajlaşma bölümü gelene kadar göstermeliktir; bağlantıyı kopyalama gerçekten çalışır.
+Paylaştığın gönderiler (fotoğraf ve videolarıyla birlikte tarayıcının IndexedDB deposunda), beğeniler, kayıtlar, yorumlar, geçmiş ve profil bilgileri şu an tarayıcıda saklanır; başka kullanıcılar görmez. Bunları herkesle paylaşmak bir sonraki adımda Firebase Firestore ile yapılabilir. "Gönder" penceresindeki kişilere gönderim de mesajlaşma bölümü gelene kadar göstermeliktir; bağlantıyı kopyalama gerçekten çalışır.
 
 ## Dosyalar
 
 - `index.html`: Uygulamanın tamamı (HTML, CSS, JS)
+- `tools/tek-dosya.py`: Her şeyi içine gömen tek dosyalık sürümü üretir (`python3 tools/tek-dosya.py cikti.html`)
 - `data/gonderiler.json`: Örnek gönderiler, mekân açıklamaları, tarihçeler, benzer mekânlar, fotoğraf kaynakları
 - `data/kiyilar.json`: Türkiye ve çevresinin kıyı çizgileri (Natural Earth 1:10m), internet haritası yüklenemezse kullanılır
 - `assets/fiziki-harita.jpg`: Fiziki dünya haritası (NASA Blue Marble, kamu malı)

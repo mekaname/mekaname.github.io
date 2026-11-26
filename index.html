@@ -1455,7 +1455,8 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     function toUser(session) {
       var u = session.user, md = u.user_metadata || {};
       return Promise.all([sb.from("profiller").select("ad,bio,foto_url,rol,yasakli").eq("id", u.id).maybeSingle(), sb.rpc("benim_dogum_tarihim")]).then(function (rr) {
-        var r = rr[0], p = r.data || {}, dogum = rr[1] && !rr[1].error ? rr[1].data : null;
+        // Veritabanında yaş kontrolü henüz kurulmadıysa (guvenlik-2.sql çalıştırılmadıysa) kimseyi doğum tarihi ekranında kilitleme.
+        var r = rr[0], p = r.data || {}, dogum = rr[1] && !rr[1].error ? rr[1].data : (rr[1] && rr[1].error ? "kurulmadi" : null);
         return { uid: u.id, email: u.email, name: p.ad || md.ad || md.full_name || md.name || u.email.split("@")[0], photo: p.foto_url || md.avatar_url || "",
           method: (u.app_metadata && u.app_metadata.provider) === "google" ? "Google" : "E-posta", bio: p.bio || "", rol: p.rol || "uye", yasakli: !!p.yasakli, dogum: dogum || "" };
       });

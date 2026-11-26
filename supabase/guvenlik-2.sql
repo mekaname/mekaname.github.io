@@ -111,3 +111,6 @@ end $$;
 drop policy if exists "medya_oku" on storage.objects;
 create policy "medya_oku" on storage.objects for select to authenticated
   using (bucket_id = 'medya' and ((storage.foldername(name))[1] = auth.uid()::text or public.yonetici_mi()));
+
+-- Supabase'in şema önbelleğini yenile (yeni sütun ve fonksiyonlar hemen görünsün)
+notify pgrst, 'reload schema';

@@ -1,5 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co https://*.googleusercontent.com https://tile.openstreetmap.org; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' data: blob: https://*.supabase.co wss://*.supabase.co https://nominatim.openstreetmap.org; frame-src https://maps.google.com https://www.google.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Mekaname</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="theme-color" content="#1b5e8c">
@@ -1134,6 +1136,15 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
 .map-search input { flex: 1; min-width: 0; border: 0; background: none; padding: 11px 0; font-size: 1rem; }
 .map-search input:focus { outline: none; }
 /* Dosya seçme: gerçek dosya girişi görünmez şekilde alanın üstünü kaplar (her tarayıcıda dokunma doğrudan ona gider) */
+.code-input { font-size: 1.5rem !important; letter-spacing: .4em; text-align: center; font-variant-numeric: tabular-nums; }
+.reasons { border: 0; margin: 0; padding: 0; display: grid; gap: 2px; }
+.reasons label { display: flex; gap: 10px; align-items: center; padding: 10px 4px; border-bottom: 1px solid var(--line); font-weight: 500; cursor: pointer; }
+.reasons input { width: 18px; height: 18px; accent-color: var(--accent); }
+.report-btn { border: 0; background: none; padding: 0; color: var(--muted); font-weight: 600; font-size: .82rem; justify-self: start; margin-top: 4px; }
+.tabs.four { grid-template-columns: repeat(4, 1fr); }
+.tabs.four button { font-size: .85rem; }
+.ad-stats.four { grid-template-columns: repeat(4, 1fr); }
+.ad-stats.four b { font-size: 1.15rem; }
 .add-wrap { position: relative; aspect-ratio: 1; }
 .add-wrap .add-tile { width: 100%; height: 100%; font: inherit; }
 .add-menu { position: absolute; z-index: 50; top: calc(100% + 6px); left: 0; min-width: 180px; padding: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); display: grid; gap: 2px; }
@@ -1217,26 +1228,35 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
     <div class="modal-head">
       <h2 id="auth-title">Giriş Yap</h2>
-      <button class="icon-btn" data-close="auth" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <button class="icon-btn" data-close="auth" id="auth-close" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
     <p class="lead" id="auth-lead"></p>
     <form class="form" id="auth-form" novalidate>
       <div class="field" id="f-name-wrap">
         <label for="f-name">Ad Soyad</label>
-        <input id="f-name" name="name" type="text" autocomplete="name" >
+        <input id="f-name" name="name" type="text" autocomplete="name" maxlength="60">
+      </div>
+      <div class="field" id="f-birth-wrap">
+        <label for="f-birth">Doğum tarihi</label>
+        <input id="f-birth" name="bday" type="date" autocomplete="bday" min="1900-01-01">
       </div>
       <div class="field" id="f-email-wrap">
         <label for="f-email">E-posta adresi</label>
         <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" >
       </div>
-      <div class="field">
+      <div class="field" id="f-code-wrap" hidden>
+        <label for="f-code">Doğrulama kodu</label>
+        <input id="f-code" class="code-input" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="10" pattern="[0-9]*">
+      </div>
+      <div class="field" id="f-pass-wrap">
         <label for="f-pass">Şifre</label>
         <div class="pw">
-          <input id="f-pass" name="password" type="password" autocomplete="current-password" placeholder="En az 6 karakter">
+          <input id="f-pass" name="password" type="password" autocomplete="current-password" >
           <button type="button" id="pw-toggle" aria-label="Şifreyi göster">Göster</button>
         </div>
       </div>
       <button type="button" class="link-btn forgot" id="btn-forgot">Şifremi unuttum</button>
+      <button type="button" class="link-btn forgot" id="btn-resend" hidden>Kodu tekrar gönder</button>
       <p class="form-error" id="auth-error" role="alert" hidden></p>
       <p class="form-info" id="auth-info" role="status" hidden></p>
       <button class="btn btn-primary" id="auth-submit" type="submit">Giriş Yap</button>
@@ -1267,6 +1287,30 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
       <button type="button" data-t="dark">Koyu</button>
     </div>
     <button class="danger" id="btn-logout" type="button">Çıkış Yap</button>
+  </div>
+</div>
+
+<!-- Şikayet et -->
+<div class="sheet-wrap" id="report" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="report-title">
+    <div class="grip"></div>
+    <div class="sheet-head">
+      <h2 id="report-title">Şikayet et</h2>
+      <button class="icon-btn" data-close="report" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <form class="form" id="report-form" novalidate>
+      <fieldset class="reasons">
+        <legend class="sr">Şikayet nedeni</legend>
+        <label><input type="radio" name="neden" value="Uygunsuz ya da müstehcen içerik"> Uygunsuz ya da müstehcen içerik</label>
+        <label><input type="radio" name="neden" value="Şiddet, taciz ya da nefret söylemi"> Şiddet, taciz ya da nefret söylemi</label>
+        <label><input type="radio" name="neden" value="Spam ya da yanıltıcı"> Spam ya da yanıltıcı</label>
+        <label><input type="radio" name="neden" value="Telif hakkı ihlali"> Telif hakkı ihlali</label>
+        <label><input type="radio" name="neden" value="Diğer"> Diğer</label>
+      </fieldset>
+      <div class="field"><label for="report-not">Açıklama (isteğe bağlı)</label><textarea id="report-not" maxlength="200"></textarea></div>
+      <p class="form-error" id="report-err" role="alert" hidden></p>
+      <button class="btn btn-primary" type="submit" id="report-submit">Gönder</button>
+    </form>
   </div>
 </div>
 
@@ -1308,6 +1352,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
 
 (function () {
   "use strict";
+  document.documentElement.lang = "tr";
   var $ = function (id) { return document.getElementById(id); };
   var store = {
     get: function (k, d) { try { var v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
@@ -1371,6 +1416,9 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   ERR["tg/no-config-reset"] = "Önizleme modunda şifre sıfırlama e-postası gönderilemez. Yeni bir hesap açabilirsin.";
   ERR["tg/yasak"] = "Hesabın yönetici tarafından kısıtlandı. Paylaşım ve yorum yapamazsın.";
   ERR["tg/yetki"] = "Bu işlem için yetkin yok.";
+  ERR["tg/yas"] = "Mekaname'yi kullanmak için en az 13 yaşında olmalısın.";
+  ERR["tg/kod"] = "Kod hatalı ya da süresi dolmuş. Kodu kontrol et ya da yeni kod iste.";
+  ERR["tg/sikayet-var"] = "Bu gönderiyi zaten şikayet ettin.";
   function uuid() {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) { var r = Math.random() * 16 | 0; return (c === "x" ? r : (r & 3 | 8)).toString(16); });
@@ -1396,6 +1444,8 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       else if (/password should be at least/i.test(m)) c = "auth/weak-password";
       else if (/unable to validate email|invalid email/i.test(m)) c = "auth/invalid-email";
       else if (/rate limit|security purposes|too many/i.test(m)) c = "auth/too-many-requests";
+      else if (/database error saving new user|13 yaş/i.test(m)) c = "tg/yas";
+      else if (/token has expired|token is invalid|otp|invalid token/i.test(m)) c = "tg/kod";
       else if (/failed to fetch|network/i.test(m)) c = "auth/network-request-failed";
       else if (/row-level security|permission denied|violates row/i.test(m)) c = current && current.yasakli ? "tg/yasak" : "tg/yetki";
       if (c) return fail(c);
@@ -1404,10 +1454,10 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     function chk(r) { if (r.error) throw sbErr(r.error); return r.data; }
     function toUser(session) {
       var u = session.user, md = u.user_metadata || {};
-      return sb.from("profiller").select("ad,bio,foto_url,rol,yasakli").eq("id", u.id).maybeSingle().then(function (r) {
-        var p = r.data || {};
+      return Promise.all([sb.from("profiller").select("ad,bio,foto_url,rol,yasakli").eq("id", u.id).maybeSingle(), sb.rpc("benim_dogum_tarihim")]).then(function (rr) {
+        var r = rr[0], p = r.data || {}, dogum = rr[1] && !rr[1].error ? rr[1].data : null;
         return { uid: u.id, email: u.email, name: p.ad || md.ad || md.full_name || md.name || u.email.split("@")[0], photo: p.foto_url || md.avatar_url || "",
-          method: (u.app_metadata && u.app_metadata.provider) === "google" ? "Google" : "E-posta", bio: p.bio || "", rol: p.rol || "uye", yasakli: !!p.yasakli };
+          method: (u.app_metadata && u.app_metadata.provider) === "google" ? "Google" : "E-posta", bio: p.bio || "", rol: p.rol || "uye", yasakli: !!p.yasakli, dogum: dogum || "" };
       });
     }
     function dataUrlBlob(d) { var b = atob(d.split(",")[1]), a = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) a[i] = b.charCodeAt(i); return new Blob([a], { type: "image/jpeg" }); }
@@ -1430,8 +1480,25 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
         }).catch(function () { cb(null); toast("Sunucuya bağlanılamadı. İnternet bağlantını kontrol et."); });
       },
       onRecovery: function (f) { recoveryCb = f; },
-      signUp: function (name, email, pw) {
-        return ready.then(function () { return sb.auth.signUp({ email: email, password: pw, options: { data: { ad: name }, emailRedirectTo: here() } }); })
+      verifyCode: function (email, token) { return ready.then(function () { return sb.auth.verifyOtp({ email: email, token: token, type: "email" }); }).then(chk); },
+      resendCode: function (email) { return ready.then(function () { return sb.auth.resend({ type: "signup", email: email, options: { emailRedirectTo: here() } }); }).then(chk); },
+      setBirthdate: function (d) {
+        return sb.from("profiller").update({ dogum_tarihi: d }).eq("id", current.uid).select("id").then(chk).then(function (rows) { if (!rows || !rows.length) throw fail("tg/yetki"); current.dogum = d; });
+      },
+      report: function (postId, neden) {
+        return sb.from("sikayetler").insert({ gonderi_id: postId, kullanici_id: current.uid, neden: neden }).then(function (r) {
+          if (r.error && r.error.code === "23505") throw fail("tg/sikayet-var");
+          chk(r);
+        });
+      },
+      adminReports: function () {
+        return sb.from("sikayetler").select("id,gonderi_id,neden,olusturma,profiller(ad)").order("olusturma", { ascending: false }).limit(300).then(chk).then(function (rows) {
+          return rows.map(function (r) { return { id: r.id, postId: r.gonderi_id, neden: r.neden, ad: (r.profiller || {}).ad || "Gezgin", t: Date.parse(r.olusturma) }; });
+        });
+      },
+      deleteReport: function (id) { return sb.from("sikayetler").delete().eq("id", id).select("id").then(chk).then(function (rows) { if (!rows || !rows.length) throw fail("tg/yetki"); }); },
+      signUp: function (name, email, pw, birth) {
+        return ready.then(function () { return sb.auth.signUp({ email: email, password: pw, options: { data: { ad: name, dogum_tarihi: birth }, emailRedirectTo: here() } }); })
           .then(function (r) { chk(r); if (r.data.user && r.data.user.identities && !r.data.user.identities.length) throw fail("auth/email-already-in-use"); return { confirm: !r.data.session }; });
       },
       signIn: function (email, pw) { return ready.then(function () { return sb.auth.signInWithPassword({ email: email, password: pw }); }).then(chk); },
@@ -1531,7 +1598,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     function firstEmail() { var all = users(), best = null; Object.keys(all).forEach(function (e) { if (!best || all[e].created < all[best].created) best = e; }); return best; }
     function toUser(email, u) {
       return { uid: "yerel-" + email, name: u.name, email: email, photo: "", method: "Önizleme (bu tarayıcı)", bio: "",
-        rol: u.rol || (email === firstEmail() ? "admin" : "uye"), yasakli: !!u.yasakli };
+        rol: u.rol || (email === firstEmail() ? "admin" : "uye"), yasakli: !!u.yasakli, dogum: u.dogum || "" };
     }
     function emit() { var e = store.get("tg_oturum", null), u = e && users()[e]; cb(u ? toUser(e, u) : null); }
     function stateKeys() { var ks = []; try { for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k.indexOf("tg_durum_") === 0) ks.push(k); } } catch (e) {} return ks; }
@@ -1539,12 +1606,28 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       mode: "local",
       onChange: function (f) { cb = f; emit(); },
       onRecovery: function () {},
-      signUp: function (name, email, pw) {
+      verifyCode: function () { return Promise.reject(fail("tg/no-config-reset")); },
+      resendCode: function () { return Promise.resolve(); },
+      setBirthdate: function (d) {
+        var e = store.get("tg_oturum", null), all = users();
+        if (!e || !all[e]) return Promise.reject(fail("tg/yetki"));
+        if (all[e].dogum) return Promise.resolve();
+        all[e].dogum = d; store.set("tg_kullanicilar", all); return Promise.resolve();
+      },
+      report: function (postId, neden) {
+        var list = store.get("tg_sikayetler", []);
+        if (list.some(function (r) { return r.postId === postId && r.uid === USER.uid; })) return Promise.reject(fail("tg/sikayet-var"));
+        list.unshift({ id: Date.now().toString(36), postId: postId, uid: USER.uid, ad: USER.name, neden: neden, t: Date.now() });
+        store.set("tg_sikayetler", list); return Promise.resolve();
+      },
+      adminReports: function () { return Promise.resolve(store.get("tg_sikayetler", [])); },
+      deleteReport: function (id) { store.set("tg_sikayetler", store.get("tg_sikayetler", []).filter(function (r) { return r.id !== id; })); return Promise.resolve(); },
+      signUp: function (name, email, pw, birth) {
         var all = users();
         if (all[email]) return Promise.reject(fail("auth/email-already-in-use"));
         var salt = Math.random().toString(36).slice(2);
         return hash(pw, salt).then(function (h) {
-          all[email] = { name: name, salt: salt, hash: h, created: Date.now() };
+          all[email] = { name: name, salt: salt, hash: h, created: Date.now(), dogum: birth };
           store.set("tg_kullanicilar", all); store.set("tg_oturum", email); emit(); return {};
         });
       },
@@ -1722,24 +1805,38 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
 
   /* ===================== GİRİŞ / KAYIT PENCERESİ ===================== */
   var authMode = "signin";
-  function openAuth(m) {
-    authMode = m; var up = m === "signup", np = m === "newpass";
-    ["f-email-wrap", "auth-or", "google-btn", "auth-switch"].forEach(function (id) { $(id).hidden = np; });
-    $("auth-title").textContent = up ? "Kayıt Ol" : "Giriş Yap";
-    $("auth-lead").textContent = "";
-    $("f-name-wrap").hidden = !up;
-    $("f-pass").setAttribute("autocomplete", up ? "new-password" : "current-password");
-    $("btn-forgot").hidden = up || np;
-    $("auth-submit").textContent = up ? "Kayıt Ol" : "Giriş Yap";
-    if (np) { $("auth-title").textContent = "Yeni şifre"; $("auth-lead").textContent = "Hesabın için yeni bir şifre belirle."; $("auth-submit").textContent = "Şifreyi güncelle"; $("f-pass").setAttribute("autocomplete", "new-password"); }
+  function openAuth(m, email) {
+    authMode = m;
+    var up = m === "signup", si = m === "signin", np = m === "newpass", code = m === "code", birth = m === "birth";
+    if (email) pendingEmail = email;
+    var show = { "f-name-wrap": up, "f-birth-wrap": up || birth, "f-email-wrap": up || si, "f-pass-wrap": up || si || np, "f-code-wrap": code,
+      "btn-forgot": si, "btn-resend": code, "auth-or": up || si, "google-btn": up || si, "auth-switch": up || si || code || birth, "auth-close": !birth };
+    Object.keys(show).forEach(function (id) { $(id).hidden = !show[id]; });
+    $("auth-title").textContent = up ? "Kayıt Ol" : si ? "Giriş Yap" : np ? "Yeni şifre" : code ? "E-postanı doğrula" : "Doğum tarihin";
+    $("auth-lead").textContent = np ? "Hesabın için yeni bir şifre belirle." :
+      code ? pendingEmail + " adresine 6 haneli bir kod gönderdik. Gelmediyse gereksiz (spam) klasörüne bak." :
+      birth ? "Devam etmek için doğum tarihini gir. Mekaname'yi 13 yaş ve üzeri kullanabilir." : "";
     $("auth-lead").hidden = !$("auth-lead").textContent;
+    $("auth-submit").textContent = up ? "Kayıt Ol" : si ? "Giriş Yap" : np ? "Şifreyi güncelle" : code ? "Doğrula" : "Kaydet";
+    $("f-pass").setAttribute("autocomplete", up || np ? "new-password" : "current-password");
+    $("f-pass").placeholder = up || np ? "En az 8 karakter, harf ve rakam" : "";
+    $("f-birth").max = isoDate(yasSiniri());
     $("google-label").textContent = up ? "Google ile Kayıt Ol" : "Google ile Giriş Yap";
-    $("auth-switch").innerHTML = up ? 'Zaten hesabın var mı? <button type="button" class="link-btn" data-mode="signin">Giriş Yap</button>' : 'Hesabın yok mu? <button type="button" class="link-btn" data-mode="signup">Kayıt Ol</button>';
-    $("local-note").hidden = Veri.mode !== "local";
-    msg("", ""); ["f-name", "f-email", "f-pass"].forEach(function (i) { $(i).removeAttribute("aria-invalid"); });
+    $("auth-switch").innerHTML = up ? 'Zaten hesabın var mı? <button type="button" class="link-btn" data-mode="signin">Giriş Yap</button>' :
+      code ? '<button type="button" class="link-btn" data-mode="signin">Farklı bir e-posta ile giriş yap</button>' :
+      birth ? '<button type="button" class="link-btn" data-logout="1">Çıkış yap</button>' :
+      'Hesabın yok mu? <button type="button" class="link-btn" data-mode="signup">Kayıt Ol</button>';
+    $("local-note").hidden = Veri.mode !== "local" || !(up || si);
+    if (code) $("f-code").value = "";
+    msg("", ""); ["f-name", "f-birth", "f-email", "f-pass", "f-code"].forEach(function (i) { $(i).removeAttribute("aria-invalid"); });
     $("auth").hidden = false;
-    setTimeout(function () { (up ? $("f-name") : np ? $("f-pass") : $("f-email")).focus(); }, 50);
+    setTimeout(function () { (up ? $("f-name") : np ? $("f-pass") : code ? $("f-code") : birth ? $("f-birth") : $("f-email")).focus(); }, 50);
   }
+  var pendingEmail = "", resendUntil = 0;
+  function yasSiniri() { var d = new Date(); d.setFullYear(d.getFullYear() - 13); return d; }
+  function isoDate(d) { return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
+  function yasUygun(v) { if (!/^\d{4}-\d{2}-\d{2}$/.test(v || "")) return false; return v >= "1900-01-01" && v <= isoDate(yasSiniri()); }
+  function sifreGuclu(pw) { return pw.length >= 8 && /[A-Za-zÇĞİÖŞÜçğıöşü]/.test(pw) && /\d/.test(pw); }
   function msg(err, info) {
     $("auth-error").textContent = err; $("auth-error").hidden = !err;
     $("auth-info").textContent = info; $("auth-info").hidden = !info;
@@ -1747,37 +1844,62 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   function busy(b) { $("auth-submit").disabled = b; $("google-btn").disabled = b; }
   $("btn-signup").addEventListener("click", function () { openAuth("signup"); });
   $("btn-signin").addEventListener("click", function () { openAuth("signin"); });
-  $("auth-switch").addEventListener("click", function (e) { var b = e.target.closest("[data-mode]"); if (b) openAuth(b.dataset.mode); });
+  $("auth-switch").addEventListener("click", function (e) {
+    if (e.target.closest("[data-logout]")) { authMode = "signin"; $("auth").hidden = true; Veri.signOut(); return; }
+    var b = e.target.closest("[data-mode]"); if (b) openAuth(b.dataset.mode);
+  });
   $("pw-toggle").addEventListener("click", function () {
     var i = $("f-pass"), show = i.type === "password"; i.type = show ? "text" : "password";
     this.textContent = show ? "Gizle" : "Göster"; this.setAttribute("aria-label", show ? "Şifreyi gizle" : "Şifreyi göster");
   });
+  $("f-code").addEventListener("input", function () { this.value = this.value.replace(/\D/g, ""); });
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function bad(id, text) { $(id).setAttribute("aria-invalid", "true"); $(id).focus(); msg(text, ""); }
   $("auth-form").addEventListener("submit", function (e) {
     e.preventDefault();
-    var up = authMode === "signup";
+    ["f-name", "f-birth", "f-email", "f-pass", "f-code"].forEach(function (i) { $(i).removeAttribute("aria-invalid"); });
+    var job;
     if (authMode === "newpass") {
       var npw = $("f-pass").value;
-      if (npw.length < 6) { $("f-pass").focus(); return msg("Şifre en az 6 karakter olmalı.", ""); }
-      busy(true);
-      return Veri.setPassword(npw).then(function () { $("auth").hidden = true; toast("Şifren güncellendi."); })
-        .catch(function (err) { msg(errText(err), ""); }).then(function () { busy(false); });
+      if (!sifreGuclu(npw)) return bad("f-pass", "Şifre en az 8 karakter olmalı ve harf ile rakam içermeli.");
+      job = Veri.setPassword(npw).then(function () { $("auth").hidden = true; toast("Şifren güncellendi."); });
+    } else if (authMode === "code") {
+      var kod = $("f-code").value.trim();
+      if (kod.length < 6) return bad("f-code", "E-postana gelen 6 haneli kodu yaz.");
+      welcome = "E-postan doğrulandı.";
+      job = Veri.verifyCode(pendingEmail, kod).then(function () { $("auth").hidden = true; });
+    } else if (authMode === "birth") {
+      var bd = $("f-birth").value;
+      if (!bd) return bad("f-birth", "Doğum tarihini seç.");
+      if (!yasUygun(bd)) return bad("f-birth", "Mekaname'yi kullanmak için en az 13 yaşında olmalısın.");
+      job = Veri.setBirthdate(bd).then(function () { USER.dogum = bd; $("auth").hidden = true; toast("Teşekkürler."); });
+    } else {
+      var up = authMode === "signup";
+      var name = $("f-name").value.trim(), birthV = $("f-birth").value, email = $("f-email").value.trim().toLowerCase(), pw = $("f-pass").value;
+      if (up && name.length < 2) return bad("f-name", "Adını ve soyadını yaz.");
+      if (up && !birthV) return bad("f-birth", "Doğum tarihini seç.");
+      if (up && !yasUygun(birthV)) return bad("f-birth", "Mekaname'yi kullanmak için en az 13 yaşında olmalısın.");
+      if (!EMAIL_RE.test(email)) return bad("f-email", "Geçerli bir e-posta adresi yaz.");
+      if (up && !sifreGuclu(pw)) return bad("f-pass", "Şifre en az 8 karakter olmalı ve harf ile rakam içermeli.");
+      if (!up && !pw) return bad("f-pass", "Şifreni yaz.");
+      welcome = up ? "Hesap oluşturuldu." : "Giriş yapıldı.";
+      job = (up ? Veri.signUp(name, email, pw, birthV) : Veri.signIn(email, pw))
+        .then(function (r) { if (r && r.confirm) { welcome = ""; resendUntil = Date.now() + 60000; openAuth("code", email); } })
+        .catch(function (err) {
+          if (err && err.code === "tg/confirm") {
+            welcome = "";
+            return Veri.resendCode(email).catch(function () {}).then(function () { resendUntil = Date.now() + 60000; openAuth("code", email); msg("", "Hesabın henüz doğrulanmadı. Yeni bir kod gönderdik."); });
+          }
+          throw err;
+        });
     }
-    var name = $("f-name").value.trim(), email = $("f-email").value.trim().toLowerCase(), pw = $("f-pass").value;
-    ["f-name", "f-email", "f-pass"].forEach(function (i) { $(i).removeAttribute("aria-invalid"); });
-    var bad = null, text = "";
-    if (up && name.length < 2) { bad = "f-name"; text = "Adını ve soyadını yaz."; }
-    else if (!EMAIL_RE.test(email)) { bad = "f-email"; text = "Geçerli bir e-posta adresi yaz."; }
-    else if (pw.length < 6) { bad = "f-pass"; text = "Şifre en az 6 karakter olmalı."; }
-    if (bad) { $(bad).setAttribute("aria-invalid", "true"); $(bad).focus(); return msg(text, ""); }
     msg("", ""); busy(true);
-    welcome = up ? "Hesap oluşturuldu." : "Giriş yapıldı.";
-    (up ? Veri.signUp(name, email, pw) : Veri.signIn(email, pw))
-      .then(function (r) {
-        if (r && r.confirm) { welcome = ""; openAuth("signin"); $("f-email").value = email; msg("", email + " adresine bir onay bağlantısı gönderdik. Bağlantıya tıkladıktan sonra buradan giriş yap."); }
-      })
-      .catch(function (err) { welcome = ""; msg(errText(err), ""); })
-      .then(function () { busy(false); });
+    job.catch(function (err) { welcome = ""; msg(errText(err), ""); }).then(function () { busy(false); });
+  });
+  $("btn-resend").addEventListener("click", function () {
+    var kalan = Math.ceil((resendUntil - Date.now()) / 1000);
+    if (kalan > 0) return msg("", "Yeni kod için " + kalan + " saniye bekle.");
+    Veri.resendCode(pendingEmail).then(function () { resendUntil = Date.now() + 60000; msg("", "Yeni kod gönderildi."); }).catch(function (err) { msg(errText(err), ""); });
   });
   $("google-btn").addEventListener("click", function () {
     msg("", ""); busy(true);
@@ -1787,7 +1909,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   });
   $("btn-forgot").addEventListener("click", function () {
     var email = $("f-email").value.trim().toLowerCase();
-    if (!EMAIL_RE.test(email)) { $("f-email").setAttribute("aria-invalid", "true"); $("f-email").focus(); return msg("Şifre sıfırlama bağlantısı için önce e-posta adresini yaz.", ""); }
+    if (!EMAIL_RE.test(email)) return bad("f-email", "Şifre sıfırlama bağlantısı için önce e-posta adresini yaz.");
     Veri.reset(email).then(function () { msg("", email + " adresine şifre sıfırlama bağlantısı gönderildi."); }).catch(function (err) { msg(errText(err), ""); });
   });
 
@@ -1924,6 +2046,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       case "fly": flyTo(+b.dataset.i); break;
       case "del-comment": deleteComment(id, b.dataset.cid); break;
       case "del-post": deleteOwnPost(id, b); break;
+      case "report": openReport(id); break;
     }
   });
   var pendingFocus = false;
@@ -1949,7 +2072,8 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     var html = '<article class="detail" data-id="' + p.id + '">' + headHTML(p) + mediaHTML(p, true) + actionsHTML(p) +
       '<div class="post-meta"><span class="likes" data-likes>' + fmt(likeCount(p)) + ' beğenme</span>' +
       (p.not ? '<p class="caption"><b>' + esc(a.ad) + '</b>' + esc(p.not) + '</p>' : '') +
-      ((p.kendi || (USER.rol === "admin" && !p.ornek)) ? '<button class="del-post" type="button" data-a="del-post">Gönderiyi sil</button>' : '') + '</div>' +
+      ((p.kendi || (USER.rol === "admin" && !p.ornek)) ? '<button class="del-post" type="button" data-a="del-post">Gönderiyi sil</button>' : '') +
+      (!p.kendi ? '<button class="report-btn" type="button" data-a="report">Şikayet et</button>' : '') + '</div>' +
       (credits ? '<details class="credits"><summary>Fotoğraf ve video kaynakları (Wikimedia Commons)</summary><ul>' + credits + '</ul></details>' : '') +
 
       '<section class="sec" aria-labelledby="h-about"><h2 id="h-about">' + esc(p.yer) + '</h2><p class="loc-line">' + esc(p.konum) + '</p>' +
@@ -2673,15 +2797,15 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   }
 
   /* ===================== YÖNETİM (yalnızca yöneticiler) ===================== */
-  var adTab = "gonderi", adUsers = [], adComments = [];
+  var adTab = "gonderi", adUsers = [], adComments = [], adReports = [];
   function renderAdmin() {
     if (!USER || USER.rol !== "admin") { toast("Bu sayfa yalnızca yöneticilere açık."); return go(""); }
     route = "admin"; setTop("menu", "Yönetim");
     $("view").innerHTML = '<div class="page page-pad">' +
       (Veri.mode === "local" ? '<p class="local-note" style="margin-top:14px">Önizleme: yalnızca bu tarayıcıdaki veriler.</p>' : '') +
-      '<div class="ad-stats" id="ad-stats"><div><b>…</b><span>Üye</span></div><div><b>…</b><span>Gönderi</span></div><div><b>…</b><span>Yorum</span></div></div>' +
-      '<div class="tabs three" role="tablist">' +
-      [["gonderi", "Gönderiler"], ["yorum", "Yorumlar"], ["uye", "Üyeler"]].map(function (t) { return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (adTab === t[0]) + '">' + t[1] + '</button>'; }).join("") +
+      '<div class="ad-stats four" id="ad-stats"><div><b>…</b><span>Üye</span></div><div><b>…</b><span>Gönderi</span></div><div><b>…</b><span>Yorum</span></div><div><b>…</b><span>Şikayet</span></div></div>' +
+      '<div class="tabs three four" role="tablist">' +
+      [["gonderi", "Gönderiler"], ["sikayet", "Şikayetler"], ["yorum", "Yorumlar"], ["uye", "Üyeler"]].map(function (t) { return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (adTab === t[0]) + '">' + t[1] + '</button>'; }).join("") +
       '</div><div id="ad-body"><p class="none">Yükleniyor…</p></div></div>';
     document.querySelector(".tabs.three").addEventListener("click", function (e) {
       var b = e.target.closest("[data-tab]"); if (!b) return; adTab = b.dataset.tab;
@@ -2691,11 +2815,11 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     loadAdmin();
   }
   function loadAdmin() {
-    return Promise.all([Veri.adminUsers(), Veri.adminComments()]).then(function (r) {
-      adUsers = r[0]; adComments = r[1];
+    return Promise.all([Veri.adminUsers(), Veri.adminComments(), Veri.adminReports().catch(function () { return []; })]).then(function (r) {
+      adUsers = r[0]; adComments = r[1]; adReports = r[2];
       if (route !== "admin") return;
       var posts = DATA.gonderiler.filter(function (p) { return !p.ornek; }).length;
-      $("ad-stats").innerHTML = '<div><b>' + adUsers.length + '</b><span>Üye</span></div><div><b>' + posts + '</b><span>Gönderi</span></div><div><b>' + adComments.length + '</b><span>Yorum</span></div>';
+      $("ad-stats").innerHTML = '<div><b>' + adUsers.length + '</b><span>Üye</span></div><div><b>' + posts + '</b><span>Gönderi</span></div><div><b>' + adComments.length + '</b><span>Yorum</span></div><div><b>' + adReports.length + '</b><span>Şikayet</span></div>';
       drawAdmin();
     }).catch(function (err) { if ($("ad-body")) $("ad-body").innerHTML = '<p class="empty">Yönetim verileri alınamadı: ' + esc(errText(err)) + '</p>'; });
   }
@@ -2711,6 +2835,14 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
           '<div class="ad-acts"><button class="btn-sec" type="button" data-open="' + p.id + '">Aç</button><button class="btn-sec danger-txt" type="button" data-ad="post" data-id="' + p.id + '">Sil</button></div></li>';
       }).join("") + '</ul>' : '<p class="empty">Henüz üyelerin paylaştığı bir gönderi yok.</p>') +
         (ORNEK_GONDERILER ? '<p class="hint">Örnek gönderiler bu listede yer almaz.</p>' : '');
+    } else if (adTab === "sikayet") {
+      b.innerHTML = adReports.length ? '<ul class="ad-list">' + adReports.map(function (r) {
+        var p = postById(r.postId);
+        return '<li><div class="ad-main"><strong>' + (p ? esc(p.yer) : 'Silinmiş gönderi') + '</strong><p>' + esc(r.neden) + '</p><small>Şikayet eden: ' + esc(r.ad) + ' · ' + fmtDate(r.t) + '</small></div>' +
+          '<div class="ad-acts">' + (p ? '<button class="btn-sec" type="button" data-open="' + p.id + '">Aç</button>' : '') +
+          (p && !p.ornek ? '<button class="btn-sec danger-txt" type="button" data-ad="post" data-id="' + p.id + '">Gönderiyi sil</button>' : '') +
+          '<button class="btn-sec" type="button" data-ad="report" data-id="' + esc(r.id) + '">Yoksay</button></div></li>';
+      }).join("") + '</ul>' : '<p class="empty">Şikayet yok.</p>';
     } else if (adTab === "yorum") {
       b.innerHTML = adComments.length ? '<ul class="ad-list">' + adComments.map(function (c) {
         var p = postById(c.postId);
@@ -2738,6 +2870,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     b.disabled = true;
     var job;
     if (kind === "post") job = Veri.deletePost(postById(id)).then(loadUserPosts).then(function () { toast("Gönderi silindi."); });
+    else if (kind === "report") job = Veri.deleteReport(id).then(function () { toast("Şikayet kaldırıldı."); });
     else if (kind === "comment") job = (Veri.mode === "cloud" ? Veri.deleteComment(id) : Veri.deleteCommentAny(id)).then(function () { toast("Yorum silindi."); });
     else {
       var u = adUsers.filter(function (x) { return x.uid === id; })[0];
@@ -2746,6 +2879,23 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     }
     job.then(loadAdmin).catch(function (err) { b.disabled = false; toast(errText(err)); });
   }
+
+  /* ===================== ŞİKAYET ===================== */
+  var reportPost = null;
+  function openReport(id) {
+    reportPost = id;
+    $("report-form").reset(); $("report-err").hidden = true; $("report-submit").disabled = false;
+    $("report").hidden = false;
+  }
+  $("report-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var r = this.querySelector('input[name="neden"]:checked'), not = $("report-not").value.trim();
+    if (!r) { $("report-err").textContent = "Bir neden seç."; $("report-err").hidden = false; return; }
+    var neden = r.value + (not ? ": " + not : "");
+    $("report-submit").disabled = true;
+    Veri.report(reportPost, neden.slice(0, 300)).then(function () { $("report").hidden = true; toast("Şikayetin yöneticiye iletildi."); })
+      .catch(function (err) { $("report-submit").disabled = false; $("report-err").textContent = errText(err); $("report-err").hidden = false; });
+  });
 
   /* ===================== GÖNDER ===================== */
   var sendPost = null;
@@ -2809,11 +2959,11 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   $("btn-logout").addEventListener("click", function () { closeAll(); Veri.signOut(); });
 
   /* ===================== GENEL ===================== */
-  function closeAll() { ["auth", "drawer", "settings", "send"].forEach(function (id) { $(id).hidden = true; }); $("btn-left").getAttribute("aria-expanded") && $("btn-left").setAttribute("aria-expanded", "false"); }
+  function closeAll() { ["drawer", "settings", "send", "report"].concat(authMode === "birth" ? [] : ["auth"]).forEach(function (id) { $(id).hidden = true; }); $("btn-left").getAttribute("aria-expanded") && $("btn-left").setAttribute("aria-expanded", "false"); }
   document.addEventListener("click", function (e) {
     var am = $("sh-add-menu"); if (am && !am.hidden && !e.target.closest(".add-wrap")) { am.hidden = true; $("sh-add") && $("sh-add").setAttribute("aria-expanded", "false"); }
     var c = e.target.closest("[data-close]"); if (c) { $(c.dataset.close).hidden = true; return; }
-    if (e.target.classList && (e.target.classList.contains("modal-wrap") || e.target.classList.contains("sheet-wrap"))) e.target.hidden = true;
+    if (e.target.classList && (e.target.classList.contains("modal-wrap") || e.target.classList.contains("sheet-wrap")) && !(e.target.id === "auth" && authMode === "birth")) e.target.hidden = true;
   });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
   var toastTimer;
@@ -2835,6 +2985,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     }).then(function () {
       showApp();
       if (welcome) { toast(welcome); welcome = ""; }
+      if (!USER.dogum) openAuth("birth");
     }).catch(function () {
       // Veriler gelmese bile giriş tamamlanır; akış boş gösterilir.
       DATA = DATA || { kullanicilar: {}, gonderiler: [], kaynaklar: {} }; SEED = SEED || []; showApp();

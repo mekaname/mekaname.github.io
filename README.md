@@ -55,6 +55,14 @@ Gerekirse bir hesabı elle yönetici yapmak için `supabase/kurulum.sql` dosyas�
 
 Supabase bağlanmadan yayınlanırsa site çalışır ama önizleme modundadır: her ziyaretçinin hesabı ve gönderileri yalnızca kendi tarayıcısında kalır.
 
+
+### 5. E-posta doğrulama kodu ve yaş sınırı
+- Supabase'de **SQL Editor**'de sırayla `supabase/guvenlik-1.sql` ve `supabase/guvenlik-2.sql` dosyalarını çalıştır (yeni kurulumda `kurulum.sql` hepsini içerir).
+- **Authentication > Sign In / Providers > Email**: **Confirm email** açık olsun.
+- **Authentication > Emails > Templates > Confirm signup**: konu `Mekaname doğrulama kodun`, içerik `supabase/eposta-sablonu.html`. Böylece e-postaya bağlantı yerine 6 haneli kod gider.
+- **Authentication > Emails > SMTP Settings**: Supabase'in hazır e-posta göndericisi yalnızca proje ekibine e-posta yollar. Herkese kod gidebilmesi için kendi SMTP hesabını gir (ör. Gmail uygulama şifresiyle `smtp.gmail.com`, port 465).
+- Kayıtta doğum tarihi istenir; 13 yaşından küçükler kayıt olamaz. Doğum tarihi olmayan hesaplardan (ör. Google ile girenler) ilk girişte istenir, bir kez girilince değiştirilemez ve başkalarına görünmez.
+
 ### Ücretsiz sınırlar
 Supabase ücretsiz planında 500 MB veritabanı ve 1 GB dosya deposu vardır; video başına en fazla 50 MB yüklenebilir. Kullanılmayan ücretsiz projeler bir hafta hareketsiz kalınca duraklatılır, panelden tek tıkla yeniden açılır.
 

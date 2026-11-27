@@ -725,17 +725,25 @@ a { color: var(--accent); }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ================= GİRİŞ EKRANI ================= */
-.login { position: fixed; inset: 0; background: var(--sea); color: #fff; overflow: hidden; }
-#login-map { position: absolute; inset: 0; background: var(--sea); }
+.login { position: fixed; inset: 0; background: #1c1411; color: #fff; overflow: hidden; }
+.login-bg { position: absolute; inset: 0; overflow: hidden; }
+.login-bg img { position: absolute; display: block; max-width: none; user-select: none; -webkit-user-drag: none; }
+.lb-blur { inset: -60px; width: calc(100% + 120px); height: calc(100% + 120px); object-fit: cover; filter: blur(30px) brightness(.5) saturate(1.2); }
+/* Telefon ve dik tablet: görsel üstte yavaşça kayar, yazı önce görünür */
+.lb-main {
+  top: 0; left: 0; height: min(198vw, max(42%, calc(100% - 330px))); width: auto;
+  -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent); mask-image: linear-gradient(180deg, #000 78%, transparent);
+  animation: lb-kay 70s ease-in-out infinite alternate;
+}
+@keyframes lb-kay { 0%, 10% { transform: translateX(-3.5%); } 90%, 100% { transform: translateX(calc(-100% + 100vw)); } }
 .login::after {
   content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 500;
-  background:
-    radial-gradient(ellipse 85% 38% at 50% 50%, rgba(6, 18, 30, .55), rgba(6, 18, 30, 0) 72%),
-    linear-gradient(180deg, rgba(6,18,30,.3), rgba(6,18,30,0) 25%, rgba(6,18,30,0) 65%, rgba(6,18,30,.55));
+  background: linear-gradient(180deg, rgba(20,12,8,0) 50%, rgba(20,12,8,.55) 80%, rgba(20,12,8,.8));
 }
 .login-center {
   position: absolute; inset: 0; z-index: 600;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 26px;
+  padding-bottom: calc(44px + env(safe-area-inset-bottom, 0px));
   padding-left: max(24px, env(safe-area-inset-left, 0px));
   padding-right: max(24px, env(safe-area-inset-right, 0px));
   text-align: center;
@@ -743,6 +751,33 @@ a { color: var(--accent); }
 .wordmark { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(2.7rem, 13vw, 3.8rem); line-height: 1; letter-spacing: -.01em; text-shadow: 0 2px 20px rgba(0,0,0,.5); }
 .tagline { margin: 12px 0 0; font-size: 1.02rem; opacity: .92; text-shadow: 0 1px 10px rgba(0,0,0,.6); }
 .login-actions { display: grid; gap: 12px; width: min(100%, 300px); }
+@media (orientation: portrait) {
+  .login-center .login-mark { width: 76px; height: 76px; border-radius: 22px; margin-bottom: 12px; }
+  .login-center .wordmark { font-size: clamp(2.3rem, 11vw, 3.2rem); }
+}
+/* Yatay ekran (bilgisayar, yatay tablet/telefon): görsel tam ekran, giriş paneli sağda */
+@media (orientation: landscape) {
+  .lb-main { inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 0% 50%; animation: none; -webkit-mask-image: none; mask-image: none; }
+  .login::after { background: linear-gradient(90deg, rgba(20,12,8,0) 55%, rgba(20,12,8,.45)); }
+  .login-center {
+    inset: auto; top: 50%; right: max(4vw, env(safe-area-inset-right, 0px)); transform: translateY(-50%);
+    width: min(360px, 40vw); box-sizing: border-box; justify-content: center; gap: 28px;
+    padding: 34px 28px; border-radius: 26px;
+    background: rgba(28, 18, 13, .55); -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.14);
+  }
+  .login-center .wordmark { font-size: clamp(2.4rem, 4.4vw, 3.4rem); }
+  .login-actions { width: 100%; }
+}
+@media (orientation: landscape) and (max-height: 520px) {
+  .login-center { padding: 18px 20px; gap: 16px; }
+  .login-center .login-mark { width: 56px; height: 56px; border-radius: 16px; margin-bottom: 8px; padding: 6px; }
+  .login-center .tagline { display: none; }
+  .login-center .wordmark { font-size: 2rem; }
+  .login-center { width: min(300px, 40vw); }
+  .login-center .btn { padding: 11px 16px; }
+}
+
 .btn { border: 0; border-radius: 12px; padding: 14px 18px; font-weight: 600; font-size: 1rem; transition: transform .1s ease, background .15s ease; }
 .btn:active { transform: scale(.98); }
 .btn-light { background: #fff; color: #16212b; }
@@ -755,13 +790,6 @@ a { color: var(--accent); }
   bottom: calc(10px + env(safe-area-inset-bottom, 0px));
   font-size: 11px; font-weight: 600; letter-spacing: .06em; color: rgba(255,255,255,.82);
 }
-.map-credit {
-  position: absolute; z-index: 600;
-  left: calc(12px + env(safe-area-inset-left, 0px));
-  bottom: calc(10px + env(safe-area-inset-bottom, 0px));
-  font-size: 10px; color: rgba(255,255,255,.6);
-}
-
 /* ================= GİRİŞ / KAYIT PENCERESİ ================= */
 .modal-wrap {
   position: fixed; inset: 0; z-index: 1000;
@@ -1283,12 +1311,47 @@ img.ev-ic { width: 18px; height: 18px; vertical-align: -4px; margin-right: 4px; 
 @keyframes slide { from { transform: translateX(-100%) } }
 @keyframes burst { 0% { transform: scale(.3); opacity: 0 } 25% { transform: scale(1.1); opacity: 1 } 45% { transform: scale(.95) } 80% { opacity: 1 } 100% { transform: scale(1); opacity: 0 } }
 @keyframes pop-icon { 50% { transform: scale(1.25) } }
+/* ================= TABLET VE BİLGİSAYAR ================= */
+@media (min-width: 600px) {
+  :root { --app-w: 760px; }
+  .feed, .page, .detail { max-width: 640px; margin-inline: auto; box-sizing: border-box; }
+  .feed { max-width: 560px; }
+  .feed { padding: 18px 0 40px; gap: 18px; }
+  .grid { grid-template-columns: repeat(4, 1fr); gap: 4px; }
+  .sheet-wrap { align-items: center; padding: 20px; }
+  .sheet { width: min(100%, 480px); border-radius: 20px; padding-bottom: 22px; animation: pop .2s cubic-bezier(.2,.8,.2,1); }
+  .share .mapbox { height: 300px; }
+  .detail { border-inline: 1px solid var(--line); }
+}
+@media (min-width: 1000px) {
+  :root { --side-w: 272px; }
+  body.in-app { background: var(--bg); }
+  body.in-app .drawer-wrap, body.in-app .drawer-wrap[hidden] { display: block !important; position: fixed; inset: 0 auto 0 0; width: var(--side-w); background: none; animation: none; z-index: 40; }
+  body.in-app .drawer { width: var(--side-w); box-shadow: none; animation: none; border-right: 1px solid var(--line); padding-top: 18px; }
+  body.in-app .drawer [data-close="drawer"] { display: none; }
+  body.in-app .app { width: auto; margin: 0 0 0 var(--side-w); box-shadow: none; }
+  body.in-app::before { left: var(--side-w); }
+  #btn-left[data-act="menu"] { visibility: hidden; pointer-events: none; }
+  .topbar { padding-inline: 20px; }
+  .comment-bar { left: calc(var(--side-w) + (100% - var(--side-w)) / 2); width: min(100% - var(--side-w), 640px); border-inline: 1px solid var(--line); }
+  .toast { left: calc(var(--side-w) + (100% - var(--side-w)) / 2); }
+  .sheet-wrap, .modal-wrap { padding-left: calc(var(--side-w) + 20px); }
+  .grid { grid-template-columns: repeat(4, 1fr); }
+  .maps-page .page-pad, .game-page .page-pad { padding-inline: 24px; }
+  .gm-card { max-height: 30%; }
+  .detail .slide { aspect-ratio: 4 / 3; }
+}
+@media (min-width: 1400px) {
+  .page, .detail { max-width: 720px; }
+  .comment-bar { width: min(100% - var(--side-w), 700px); }
+}
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 
 <!-- ================= GİRİŞ EKRANI ================= -->
 <section class="login" id="login" aria-label="Giriş ekranı">
-  <div id="login-map" aria-hidden="true"></div>
+  <div class="login-bg" aria-hidden="true"><img class="lb-blur" src="assets/giris-arka.jpg" alt=""><img class="lb-main" src="assets/giris-arka.jpg" alt=""></div>
+  <p class="sr">Her rota bir iz, her iz bir hikâye… Türkiye'nin kültürel haritasını birlikte çiziyoruz!</p>
   <div class="login-center">
     <div>
       <img class="login-mark" src="assets/logo-isaret.png" alt="" width="112" height="112">
@@ -1300,7 +1363,6 @@ img.ev-ic { width: 18px; height: 18px; vertical-align: -4px; margin-right: 4px; 
       <button class="btn btn-outline" id="btn-signin" type="button">Giriş Yap</button>
     </div>
   </div>
-  <div class="map-credit">Harita: NASA Blue Marble</div>
   <div class="version">1.1.2</div>
 </section>
 
@@ -2025,34 +2087,10 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   function worldImage(map, shift) {
     return L.imageOverlay(asset("assets/fiziki-harita.jpg"), [[WORLD[0][0], WORLD[0][1] + shift], [WORLD[1][0], WORLD[1][1] + shift]], { interactive: false }).addTo(map);
   }
-  var loginMap = null, raf = 0;
-  function initLoginMap() {
-    if (!window.L || loginMap) return;
-    loginMap = L.map("login-map", { zoomControl: false, attributionControl: false, dragging: false, scrollWheelZoom: false, doubleClickZoom: false, boxZoom: false, keyboard: false, touchZoom: false, zoomSnap: 0.1 });
-    [-360, 0, 360].forEach(function (s) { worldImage(loginMap, s); });
-    var w = window.innerWidth, h = window.innerHeight;
-    var z = Math.max(Math.log2(h / 256) + 0.35, Math.log2(w / 256 / 1.4));
-    loginMap.setView([24, 28], z, { animate: false });
-    drift();
-  }
-  function drift() {
-    cancelAnimationFrame(raf);
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    var last = 0;
-    (function step(t) {
-      raf = requestAnimationFrame(step);
-      if ($("login").hidden || t - last < 33) return; last = t;
-      loginMap.panBy([0.35, 0], { animate: false });
-      var c = loginMap.getCenter();
-      if (c.lng > 200) loginMap.setView([c.lat, c.lng - 360], loginMap.getZoom(), { animate: false });
-    })(0);
-  }
-
   /* ===================== EKRANLAR ===================== */
   function showLogin() {
     document.body.classList.remove("in-app");
     $("app").hidden = true; $("login").hidden = false;
-    initLoginMap(); if (loginMap) setTimeout(function () { loginMap.invalidateSize(); }, 0);
   }
   function showApp() {
     document.body.classList.add("in-app");
@@ -2193,6 +2231,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   /* ===================== YÖNLENDİRME ===================== */
   function router() {
     if (!USER || !DATA) return;
+    setTimeout(yanMenu, 0);
     var h = location.hash.replace("#", "");
     stopMaps();
     if (h.indexOf("gonderi-") === 0 && postById(h.slice(8))) return renderDetail(postById(h.slice(8)));
@@ -3593,6 +3632,8 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       toast("Gönderiler yüklenemedi. İnternet bağlantını kontrol edip sayfayı yenile.");
     });
   });
-  window.addEventListener("resize", function () { if (loginMap) loginMap.invalidateSize(); });
+  var genisMi = matchMedia("(min-width: 1000px)");
+  function yanMenu() { if (USER && DATA && genisMi.matches && !$("app").hidden) renderMenu(); }
+  window.addEventListener("resize", yanMenu);
 })();
 </script>

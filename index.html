@@ -1172,6 +1172,9 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
 .egg-sub { margin: 4px 0 12px; color: var(--muted); font-weight: 600; }
 .egg-player { position: relative; aspect-ratio: 16 / 9; max-width: 100%; border-radius: 12px; overflow: hidden; background: #000; }
 .egg-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.own-acts { display: flex; gap: 16px; margin-top: 4px; }
+.edit-btn { border: 0; background: none; padding: 0; color: var(--accent); font-weight: 600; font-size: .85rem; }
+.own-acts .del-post { margin-top: 0; }
 .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
 .add-wrap { position: relative; aspect-ratio: 1; }
 .add-wrap .add-tile { width: 100%; height: 100%; font: inherit; }
@@ -1484,6 +1487,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   ERR["tg/yas"] = "Kültürİz'i kullanmak için en az 13 yaşında olmalısın.";
   ERR["tg/kod"] = "Kod hatalı ya da süresi dolmuş. Kodu kontrol et ya da yeni kod iste.";
   ERR["tg/sikayet-var"] = "Bu gönderiyi zaten şikayet ettin.";
+  ERR["tg/duzenle"] = "Gönderi güncellenemedi. Yönetici veritabanı güncellemesini (güncelleme-5) çalıştırmalı.";
   function uuid() {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) { var r = Math.random() * 16 | 0; return (c === "x" ? r : (r & 3 | 8)).toString(16); });
@@ -1632,6 +1636,29 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
           if (yollar.length) sb.storage.from("medya").remove(yollar);
         });
       },
+      updatePost: function (p, d, progress) {
+        var yuklenen = [], seq = Promise.resolve();
+        d.yeni.forEach(function (m, i) {
+          seq = seq.then(function () {
+            progress && progress("Yükleniyor " + (i + 1) + "/" + d.yeni.length + "…");
+            var yol = current.uid + "/" + p.id + "/d" + Date.now().toString(36) + i + "." + ext(m.blob, m.tur);
+            return upload(yol, m.blob).then(function (url) { yuklenen.push({ tur: m.tur, yol: yol, url: url }); });
+          });
+        });
+        return seq.then(function () {
+          progress && progress("Kaydediliyor…");
+          var medya = d.kalan.map(function (m) { return { tur: m.tur, yol: m.yol, url: m.url }; }).concat(yuklenen);
+          return sb.from("gonderiler").update({ yer: d.yer, konum: d.konum, kategori: d.kategori, enlem: d.koordinat[0], boylam: d.koordinat[1], notu: d.not, medya: medya })
+            .eq("id", p.id).select("id");
+        }).then(chk).then(function (rows) {
+          if (!rows || !rows.length) throw fail("tg/duzenle");
+          var silinen = p.medya.filter(function (m) { return m.yol && !d.kalan.some(function (k) { return k.yol === m.yol; }); }).map(function (m) { return m.yol; });
+          if (silinen.length) sb.storage.from("medya").remove(silinen);
+        }).catch(function (e) {
+          if (yuklenen.length) sb.storage.from("medya").remove(yuklenen.map(function (m) { return m.yol; }));
+          throw e;
+        });
+      },
       counts: function () {
         return ready.then(function () { return sb.from("gonderi_sayilari").select("*"); }).then(chk).then(function (rows) {
           var o = {}; rows.forEach(function (r) { o[r.gonderi_id] = { begeni: r.begeni || 0, yorum: r.yorum || 0 }; }); return o;
@@ -1740,7 +1767,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
           urls.forEach(function (u) { URL.revokeObjectURL(u); }); urls = [];
           return recs.map(function (r) {
             return { id: "k-" + r.id, kayitId: r.id, uid: r.uid, yazarAd: r.yazarAd, yazarFoto: r.yazarFoto, t: r.t, yer: r.yer, konum: r.konum, kategori: r.kategori, koordinat: r.koordinat, not: r.not,
-              medya: r.medya.map(function (m) { var u = URL.createObjectURL(m.blob); urls.push(u); return { tur: m.tur, url: u }; }) };
+              medya: r.medya.map(function (m, i) { var u = URL.createObjectURL(m.blob); urls.push(u); return { tur: m.tur, url: u, idx: i }; }) };
           });
         });
       },
@@ -1751,6 +1778,15 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
         return IDB.put(rec).then(function () { return "k-" + rec.id; });
       },
       deletePost: function (p) { return IDB.del(p.kayitId); },
+      updatePost: function (p, d) {
+        return IDB.all().then(function (recs) {
+          var rec = recs.filter(function (r) { return r.id === p.kayitId; })[0];
+          if (!rec) throw fail("tg/yetki");
+          rec.yer = d.yer; rec.konum = d.konum; rec.kategori = d.kategori; rec.koordinat = d.koordinat; rec.not = d.not;
+          rec.medya = d.kalan.map(function (m) { return rec.medya[m.idx]; }).filter(Boolean).concat(d.yeni);
+          return IDB.put(rec);
+        });
+      },
       counts: function () { return Promise.resolve({}); },
       myMarks: function () { return Promise.resolve(null); },
       setMark: function () { return Promise.resolve(); },
@@ -2027,6 +2063,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     if (h.indexOf("gonderi-") === 0 && postById(h.slice(8))) return renderDetail(postById(h.slice(8)));
     if (h === "kaydedilenler") return renderFeed("saved");
     if (h === "paylas") return renderShare();
+    if (h.indexOf("duzenle-") === 0) { var dp = postById(h.slice(8)); if (dp && !dp.ornek && (dp.kendi || USER.rol === "admin")) return renderShare(dp); }
     if (h === "kesfet") return renderExplore();
     if (h === "gecmis") return renderHistory();
     if (h === "haritalar") return renderMaps();
@@ -2154,6 +2191,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       case "del-comment": deleteComment(id, b.dataset.cid); break;
       case "del-post": deleteOwnPost(id, b); break;
       case "report": openReport(id); break;
+      case "edit": go("duzenle-" + id); break;
     }
   });
   var pendingFocus = false;
@@ -2179,7 +2217,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     var html = '<article class="detail" data-id="' + p.id + '">' + headHTML(p) + mediaHTML(p, true) + actionsHTML(p) +
       '<div class="post-meta"><span class="likes" data-likes>' + fmt(likeCount(p)) + ' beğenme</span>' +
       (p.not ? '<p class="caption"><b>' + esc(a.ad) + '</b>' + esc(p.not) + '</p>' : '') +
-      ((p.kendi || (USER.rol === "admin" && !p.ornek)) ? '<button class="del-post" type="button" data-a="del-post">Gönderiyi sil</button>' : '') +
+      ((p.kendi || (USER.rol === "admin" && !p.ornek)) ? '<div class="own-acts"><button class="edit-btn" type="button" data-a="edit">Düzenle</button><button class="del-post" type="button" data-a="del-post">Gönderiyi sil</button></div>' : '') +
       (!p.kendi ? '<button class="report-btn" type="button" data-a="report">Şikayet et</button>' : '') + '</div>' +
       (credits ? '<details class="credits"><summary>Fotoğraf ve video kaynakları (Wikimedia Commons)</summary><ul>' + credits + '</ul></details>' : '') +
 
@@ -2476,7 +2514,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
         return {
           id: r.id, yazar: key, uid: r.uid, t: r.t, zaman: ago(r.t), begeni: 0, yer: r.yer, konum: r.konum || "", bolge: r.konum || "",
           koordinat: r.koordinat, not: r.not || "", kategori: r.kategori || "Diğer", kendi: me, kayitId: r.kayitId, yakin: !src,
-          medya: r.medya.map(function (m) { return { tur: m.tur, url: m.url, yol: m.yol, alt: r.yer + (m.tur === "video" ? " videosu" : " fotoğrafı") }; }),
+          medya: r.medya.map(function (m) { return { tur: m.tur, url: m.url, yol: m.yol, idx: m.idx, alt: r.yer + (m.tur === "video" ? " videosu" : " fotoğrafı") }; }),
           bilgiler: src ? src.bilgiler : [], hakkinda: src ? src.hakkinda : "", tarihce: src ? src.tarihce : [], yorumlar: [],
           benzer: src ? src.benzer : nearest(r.koordinat, 6, r.yer)
         };
@@ -2537,8 +2575,10 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   /* ===================== + PAYLAŞ ===================== */
   var picks = [], shPoint = null, shMarker = null, shMap = null;
   var KATEGORILER = ["Antik kent", "Saray", "Cami ve dini yapı", "Medrese", "Türbe", "Kümbet", "Kervansaray", "Han", "Hamam", "Kale ve kule", "Müze", "Kaya yerleşimi", "Tarihi kent", "Tarihi yapı", "Tarihi çarşı", "Köprü", "Anıt", "Doğal oluşum", "Diğer"];
-  function renderShare() {
-    route = "share"; setTop("back", "Yeni gönderi");
+  var editPost = null, mevcut = [];
+  function renderShare(ep) {
+    editPost = ep || null; mevcut = ep ? ep.medya.slice() : [];
+    route = ep ? "edit" : "share"; setTop("back", ep ? "Gönderiyi düzenle" : "Yeni gönderi");
     picks.forEach(function (p) { URL.revokeObjectURL(p.url); }); picks = []; shPoint = null; shMarker = null;
     $("view").innerHTML = '<form class="share page" id="sh-form" novalidate>' +
       (USER.yasakli ? '<p class="empty">Hesabın yönetici tarafından kısıtlandığı için şu an gönderi paylaşamazsın.</p>' : '') +
@@ -2555,10 +2595,17 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       '<div class="map-actions"><button type="button" class="pill-link" id="sh-geo">' + ICON.pin + 'Konumumu kullan</button><span class="coords" id="sh-coords">Konum seçilmedi</span></div></div>' +
       '</div></section>' +
       '<section class="sec"><div class="form"><div class="field"><label for="sh-not">Açıklama</label><textarea id="sh-not" maxlength="5000"></textarea><span class="counter" id="sh-count">0/700 kelime</span></div></div></section>' +
-      '<div class="share-foot page-pad"><p class="form-error" id="sh-err" role="alert" hidden></p><button class="btn btn-primary" id="sh-submit" type="submit"' + (USER.yasakli ? ' disabled' : '') + '>Paylaş</button></div></form>';
+      '<div class="share-foot page-pad"><p class="form-error" id="sh-err" role="alert" hidden></p><button class="btn btn-primary" id="sh-submit" type="submit"' + (USER.yasakli && !(ep && USER.rol === "admin") ? ' disabled' : '') + '>' + (ep ? "Kaydet" : "Paylaş") + '</button></div></form>';
+    if (ep) {
+      $("sh-yer").value = ep.yer; $("sh-konum").value = ep.konum || ""; $("sh-not").value = ep.not || "";
+      if (KATEGORILER.indexOf(ep.kategori) < 0 && ep.kategori) $("sh-kat").insertAdjacentHTML("beforeend", "<option>" + esc(ep.kategori) + "</option>");
+      $("sh-kat").value = ep.kategori || "Diğer";
+      $("sh-count").textContent = kelimeSay(ep.not) + "/700 kelime";
+    }
     drawPicks();
     var form = $("sh-form");
     form.addEventListener("click", function (e) {
+      var rmm = e.target.closest("[data-rm-m]"); if (rmm) { mevcut.splice(+rmm.dataset.rmM, 1); drawPicks(); return; }
       var rm = e.target.closest("[data-rm]"); if (!rm) return;
       var i = +rm.dataset.rm; URL.revokeObjectURL(picks[i].url); picks.splice(i, 1); drawPicks();
     });
@@ -2596,6 +2643,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     setTimeout(function () {
       shMap = newMap("sh-map"); onlineBase(shMap); shMap.setView([39, 34], 5);
       shMap.on("click", function (e) { setPoint([e.latlng.lat, e.latlng.lng], false); });
+      if (editPost) setPoint(editPost.koordinat, true);
     }, 30);
   }
   function cityLabel(s) { return s.ad + ", " + s.ust; }
@@ -2606,7 +2654,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     if (KATEGORILER.indexOf(x.kategori) >= 0) $("sh-kat").value = x.kategori;
     setPoint(x.koordinat, true); shErr("");
   }
-  function flyMap(c, z) { if (shMap) shMap.setView(c, Math.min(shMap.getMaxZoom() - 1, z)); }
+  function flyMap(c, z) { if (shMap && maps.indexOf(shMap) >= 0) shMap.setView(c, Math.min(shMap.getMaxZoom() - 1, z), { animate: false }); }
   function onlineAra(q, loud) {
     if (!q) return;
     var prev = $("sh-coords").textContent; $("sh-coords").textContent = "“" + q + "” aranıyor…";
@@ -2634,10 +2682,15 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   function shErr(t) { var e = $("sh-err"); if (!e) return; e.textContent = t; e.hidden = !t; }
   function drawPicks() {
     var box = $("sh-picks"); if (!box) return;
-    box.innerHTML = picks.map(function (p, i) {
+    var yeniEklenebilir = !editPost || editPost.kendi, toplam = mevcut.length + picks.length;
+    box.innerHTML = mevcut.map(function (m, i) {
+      var src = mediaSrc(m);
+      return '<div class="pick">' + (m.tur === "video" ? '<video src="' + src + '#t=0.5" muted playsinline preload="metadata"></video><span class="vid-tag">' + ICON.play + 'Video</span>' : '<img src="' + src + '" alt="Mevcut fotoğraf ' + (i + 1) + '">') +
+        '<button type="button" class="x" data-rm-m="' + i + '" aria-label="Kaldır">×</button></div>';
+    }).join("") + picks.map(function (p, i) {
       return '<div class="pick">' + (p.tur === "video" ? '<video src="' + p.url + '#t=0.5" muted playsinline preload="metadata"></video><span class="vid-tag">' + ICON.play + 'Video</span>' : '<img src="' + p.url + '" alt="Seçilen fotoğraf ' + (i + 1) + '">') +
         '<button type="button" class="x" data-rm="' + i + '" aria-label="Kaldır">×</button></div>';
-    }).join("") + (picks.length < 7 ? '<div class="add-wrap"><button type="button" class="add-tile" id="sh-add" aria-haspopup="true" aria-expanded="false"><span>+ Ekle</span></button>' +
+    }).join("") + (toplam < 7 && yeniEklenebilir ? '<div class="add-wrap"><button type="button" class="add-tile" id="sh-add" aria-haspopup="true" aria-expanded="false"><span>+ Ekle</span></button>' +
       '<div class="add-menu" id="sh-add-menu" hidden>' +
       '<span class="add-opt">' + ICON.photos + 'Fotoğraflar<input class="file-over" type="file" accept="image/*,video/*" multiple aria-label="Fotoğraflardan seç"></span>' +
       '<span class="add-opt">' + ICON.folder + 'Dosyalar<input class="file-over" type="file" accept=".jpg,.jpeg,.png,.webp,.gif,.heic,.heif,.mp4,.mov,.m4v,.webm" multiple aria-label="Dosyalardan seç"></span>' +
@@ -2651,7 +2704,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   function addFiles(list) {
     var err = "";
     Array.prototype.forEach.call(list, function (f) {
-      if (picks.length >= 7) { err = "En fazla 7 dosya ekleyebilirsin."; return; }
+      if (mevcut.length + picks.length >= 7) { err = "En fazla 7 dosya ekleyebilirsin."; return; }
       var tur = /^video\//.test(f.type) ? "video" : (/^image\//.test(f.type) || /\.(heic|heif|jpe?g|png|webp)$/i.test(f.name)) ? "foto" : /\.(mp4|mov|m4v|webm)$/i.test(f.name) ? "video" : null;
       if (!tur) { err = f.name + " bir fotoğraf ya da video değil."; return; }
       if (tur === "video" && f.size > 50e6) { err = f.name + " 50 MB'tan büyük. Daha kısa bir video seç."; return; }
@@ -2661,14 +2714,26 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   }
   function submitShare(e) {
     e.preventDefault();
-    if (USER.yasakli) return shErr("Hesabın kısıtlandığı için gönderi paylaşamazsın.");
+    if (USER.yasakli && !(editPost && USER.rol === "admin")) return shErr("Hesabın kısıtlandığı için gönderi paylaşamazsın.");
     var yer = sansurle($("sh-yer").value.trim()), btn = $("sh-submit");
     if (kelimeSay($("sh-not").value) > 700) { $("sh-not").focus(); return shErr("Açıklama en fazla 700 kelime olabilir."); }
-    if (!picks.length) return shErr("En az bir fotoğraf ya da video ekle.");
+    if (!picks.length && !mevcut.length) return shErr("En az bir fotoğraf ya da video olmalı.");
     if (yer.length < 2) { $("sh-yer").focus(); return shErr("Mekânın adını yaz."); }
     if (!shPoint) { $("sh-map").scrollIntoView({ block: "center", behavior: "smooth" }); return shErr("Haritada konum seç."); }
-    shErr(""); btn.disabled = true; btn.textContent = "Paylaşılıyor…";
+    shErr(""); btn.disabled = true; btn.textContent = editPost ? "Kaydediliyor…" : "Paylaşılıyor…";
     var tur = picks.map(function (p) { return p.tur; });
+    if (editPost) {
+      var ep = editPost;
+      Promise.all(picks.map(function (p) { return p.tur === "foto" ? shrinkImage(p.file, 1440, false) : Promise.resolve(p.file); }))
+        .then(function (blobs) {
+          return Veri.updatePost(ep, { yer: yer, konum: sansurle($("sh-konum").value.trim()), kategori: $("sh-kat").value, koordinat: shPoint, not: sansurle($("sh-not").value.trim()),
+            kalan: mevcut, yeni: blobs.map(function (b, i) { return { tur: tur[i], blob: b }; }) }, function (msg) { btn.textContent = msg; });
+        })
+        .then(function () { return loadUserPosts(); })
+        .then(function () { picks.forEach(function (p) { URL.revokeObjectURL(p.url); }); picks = []; go("gonderi-" + ep.id); toast("Gönderi güncellendi."); })
+        .catch(function (err) { btn.disabled = false; btn.textContent = "Kaydet"; shErr(errText(err)); });
+      return;
+    }
     Promise.all(picks.map(function (p) { return p.tur === "foto" ? shrinkImage(p.file, 1440, false) : Promise.resolve(p.file); }))
       .then(function (blobs) {
         return Veri.createPost({ yer: yer, konum: sansurle($("sh-konum").value.trim()), kategori: $("sh-kat").value, koordinat: shPoint, not: sansurle($("sh-not").value.trim()),

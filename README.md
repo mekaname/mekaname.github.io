@@ -71,6 +71,9 @@ Supabase bağlanmadan yayınlanırsa site çalışır ama önizleme modundadır:
 ### 7. Okul bilgileri ve 7 dosya sınırı
 `supabase/guncelleme-4.sql` dosyasını SQL Editor'de çalıştır. Kayıtta okul, şube ve okul numarası (en fazla 8 rakam) istenir; bu bilgileri yalnızca kişinin kendisi ve yönetici görür, bir kez girilince yalnızca yönetici değiştirebilir. Bir gönderiye en fazla 7 fotoğraf/video eklenebilir.
 
+### 8. Gönderi düzenleme
+`supabase/guncelleme-5.sql` dosyasını SQL Editor'de çalıştır. Gönderi sahibi kendi gönderisinin mekân adını, şehrini, türünü, açıklamasını, haritadaki yerini ve fotoğraf/videolarını (toplam en fazla 7) düzenleyebilir; yönetici her gönderiyi düzenleyebilir. Gönderinin sahibi ve paylaşım tarihi değişmez.
+
 ### Ücretsiz sınırlar
 Supabase ücretsiz planında 500 MB veritabanı ve 1 GB dosya deposu vardır; video başına en fazla 50 MB yüklenebilir. Kullanılmayan ücretsiz projeler bir hafta hareketsiz kalınca duraklatılır, panelden tek tıkla yeniden açılır.
 

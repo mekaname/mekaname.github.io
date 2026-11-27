@@ -1871,7 +1871,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     Object.keys(show).forEach(function (id) { $(id).hidden = !show[id]; });
     $("auth-title").textContent = up ? "Kayıt Ol" : si ? "Giriş Yap" : np ? "Yeni şifre" : code ? "E-postanı doğrula" : "Eksik bilgiler";
     $("auth-lead").textContent = np ? "Hesabın için yeni bir şifre belirle." :
-      code ? pendingEmail + " adresine 6 haneli bir kod gönderdik. Gelmediyse gereksiz (spam) klasörüne bak." :
+      code ? pendingEmail + " adresine bir doğrulama e-postası gönderdik. E-postadaki bağlantıya tıkla ya da e-postada kod varsa buraya yaz. Gelmediyse gereksiz (spam) klasörüne bak." :
       birth ? "Devam etmek için aşağıdaki bilgileri tamamla. Bu bilgileri yalnızca sen ve yönetici görebilir." : "";
     $("auth-lead").hidden = !$("auth-lead").textContent;
     $("auth-submit").textContent = up ? "Kayıt Ol" : si ? "Giriş Yap" : np ? "Şifreyi güncelle" : code ? "Doğrula" : "Kaydet";
@@ -1935,7 +1935,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       job = Veri.setPassword(npw).then(function () { $("auth").hidden = true; toast("Şifren güncellendi."); });
     } else if (authMode === "code") {
       var kod = $("f-code").value.trim();
-      if (kod.length < 6) return bad("f-code", "E-postana gelen 6 haneli kodu yaz.");
+      if (kod.length < 6) return bad("f-code", "E-postadaki kodu yaz ya da e-postadaki bağlantıya tıkla.");
       welcome = "E-postan doğrulandı.";
       job = Veri.verifyCode(pendingEmail, kod).then(function () { $("auth").hidden = true; });
     } else if (authMode === "birth") {

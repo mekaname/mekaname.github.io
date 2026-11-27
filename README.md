@@ -77,6 +77,9 @@ Supabase bağlanmadan yayınlanırsa site çalışır ama önizleme modundadır:
 ### 9. Mesajlaşma
 `supabase/guncelleme-6.sql` dosyasını SQL Editor'de çalıştır. "Gönder" düğmesiyle bir gönderi, adı yazılarak bulunan herhangi bir üyeye (isteğe bağlı notla) gönderilir. Üst çubuktaki zarf simgesi mesaj kutusunu açar; okunmamış mesaj sayısı rozetle görünür. Mesajları yalnızca gönderen ve alan görür; metinler sansürlenir, kişi başı günde en fazla 300 mesaj gönderilebilir.
 
+### 10. Haritada Bul oyunu
+`supabase/guncelleme-7.sql` dosyasını SQL Editor'de çalıştır. Keşfet sayfasındaki "Haritada Bul" kartından açılır: 5 tarihî mekânın yerini haritada işaretlersin, yakınlığa göre tur başına en fazla 1000 puan alırsın (Türkiye ve Dünya modları). Her oyuncunun en iyi puanı sıralama tablosunda görünür. Puanlar 0–5000 aralığında olmalıdır, kimse başkası adına puan kaydedemez, günde en fazla 60 oyun kaydedilir; puanları yalnızca yönetici silebilir.
+
 ### Ücretsiz sınırlar
 Supabase ücretsiz planında 500 MB veritabanı ve 1 GB dosya deposu vardır; video başına en fazla 50 MB yüklenebilir. Kullanılmayan ücretsiz projeler bir hafta hareketsiz kalınca duraklatılır, panelden tek tıkla yeniden açılır.
 

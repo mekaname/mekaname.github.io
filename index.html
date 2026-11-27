@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co https://*.googleusercontent.com https://tile.openstreetmap.org; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' data: blob: https://*.supabase.co wss://*.supabase.co https://nominatim.openstreetmap.org; frame-src https://maps.google.com https://www.google.com https://www.youtube-nocookie.com https://www.youtube.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co https://*.googleusercontent.com https://tile.openstreetmap.org https://server.arcgisonline.com; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' data: blob: https://*.supabase.co wss://*.supabase.co https://nominatim.openstreetmap.org; frame-src https://maps.google.com https://www.google.com https://www.youtube-nocookie.com https://www.youtube.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>KültürİZ</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -1064,6 +1064,55 @@ img.ev-ic { width: 18px; height: 18px; vertical-align: -4px; margin-right: 4px; 
 /* Haritalar */
 .maps-page { display: flex; flex-direction: column; height: calc(100vh - 57px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); height: calc(100dvh - 57px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); }
 .maps-page .chips { padding-block: 10px; }
+/* Oyun: Haritada Bul */
+.gm-banner { display: flex; align-items: center; gap: 12px; width: 100%; margin: 12px 0 2px; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--fg); text-align: left; }
+.gm-banner:hover { border-color: var(--accent); }
+.gm-banner-ic { flex: none; width: 44px; height: 44px; border-radius: 11px; background: url(assets/fiziki-harita.jpg) 52% 38% / 520px auto; position: relative; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); }
+.gm-banner-ic::after { content: ""; position: absolute; left: 15px; top: 9px; width: 14px; height: 14px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--like); border: 2px solid #fff; }
+.gm-banner > span:nth-child(2) { flex: 1; display: grid; gap: 2px; }
+.gm-banner small { color: var(--muted); font-size: .82rem; }
+.gm-ok { font-size: 1.6rem; color: var(--muted); line-height: 1; }
+.mp-oyun { margin-left: auto; font-size: .85rem; }
+.game-start { padding-top: 18px; padding-bottom: 32px; }
+.gm-hero h2 { margin: 0 0 6px; font-family: var(--font-display); font-weight: 400; font-size: 1.7rem; }
+.gm-hero p { margin: 0 0 14px; color: var(--muted); line-height: 1.5; }
+.gm-rekor { margin: 12px 0; color: var(--muted); font-size: .92rem; }
+.gm-rekor b { color: var(--fg); font-variant-numeric: tabular-nums; }
+.gm-son { text-align: center; padding: 10px 0 6px; }
+.gm-son small { color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; font-size: .75rem; }
+.gm-son h2 { font-size: 3rem; font-variant-numeric: tabular-nums; margin: 4px 0 0; }
+.gm-son h2 span { font-size: 1.1rem; color: var(--muted); }
+.gm-son .unvan { margin: 2px 0 0; color: var(--accent); font-weight: 700; font-size: 1.1rem; }
+.gm-yeni { margin: 6px auto 0 !important; display: inline-block; padding: 3px 10px; border-radius: 99px; background: color-mix(in srgb, var(--like) 15%, transparent); color: var(--like) !important; font-weight: 700; font-size: .85rem; }
+.gm-turlar { list-style: none; margin: 16px 0; padding: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.gm-turlar li { display: flex; align-items: baseline; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.gm-turlar li:last-child { border-bottom: 0; }
+.gm-turlar span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gm-turlar small { color: var(--muted); font-variant-numeric: tabular-nums; }
+.gm-turlar b { width: 3.2em; text-align: right; font-variant-numeric: tabular-nums; }
+.lider { list-style: none; margin: 0; padding: 0; }
+.lider li { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.lider li.ben strong { color: var(--accent); }
+.lider .sira { width: 1.6em; text-align: center; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.lider li:nth-child(1) .sira { color: #c9971a; } .lider li:nth-child(2) .sira { color: #8b98a5; } .lider li:nth-child(3) .sira { color: #b0703c; }
+.lider strong { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lider b { font-variant-numeric: tabular-nums; }
+.lider .none, .lider li.none { color: var(--muted); justify-content: center; border: 0; }
+.game-page { display: flex; flex-direction: column; height: calc(100vh - 57px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); height: calc(100dvh - 57px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); }
+.gm-card { display: flex; gap: 12px; align-items: flex-start; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--line); background: var(--surface); max-height: 34%; overflow-y: auto; }
+.gm-foto { flex: none; width: 76px; height: 76px; object-fit: cover; border-radius: 10px; }
+.gm-info { display: grid; gap: 2px; min-width: 0; }
+.gm-info small { color: var(--muted); font-size: .78rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.gm-info strong { font-size: 1.12rem; }
+.gm-info span { color: var(--muted); font-size: .88rem; }
+.gm-info p { margin: 4px 0 0; font-size: .88rem; line-height: 1.45; }
+.gm-map { min-height: 200px; cursor: crosshair; }
+.gm-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 10px; padding-bottom: max(10px, env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); background: var(--surface); }
+.gm-bar span { font-size: .92rem; }
+.gm-p { color: var(--accent); }
+.gm-bar .chip-btn { padding: 11px 20px; font-size: .95rem; }
+.gm-bar .chip-btn:disabled { opacity: .45; }
+.pin-guess { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,.45); }
 .bigmap { flex: 1; min-height: 280px; position: relative; background: var(--sea); }
 .pin-photo { width: 44px; height: 44px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 3px 10px rgba(0,0,0,.45); overflow: hidden; background: #ccc; }
 .pin-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -1520,6 +1569,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   ERR["tg/yas"] = "Kültürİz'i kullanmak için en az 13 yaşında olmalısın.";
   ERR["tg/kod"] = "Kod hatalı ya da süresi dolmuş. Kodu kontrol et ya da yeni kod iste.";
   ERR["tg/sikayet-var"] = "Bu gönderiyi zaten şikayet ettin.";
+  ERR["tg/oyun-yok"] = "Sıralama tablosu henüz açılmadı. Yönetici veritabanı güncellemesini (güncelleme-7) çalıştırmalı.";
   ERR["tg/mesaj-yok"] = "Mesajlaşma henüz açılmadı. Yönetici veritabanı güncellemesini (güncelleme-6) çalıştırmalı.";
   ERR["tg/duzenle"] = "Gönderi güncellenemedi. Yönetici veritabanı güncellemesini (güncelleme-5) çalıştırmalı.";
   function uuid() {
@@ -1550,6 +1600,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       else if (/database error saving new user|13 yaş/i.test(m)) c = "tg/yas";
       else if (/token has expired|token is invalid|otp|invalid token/i.test(m)) c = "tg/kod";
       else if (/mesajlar/i.test(m) && /schema cache|does not exist|could not find/i.test(m)) c = "tg/mesaj-yok";
+      else if (/oyun_/i.test(m) && /schema cache|does not exist|could not find/i.test(m)) c = "tg/oyun-yok";
       else if (/failed to fetch|network/i.test(m)) c = "auth/network-request-failed";
       else if (/row-level security|permission denied|violates row/i.test(m)) c = current && current.yasakli ? "tg/yasak" : "tg/yetki";
       if (c) return fail(c);
@@ -1688,6 +1739,15 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
           });
       },
       markRead: function (uid) { return sb.from("mesajlar").update({ okundu: true }).eq("alici_id", current.uid).eq("gonderen_id", uid).eq("okundu", false).then(chk); },
+      saveScore: function (mod, puan) {
+        if (current.yasakli) return Promise.resolve();
+        return sb.from("oyun_skorlari").insert({ kullanici_id: current.uid, mod: mod, puan: puan }).then(chk);
+      },
+      leaders: function (mod) {
+        return sb.rpc("oyun_liderler", { m: mod }).then(chk).then(function (rows) {
+          return (rows || []).map(function (r) { return { uid: r.kullanici_id, ad: r.ad, foto: r.foto_url || "", puan: r.puan }; });
+        });
+      },
       unreadCount: function () {
         return sb.from("mesajlar").select("id", { count: "exact", head: true }).eq("alici_id", current.uid).eq("okundu", false).then(function (r) { if (r.error) throw sbErr(r.error); return r.count || 0; });
       },
@@ -1847,6 +1907,11 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       },
       messages: function () { var me = USER.uid; return Promise.resolve(store.get("tg_mesajlar", []).filter(function (m) { return m.from === me || m.to === me; })); },
       markRead: function (uid) { var me = USER.uid, list = store.get("tg_mesajlar", []); list.forEach(function (m) { if (m.to === me && m.from === uid) m.okundu = true; }); store.set("tg_mesajlar", list); return Promise.resolve(); },
+      saveScore: function (mod, puan) { var l = store.get("tg_oyun", []); l.push({ uid: USER.uid, ad: USER.name, foto: USER.photo || "", mod: mod, puan: puan }); store.set("tg_oyun", l.slice(-500)); return Promise.resolve(); },
+      leaders: function (mod) {
+        var best = {}; store.get("tg_oyun", []).forEach(function (r) { if (r.mod === mod && (!best[r.uid] || r.puan > best[r.uid].puan)) best[r.uid] = r; });
+        return Promise.resolve(Object.keys(best).map(function (k) { return best[k]; }).sort(function (a, b) { return b.puan - a.puan; }).slice(0, 20));
+      },
       unreadCount: function () { var me = USER.uid; return Promise.resolve(store.get("tg_mesajlar", []).filter(function (m) { return m.to === me && !m.okundu; }).length); },
       updatePost: function (p, d) {
         return IDB.all().then(function (recs) {
@@ -2140,6 +2205,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     if (h === "kesfet") return renderExplore();
     if (h === "gecmis") return renderHistory();
     if (h === "haritalar") return renderMaps();
+    if (h === "oyun") return renderGame();
     if (h === "profil") return renderProfile();
     if (h === "yonetim") return renderAdmin();
     renderFeed("home");
@@ -2829,8 +2895,10 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     if (cats.indexOf(exCat) < 0) exCat = "Tümü";
     $("view").innerHTML = '<div class="page page-pad">' +
       '<label class="search" for="ex-q">' + ICON.search + '<span class="sr">Ara</span><input id="ex-q" type="search" autocomplete="off" placeholder="Ara" value="' + esc(exQ) + '"></label>' +
+      '<button class="gm-banner" type="button" id="ex-oyun"><span class="gm-banner-ic" aria-hidden="true"></span><span><strong>Haritada Bul</strong><small>Mekânların yerini tahmin et, sıralamada yüksel</small></span><span class="gm-ok" aria-hidden="true">›</span></button>' +
       chipsHTML("ex-chips", cats.map(function (c) { return [c, c]; }), exCat) + '<div id="ex-res"></div></div>';
     $("ex-q").addEventListener("input", function () { exQ = this.value; exLimit = 30; drawExplore(); });
+    $("ex-oyun").addEventListener("click", function () { go("oyun"); });
     $("ex-res").addEventListener("click", function (e) { if (e.target.closest("#ex-more")) { exLimit += 40; drawExplore(); } });
     $("ex-chips").addEventListener("click", function (e) {
       var b = e.target.closest("[data-c]"); if (!b) return; exCat = b.dataset.c;
@@ -2918,12 +2986,13 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     route = "maps"; setTop("menu", "Haritalar");
     $("view").innerHTML = '<div class="maps-page"><div class="page-pad">' +
       chipsHTML("mp-chips", [["hepsi", "Tümü"], ["gonderi", "Gönderiler"], ["mekan", "Mekânlar"], ["kayitli", "Kaydedilenler"]], mpFilter) +
-      '<div class="legend"><span><i class="ph"></i>Gönderi</span><span><i></i>Mekân</span><span id="mp-count"></span></div></div>' +
+      '<div class="legend"><span><i class="ph"></i>Gönderi</span><span><i></i>Mekân</span><span id="mp-count"></span><button class="link-btn mp-oyun" type="button" id="mp-oyun">Haritada Bul oyna</button></div></div>' +
       '<div class="bigmap" id="big-map"><div class="map-card" id="mp-card" hidden></div></div></div>';
     $("mp-chips").addEventListener("click", function (e) {
       var b = e.target.closest("[data-c]"); if (!b) return; mpFilter = b.dataset.c;
       this.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", String(c === b)); }); hideCard(); drawBigMap(true);
     });
+    $("mp-oyun").addEventListener("click", function () { go("oyun"); });
     bigMap = null;
     setTimeout(function () {
       bigMap = newMap("big-map", { scrollWheelZoom: true }); onlineBase(bigMap);
@@ -2986,6 +3055,142 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
         '<div class="row-links"><a href="' + gmapsLink(x.koordinat) + '" target="_blank" rel="noopener">Google Haritalar\'da aç</a></div></div>' + close;
     }
     c.hidden = false;
+  }
+
+  /* ===================== OYUN: HARİTADA BUL ===================== */
+  var gmMod = "turkiye", GM = null, gmMap = null, gmLayer = null;
+  var GM_TUR = 5;
+  function trIcinde(c) { return c[0] > 35.7 && c[0] < 42.3 && c[1] > 25.6 && c[1] < 44.9; }
+  function gmHavuz() {
+    var list = CATALOG.map(function (x) {
+      var p = x.postId && postById(x.postId);
+      return { ad: x.ad, kategori: x.kategori, aciklama: x.aciklama, bolge: x.bolge, koordinat: x.koordinat, foto: p ? thumbOf(p) : "", postId: x.postId || null };
+    });
+    DATA.gonderiler.forEach(function (p) {
+      if (p.ornek || !p.koordinat || !thumbOf(p)) return;
+      if (list.some(function (x) { return x.postId === p.id || norm(x.ad) === norm(p.yer); })) return;
+      list.push({ ad: p.yer, kategori: p.kategori || "", aciklama: p.konum || "", bolge: p.konum || "", koordinat: p.koordinat, foto: thumbOf(p), postId: p.id, yazar: person(p.yazar).ad });
+    });
+    return list;
+  }
+  function karistir(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function gmSec(mod) {
+    var h = gmHavuz(), tr = karistir(h.filter(function (x) { return trIcinde(x.koordinat); })), dis = karistir(h.filter(function (x) { return !trIcinde(x.koordinat); }));
+    var secim;
+    if (mod === "turkiye") {
+      var fotolu = tr.filter(function (x) { return x.foto; }), digerleri = tr.filter(function (x) { return !x.foto; });
+      secim = fotolu.slice(0, 2).concat(digerleri).slice(0, GM_TUR);
+    } else secim = dis.slice(0, 3).concat(tr.slice(0, 2));
+    return karistir(secim).slice(0, GM_TUR);
+  }
+  function gmPuan(d, mod) {
+    var tam = mod === "turkiye" ? 5 : 50, olcek = mod === "turkiye" ? 200 : 1500;
+    if (d <= tam) return 1000;
+    return Math.max(0, Math.round(1000 * Math.exp(-(d - tam) / olcek)));
+  }
+  function gmUnvan(t) {
+    return t >= 4500 ? "Usta Gezgin" : t >= 3500 ? "Tarih Kâşifi" : t >= 2500 ? "Meraklı Yolcu" : t >= 1200 ? "Yolun Başında" : "Kayıp Turist";
+  }
+  function gmKm(d) { return d < 10 ? d.toFixed(1).replace(".", ",") + " km" : Math.round(d).toLocaleString("tr-TR") + " km"; }
+  function gmRekor(mod) { return store.get("tg_oyun_rekor_" + USER.uid + "_" + mod, 0); }
+  function fizikiBase(map) {
+    var failed = false;
+    var tl = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}", { maxZoom: 8, maxNativeZoom: 8, attribution: "Esri, US National Park Service" }).addTo(map);
+    tl.on("tileerror", function () { if (failed) return; failed = true; map.removeLayer(tl); localBase(map); });
+    map.setMaxZoom(8);
+  }
+  function liderHTML(list) {
+    if (!list.length) return '<li class="none">Henüz kimse oynamadı. İlk sen ol.</li>';
+    return list.map(function (r, i) {
+      return '<li class="' + (r.uid === USER.uid ? "ben" : "") + '"><span class="sira">' + (i + 1) + '</span>' + avatarHTML(r.ad, "#5b6b78", r.foto) +
+        '<strong>' + esc(r.ad) + '</strong><b>' + r.puan.toLocaleString("tr-TR") + '</b></li>';
+    }).join("");
+  }
+  function liderYukle(mod) {
+    var k = $("gm-lider"); if (!k) return;
+    k.innerHTML = '<li class="none">Yükleniyor…</li>';
+    Veri.leaders(mod).then(function (list) { if ($("gm-lider")) $("gm-lider").innerHTML = liderHTML(list); })
+      .catch(function (err) { if ($("gm-lider")) $("gm-lider").innerHTML = '<li class="none">' + esc(errText(err)) + '</li>'; });
+  }
+  function renderGame() {
+    route = "game"; setTop("back", "Haritada Bul"); GM = null; gmMap = null;
+    var rekor = gmRekor(gmMod);
+    $("view").innerHTML = '<div class="page page-pad game-start">' +
+      '<div class="gm-hero"><h2>Haritada Bul</h2><p>' + GM_TUR + ' tarihî mekân, her birinin yerini haritada işaretle. Ne kadar yakına dokunursan o kadar puan; tur başına en fazla 1000.</p></div>' +
+      chipsHTML("gm-chips", [["turkiye", "Türkiye"], ["dunya", "Dünya"]], gmMod) +
+      '<div class="gm-rekor">En iyi puanın: <b id="gm-rekor">' + (rekor ? rekor.toLocaleString("tr-TR") : "—") + '</b></div>' +
+      '<button class="btn btn-primary" type="button" id="gm-basla">Başla</button>' +
+      '<div class="sub-head"><h2>Sıralama</h2><span id="gm-lider-mod">' + (gmMod === "turkiye" ? "Türkiye" : "Dünya") + '</span></div>' +
+      '<ol class="lider" id="gm-lider"></ol></div>';
+    $("gm-chips").addEventListener("click", function (e) {
+      var b = e.target.closest("[data-c]"); if (!b) return; gmMod = b.dataset.c;
+      this.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", String(c === b)); });
+      var r = gmRekor(gmMod); $("gm-rekor").textContent = r ? r.toLocaleString("tr-TR") : "—";
+      $("gm-lider-mod").textContent = gmMod === "turkiye" ? "Türkiye" : "Dünya"; liderYukle(gmMod);
+    });
+    $("gm-basla").addEventListener("click", gmBasla);
+    liderYukle(gmMod);
+  }
+  function gmBasla() {
+    var turlar = gmSec(gmMod);
+    if (turlar.length < GM_TUR) { toast("Oyun için yeterli mekân yüklenemedi."); return; }
+    GM = { mod: gmMod, turlar: turlar, i: 0, sonuc: [], tahmin: null, bitti: false };
+    $("view").innerHTML = '<div class="game-page">' +
+      '<div class="gm-card page-pad" id="gm-card"></div>' +
+      '<div class="bigmap gm-map" id="gm-map"></div>' +
+      '<div class="gm-bar page-pad"><span id="gm-durum"></span><button class="chip-btn" type="button" id="gm-btn" disabled>Tahmin et</button></div></div>';
+    stopMaps();
+    gmMap = newMap("gm-map", { scrollWheelZoom: true, minZoom: 2, worldCopyJump: true }); fizikiBase(gmMap);
+    gmLayer = L.layerGroup().addTo(gmMap);
+    gmMap.on("click", function (e) {
+      if (!GM || GM.bitti) return;
+      GM.tahmin = [e.latlng.lat, ((e.latlng.lng + 540) % 360) - 180];
+      gmLayer.clearLayers();
+      L.marker(GM.tahmin, { icon: L.divIcon({ className: "", html: '<div class="pin-guess"></div>', iconSize: [22, 22], iconAnchor: [11, 11] }) }).addTo(gmLayer);
+      $("gm-btn").disabled = false;
+    });
+    $("gm-btn").addEventListener("click", function () { if (!GM) return; if (GM.bitti) gmSonraki(); else gmTahmin(); });
+    gmTur();
+  }
+  function gmGorunum() { if (GM.mod === "turkiye") gmMap.setView([39.1, 35.3], 5); else gmMap.setView([30, 20], 2); }
+  function gmTur() {
+    var x = GM.turlar[GM.i], toplam = GM.sonuc.reduce(function (s, r) { return s + r.puan; }, 0);
+    GM.tahmin = null; GM.bitti = false; gmLayer.clearLayers(); gmGorunum();
+    $("gm-card").innerHTML = (x.foto ? '<img class="gm-foto" src="' + x.foto + '" alt="">' : '') +
+      '<div class="gm-info"><small>Tur ' + (GM.i + 1) + '/' + GM_TUR + ' · ' + toplam.toLocaleString("tr-TR") + ' puan</small>' +
+      '<strong>' + esc(x.ad) + '</strong><span>' + esc(x.kategori || "") + (x.yazar ? " · " + esc(x.yazar) + " paylaştı" : "") + '</span></div>';
+    $("gm-durum").textContent = "Haritada yerine dokun.";
+    var b = $("gm-btn"); b.textContent = "Tahmin et"; b.disabled = true;
+  }
+  function gmTahmin() {
+    var x = GM.turlar[GM.i]; if (!GM.tahmin) return;
+    var d = km(GM.tahmin, x.koordinat), puan = gmPuan(d, GM.mod);
+    GM.sonuc.push({ ad: x.ad, d: d, puan: puan }); GM.bitti = true;
+    L.marker(x.koordinat, { icon: mainPin() }).addTo(gmLayer);
+    L.polyline([GM.tahmin, x.koordinat], { color: "#b4553a", weight: 2.5, dashArray: "6 6", interactive: false }).addTo(gmLayer);
+    var toplam = GM.sonuc.reduce(function (s, r) { return s + r.puan; }, 0);
+    $("gm-card").innerHTML = (x.foto ? '<img class="gm-foto" src="' + x.foto + '" alt="">' : '') +
+      '<div class="gm-info"><small>Tur ' + (GM.i + 1) + '/' + GM_TUR + ' · ' + toplam.toLocaleString("tr-TR") + ' puan</small>' +
+      '<strong>' + esc(x.ad) + '</strong><span>' + esc(x.bolge || "") + '</span>' + (x.aciklama && x.aciklama !== x.bolge ? '<p>' + esc(x.aciklama) + '</p>' : '') +
+      (x.postId && postById(x.postId) ? '<div class="row-links"><button type="button" data-open="' + esc(x.postId) + '">Gönderiyi aç</button></div>' : '') + '</div>';
+    gmMap.invalidateSize();
+    gmMap.fitBounds(L.latLngBounds([GM.tahmin, x.koordinat]), { padding: [40, 40], maxZoom: 7, animate: false });
+    $("gm-durum").innerHTML = '<b>' + gmKm(d) + '</b> uzaktaydın · <b class="gm-p">+' + puan + '</b>';
+    $("gm-btn").textContent = GM.i + 1 < GM_TUR ? "Sonraki" : "Sonucu gör";
+  }
+  function gmSonraki() { GM.i++; if (GM.i < GM_TUR) gmTur(); else gmBitir(); }
+  function gmBitir() {
+    var g = GM; GM = null; stopMaps(); gmMap = null;
+    var toplam = g.sonuc.reduce(function (s, r) { return s + r.puan; }, 0), eski = gmRekor(g.mod), yeni = toplam > eski;
+    if (yeni) store.set("tg_oyun_rekor_" + USER.uid + "_" + g.mod, toplam);
+    $("view").innerHTML = '<div class="page page-pad game-start">' +
+      '<div class="gm-hero gm-son"><small>' + (g.mod === "turkiye" ? "Türkiye" : "Dünya") + '</small><h2>' + toplam.toLocaleString("tr-TR") + ' <span>/ ' + (GM_TUR * 1000).toLocaleString("tr-TR") + '</span></h2>' +
+      '<p class="unvan">' + gmUnvan(toplam) + '</p>' + (yeni && eski ? '<p class="gm-yeni">Yeni rekor!</p>' : '') + '</div>' +
+      '<ul class="gm-turlar">' + g.sonuc.map(function (r) { return '<li><span>' + esc(r.ad) + '</span><small>' + gmKm(r.d) + '</small><b>' + r.puan + '</b></li>'; }).join("") + '</ul>' +
+      '<button class="btn btn-primary" type="button" id="gm-tekrar">Tekrar oyna</button>' +
+      '<div class="sub-head"><h2>Sıralama</h2><span>' + (g.mod === "turkiye" ? "Türkiye" : "Dünya") + '</span></div><ol class="lider" id="gm-lider"><li class="none">Kaydediliyor…</li></ol></div>';
+    $("gm-tekrar").addEventListener("click", function () { gmMod = g.mod; gmBasla(); });
+    Veri.saveScore(g.mod, toplam).catch(function (err) { toast(errText(err)); }).then(function () { liderYukle(g.mod); });
   }
 
   /* ===================== PROFİL ===================== */
@@ -3315,7 +3520,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   $("top-title").addEventListener("click", anaSayfa);
   $("top-title").addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); anaSayfa(); } });
   $("btn-left").addEventListener("click", function () {
-    if (this.dataset.act === "back") { go(route === "chat" ? "mesajlar" : ""); return; }
+    if (this.dataset.act === "back") { go(route === "chat" ? "mesajlar" : route === "game" ? "kesfet" : ""); return; }
     renderMenu(); $("drawer").hidden = false; this.setAttribute("aria-expanded", "true");
   });
   $("drawer").addEventListener("click", function (e) {

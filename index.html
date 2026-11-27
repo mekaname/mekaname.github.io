@@ -1145,6 +1145,17 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
 .tabs.four button { font-size: .85rem; }
 .ad-stats.four { grid-template-columns: repeat(4, 1fr); }
 .ad-stats.four b { font-size: 1.15rem; }
+.pf-about { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 16px; margin-top: 14px; padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.pf-about h3 { margin: 0 0 6px; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
+.pf-about .bio { margin: 0; white-space: pre-line; overflow-wrap: anywhere; font-size: .93rem; }
+.ilgi { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.ilgi li { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); font-weight: 600; font-size: .82rem; overflow-wrap: anywhere; }
+.ilgi.edit { margin-top: 8px; }
+.ilgi button { border: 0; background: none; color: inherit; font-size: 1rem; line-height: 1; padding: 0 2px; }
+.ilgi-add { display: flex; gap: 8px; }
+.ilgi-add input { flex: 1; min-width: 0; }
+.counter.over { color: var(--like); font-weight: 700; }
+.caption { white-space: pre-line; overflow-wrap: anywhere; }
 .add-wrap { position: relative; aspect-ratio: 1; }
 .add-wrap .add-tile { width: 100%; height: 100%; font: inherit; }
 .add-menu { position: absolute; z-index: 50; top: calc(100% + 6px); left: 0; min-width: 180px; padding: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); display: grid; gap: 2px; }
@@ -1360,6 +1371,20 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     del: function (k) { try { localStorage.removeItem(k); } catch (e) {} }
   };
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  /* Sansür: küfür ve uygunsuz ifadeler ilk harfi kalacak şekilde yıldızlanır. Veritabanındaki sansurle() ile aynı kurallar. */
+  var KUFUR_TAM = ["amk","amq","amg","aq","mk","mq","oç","oc","pç","sik","göt","götü","götler","pust","dick","dicks","pusy","fck","niga"];
+  var KUFUR_KOK = new RegExp("^(orospu|orosbu|oruspu|orspu|yarak|yarağ|dalyarak|dalyarağ|amına|amınak|aminak|amcık|amcik|amını|siktir|sikeyim|sikerim|sikiyim|sikim|sikik|sikiş|siker|sikti" +
+    "|götün|götver|götlek|ibne|kahpe|pezevenk|pezo|puşt|gavat|kaltak|fahişe|fahise|sürtük|surtuk|yavşak|yavsak|şerefsiz|serefsiz|gerizekalı|gerizekali|taşak|tasak|piç" +
+    "|fuck|shit|bitch|ashole|motherf|cunt|whore|slut|retard|porn)");
+  function kufurMu(w) {
+    var n = w.toLocaleLowerCase("tr").replace(/[0134@$5€]/g, function (c) { return { "0": "o", "1": "i", "3": "e", "4": "a", "@": "a", "$": "s", "5": "s", "€": "e" }[c]; });
+    n = n.replace(/[^a-zçğıöşüâîû]/g, "").replace(/(.)\1+/g, "$1");
+    return !!n && (KUFUR_TAM.indexOf(n) >= 0 || KUFUR_KOK.test(n));
+  }
+  function sansurle(t) {
+    return String(t || "").replace(/[^\s!-\/:-@\[-`{-~]+/g, function (w) { return kufurMu(w) ? w.charAt(0) + new Array(w.length).join("*") : w; });
+  }
+  function kelimeSay(t) { t = String(t || "").trim(); return t ? t.split(/\s+/).length : 0; }
   function initials(name) { return String(name || "?").trim().split(/\s+/).slice(0, 2).map(function (w) { return w.charAt(0).toLocaleUpperCase("tr"); }).join(""); }
 
   var ICON = {
@@ -1454,11 +1479,15 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     function chk(r) { if (r.error) throw sbErr(r.error); return r.data; }
     function toUser(session) {
       var u = session.user, md = u.user_metadata || {};
-      return Promise.all([sb.from("profiller").select("ad,bio,foto_url,rol,yasakli").eq("id", u.id).maybeSingle(), sb.rpc("benim_dogum_tarihim")]).then(function (rr) {
+      // guncelleme-3.sql çalıştırılmadıysa ilgi_alanlari sütunu yoktur; o zaman onsuz oku.
+      var profQ = sb.from("profiller").select("ad,bio,foto_url,rol,yasakli,ilgi_alanlari").eq("id", u.id).maybeSingle().then(function (r) {
+        return r.error ? sb.from("profiller").select("ad,bio,foto_url,rol,yasakli").eq("id", u.id).maybeSingle() : r;
+      });
+      return Promise.all([profQ, sb.rpc("benim_dogum_tarihim")]).then(function (rr) {
         // Veritabanında yaş kontrolü henüz kurulmadıysa (guvenlik-2.sql çalıştırılmadıysa) kimseyi doğum tarihi ekranında kilitleme.
         var r = rr[0], p = r.data || {}, dogum = rr[1] && !rr[1].error ? rr[1].data : (rr[1] && rr[1].error ? "kurulmadi" : null);
         return { uid: u.id, email: u.email, name: p.ad || md.ad || md.full_name || md.name || u.email.split("@")[0], photo: p.foto_url || md.avatar_url || "",
-          method: (u.app_metadata && u.app_metadata.provider) === "google" ? "Google" : "E-posta", bio: p.bio || "", rol: p.rol || "uye", yasakli: !!p.yasakli, dogum: dogum || "" };
+          method: (u.app_metadata && u.app_metadata.provider) === "google" ? "Google" : "E-posta", bio: p.bio || "", ilgi: p.ilgi_alanlari || [], rol: p.rol || "uye", yasakli: !!p.yasakli, dogum: dogum || "" };
       });
     }
     function dataUrlBlob(d) { var b = atob(d.split(",")[1]), a = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) a[i] = b.charCodeAt(i); return new Blob([a], { type: "image/jpeg" }); }
@@ -1510,8 +1539,11 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       updateProfile: function (d) {
         var up = (d.foto && d.foto.indexOf("data:") === 0) ? upload(current.uid + "/profil-" + Date.now() + ".jpg", dataUrlBlob(d.foto)) : Promise.resolve(d.foto);
         return up.then(function (url) {
-          var row = { ad: d.ad, bio: d.bio }; if (url !== undefined) row.foto_url = url || "";
-          return sb.from("profiller").update(row).eq("id", current.uid).then(chk).then(function () { current.name = d.ad; current.bio = d.bio; if (url !== undefined) current.photo = url || ""; return url; });
+          var row = { ad: d.ad, bio: d.bio, ilgi_alanlari: d.ilgi || [] }; if (url !== undefined) row.foto_url = url || "";
+          return sb.from("profiller").update(row).eq("id", current.uid).then(function (r) {
+            if (r.error && /ilgi_alanlari/.test(r.error.message || "")) { delete row.ilgi_alanlari; return sb.from("profiller").update(row).eq("id", current.uid); }
+            return r;
+          }).then(chk).then(function () { current.name = d.ad; current.bio = d.bio; if (url !== undefined) current.photo = url || ""; return url; });
         });
       },
       listPosts: function () {
@@ -1647,7 +1679,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       updateProfile: function (d) {
         var e = store.get("tg_oturum", null), all = users();
         if (e && all[e]) { all[e].name = d.ad; store.set("tg_kullanicilar", all); }
-        var pr = store.get(profKey(), {}); pr.ad = d.ad; pr.bio = d.bio; if (d.foto !== undefined) pr.foto = d.foto; store.set(profKey(), pr);
+        var pr = store.get(profKey(), {}); pr.ad = d.ad; pr.bio = d.bio; pr.ilgi = d.ilgi || []; if (d.foto !== undefined) pr.foto = d.foto; store.set(profKey(), pr);
         return Promise.resolve(d.foto);
       },
       listPosts: function () {
@@ -2107,7 +2139,8 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     var inp = bar.querySelector("input"), btn = bar.querySelector("button");
     inp.addEventListener("input", function () { btn.disabled = !inp.value.trim(); });
     bar.addEventListener("submit", function (e) {
-      e.preventDefault(); var t = inp.value.trim(); if (!t) return;
+      e.preventDefault(); var ham = inp.value.trim(); if (!ham) return; var t = sansurle(ham);
+      if (t !== ham) toast("Uygunsuz ifadeler gizlendi.");
       function after() { inp.value = ""; btn.disabled = true; logEv("yorum", p.id, t); saveState(); var list = $("comments"); list && list.lastElementChild && list.lastElementChild.scrollIntoView({ behavior: "smooth", block: "center" }); }
       if (Veri.mode === "cloud") {
         btn.disabled = true;
@@ -2396,7 +2429,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   function profKey() { return "tg_profil_" + USER.uid; }
   function applyProfile() {
     if (Veri.mode === "cloud") return;
-    var pr = store.get(profKey(), {}); if (pr.ad) USER.name = pr.ad; if (pr.foto) USER.photo = pr.foto; if (pr.foto === "") USER.photo = ""; USER.bio = pr.bio || "";
+    var pr = store.get(profKey(), {}); if (pr.ad) USER.name = pr.ad; if (pr.foto) USER.photo = pr.foto; if (pr.foto === "") USER.photo = ""; USER.bio = pr.bio || ""; USER.ilgi = pr.ilgi || [];
   }
   function shrinkImage(file, max, square) {
     return new Promise(function (res, rej) {
@@ -2447,7 +2480,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       '<div class="mapbox" id="sh-map"></div>' +
       '<div class="map-actions"><button type="button" class="pill-link" id="sh-geo">' + ICON.pin + 'Konumumu kullan</button><span class="coords" id="sh-coords">Konum seçilmedi</span></div></div>' +
       '</div></section>' +
-      '<section class="sec"><div class="form"><div class="field"><label for="sh-not">Not</label><textarea id="sh-not" maxlength="500" ></textarea><span class="counter" id="sh-count">0/500</span></div></div></section>' +
+      '<section class="sec"><div class="form"><div class="field"><label for="sh-not">Not</label><textarea id="sh-not" maxlength="5000"></textarea><span class="counter" id="sh-count">0/700 kelime</span></div></div></section>' +
       '<div class="share-foot page-pad"><p class="form-error" id="sh-err" role="alert" hidden></p><button class="btn btn-primary" id="sh-submit" type="submit"' + (USER.yasakli ? ' disabled' : '') + '>Paylaş</button></div></form>';
     drawPicks();
     var form = $("sh-form");
@@ -2459,7 +2492,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     form.addEventListener("dragover", function (e) { e.preventDefault(); });
     form.addEventListener("drop", function (e) { e.preventDefault(); if (e.dataTransfer && e.dataTransfer.files.length) addFiles(e.dataTransfer.files); });
     form.addEventListener("paste", function (e) { var f = e.clipboardData && e.clipboardData.files; if (f && f.length) { e.preventDefault(); addFiles(f); } });
-    $("sh-not").addEventListener("input", function () { $("sh-count").textContent = this.value.length + "/500"; });
+    $("sh-not").addEventListener("input", function () { var n = kelimeSay(this.value); $("sh-count").textContent = n + "/700 kelime"; $("sh-count").classList.toggle("over", n > 700); });
 
     attachSuggest($("sh-yer"), ["mekan"], pickPlace);
     attachSuggest($("sh-konum"), ["sehir"], function (r) {
@@ -2555,7 +2588,8 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   function submitShare(e) {
     e.preventDefault();
     if (USER.yasakli) return shErr("Hesabın kısıtlandığı için gönderi paylaşamazsın.");
-    var yer = $("sh-yer").value.trim(), btn = $("sh-submit");
+    var yer = sansurle($("sh-yer").value.trim()), btn = $("sh-submit");
+    if (kelimeSay($("sh-not").value) > 700) { $("sh-not").focus(); return shErr("Açıklama en fazla 700 kelime olabilir."); }
     if (!picks.length) return shErr("En az bir fotoğraf ya da video ekle.");
     if (yer.length < 2) { $("sh-yer").focus(); return shErr("Mekânın adını yaz."); }
     if (!shPoint) { $("sh-map").scrollIntoView({ block: "center", behavior: "smooth" }); return shErr("Haritada konum seç."); }
@@ -2563,7 +2597,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     var tur = picks.map(function (p) { return p.tur; });
     Promise.all(picks.map(function (p) { return p.tur === "foto" ? shrinkImage(p.file, 1440, false) : Promise.resolve(p.file); }))
       .then(function (blobs) {
-        return Veri.createPost({ yer: yer, konum: $("sh-konum").value.trim(), kategori: $("sh-kat").value, koordinat: shPoint, not: $("sh-not").value.trim(),
+        return Veri.createPost({ yer: yer, konum: sansurle($("sh-konum").value.trim()), kategori: $("sh-kat").value, koordinat: shPoint, not: sansurle($("sh-not").value.trim()),
           medya: blobs.map(function (b, i) { return { tur: tur[i], blob: b }; }) }, function (msg) { btn.textContent = msg; });
       })
       .then(function (id) { logEv("paylas", id); saveState(); return loadUserPosts(); })
@@ -2751,12 +2785,16 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       '<div class="pf-head">' + avatarHTML(USER.name, "var(--accent)", USER.photo) +
       '<div class="pf-stats"><div><b>' + mine.length + '</b><span>Gönderi</span></div><div><b>' + Object.keys(ST.liked).length + '</b><span>Beğeni</span></div><div><b>' + nSaved + '</b><span>Kayıtlı</span></div></div></div>' +
       '<div class="pf-info"><strong>' + esc(USER.name) + '</strong><span class="handle">' + esc(handleOf(USER.email)) + ' · ' + esc(USER.method) + '</span>' +
-      (USER.bio ? '<p class="bio">' + esc(USER.bio) + '</p>' : '') + '</div>' +
+      '</div>' +
+      ((USER.bio || (USER.ilgi || []).length) ? '<div class="pf-about"><div class="pf-col"><h3>Hakkımda</h3>' + (USER.bio ? '<p class="bio">' + esc(USER.bio) + '</p>' : '<p class="bio empty-bio">Henüz yazılmadı.</p>') + '</div>' +
+        '<div class="pf-col"><h3>İlgi alanları</h3>' + ((USER.ilgi || []).length ? '<ul class="ilgi">' + USER.ilgi.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '<p class="bio empty-bio">Eklenmedi.</p>') + '</div></div>' : '') +
       '<div class="pf-actions" id="pf-actions"><button class="btn-sec" id="pf-edit-btn" type="button">Profili düzenle</button><button class="btn-sec" type="button" data-go="paylas">+ Yeni gönderi</button></div>' +
       '<form class="pf-edit form" id="pf-form" hidden novalidate>' +
       '<div class="pf-photo-row"><span id="pf-av">' + avatarHTML(USER.name, "var(--accent)", USER.photo) + '</span><span class="btn-sec file-btn">Fotoğraf seç<input id="pf-photo" class="file-over" type="file" accept="image/*" aria-label="Profil fotoğrafı seç"></span><button type="button" class="link-btn" id="pf-photo-rm">Kaldır</button></div>' +
       '<div class="field"><label for="pf-name">Ad Soyad</label><input id="pf-name" maxlength="60" autocomplete="name" value="' + esc(USER.name) + '"></div>' +
-      '<div class="field"><label for="pf-bio">Hakkımda</label><textarea id="pf-bio" maxlength="150" >' + esc(USER.bio) + '</textarea><span class="counter" id="pf-count">' + USER.bio.length + '/150</span></div>' +
+      '<div class="field"><label for="pf-bio">Hakkımda</label><textarea id="pf-bio" maxlength="2000" rows="6">' + esc(USER.bio) + '</textarea><span class="counter" id="pf-count">' + kelimeSay(USER.bio) + '/250 kelime</span></div>' +
+      '<div class="field"><label for="pf-ilgi">İlgi alanları <span class="hint" style="display:inline">(en fazla 3)</span></label>' +
+      '<div class="ilgi-add"><input id="pf-ilgi" maxlength="30" autocomplete="off"><button class="btn-sec" type="button" id="pf-ilgi-ekle">Ekle</button></div><ul class="ilgi edit" id="pf-ilgi-list"></ul></div>' +
       '<p class="form-error" id="pf-err" role="alert" hidden></p>' +
       '<div class="pf-actions"><button class="btn-sec" type="button" id="pf-cancel">Vazgeç</button><button class="btn btn-primary" type="submit" style="margin:0">Kaydet</button></div></form>' +
       '<div class="tabs" role="tablist"><button type="button" role="tab" data-tab="gonderi" aria-selected="' + (pfTab === "gonderi") + '">Gönderilerim</button><button type="button" role="tab" data-tab="kayitli" aria-selected="' + (pfTab === "kayitli") + '">Kaydedilenler</button></div>' +
@@ -2768,7 +2806,21 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     });
     $("pf-edit-btn").addEventListener("click", function () { $("pf-form").hidden = false; $("pf-actions").hidden = true; $("pf-name").focus(); });
     $("pf-cancel").addEventListener("click", function () { renderProfile(); });
-    $("pf-bio").addEventListener("input", function () { $("pf-count").textContent = this.value.length + "/150"; });
+    $("pf-bio").addEventListener("input", function () { var n = kelimeSay(this.value); $("pf-count").textContent = n + "/250 kelime"; $("pf-count").classList.toggle("over", n > 250); });
+    var pfIlgi = (USER.ilgi || []).slice();
+    function drawIlgi() {
+      $("pf-ilgi-list").innerHTML = pfIlgi.map(function (x, i) { return '<li>' + esc(x) + '<button type="button" data-ilgi-sil="' + i + '" aria-label="' + esc(x) + ' kaldır">×</button></li>'; }).join("");
+      var dolu = pfIlgi.length >= 3; $("pf-ilgi").disabled = dolu; $("pf-ilgi-ekle").disabled = dolu; $("pf-ilgi").placeholder = dolu ? "En fazla 3 ilgi alanı" : "";
+    }
+    function ilgiEkle() {
+      var v = sansurle($("pf-ilgi").value.trim().replace(/\s+/g, " ")); if (!v || pfIlgi.length >= 3) return;
+      if (pfIlgi.some(function (x) { return x.toLocaleLowerCase("tr") === v.toLocaleLowerCase("tr"); })) { $("pf-ilgi").value = ""; return; }
+      pfIlgi.push(v.slice(0, 30)); $("pf-ilgi").value = ""; drawIlgi(); if (pfIlgi.length < 3) $("pf-ilgi").focus();
+    }
+    $("pf-ilgi-ekle").addEventListener("click", ilgiEkle);
+    $("pf-ilgi").addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); ilgiEkle(); } });
+    $("pf-ilgi-list").addEventListener("click", function (e) { var b = e.target.closest("[data-ilgi-sil]"); if (b) { pfIlgi.splice(+b.dataset.ilgiSil, 1); drawIlgi(); } });
+    drawIlgi();
     $("pf-photo").addEventListener("change", function () {
       var f = this.files[0]; if (!f) return;
       shrinkImage(f, 256, true).then(function (d) { pfPhoto = d; $("pf-av").innerHTML = avatarHTML(USER.name, "var(--accent)", d); })
@@ -2777,11 +2829,13 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     $("pf-photo-rm").addEventListener("click", function () { pfPhoto = ""; $("pf-av").innerHTML = avatarHTML($("pf-name").value || USER.name, "var(--accent)", ""); });
     $("pf-form").addEventListener("submit", function (e) {
       e.preventDefault();
-      var name = $("pf-name").value.trim(), bio = $("pf-bio").value.trim();
+      if ($("pf-ilgi").value.trim()) ilgiEkle();
+      var name = sansurle($("pf-name").value.trim()), bio = sansurle($("pf-bio").value.trim());
       if (name.length < 2) { $("pf-name").focus(); return pfErr("Adını ve soyadını yaz."); }
+      if (kelimeSay(bio) > 250) { $("pf-bio").focus(); return pfErr("Hakkımda en fazla 250 kelime olabilir."); }
       var sbtn = this.querySelector('[type="submit"]'); sbtn.disabled = true; sbtn.textContent = "Kaydediliyor…";
-      Veri.updateProfile({ ad: name, bio: bio, foto: pfPhoto }).then(function (url) {
-        USER.name = name; USER.bio = bio; if (pfPhoto !== undefined) USER.photo = url || "";
+      Veri.updateProfile({ ad: name, bio: bio, ilgi: pfIlgi, foto: pfPhoto }).then(function (url) {
+        USER.name = name; USER.bio = bio; USER.ilgi = pfIlgi.slice(); if (pfPhoto !== undefined) USER.photo = url || "";
         return loadUserPosts();
       }).then(function () { renderProfile(); toast("Profilin güncellendi."); })
         .catch(function (err) { sbtn.disabled = false; sbtn.textContent = "Kaydet"; pfErr(errText(err)); });
@@ -2894,7 +2948,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     if (!r) { $("report-err").textContent = "Bir neden seç."; $("report-err").hidden = false; return; }
     var neden = r.value + (not ? ": " + not : "");
     $("report-submit").disabled = true;
-    Veri.report(reportPost, neden.slice(0, 300)).then(function () { $("report").hidden = true; toast("Şikayetin yöneticiye iletildi."); })
+    Veri.report(reportPost, sansurle(neden).slice(0, 300)).then(function () { $("report").hidden = true; toast("Şikayetin yöneticiye iletildi."); })
       .catch(function (err) { $("report-submit").disabled = false; $("report-err").textContent = errText(err); $("report-err").hidden = false; });
   });
 

@@ -63,6 +63,9 @@ Supabase bağlanmadan yayınlanırsa site çalışır ama önizleme modundadır:
 - **Authentication > Emails > SMTP Settings**: Supabase'in hazır e-posta göndericisi yalnızca proje ekibine e-posta yollar. Herkese kod gidebilmesi için kendi SMTP hesabını gir (ör. Gmail uygulama şifresiyle `smtp.gmail.com`, port 465).
 - Kayıtta doğum tarihi istenir; 13 yaşından küçükler kayıt olamaz. Doğum tarihi olmayan hesaplardan (ör. Google ile girenler) ilk girişte istenir, bir kez girilince değiştirilemez ve başkalarına görünmez.
 
+### 6. Sansür, uzun metinler ve ilgi alanları
+`supabase/guncelleme-3.sql` dosyasını SQL Editor'de çalıştır. Hakkımda 250, gönderi açıklaması 700 kelimeye çıkar; profile en fazla 3 ilgi alanı eklenir. Küfür ve uygunsuz ifadeler (ad, hakkımda, ilgi alanları, mekân, açıklama, yorum, şikayet) hem sitede hem veritabanında otomatik yıldızlanır; mevcut içerikler de temizlenir. Kelime listesi `index.html` içindeki `KUFUR_TAM`/`KUFUR_KOK` ile veritabanındaki `kufur_mu()` fonksiyonunda; ikisi aynı tutulmalı.
+
 ### Ücretsiz sınırlar
 Supabase ücretsiz planında 500 MB veritabanı ve 1 GB dosya deposu vardır; video başına en fazla 50 MB yüklenebilir. Kullanılmayan ücretsiz projeler bir hafta hareketsiz kalınca duraklatılır, panelden tek tıkla yeniden açılır.
 

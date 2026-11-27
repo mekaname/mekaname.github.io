@@ -74,6 +74,9 @@ Supabase bağlanmadan yayınlanırsa site çalışır ama önizleme modundadır:
 ### 8. Gönderi düzenleme
 `supabase/guncelleme-5.sql` dosyasını SQL Editor'de çalıştır. Gönderi sahibi kendi gönderisinin mekân adını, şehrini, türünü, açıklamasını, haritadaki yerini ve fotoğraf/videolarını (toplam en fazla 7) düzenleyebilir; yönetici her gönderiyi düzenleyebilir. Gönderinin sahibi ve paylaşım tarihi değişmez.
 
+### 9. Mesajlaşma
+`supabase/guncelleme-6.sql` dosyasını SQL Editor'de çalıştır. "Gönder" düğmesiyle bir gönderi, adı yazılarak bulunan herhangi bir üyeye (isteğe bağlı notla) gönderilir. Üst çubuktaki zarf simgesi mesaj kutusunu açar; okunmamış mesaj sayısı rozetle görünür. Mesajları yalnızca gönderen ve alan görür; metinler sansürlenir, kişi başı günde en fazla 300 mesaj gönderilebilir.
+
 ### Ücretsiz sınırlar
 Supabase ücretsiz planında 500 MB veritabanı ve 1 GB dosya deposu vardır; video başına en fazla 50 MB yüklenebilir. Kullanılmayan ücretsiz projeler bir hafta hareketsiz kalınca duraklatılır, panelden tek tıkla yeniden açılır.
 

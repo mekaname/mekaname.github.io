@@ -51,7 +51,7 @@ Gerekirse bir hesabı elle yönetici yapmak için `supabase/kurulum.sql` dosyas�
 ### 4. Yayınlama (GitHub Pages)
 1. Depo **Settings > Pages** sayfasında **Source** olarak **Deploy from a branch**'i seç.
 2. **Branch** olarak `claude/site-yapimi-596xqf` ve klasör olarak `/ (root)` seç, **Save**'e bas.
-3. 1-2 dakika sonra site açılır: `https://mekaname.github.io/`. Bu dala yapılan her gönderim siteyi kendiliğinden günceller.
+3. 1-2 dakika sonra site açılır: `https://kulturiz.github.io/`. Bu dala yapılan her gönderim siteyi kendiliğinden günceller.
 
 Supabase bağlanmadan yayınlanırsa site çalışır ama önizleme modundadır: her ziyaretçinin hesabı ve gönderileri yalnızca kendi tarayıcısında kalır.
 

@@ -1,5 +1,5 @@
 -- =====================================================================
--- Kültürize güvenlik güncellemesi 1
+-- Kültürİz güvenlik güncellemesi 1
 -- Supabase panelinde: SQL Editor > New query > bu dosyanın tamamını yapıştır > Run
 -- Birden fazla kez çalıştırmak güvenlidir. (kurulum.sql'i yeni çalıştıranlar için de zararsızdır.)
 -- =====================================================================

@@ -1,5 +1,5 @@
 -- =====================================================================
--- Kültürize veritabanı kurulumu
+-- Kültürİz veritabanı kurulumu
 -- Supabase panelinde: SQL Editor > New query > bu dosyanın tamamını yapıştır > Run
 -- Birden fazla kez çalıştırmak güvenlidir.
 --
@@ -269,7 +269,7 @@ begin
     d := null;
   end;
   if d is not null and not public.yas_uygun(d) then
-    raise exception 'Kültürize için en az 13 yaşında olmalısın.' using errcode = 'P0001';
+    raise exception 'Kültürİz için en az 13 yaşında olmalısın.' using errcode = 'P0001';
   end if;
   insert into public.profiller (id, ad, foto_url, rol, dogum_tarihi)
   values (
@@ -296,7 +296,7 @@ begin
     end if;
   end if;
   if new.dogum_tarihi is distinct from old.dogum_tarihi and new.dogum_tarihi is not null and not public.yas_uygun(new.dogum_tarihi) then
-    raise exception 'Kültürize için en az 13 yaşında olmalısın.' using errcode = 'P0001';
+    raise exception 'Kültürİz için en az 13 yaşında olmalısın.' using errcode = 'P0001';
   end if;
   new.id := old.id;
   return new;
@@ -486,7 +486,7 @@ begin
     d := null;
   end;
   if d is not null and not public.yas_uygun(d) then
-    raise exception 'Kültürize için en az 13 yaşında olmalısın.' using errcode = 'P0001';
+    raise exception 'Kültürİz için en az 13 yaşında olmalısın.' using errcode = 'P0001';
   end if;
   o := nullif(btrim(coalesce(m->>'okul', '')), '');
   s := nullif(btrim(coalesce(m->>'sube', '')), '');
@@ -519,7 +519,7 @@ begin
     if old.okul_no is not null then new.okul_no := old.okul_no; end if;
   end if;
   if new.dogum_tarihi is distinct from old.dogum_tarihi and new.dogum_tarihi is not null and not public.yas_uygun(new.dogum_tarihi) then
-    raise exception 'Kültürize için en az 13 yaşında olmalısın.' using errcode = 'P0001';
+    raise exception 'Kültürİz için en az 13 yaşında olmalısın.' using errcode = 'P0001';
   end if;
   new.id := old.id;
   return new;

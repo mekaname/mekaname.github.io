@@ -44,4 +44,4 @@ def main(cikti):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "kulturize-tek-dosya.html")
+    main(sys.argv[1] if len(sys.argv) > 1 else "kulturiz-tek-dosya.html")

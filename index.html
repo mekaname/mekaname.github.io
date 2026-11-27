@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co https://*.googleusercontent.com https://tile.openstreetmap.org; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' data: blob: https://*.supabase.co wss://*.supabase.co https://nominatim.openstreetmap.org; frame-src https://maps.google.com https://www.google.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Kültürize</title>
+<title>Kültürİz</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="theme-color" content="#1b5e8c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1199,7 +1199,7 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
   <div id="login-map" aria-hidden="true"></div>
   <div class="login-center">
     <div>
-      <h1 class="wordmark">Kültürize</h1>
+      <h1 class="wordmark">Kültürİz</h1>
       <p class="tagline">Gezdiğin tarihi yerleri paylaş.</p>
     </div>
     <div class="login-actions">
@@ -1215,7 +1215,7 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
 <div class="app" id="app" hidden>
   <header class="topbar">
     <button class="icon-btn" id="btn-left" type="button" aria-label="Menüyü aç"></button>
-    <p class="topbar-title" id="top-title">Kültürize</p>
+    <p class="topbar-title" id="top-title">Kültürİz</p>
     <button class="settings-btn" id="btn-settings" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       <span>Ayarlar</span>
@@ -1228,7 +1228,7 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
 <div class="drawer-wrap" id="drawer" hidden>
   <nav class="drawer" aria-label="Ana menü">
     <div class="drawer-top">
-      <span class="wm">Kültürize</span>
+      <span class="wm">Kültürİz</span>
       <button class="icon-btn" data-close="drawer" type="button" aria-label="Menüyü kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
     <ul class="menu" id="menu-list"></ul>
@@ -1451,7 +1451,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   ERR["tg/no-config-reset"] = "Önizleme modunda şifre sıfırlama e-postası gönderilemez. Yeni bir hesap açabilirsin.";
   ERR["tg/yasak"] = "Hesabın yönetici tarafından kısıtlandı. Paylaşım ve yorum yapamazsın.";
   ERR["tg/yetki"] = "Bu işlem için yetkin yok.";
-  ERR["tg/yas"] = "Kültürize'yi kullanmak için en az 13 yaşında olmalısın.";
+  ERR["tg/yas"] = "Kültürİz'i kullanmak için en az 13 yaşında olmalısın.";
   ERR["tg/kod"] = "Kod hatalı ya da süresi dolmuş. Kodu kontrol et ya da yeni kod iste.";
   ERR["tg/sikayet-var"] = "Bu gönderiyi zaten şikayet ettin.";
   function uuid() {
@@ -1944,7 +1944,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       if (ek.dogum) {
         var bd = $("f-birth").value;
         if (!bd) return bad("f-birth", "Doğum tarihini seç.");
-        if (!yasUygun(bd)) return bad("f-birth", "Kültürize'yi kullanmak için en az 13 yaşında olmalısın.");
+        if (!yasUygun(bd)) return bad("f-birth", "Kültürİz'i kullanmak için en az 13 yaşında olmalısın.");
         bilgi.dogum = bd;
       }
       job = Veri.setInfo(bilgi).then(function () { Object.keys(bilgi).forEach(function (k) { USER[k] = bilgi[k]; }); $("auth").hidden = true; authMode = "signin"; toast("Teşekkürler."); });
@@ -1954,7 +1954,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       if (up && name.length < 2) return bad("f-name", "Adını ve soyadını yaz.");
       var okulB = null; if (up) { okulB = okulDogrula(); if (!okulB) return; }
       if (up && !birthV) return bad("f-birth", "Doğum tarihini seç.");
-      if (up && !yasUygun(birthV)) return bad("f-birth", "Kültürize'yi kullanmak için en az 13 yaşında olmalısın.");
+      if (up && !yasUygun(birthV)) return bad("f-birth", "Kültürİz'i kullanmak için en az 13 yaşında olmalısın.");
       if (!EMAIL_RE.test(email)) return bad("f-email", "Geçerli bir e-posta adresi yaz.");
       if (up && !sifreGuclu(pw)) return bad("f-pass", "Şifre en az 8 karakter olmalı ve harf ile rakam içermeli.");
       if (!up && !pw) return bad("f-pass", "Şifreni yaz.");
@@ -2011,7 +2011,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     var b = $("btn-left");
     if (mode === "back") { b.innerHTML = ICON.back; b.setAttribute("aria-label", "Geri dön"); b.dataset.act = "back"; b.removeAttribute("aria-expanded"); }
     else { b.innerHTML = ICON.menu; b.setAttribute("aria-label", "Menüyü aç"); b.dataset.act = "menu"; b.setAttribute("aria-expanded", "false"); }
-    $("top-title").textContent = title || "Kültürize";
+    $("top-title").textContent = title || "Kültürİz";
     $("top-title").classList.toggle("small", mode === "back");
   }
 

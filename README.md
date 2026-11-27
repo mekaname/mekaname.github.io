@@ -1,10 +1,10 @@
-# Kültürize
+# Kültürİz
 
 Gezilen tarihi yerlerin paylaşıldığı, mobil öncelikli bir web uygulaması (sürüm 1.0 E).
 
 ## Neler çalışıyor
 
-- **Giriş ekranı:** Arka planda Leaflet ile gösterilen fiziki dünya haritası (NASA Blue Marble görüntüsünden üretildi), ortada Kültürize yazısı, "Kayıt Ol" ve "Giriş Yap" butonları, sağ altta "1.0 E".
+- **Giriş ekranı:** Arka planda Leaflet ile gösterilen fiziki dünya haritası (NASA Blue Marble görüntüsünden üretildi), ortada Kültürİz yazısı, "Kayıt Ol" ve "Giriş Yap" butonları, sağ altta "1.0 E".
 - **Kayıt / giriş penceresi:** Ad soyad, e-posta ve şifre ile kayıt; e-posta ve şifre ile giriş; şifremi unuttum (e-postayla yeni şifre); altında "Google ile Giriş Yap" butonu.
 - **Ana ekran:** Sol üstte menü, sağ üstte Ayarlar (tema, çıkış).
 - **Gönderiler:** Gerçek fotoğraflar ve videolar. Beğen (çift dokunuşla da), yorum yap, gönder, kaydet.
@@ -26,7 +26,7 @@ Gezilen tarihi yerlerin paylaşıldığı, mobil öncelikli bir web uygulaması 
 Ayar yapılmadan uygulama **önizleme modunda** çalışır: hesaplar ve gönderiler yalnızca o tarayıcıda durur. Herkesin birbirinin gönderisini (fotoğraf ve videolar dahil) görmesi için ücretsiz bir Supabase projesi bağlanır. Supabase; giriş (Google dahil), veritabanı ve dosya deposunu tek yerde, kredi kartı istemeden sunar.
 
 ### 1. Supabase projesi aç (5 dakika)
-1. https://supabase.com adresinde ücretsiz hesap aç, **New project** ile proje oluştur (ör. `kulturize`, bölge: Frankfurt).
+1. https://supabase.com adresinde ücretsiz hesap aç, **New project** ile proje oluştur (ör. `kulturiz`, bölge: Frankfurt).
 2. Sol menüden **SQL Editor > New query**: `supabase/kurulum.sql` dosyasının tamamını yapıştır ve **Run**'a bas. Tablolar, güvenlik kuralları ve `medya` adlı fotoğraf/video deposu kurulur.
 3. Proje ana sayfasındaki **Connect** düğmesinden (ya da **Project Settings > API Keys**) **Project URL** ile **Publishable key**'i kopyala. Eski projelerde bu anahtarın adı **anon public**'tir; ikisi de olur.
 4. `index.html` dosyasının en üstündeki betikte şu iki satırı doldur:
@@ -59,7 +59,7 @@ Supabase bağlanmadan yayınlanırsa site çalışır ama önizleme modundadır:
 ### 5. E-posta doğrulama kodu ve yaş sınırı
 - Supabase'de **SQL Editor**'de sırayla `supabase/guvenlik-1.sql` ve `supabase/guvenlik-2.sql` dosyalarını çalıştır (yeni kurulumda `kurulum.sql` hepsini içerir).
 - **Authentication > Sign In / Providers > Email**: **Confirm email** açık olsun.
-- **Authentication > Emails > Templates > Confirm signup**: konu `Kültürize doğrulama kodun`, içerik `supabase/eposta-sablonu.html`. Böylece e-postaya bağlantı yerine 6 haneli kod gider.
+- **Authentication > Emails > Templates > Confirm signup**: konu `Kültürİz doğrulama kodun`, içerik `supabase/eposta-sablonu.html`. Böylece e-postaya bağlantı yerine 6 haneli kod gider.
 - **Authentication > Emails > SMTP Settings**: Supabase'in hazır e-posta göndericisi yalnızca proje ekibine e-posta yollar. Herkese kod gidebilmesi için kendi SMTP hesabını gir (ör. Gmail uygulama şifresiyle `smtp.gmail.com`, port 465).
 - Kayıtta doğum tarihi istenir; 13 yaşından küçükler kayıt olamaz. Doğum tarihi olmayan hesaplardan (ör. Google ile girenler) ilk girişte istenir, bir kez girilince değiştirilemez ve başkalarına görünmez.
 

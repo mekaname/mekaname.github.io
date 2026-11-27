@@ -1,5 +1,5 @@
 -- =====================================================================
--- Mekaname güncelleme 3: uzun "Hakkımda" (250 kelime), uzun açıklama (700 kelime),
+-- Kültürize güncelleme 3: uzun "Hakkımda" (250 kelime), uzun açıklama (700 kelime),
 -- ilgi alanları (en fazla 3), küfür ve uygunsuz ifadelerin otomatik sansürü
 -- Supabase panelinde: SQL Editor > New query > bu dosyanın tamamını yapıştır > Run
 -- Birden fazla kez çalıştırmak güvenlidir.

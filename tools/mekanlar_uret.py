@@ -20,8 +20,8 @@ Ortaköy Camii|Büyük Mecidiye Camii|İstanbul|Türkiye|Cami ve dini yapı|41.0
 Eyüp Sultan Camii|Eyüpsultan|İstanbul|Türkiye|Cami ve dini yapı|41.0477|28.9339|Fetihten sonra yapılan ilk selatin camilerinden.
 Kariye Camii|Khora,Chora Kilisesi|İstanbul|Türkiye|Cami ve dini yapı|41.0312|28.9390|Bizans mozaik ve freskleriyle ünlü yapı.
 Aya İrini|Hagia Irene|İstanbul|Türkiye|Cami ve dini yapı|41.0094|28.9813|Topkapı Sarayı avlusundaki Bizans kilisesi.
-Kapalıçarşı|Grand Bazaar,Kapalı Çarşı|İstanbul|Türkiye|Tarihi çarşı ve han|41.0107|28.9681|60'tan fazla sokağıyla dünyanın en eski kapalı çarşılarından.
-Mısır Çarşısı|Spice Bazaar,Baharatçılar Çarşısı|İstanbul|Türkiye|Tarihi çarşı ve han|41.0166|28.9706|Eminönü'nde 17. yüzyıldan kalma baharat çarşısı.
+Kapalıçarşı|Grand Bazaar,Kapalı Çarşı|İstanbul|Türkiye|Tarihi çarşı|41.0107|28.9681|60'tan fazla sokağıyla dünyanın en eski kapalı çarşılarından.
+Mısır Çarşısı|Spice Bazaar,Baharatçılar Çarşısı|İstanbul|Türkiye|Tarihi çarşı|41.0166|28.9706|Eminönü'nde 17. yüzyıldan kalma baharat çarşısı.
 Galata Kulesi|Galata Tower|İstanbul|Türkiye|Kale ve kule|41.0256|28.9741|Cenevizlilerin 1348'de yaptığı kule.
 Kız Kulesi|Maiden's Tower,Leander|İstanbul|Türkiye|Kale ve kule|41.0211|29.0041|Üsküdar açığında küçük bir adacık üzerindeki kule.
 Rumeli Hisarı|Rumelihisarı|İstanbul|Türkiye|Kale ve kule|41.0847|29.0569|Fetihten önce Boğaz'ın en dar yerine yapılan kale.
@@ -33,8 +33,8 @@ Bozdoğan Su Kemeri|Valens Su Kemeri,Valens Aqueduct|İstanbul|Türkiye|Tarihi y
 Pera Müzesi|Kaplumbağa Terbiyecisi|İstanbul|Türkiye|Müze|41.0317|28.9752|Oryantalist resim koleksiyonuyla Beyoğlu'ndaki müze.
 Selimiye Camii|Selimiye Mosque|Edirne|Türkiye|Cami ve dini yapı|41.6779|26.5594|Mimar Sinan'ın "ustalık eserim" dediği cami.
 Bursa Ulu Camii|Ulucami|Bursa|Türkiye|Cami ve dini yapı|40.1840|29.0617|20 kubbeli erken Osmanlı camisi.
-Yeşil Türbe|Yesil Turbe|Bursa|Türkiye|Cami ve dini yapı|40.1817|29.0727|Çelebi Mehmed'in yeşil çinili türbesi.
-Koza Han|Kozahan|Bursa|Türkiye|Tarihi çarşı ve han|40.1836|29.0626|İpek ticaretinin merkezi olan 15. yüzyıl hanı.
+Yeşil Türbe|Yesil Turbe|Bursa|Türkiye|Türbe|40.1817|29.0727|Çelebi Mehmed'in yeşil çinili türbesi.
+Koza Han|Kozahan|Bursa|Türkiye|Han|40.1836|29.0626|İpek ticaretinin merkezi olan 15. yüzyıl hanı.
 Cumalıkızık|Cumalikizik|Bursa|Türkiye|Tarihi kent|40.1752|29.1717|Osmanlı kuruluş döneminden kalma köy.
 Troya|Truva,Troy|Çanakkale|Türkiye|Antik kent|39.9575|26.2389|Dokuz yerleşim katmanıyla efsanevi kent.
 Assos|Behramkale|Çanakkale|Türkiye|Antik kent|39.4897|26.3371|Athena Tapınağı'yla Ege'ye bakan antik kent.
@@ -52,7 +52,7 @@ Priene|Priene Antik Kenti|Aydın|Türkiye|Antik kent|37.6597|27.2975|Izgara plan
 Milet|Miletos|Aydın|Türkiye|Antik kent|37.5303|27.2781|Thales'in kenti; büyük tiyatrosu ayakta.
 Didim Apollon Tapınağı|Didyma|Aydın|Türkiye|Antik kent|37.3850|27.2563|Dev sütunlarıyla kehanet tapınağı.
 Hierapolis (Pamukkale)|Hierapolis|Denizli|Türkiye|Antik kent|37.9257|29.1260|Travertenlerin üzerinde Roma dönemi şifa kenti.
-Pamukkale Travertenleri|Pamukkale|Denizli|Türkiye|Doğal alan|37.9214|29.1205|Bembeyaz kireç taşı havuzları.
+Pamukkale Travertenleri|Pamukkale|Denizli|Türkiye|Doğal oluşum|37.9214|29.1205|Bembeyaz kireç taşı havuzları.
 Laodikeia|Laodicea|Denizli|Türkiye|Antik kent|37.8357|29.1076|Kazılarla ortaya çıkan büyük Roma kenti.
 Bodrum Kalesi|St. Peter Kalesi,Sualtı Arkeoloji Müzesi|Muğla|Türkiye|Kale ve kule|37.0319|27.4290|Rodos Şövalyeleri'nin kalesi, sualtı arkeoloji müzesi.
 Halikarnas Mozolesi|Mausoleum,Mozole|Muğla|Türkiye|Antik kent|37.0379|27.4241|Antik dünyanın yedi harikasından birinin kalıntıları.
@@ -60,7 +60,7 @@ Kaunos|Kaunos Kral Mezarları,Dalyan|Muğla|Türkiye|Antik kent|36.8270|28.6230|
 Knidos|Knidos Antik Kenti|Muğla|Türkiye|Antik kent|36.6858|27.3746|Datça Yarımadası'nın ucunda iki limanlı kent.
 Amintas Kaya Mezarları|Fethiye Kaya Mezarları|Muğla|Türkiye|Antik kent|36.6194|29.1236|Fethiye'deki Likya kaya mezarları.
 Kayaköy|Karmylassos,Levissi|Muğla|Türkiye|Tarihi kent|36.5759|29.0880|Terk edilmiş taş evleriyle hayalet köy.
-Saklıkent Kanyonu|Saklıkent|Muğla|Türkiye|Doğal alan|36.4697|29.4060|Buz gibi suyuyla derin kanyon.
+Saklıkent Kanyonu|Saklıkent|Muğla|Türkiye|Doğal oluşum|36.4697|29.4060|Buz gibi suyuyla derin kanyon.
 Stratonikeia|Eskihisar|Muğla|Türkiye|Antik kent|37.3147|28.0628|Osmanlı köyüyle iç içe antik kent.
 Aspendos|Aspendos Tiyatrosu|Antalya|Türkiye|Antik kent|36.9389|31.1722|Dünyanın en iyi korunmuş Roma tiyatrolarından.
 Perge|Perge Antik Kenti|Antalya|Türkiye|Antik kent|36.9614|30.8544|Sütunlu caddesi ve stadyumuyla Pamfilya kenti.
@@ -78,7 +78,7 @@ Alanya Kalesi|Alanya Castle|Antalya|Türkiye|Kale ve kule|36.5389|31.9918|Yarım
 Kızıl Kule|Kızılkule|Antalya|Türkiye|Kale ve kule|36.5414|32.0003|Alanya limanındaki sekizgen Selçuklu kulesi.
 Sagalassos|Sagalassos Antik Kenti|Burdur|Türkiye|Antik kent|37.6766|30.5175|Toros Dağları'nda anıtsal çeşmesiyle kent.
 Kızkalesi|Korykos|Mersin|Türkiye|Kale ve kule|36.4592|34.1531|Denizin içindeki ortaçağ kalesi.
-Cennet ve Cehennem Obrukları|Cennet Cehennem|Mersin|Türkiye|Doğal alan|36.4511|34.1047|Silifke yakınındaki dev obruklar.
+Cennet ve Cehennem Obrukları|Cennet Cehennem|Mersin|Türkiye|Doğal oluşum|36.4511|34.1047|Silifke yakınındaki dev obruklar.
 Kleopatra Kapısı|Tarsus|Mersin|Türkiye|Tarihi yapı|36.9157|34.8913|Tarsus'taki antik kent kapısı.
 Silifke Kalesi|Silifke|Mersin|Türkiye|Kale ve kule|36.3769|33.9277|Göksu vadisine bakan ortaçağ kalesi.
 Adana Taşköprü|Taşköprü|Adana|Türkiye|Köprü|36.9852|35.3375|Seyhan üzerindeki Roma köprüsü.
@@ -101,14 +101,14 @@ On Gözlü Köprü|Dicle Köprüsü|Diyarbakır|Türkiye|Köprü|37.8817|40.2462
 Akdamar Kilisesi|Akdamar Adası|Van|Türkiye|Cami ve dini yapı|38.3407|43.0333|Van Gölü'ndeki adada 10. yüzyıl kilisesi.
 Van Kalesi|Tuşpa|Van|Türkiye|Kale ve kule|38.5044|43.3437|Urartu başkenti Tuşpa'nın kalesi.
 İshak Paşa Sarayı|Ishak Pasa Palace|Ağrı|Türkiye|Saray|39.5223|44.1286|Doğubayazıt'ta 18. yüzyıl saray kompleksi.
-Ağrı Dağı|Ararat|Ağrı|Türkiye|Doğal alan|39.7019|44.2983|Türkiye'nin en yüksek dağı, 5.137 m.
+Ağrı Dağı|Ararat|Ağrı|Türkiye|Doğal oluşum|39.7019|44.2983|Türkiye'nin en yüksek dağı, 5.137 m.
 Ani Ören Yeri|Ani,Ani Harabeleri|Kars|Türkiye|Antik kent|40.5075|43.5728|"Bin bir kiliseli" ortaçağ başkenti.
-Çifte Minareli Medrese|Erzurum Çifte Minare|Erzurum|Türkiye|Cami ve dini yapı|39.9046|41.2770|Erzurum'un simgesi olan Selçuklu medresesi.
+Çifte Minareli Medrese|Erzurum Çifte Minare|Erzurum|Türkiye|Medrese|39.9046|41.2770|Erzurum'un simgesi olan Selçuklu medresesi.
 Sümela Manastırı|Sumela,Meryem Ana Manastırı|Trabzon|Türkiye|Cami ve dini yapı|40.6903|39.6581|Sarp kayalığa kurulmuş Bizans manastırı.
 Trabzon Ayasofya|Ayasofya Trabzon|Trabzon|Türkiye|Cami ve dini yapı|41.0050|39.6867|Freskleriyle 13. yüzyıl Bizans yapısı.
-Uzungöl|Uzun Göl|Trabzon|Türkiye|Doğal alan|40.6197|40.2925|Dağlar arasındaki göl ve köy.
+Uzungöl|Uzun Göl|Trabzon|Türkiye|Doğal oluşum|40.6197|40.2925|Dağlar arasındaki göl ve köy.
 Divriği Ulu Camii ve Darüşşifası|Divriği|Sivas|Türkiye|Cami ve dini yapı|39.3713|38.1203|Taş işçiliğiyle UNESCO listesindeki yapı.
-Sivas Gök Medrese|Gök Medrese|Sivas|Türkiye|Cami ve dini yapı|39.7470|37.0193|Çini kaplı Selçuklu medresesi.
+Sivas Gök Medrese|Gök Medrese|Sivas|Türkiye|Medrese|39.7470|37.0193|Çini kaplı Selçuklu medresesi.
 Kültepe (Kaniş)|Kaniş,Karum|Kayseri|Türkiye|Antik kent|38.8503|35.6350|Anadolu'nun ilk yazılı belgelerinin bulunduğu höyük.
 Göreme, Kapadokya|Göreme,Kapadokya,Cappadocia|Nevşehir|Türkiye|Kaya yerleşimi|38.6431|34.8289|Peri bacaları ve balonlarıyla Kapadokya'nın kalbi.
 Göreme Açık Hava Müzesi|Karanlık Kilise|Nevşehir|Türkiye|Müze|38.6398|34.8452|Freskli kaya kiliselerinin bulunduğu müze.
@@ -116,9 +116,9 @@ Uçhisar Kalesi|Uçhisar|Nevşehir|Türkiye|Kale ve kule|38.6297|34.8044|Bölgen
 Zelve Açık Hava Müzesi|Zelve|Nevşehir|Türkiye|Kaya yerleşimi|38.6717|34.8611|1950'lere kadar yaşanan kaya köyü.
 Kaymaklı Yeraltı Şehri|Kaymaklı|Nevşehir|Türkiye|Kaya yerleşimi|38.4617|34.7514|Dar tünellerle bağlı yeraltı katları.
 Derinkuyu Yeraltı Şehri|Derinkuyu|Nevşehir|Türkiye|Kaya yerleşimi|38.3735|34.7346|Binlerce kişilik çok katlı yeraltı kenti.
-Ihlara Vadisi|Ihlara|Aksaray|Türkiye|Doğal alan|38.2483|34.2989|Kaya kiliseleriyle dolu kanyon.
-Sultanhanı Kervansarayı|Sultanhanı|Aksaray|Türkiye|Tarihi çarşı ve han|38.2494|33.5465|Anadolu'nun en büyük Selçuklu kervansaraylarından.
-Soğanlı Vadisi|Soğanlı|Kayseri|Türkiye|Doğal alan|38.3381|35.0711|Kaya kiliseleriyle sessiz bir vadi.
+Ihlara Vadisi|Ihlara|Aksaray|Türkiye|Doğal oluşum|38.2483|34.2989|Kaya kiliseleriyle dolu kanyon.
+Sultanhanı Kervansarayı|Sultanhanı|Aksaray|Türkiye|Kervansaray|38.2494|33.5465|Anadolu'nun en büyük Selçuklu kervansaraylarından.
+Soğanlı Vadisi|Soğanlı|Kayseri|Türkiye|Doğal oluşum|38.3381|35.0711|Kaya kiliseleriyle sessiz bir vadi.
 Mevlana Müzesi|Mevlana Türbesi,Yeşil Kubbe|Konya|Türkiye|Müze|37.8708|32.5047|Mevlana Celaleddin Rumi'nin türbesi.
 Çatalhöyük|Catalhoyuk|Konya|Türkiye|Antik kent|37.6676|32.8282|9.000 yıllık Neolitik yerleşim.
 Alaeddin Camii|Alaaddin Tepesi|Konya|Türkiye|Cami ve dini yapı|37.8738|32.4928|Selçuklu başkentinin ulu camisi.
@@ -131,12 +131,21 @@ Hattuşa|Hattuşaş,Boğazköy|Çorum|Türkiye|Antik kent|40.0195|34.6153|Hitit 
 Alacahöyük|Alaca Höyük|Çorum|Türkiye|Antik kent|40.2352|34.6944|Sfenksli kapısıyla Hitit yerleşimi.
 Safranbolu|Safranbolu Evleri|Karabük|Türkiye|Tarihi kent|41.2447|32.6945|Osmanlı konaklarıyla korunmuş kent.
 Amasya Kral Kaya Mezarları|Pontus Kral Mezarları|Amasya|Türkiye|Antik kent|40.6527|35.8288|Yeşilırmak'a bakan Pontus kral mezarları.
-Ahlat Selçuklu Mezarlığı|Ahlat|Bitlis|Türkiye|Tarihi yapı|38.7584|42.4680|Binlerce işlemeli mezar taşıyla mezarlık.
+Ahlat Selçuklu Mezarlığı|Ahlat|Bitlis|Türkiye|Kümbet|38.7584|42.4680|Binlerce işlemeli mezar taşıyla mezarlık.
 Odunpazarı|Odunpazarı Evleri|Eskişehir|Türkiye|Tarihi kent|39.7622|30.5254|Renkli Osmanlı evleriyle eski mahalle.
 Aizanoi|Zeus Tapınağı Çavdarhisar|Kütahya|Türkiye|Antik kent|39.1997|29.6087|Zeus Tapınağı'yla Frigya kenti.
 Sardes|Sard,Sardis|Manisa|Türkiye|Antik kent|38.4883|28.0400|Lidya'nın başkenti, Artemis Tapınağı.
 Harput|Harput Kalesi|Elazığ|Türkiye|Tarihi kent|38.7072|39.2556|Kalesi ve camileriyle tarihi kent.
 Arslantepe|Arslantepe Höyüğü|Malatya|Türkiye|Antik kent|38.3818|38.3613|Devletin doğuşuna tanıklık eden höyük.
+Karatay Medresesi|Karatay Çini Eserler Müzesi|Konya|Türkiye|Medrese|37.8744|32.4951|Çini süslemeli kubbesiyle 13. yüzyıl Selçuklu medresesi.
+İnce Minareli Medrese|İnce Minare|Konya|Türkiye|Medrese|37.8730|32.4890|Taç kapısıyla ünlü Selçuklu medresesi, bugün taş ve ahşap eserler müzesi.
+Döner Kümbet|Döner Kümbet Kayseri|Kayseri|Türkiye|Kümbet|38.7178|35.4926|Kabartmalarıyla 13. yüzyıl Selçuklu kümbeti.
+Ağzıkarahan Kervansarayı|Ağzıkara Han|Aksaray|Türkiye|Kervansaray|38.3725|34.1960|Aksaray–Nevşehir yolu üzerindeki Selçuklu kervansarayı.
+Büyük Valide Han|Valide Han|İstanbul|Türkiye|Han|41.0140|28.9675|Kapalıçarşı yakınındaki 17. yüzyıl Osmanlı hanı.
+Çemberlitaş Hamamı|Çemberlitaş|İstanbul|Türkiye|Hamam|41.0085|28.9715|Mimar Sinan'ın 1584'te yaptığı tarihi hamam.
+Hürrem Sultan Hamamı|Haseki Hürrem Hamamı|İstanbul|Türkiye|Hamam|41.0072|28.9786|Ayasofya ile Sultanahmet arasındaki Sinan hamamı.
+Cağaloğlu Hamamı|Cağaloğlu|İstanbul|Türkiye|Hamam|41.0108|28.9763|1741'de yapılan son büyük Osmanlı hamamlarından.
+Mevlana Türbesi|Yeşil Türbe Konya|Konya|Türkiye|Türbe|37.8708|32.5047|Mevlana Celaleddin Rumi'nin yeşil kubbeli türbesi.
 Kolezyum|Colosseum,Kolosseum,Colosseo|Roma|İtalya|Antik kent|41.8902|12.4922|50.000 kişilik Roma amfitiyatrosu.
 Pantheon|Panteon|Roma|İtalya|Cami ve dini yapı|41.8986|12.4769|Dev kubbesiyle Roma tapınağı.
 Roma Forumu|Forum Romanum|Roma|İtalya|Antik kent|41.8925|12.4853|Antik Roma'nın kamusal merkezi.
@@ -147,7 +156,7 @@ Floransa Katedrali|Duomo,Santa Maria del Fiore|Floransa|İtalya|Cami ve dini yap
 San Marco Bazilikası|San Marco|Venedik|İtalya|Cami ve dini yapı|45.4345|12.3397|Altın mozaikli Venedik bazilikası.
 Akropolis|Acropolis,Parthenon|Atina|Yunanistan|Antik kent|37.9715|23.7257|Parthenon'un bulunduğu kutsal tepe.
 Delfi|Delphi|Delfi|Yunanistan|Antik kent|38.4824|22.5010|Antik dünyanın kehanet merkezi.
-Meteora (Yunanistan)|Meteora|Kalambaka|Yunanistan|Doğal alan|39.7217|21.6306|Kaya sütunlarının tepesinde manastırlar.
+Meteora (Yunanistan)|Meteora|Kalambaka|Yunanistan|Doğal oluşum|39.7217|21.6306|Kaya sütunlarının tepesinde manastırlar.
 Knossos|Knosos|Girit|Yunanistan|Antik kent|35.2980|25.1631|Minos uygarlığının sarayı.
 Giza Piramitleri|Keops Piramidi,Sfenks,Gize|Kahire|Mısır|Anıt|29.9792|31.1342|Antik dünyanın yedi harikasından ayakta kalan tek eser.
 Karnak Tapınağı|Karnak|Luksor|Mısır|Antik kent|25.7188|32.6573|Dev sütun salonuyla tapınak kompleksi.

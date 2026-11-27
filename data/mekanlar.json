@@ -225,7 +225,7 @@
 ],
 "il": "İstanbul",
 "ulke": "Türkiye",
-"kategori": "Tarihi çarşı ve han",
+"kategori": "Tarihi çarşı",
 "koordinat": [
 41.0107,
 28.9681
@@ -240,7 +240,7 @@
 ],
 "il": "İstanbul",
 "ulke": "Türkiye",
-"kategori": "Tarihi çarşı ve han",
+"kategori": "Tarihi çarşı",
 "koordinat": [
 41.0166,
 28.9706
@@ -410,7 +410,7 @@
 ],
 "il": "Bursa",
 "ulke": "Türkiye",
-"kategori": "Cami ve dini yapı",
+"kategori": "Türbe",
 "koordinat": [
 40.1817,
 29.0727
@@ -424,7 +424,7 @@
 ],
 "il": "Bursa",
 "ulke": "Türkiye",
-"kategori": "Tarihi çarşı ve han",
+"kategori": "Han",
 "koordinat": [
 40.1836,
 29.0626
@@ -681,7 +681,7 @@
 ],
 "il": "Denizli",
 "ulke": "Türkiye",
-"kategori": "Doğal alan",
+"kategori": "Doğal oluşum",
 "koordinat": [
 37.9214,
 29.1205
@@ -797,7 +797,7 @@
 ],
 "il": "Muğla",
 "ulke": "Türkiye",
-"kategori": "Doğal alan",
+"kategori": "Doğal oluşum",
 "koordinat": [
 36.4697,
 29.406
@@ -1054,7 +1054,7 @@
 ],
 "il": "Mersin",
 "ulke": "Türkiye",
-"kategori": "Doğal alan",
+"kategori": "Doğal oluşum",
 "koordinat": [
 36.4511,
 34.1047
@@ -1379,7 +1379,7 @@
 ],
 "il": "Ağrı",
 "ulke": "Türkiye",
-"kategori": "Doğal alan",
+"kategori": "Doğal oluşum",
 "koordinat": [
 39.7019,
 44.2983
@@ -1408,7 +1408,7 @@
 ],
 "il": "Erzurum",
 "ulke": "Türkiye",
-"kategori": "Cami ve dini yapı",
+"kategori": "Medrese",
 "koordinat": [
 39.9046,
 41.277
@@ -1451,7 +1451,7 @@
 ],
 "il": "Trabzon",
 "ulke": "Türkiye",
-"kategori": "Doğal alan",
+"kategori": "Doğal oluşum",
 "koordinat": [
 40.6197,
 40.2925
@@ -1479,7 +1479,7 @@
 ],
 "il": "Sivas",
 "ulke": "Türkiye",
-"kategori": "Cami ve dini yapı",
+"kategori": "Medrese",
 "koordinat": [
 39.747,
 37.0193
@@ -1594,7 +1594,7 @@
 ],
 "il": "Aksaray",
 "ulke": "Türkiye",
-"kategori": "Doğal alan",
+"kategori": "Doğal oluşum",
 "koordinat": [
 38.2483,
 34.2989
@@ -1608,7 +1608,7 @@
 ],
 "il": "Aksaray",
 "ulke": "Türkiye",
-"kategori": "Tarihi çarşı ve han",
+"kategori": "Kervansaray",
 "koordinat": [
 38.2494,
 33.5465
@@ -1622,7 +1622,7 @@
 ],
 "il": "Kayseri",
 "ulke": "Türkiye",
-"kategori": "Doğal alan",
+"kategori": "Doğal oluşum",
 "koordinat": [
 38.3381,
 35.0711
@@ -1807,7 +1807,7 @@
 ],
 "il": "Bitlis",
 "ulke": "Türkiye",
-"kategori": "Tarihi yapı",
+"kategori": "Kümbet",
 "koordinat": [
 38.7584,
 42.468
@@ -1884,6 +1884,132 @@
 38.3613
 ],
 "aciklama": "Devletin doğuşuna tanıklık eden höyük."
+},
+{
+"ad": "Karatay Medresesi",
+"alt": [
+"Karatay Çini Eserler Müzesi"
+],
+"il": "Konya",
+"ulke": "Türkiye",
+"kategori": "Medrese",
+"koordinat": [
+37.8744,
+32.4951
+],
+"aciklama": "Çini süslemeli kubbesiyle 13. yüzyıl Selçuklu medresesi."
+},
+{
+"ad": "İnce Minareli Medrese",
+"alt": [
+"İnce Minare"
+],
+"il": "Konya",
+"ulke": "Türkiye",
+"kategori": "Medrese",
+"koordinat": [
+37.873,
+32.489
+],
+"aciklama": "Taç kapısıyla ünlü Selçuklu medresesi, bugün taş ve ahşap eserler müzesi."
+},
+{
+"ad": "Döner Kümbet",
+"alt": [
+"Döner Kümbet Kayseri"
+],
+"il": "Kayseri",
+"ulke": "Türkiye",
+"kategori": "Kümbet",
+"koordinat": [
+38.7178,
+35.4926
+],
+"aciklama": "Kabartmalarıyla 13. yüzyıl Selçuklu kümbeti."
+},
+{
+"ad": "Ağzıkarahan Kervansarayı",
+"alt": [
+"Ağzıkara Han"
+],
+"il": "Aksaray",
+"ulke": "Türkiye",
+"kategori": "Kervansaray",
+"koordinat": [
+38.3725,
+34.196
+],
+"aciklama": "Aksaray–Nevşehir yolu üzerindeki Selçuklu kervansarayı."
+},
+{
+"ad": "Büyük Valide Han",
+"alt": [
+"Valide Han"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Han",
+"koordinat": [
+41.014,
+28.9675
+],
+"aciklama": "Kapalıçarşı yakınındaki 17. yüzyıl Osmanlı hanı."
+},
+{
+"ad": "Çemberlitaş Hamamı",
+"alt": [
+"Çemberlitaş"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Hamam",
+"koordinat": [
+41.0085,
+28.9715
+],
+"aciklama": "Mimar Sinan'ın 1584'te yaptığı tarihi hamam."
+},
+{
+"ad": "Hürrem Sultan Hamamı",
+"alt": [
+"Haseki Hürrem Hamamı"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Hamam",
+"koordinat": [
+41.0072,
+28.9786
+],
+"aciklama": "Ayasofya ile Sultanahmet arasındaki Sinan hamamı."
+},
+{
+"ad": "Cağaloğlu Hamamı",
+"alt": [
+"Cağaloğlu"
+],
+"il": "İstanbul",
+"ulke": "Türkiye",
+"kategori": "Hamam",
+"koordinat": [
+41.0108,
+28.9763
+],
+"aciklama": "1741'de yapılan son büyük Osmanlı hamamlarından."
+},
+{
+"ad": "Mevlana Türbesi",
+"alt": [
+"Yeşil Türbe Konya"
+],
+"il": "Konya",
+"ulke": "Türkiye",
+"kategori": "Türbe",
+"koordinat": [
+37.8708,
+32.5047
+],
+"aciklama": "Mevlana Celaleddin Rumi'nin yeşil kubbeli türbesi."
 },
 {
 "ad": "Kolezyum",
@@ -2038,7 +2164,7 @@
 ],
 "il": "Kalambaka",
 "ulke": "Yunanistan",
-"kategori": "Doğal alan",
+"kategori": "Doğal oluşum",
 "koordinat": [
 39.7217,
 21.6306

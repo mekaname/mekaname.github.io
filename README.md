@@ -1,5 +1,7 @@
 # Kültürİz
 
+<img src="assets/logo.jpg" alt="KültürİZ logosu" width="200">
+
 Gezilen tarihi yerlerin paylaşıldığı, mobil öncelikli bir web uygulaması (sürüm 1.0 E).
 
 ## Neler çalışıyor

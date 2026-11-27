@@ -2,12 +2,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co https://*.googleusercontent.com https://tile.openstreetmap.org; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' data: blob: https://*.supabase.co wss://*.supabase.co https://nominatim.openstreetmap.org; frame-src https://maps.google.com https://www.google.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Kültürİz</title>
+<title>KültürİZ</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="theme-color" content="#1b5e8c">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/simge-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/simge-192.png">
+<link rel="apple-touch-icon" href="assets/simge-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Young+Serif&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Montserrat:wght@400;700&family=Young+Serif&display=swap">
 <style>
 /* Layout: tek telefon sütunu. Giriş = tam ekran fiziki harita + ortada logo; uygulama = yapışkan üst çubuk, soldan çekmece, akış ve gönderi detay sayfası. */
 :root {
@@ -1157,6 +1160,14 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
 .counter.over { color: var(--like); font-weight: 700; }
 .caption { white-space: pre-line; overflow-wrap: anywhere; }
 .gizli { font-style: normal; font-size: .75rem; opacity: .8; }
+.brand { font-family: "Montserrat", var(--font-body); font-weight: 400; letter-spacing: -.01em; }
+.brand b { font-weight: 700; }
+.wordmark.brand { font-size: clamp(2.6rem, 12vw, 3.6rem); }
+.login-mark { width: 104px; height: 104px; display: block; margin: 0 auto 16px; padding: 10px; background: #fff; border-radius: 28px; box-shadow: 0 8px 28px rgba(0,0,0,.4); }
+.brand-sm { display: inline-flex; align-items: center; gap: 8px; }
+.brand-sm img { width: 30px; height: 30px; flex: none; }
+.topbar-title .brand { font-size: 1.35rem; }
+.drawer-top .wm.brand-sm .brand { font-size: 1.3rem; }
 .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
 .add-wrap { position: relative; aspect-ratio: 1; }
 .add-wrap .add-tile { width: 100%; height: 100%; font: inherit; }
@@ -1199,7 +1210,8 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
   <div id="login-map" aria-hidden="true"></div>
   <div class="login-center">
     <div>
-      <h1 class="wordmark">Kültürİz</h1>
+      <img class="login-mark" src="assets/logo-isaret.png" alt="" width="112" height="112">
+      <h1 class="wordmark brand">Kültür<b>İZ</b></h1>
       <p class="tagline">Gezdiğin tarihi yerleri paylaş.</p>
     </div>
     <div class="login-actions">
@@ -1215,7 +1227,7 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
 <div class="app" id="app" hidden>
   <header class="topbar">
     <button class="icon-btn" id="btn-left" type="button" aria-label="Menüyü aç"></button>
-    <p class="topbar-title" id="top-title">Kültürİz</p>
+    <p class="topbar-title" id="top-title"><span class="brand-sm"><img src="assets/logo-isaret.png" alt=""><span class="brand">Kültür<b>İZ</b></span></span></p>
     <button class="settings-btn" id="btn-settings" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       <span>Ayarlar</span>
@@ -1228,7 +1240,7 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
 <div class="drawer-wrap" id="drawer" hidden>
   <nav class="drawer" aria-label="Ana menü">
     <div class="drawer-top">
-      <span class="wm">Kültürİz</span>
+      <span class="wm brand-sm"><img src="assets/logo-isaret.png" alt=""><span class="brand">Kültür<b>İZ</b></span></span>
       <button class="icon-btn" data-close="drawer" type="button" aria-label="Menüyü kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
     <ul class="menu" id="menu-list"></ul>
@@ -2011,7 +2023,8 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     var b = $("btn-left");
     if (mode === "back") { b.innerHTML = ICON.back; b.setAttribute("aria-label", "Geri dön"); b.dataset.act = "back"; b.removeAttribute("aria-expanded"); }
     else { b.innerHTML = ICON.menu; b.setAttribute("aria-label", "Menüyü aç"); b.dataset.act = "menu"; b.setAttribute("aria-expanded", "false"); }
-    $("top-title").textContent = title || "Kültürİz";
+    if (title) $("top-title").textContent = title;
+    else $("top-title").innerHTML = '<span class="brand-sm"><img src="assets/logo-isaret.png" alt=""><span class="brand">Kültür<b>İZ</b></span></span>';
     $("top-title").classList.toggle("small", mode === "back");
   }
 

@@ -1228,6 +1228,13 @@ img.ev-ic { width: 18px; height: 18px; vertical-align: -4px; margin-right: 4px; 
 .tabs.four { grid-template-columns: repeat(4, 1fr); }
 .tabs.four button { font-size: .85rem; }
 .ad-stats.four { grid-template-columns: repeat(4, 1fr); }
+.ad-depo { margin-top: 10px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); display: grid; gap: 8px; }
+.dp-ust { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.dp-ust span, .ad-depo small { color: var(--muted); font-size: .82rem; font-variant-numeric: tabular-nums; }
+.dp-bar { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.dp-bar i { display: block; height: 100%; border-radius: inherit; background: var(--accent); }
+.ad-depo.uyari .dp-bar i { background: #c9971a; }
+.ad-depo.dolu .dp-bar i { background: var(--like); }
 .ad-stats.four b { font-size: 1.15rem; }
 .pf-about { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 16px; margin-top: 14px; padding: 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
 .pf-about h3 { margin: 0 0 6px; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; }
@@ -1631,6 +1638,8 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   ERR["tg/yas"] = "Kültürİz'i kullanmak için en az 13 yaşında olmalısın.";
   ERR["tg/kod"] = "Kod hatalı ya da süresi dolmuş. Kodu kontrol et ya da yeni kod iste.";
   ERR["tg/sikayet-var"] = "Bu gönderiyi zaten şikayet ettin.";
+  ERR["tg/buyuk"] = "Dosya çok büyük. Videolar en fazla 15 MB ve 1 dakika olabilir.";
+  ERR["tg/depo-yok"] = "Depolama göstergesi için yönetici veritabanı güncellemesini (güncelleme-8) çalıştırmalı.";
   ERR["tg/oyun-yok"] = "Sıralama tablosu henüz açılmadı. Yönetici veritabanı güncellemesini (güncelleme-7) çalıştırmalı.";
   ERR["tg/mesaj-yok"] = "Mesajlaşma henüz açılmadı. Yönetici veritabanı güncellemesini (güncelleme-6) çalıştırmalı.";
   ERR["tg/duzenle"] = "Gönderi güncellenemedi. Yönetici veritabanı güncellemesini (güncelleme-5) çalıştırmalı.";
@@ -1663,6 +1672,8 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       else if (/token has expired|token is invalid|otp|invalid token/i.test(m)) c = "tg/kod";
       else if (/mesajlar/i.test(m) && /schema cache|does not exist|could not find/i.test(m)) c = "tg/mesaj-yok";
       else if (/oyun_/i.test(m) && /schema cache|does not exist|could not find/i.test(m)) c = "tg/oyun-yok";
+      else if (/depolama_durumu/i.test(m) && /schema cache|does not exist|could not find/i.test(m)) c = "tg/depo-yok";
+      else if (/exceeded the maximum allowed size|payload too large|entity too large/i.test(m)) c = "tg/buyuk";
       else if (/failed to fetch|network/i.test(m)) c = "auth/network-request-failed";
       else if (/row-level security|permission denied|violates row/i.test(m)) c = current && current.yasakli ? "tg/yasak" : "tg/yetki";
       if (c) return fail(c);
@@ -1745,7 +1756,14 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
           return sb.from("profiller").update(row).eq("id", current.uid).then(function (r) {
             if (r.error && /ilgi_alanlari/.test(r.error.message || "")) { delete row.ilgi_alanlari; return sb.from("profiller").update(row).eq("id", current.uid); }
             return r;
-          }).then(chk).then(function () { current.name = d.ad; current.bio = d.bio; if (url !== undefined) current.photo = url || ""; return url; });
+          }).then(chk).then(function () {
+            var eski = current.photo || "", on = "/storage/v1/object/public/medya/";
+            if (url !== undefined && eski !== (url || "") && eski.indexOf(on) > 0) {
+              var eyol = eski.split(on)[1];
+              if (eyol && eyol.indexOf(current.uid + "/") === 0) sb.storage.from("medya").remove([eyol]);
+            }
+            current.name = d.ad; current.bio = d.bio; if (url !== undefined) current.photo = url || ""; return url;
+          });
         });
       },
       listPosts: function () {
@@ -1781,7 +1799,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
         return sb.from("gonderiler").delete().eq("id", p.id).select("id").then(chk).then(function (rows) {
           if (!rows || !rows.length) throw fail("tg/yetki");
           var yollar = p.medya.map(function (m) { return m.yol; }).filter(Boolean);
-          if (yollar.length) sb.storage.from("medya").remove(yollar);
+          if (yollar.length) return sb.storage.from("medya").remove(yollar).then(function () {}, function () {});
         });
       },
       searchUsers: function (q) {
@@ -1801,6 +1819,14 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
           });
       },
       markRead: function (uid) { return sb.from("mesajlar").update({ okundu: true }).eq("alici_id", current.uid).eq("gonderen_id", uid).eq("okundu", false).then(chk); },
+      storage: function () { return sb.rpc("depolama_durumu").then(chk); },
+      cleanStorage: function (yollar) {
+        var seq = Promise.resolve(), n = 0;
+        for (var i = 0; i < yollar.length; i += 100) (function (parca) {
+          seq = seq.then(function () { return sb.storage.from("medya").remove(parca).then(function (r) { chk(r); n += (r.data || []).length; }); });
+        })(yollar.slice(i, i + 100));
+        return seq.then(function () { return n; });
+      },
       saveScore: function (mod, puan) {
         if (current.yasakli) return Promise.resolve();
         return sb.from("oyun_skorlari").insert({ kullanici_id: current.uid, mod: mod, puan: puan }).then(chk);
@@ -1969,6 +1995,8 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       },
       messages: function () { var me = USER.uid; return Promise.resolve(store.get("tg_mesajlar", []).filter(function (m) { return m.from === me || m.to === me; })); },
       markRead: function (uid) { var me = USER.uid, list = store.get("tg_mesajlar", []); list.forEach(function (m) { if (m.to === me && m.from === uid) m.okundu = true; }); store.set("tg_mesajlar", list); return Promise.resolve(); },
+      storage: function () { return Promise.resolve(null); },
+      cleanStorage: function () { return Promise.resolve(0); },
       saveScore: function (mod, puan) { var l = store.get("tg_oyun", []); l.push({ uid: USER.uid, ad: USER.name, foto: USER.photo || "", mod: mod, puan: puan }); store.set("tg_oyun", l.slice(-500)); return Promise.resolve(); },
       leaders: function (mod) {
         var best = {}; store.get("tg_oyun", []).forEach(function (r) { if (r.mod === mod && (!best[r.uid] || r.puan > best[r.uid].puan)) best[r.uid] = r; });
@@ -2885,10 +2913,23 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       if (mevcut.length + picks.length >= 7) { err = "En fazla 7 dosya ekleyebilirsin."; return; }
       var tur = /^video\//.test(f.type) ? "video" : (/^image\//.test(f.type) || /\.(heic|heif|jpe?g|png|webp)$/i.test(f.name)) ? "foto" : /\.(mp4|mov|m4v|webm)$/i.test(f.name) ? "video" : null;
       if (!tur) { err = f.name + " bir fotoğraf ya da video değil."; return; }
-      if (tur === "video" && f.size > 50e6) { err = f.name + " 50 MB'tan büyük. Daha kısa bir video seç."; return; }
-      picks.push({ file: f, tur: tur, url: URL.createObjectURL(f) });
+      if (tur === "video" && f.size > 15 * 1048576) { err = f.name + " 15 MB'tan büyük. En fazla 1 dakikalık kısa bir video seç."; return; }
+      var pk = { file: f, tur: tur, url: URL.createObjectURL(f) };
+      picks.push(pk);
+      if (tur === "video") sureKontrol(pk);
     });
     drawPicks(); shErr(err);
+  }
+  function sureKontrol(pk) {
+    var v = document.createElement("video"); v.preload = "metadata"; v.muted = true;
+    v.onloadedmetadata = function () {
+      if (isFinite(v.duration) && v.duration > 61 && picks.indexOf(pk) >= 0) {
+        picks.splice(picks.indexOf(pk), 1); drawPicks();
+        shErr((pk.file.name || "Video") + " " + Math.round(v.duration) + " saniye. Videolar en fazla 1 dakika olabilir.");
+      }
+      v.removeAttribute("src"); v.load();
+    };
+    v.src = pk.url;
   }
   function submitShare(e) {
     e.preventDefault();
@@ -3316,6 +3357,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     $("view").innerHTML = '<div class="page page-pad">' +
       (Veri.mode === "local" ? '<p class="local-note" style="margin-top:14px">Önizleme: yalnızca bu tarayıcıdaki veriler.</p>' : '') +
       '<div class="ad-stats four" id="ad-stats"><div><b>…</b><span>Üye</span></div><div><b>…</b><span>Gönderi</span></div><div><b>…</b><span>Yorum</span></div><div><b>…</b><span>Şikayet</span></div></div>' +
+      '<div class="ad-depo" id="ad-depo" hidden></div>' +
       '<div class="tabs three four" role="tablist">' +
       [["gonderi", "Gönderiler"], ["sikayet", "Şikayetler"], ["yorum", "Yorumlar"], ["uye", "Üyeler"]].map(function (t) { return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="' + (adTab === t[0]) + '">' + t[1] + '</button>'; }).join("") +
       '</div><div id="ad-body"><p class="none">Yükleniyor…</p></div></div>';
@@ -3324,7 +3366,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       this.querySelectorAll("[data-tab]").forEach(function (t) { t.setAttribute("aria-selected", String(t === b)); }); drawAdmin();
     });
     $("ad-body").addEventListener("click", adminClick);
-    loadAdmin();
+    loadAdmin(); depoYukle(true);
   }
   function loadAdmin() {
     return Promise.all([Veri.adminUsers(), Veri.adminComments(), Veri.adminReports().catch(function () { return []; })]).then(function (r) {
@@ -3334,6 +3376,32 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       $("ad-stats").innerHTML = '<div><b>' + adUsers.length + '</b><span>Üye</span></div><div><b>' + posts + '</b><span>Gönderi</span></div><div><b>' + adComments.length + '</b><span>Yorum</span></div><div><b>' + adReports.length + '</b><span>Şikayet</span></div>';
       drawAdmin();
     }).catch(function (err) { if ($("ad-body")) $("ad-body").innerHTML = '<p class="empty">Yönetim verileri alınamadı: ' + esc(errText(err)) + '</p>'; });
+  }
+  var DEPO_SINIR = 1024 * 1048576;
+  function mb(b) { return (b / 1048576).toLocaleString("tr-TR", { maximumFractionDigits: b < 10 * 1048576 ? 1 : 0 }) + " MB"; }
+  function depoCiz(d) {
+    var k = $("ad-depo"); if (!k) return;
+    if (!d) { k.hidden = true; return; }
+    var oran = Math.min(1, d.toplam / DEPO_SINIR), yuzde = Math.round(oran * 100);
+    k.hidden = false; k.className = "ad-depo" + (oran > .85 ? " dolu" : oran > .6 ? " uyari" : "");
+    k.innerHTML = '<div class="dp-ust"><strong>Depolama</strong><span>' + mb(d.toplam) + ' / 1 GB · ' + d.sayi + ' dosya</span></div>' +
+      '<div class="dp-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + yuzde + '" aria-label="Depolama doluluğu"><i style="width:' + Math.max(1, yuzde) + '%"></i></div>' +
+      '<small>%' + yuzde + ' dolu' + (oran > .85 ? ' · Yer azaldı, eski videoları silmeyi düşün.' : '') + '</small>';
+  }
+  function depoYukle(temizle) {
+    Veri.storage().then(function (d) {
+      if (route !== "admin") return;
+      depoCiz(d);
+      if (!temizle || !d || !d.yetim || !d.yetim.length) return;
+      var boyut = d.yetim_boyut;
+      return Veri.cleanStorage(d.yetim).then(function (n) {
+        if (n) toast("Silinen içeriklerden kalan " + n + " dosya temizlendi (" + mb(boyut) + ").");
+        if (route === "admin") depoYukle(false);
+      });
+    }).catch(function (err) {
+      var k = $("ad-depo"); if (!k) return;
+      k.hidden = false; k.className = "ad-depo"; k.innerHTML = '<small>' + esc(errText(err)) + '</small>';
+    });
   }
   function fmtDate(t) { return new Date(t).toLocaleDateString("tr-TR", { day: "numeric", month: "short", year: "numeric" }); }
   function drawAdmin() {

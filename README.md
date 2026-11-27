@@ -80,6 +80,9 @@ Supabase bağlanmadan yayınlanırsa site çalışır ama önizleme modundadır:
 ### 10. Haritada Bul oyunu
 `supabase/guncelleme-7.sql` dosyasını SQL Editor'de çalıştır. Keşfet sayfasındaki "Haritada Bul" kartından açılır: 5 tarihî mekânın yerini haritada işaretlersin, yakınlığa göre tur başına en fazla 1000 puan alırsın (Türkiye ve Dünya modları). Her oyuncunun en iyi puanı sıralama tablosunda görünür. Puanlar 0–5000 aralığında olmalıdır, kimse başkası adına puan kaydedemez, günde en fazla 60 oyun kaydedilir; puanları yalnızca yönetici silebilir.
 
+### 11. Video sınırı ve depolama temizliği
+`supabase/guncelleme-8.sql` dosyasını SQL Editor'de çalıştır. Videolar en fazla 15 MB ve 1 dakika olabilir (fotoğraflar site tarafından zaten küçültülür). Yönetim sayfasında depolama göstergesi (1 GB'ın ne kadarı dolu) görünür. Yönetici Yönetim sayfasını her açtığında, silinmiş gönderilerden, silinmiş hesaplardan, düzenlemede çıkarılan medyadan ve eski profil fotoğraflarından kalan dosyalar depodan kendiliğinden silinir.
+
 ### Ücretsiz sınırlar
 Supabase ücretsiz planında 500 MB veritabanı ve 1 GB dosya deposu vardır; video başına en fazla 50 MB yüklenebilir. Kullanılmayan ücretsiz projeler bir hafta hareketsiz kalınca duraklatılır, panelden tek tıkla yeniden açılır.
 

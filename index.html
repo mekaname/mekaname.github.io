@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co https://*.googleusercontent.com https://tile.openstreetmap.org; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' data: blob: https://*.supabase.co wss://*.supabase.co https://nominatim.openstreetmap.org; frame-src https://maps.google.com https://www.google.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://*.supabase.co https://*.googleusercontent.com https://tile.openstreetmap.org; media-src 'self' data: blob: https://*.supabase.co; connect-src 'self' data: blob: https://*.supabase.co wss://*.supabase.co https://nominatim.openstreetmap.org; frame-src https://maps.google.com https://www.google.com https://www.youtube-nocookie.com https://www.youtube.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>KültürİZ</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -1168,6 +1168,10 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
 .brand-sm img { width: 30px; height: 30px; flex: none; }
 .topbar-title .brand { font-size: 1.35rem; }
 .drawer-top .wm.brand-sm .brand { font-size: 1.3rem; }
+.egg .sheet-head h2 { font-family: "Montserrat", var(--font-body); font-weight: 700; }
+.egg-sub { margin: 4px 0 12px; color: var(--muted); font-weight: 600; }
+.egg-player { position: relative; aspect-ratio: 16 / 9; max-width: 100%; border-radius: 12px; overflow: hidden; background: #000; }
+.egg-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
 .add-wrap { position: relative; aspect-ratio: 1; }
 .add-wrap .add-tile { width: 100%; height: 100%; font: inherit; }
@@ -1320,6 +1324,20 @@ body.in-app::before { content: ""; position: fixed; inset: 0 0 auto; height: env
       <button type="button" data-t="dark">Koyu</button>
     </div>
     <button class="danger" id="btn-logout" type="button">Çıkış Yap</button>
+  </div>
+</div>
+
+<!-- Sürpriz: Ayarlar > Tema > "Sistem" düğmesine art arda 5 kez basınca açılır -->
+<div class="sheet-wrap" id="egg" hidden>
+  <div class="sheet egg" role="dialog" aria-modal="true" aria-labelledby="egg-title">
+    <div class="grip"></div>
+    <div class="sheet-head">
+      <h2 id="egg-title">admin'in en sevdiği müzik</h2>
+      <button class="icon-btn" data-close="egg" type="button" aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <p class="egg-sub">Tolga Çandar · Harmandalı</p>
+    <div class="egg-player" id="egg-player"></div>
+    <p class="hint">Şarkı başlamazsa oynatıcıya dokun.</p>
   </div>
 </div>
 
@@ -3069,11 +3087,25 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     $("account").innerHTML = avatarHTML(USER.name, "var(--accent)", USER.photo) + '<div><strong>' + esc(USER.name) + '</strong><span>' + esc(USER.email) + '</span><span>Giriş yöntemi: ' + esc(USER.method) + '</span></div>';
     $("settings").hidden = false;
   });
-  $("theme-seg").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; store.set("tg_tema", b.dataset.t); applyTheme(b.dataset.t); });
+  var eggSay = 0, eggZaman = 0;
+  $("theme-seg").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return; store.set("tg_tema", b.dataset.t); applyTheme(b.dataset.t);
+    // Sürpriz: "Sistem"e 3 saniye içinde art arda 5 kez basılırsa
+    if (b.dataset.t !== "system") { eggSay = 0; return; }
+    var simdi = Date.now(); eggSay = simdi - eggZaman < 3000 ? eggSay + 1 : 1; eggZaman = simdi;
+    if (eggSay >= 5) { eggSay = 0; acSurpriz(); }
+  });
+  function acSurpriz() {
+    $("settings").hidden = true;
+    $("egg-player").innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/6xIjqp0SO7U?autoplay=1&rel=0&playsinline=1" title="Tolga Çandar - Harmandalı" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    $("egg").hidden = false;
+  }
+  function kapatSurpriz() { $("egg-player").innerHTML = ""; }
+  new MutationObserver(function () { if ($("egg").hidden) kapatSurpriz(); }).observe($("egg"), { attributes: true, attributeFilter: ["hidden"] });
   $("btn-logout").addEventListener("click", function () { closeAll(); Veri.signOut(); });
 
   /* ===================== GENEL ===================== */
-  function closeAll() { ["drawer", "settings", "send", "report"].concat(authMode === "birth" ? [] : ["auth"]).forEach(function (id) { $(id).hidden = true; }); $("btn-left").getAttribute("aria-expanded") && $("btn-left").setAttribute("aria-expanded", "false"); }
+  function closeAll() { ["drawer", "settings", "send", "report", "egg"].concat(authMode === "birth" ? [] : ["auth"]).forEach(function (id) { $(id).hidden = true; }); $("btn-left").getAttribute("aria-expanded") && $("btn-left").setAttribute("aria-expanded", "false"); }
   document.addEventListener("click", function (e) {
     var am = $("sh-add-menu"); if (am && !am.hidden && !e.target.closest(".add-wrap")) { am.hidden = true; $("sh-add") && $("sh-add").setAttribute("aria-expanded", "false"); }
     var c = e.target.closest("[data-close]"); if (c) { $(c.dataset.close).hidden = true; return; }

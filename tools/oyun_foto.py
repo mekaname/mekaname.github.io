@@ -54,13 +54,16 @@ def main():
     for p in gon["gonderiler"]:
         for b in p.get("benzer", []): yerler.append((b["ad"], [], (b.get("bolge") or "").split(",")[0]))
     sonuc = json.load(open(CIKTI)) if os.path.exists(CIKTI) else {}
-    atla = set(sys.argv[1:])
+    # Elle düzeltme: python3 tools/oyun_foto.py "Mekân adı=Commons arama sözcükleri" ...
+    ozel = dict(a.split("=", 1) for a in sys.argv[1:] if "=" in a)
+    atla = set(a.split("=", 1)[0] for a in sys.argv[1:])
     for ad, alt, il in yerler:
         if ad in sonuc and ad not in atla: continue
         if atla and ad not in atla: continue
         ilq = kod(il).replace("-", " ") if il and kod(il) not in kod(ad) else ""
         en = [a for a in alt if re.match(r"^[A-Za-z0-9 '\-.,]+$", a)][:1]
         sorgular = [(q + " " + ilq).strip() for q in en + [ad]] + en + [ad]
+        if ad in ozel: sorgular = [ozel[ad]]
         bulunan = None
         for s in sorgular:
             try: bulunan = ara(s)

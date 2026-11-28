@@ -1,0 +1,32 @@
+{
+"Topkapı Sarayı": {
+"foto": "assets/oyun/topkapi-sarayi.jpg",
+"kaynak": "File:Istanbul asv2020-02 img19 Topkapı Palace.jpg",
+"yazar": "A.Savin",
+"lisans": "FAL"
+},
+"Ayasofya": {
+"foto": "assets/oyun/ayasofya.jpg",
+"kaynak": "File:Hagia Sophia Mars 2013.jpg",
+"yazar": "Arild Vågen",
+"lisans": "CC BY-SA 3.0"
+},
+"Sultanahmet Camii": {
+"foto": "assets/oyun/sultanahmet-camii.jpg",
+"kaynak": "File:Blue Mosque Courtyard Dusk Wikimedia Commons.jpg",
+"yazar": "Benh LIEU SONG (Flickr)",
+"lisans": "CC BY-SA 3.0"
+},
+"Yerebatan Sarnıcı": {
+"foto": "assets/oyun/yerebatan-sarnici.jpg",
+"kaynak": "File:Istanbul Basilica Cistern 2009.JPG",
+"yazar": "Bjørn Christian Tørrissen",
+"lisans": "CC BY-SA 3.0"
+},
+"Sultanahmet Meydanı (Hipodrom)": {
+"foto": "assets/oyun/sultanahmet-meydani-hipodrom.jpg",
+"kaynak": "File:ROBERTSON Constantinople, Obelisk in the Hippodrome ca 1854.jpg",
+"yazar": "James Robertson",
+"lisans": "Public domain"
+}
+}

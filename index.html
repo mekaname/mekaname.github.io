@@ -1127,9 +1127,18 @@ img.ev-ic { width: 18px; height: 18px; vertical-align: -4px; margin-right: 4px; 
 .lider b { font-variant-numeric: tabular-nums; }
 .lider .none, .lider li.none { color: var(--muted); justify-content: center; border: 0; }
 .game-page { display: flex; flex-direction: column; height: calc(100vh - 57px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); height: calc(100dvh - 57px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); }
-.gm-card { display: flex; gap: 12px; align-items: flex-start; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--line); background: var(--surface); max-height: 34%; overflow-y: auto; }
-.gm-foto { flex: none; width: 76px; height: 76px; object-fit: cover; border-radius: 10px; }
+.gm-card { display: flex; flex-direction: column; border-bottom: 1px solid var(--line); background: var(--surface); max-height: 48%; overflow-y: auto; flex: none; }
+.gm-card.page-pad { padding: 0; }
+.gm-kapak { position: relative; flex: none; height: clamp(130px, 27vh, 260px); background: #222; overflow: hidden; }
+.gm-kapak img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gm-ust { position: absolute; inset: auto 0 0; display: grid; gap: 1px; padding-top: 40px; padding-bottom: 10px; color: #fff; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.72)); }
+.gm-ust small { font-size: .76rem; font-weight: 600; opacity: .9; font-variant-numeric: tabular-nums; }
+.gm-ust strong { font-size: 1.25rem; text-shadow: 0 1px 8px rgba(0,0,0,.5); }
+.gm-ust span { font-size: .88rem; opacity: .92; }
+.gm-kredi { position: absolute; top: 6px; right: 8px; max-width: 70%; font-style: normal; font-size: .62rem; color: rgba(255,255,255,.85); background: rgba(0,0,0,.4); padding: 2px 6px; border-radius: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gm-card .gm-info { padding-top: 10px; padding-bottom: 10px; }
 .gm-info { display: grid; gap: 2px; min-width: 0; }
+.gm-info .row-links { margin-top: 4px; }
 .gm-info small { color: var(--muted); font-size: .78rem; font-weight: 600; font-variant-numeric: tabular-nums; }
 .gm-info strong { font-size: 1.12rem; }
 .gm-info span { color: var(--muted); font-size: .88rem; }
@@ -3141,10 +3150,13 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   var gmMod = "turkiye", GM = null, gmMap = null, gmLayer = null;
   var GM_TUR = 5;
   function trIcinde(c) { return c[0] > 35.7 && c[0] < 42.3 && c[1] > 25.6 && c[1] < 44.9; }
+  var OYUN_FOTO = {}, oyunFotoYuklendi = null;
+  function oyunFotoYukle() { return oyunFotoYuklendi || (oyunFotoYuklendi = getJSON("data/oyun-foto.json").then(function (d) { OYUN_FOTO = d || {}; }, function () { oyunFotoYuklendi = null; })); }
   function gmHavuz() {
     var list = CATALOG.map(function (x) {
       var p = x.postId && postById(x.postId);
-      return { ad: x.ad, kategori: x.kategori, aciklama: x.aciklama, bolge: x.bolge, koordinat: x.koordinat, foto: p ? thumbOf(p) : "", postId: x.postId || null };
+      var of = OYUN_FOTO[x.ad];
+      return { ad: x.ad, kategori: x.kategori, aciklama: x.aciklama, bolge: x.bolge, koordinat: x.koordinat, foto: p ? thumbOf(p) : of ? asset(of.foto) : "", kredi: !p && of ? [of.yazar, of.lisans].filter(Boolean).join(" · ") : "", postId: x.postId || null };
     });
     DATA.gonderiler.forEach(function (p) {
       if (p.ornek || !p.koordinat || !thumbOf(p)) return;
@@ -3157,10 +3169,10 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   function gmSec(mod) {
     var h = gmHavuz(), tr = karistir(h.filter(function (x) { return trIcinde(x.koordinat); })), dis = karistir(h.filter(function (x) { return !trIcinde(x.koordinat); }));
     var secim;
-    if (mod === "turkiye") {
-      var fotolu = tr.filter(function (x) { return x.foto; }), digerleri = tr.filter(function (x) { return !x.foto; });
-      secim = fotolu.slice(0, 2).concat(digerleri).slice(0, GM_TUR);
-    } else secim = dis.slice(0, 3).concat(tr.slice(0, 2));
+    function fotoOnce(a) { return a.filter(function (x) { return x.foto; }).concat(a.filter(function (x) { return !x.foto; })); }
+    tr = fotoOnce(tr); dis = fotoOnce(dis);
+    if (mod === "turkiye") secim = tr.slice(0, GM_TUR);
+    else secim = dis.slice(0, 3).concat(tr.slice(0, 2));
     return karistir(secim).slice(0, GM_TUR);
   }
   function gmPuan(d, mod) {
@@ -3173,11 +3185,14 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
   }
   function gmKm(d) { return d < 10 ? d.toFixed(1).replace(".", ",") + " km" : Math.round(d).toLocaleString("tr-TR") + " km"; }
   function gmRekor(mod) { return store.get("tg_oyun_rekor_" + USER.uid + "_" + mod, 0); }
+  // Uzaktan fiziki harita, yakınlaştırınca ayrıntılı uydu görüntüsü (ikisinde de yer adı yok; adlar tahminden sonra çıkar).
   function fizikiBase(map) {
-    var failed = false;
-    var tl = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}", { maxZoom: 8, maxNativeZoom: 8, attribution: "Esri, US National Park Service" }).addTo(map);
-    tl.on("tileerror", function () { if (failed) return; failed = true; map.removeLayer(tl); localBase(map); });
-    map.setMaxZoom(8);
+    var failed = false, esri = "https://server.arcgisonline.com/ArcGIS/rest/services/";
+    var fiz = L.tileLayer(esri + "World_Physical_Map/MapServer/tile/{z}/{y}/{x}", { maxZoom: 6, attribution: "Esri, US National Park Service" }).addTo(map);
+    var uydu = L.tileLayer(esri + "World_Imagery/MapServer/tile/{z}/{y}/{x}", { minZoom: 7, maxZoom: 18, attribution: "Esri, Maxar, Earthstar Geographics" }).addTo(map);
+    function yedek() { if (failed) return; failed = true; map.removeLayer(fiz); map.removeLayer(uydu); localBase(map); map.setMaxZoom(9); if (GM) GM.yedek = true; }
+    fiz.on("tileerror", yedek);
+    map.setMaxZoom(18);
   }
   function liderHTML(list) {
     if (!list.length) return '<li class="none">Henüz kimse oynamadı. İlk sen ol.</li>';
@@ -3193,7 +3208,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       .catch(function (err) { if ($("gm-lider")) $("gm-lider").innerHTML = '<li class="none">' + esc(errText(err)) + '</li>'; });
   }
   function renderGame() {
-    route = "game"; setTop("back", "Haritada Bul"); GM = null; gmMap = null;
+    route = "game"; setTop("back", "Haritada Bul"); GM = null; gmMap = null; oyunFotoYukle();
     var rekor = gmRekor(gmMod);
     $("view").innerHTML = '<div class="page page-pad game-start">' +
       '<div class="gm-hero"><h2>Haritada Bul</h2><p>' + GM_TUR + ' tarihî mekân, her birinin yerini haritada işaretle. Ne kadar yakına dokunursan o kadar puan; tur başına en fazla 1000.</p></div>' +
@@ -3208,7 +3223,7 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
       var r = gmRekor(gmMod); $("gm-rekor").textContent = r ? r.toLocaleString("tr-TR") : "—";
       $("gm-lider-mod").textContent = gmMod === "turkiye" ? "Türkiye" : "Dünya"; liderYukle(gmMod);
     });
-    $("gm-basla").addEventListener("click", gmBasla);
+    $("gm-basla").addEventListener("click", function () { var b = this; b.disabled = true; Promise.race([oyunFotoYukle(), new Promise(function (r) { setTimeout(r, 4000); })]).then(function () { b.disabled = false; gmBasla(); }); });
     liderYukle(gmMod);
   }
   function gmBasla() {
@@ -3233,12 +3248,21 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     gmTur();
   }
   function gmGorunum() { if (GM.mod === "turkiye") gmMap.setView([39.1, 35.3], 5); else gmMap.setView([30, 20], 2); }
+  function gmKart(x, acik, toplam) {
+    var ust = '<small>Tur ' + (GM.i + 1) + '/' + GM_TUR + ' · ' + toplam.toLocaleString("tr-TR") + ' puan</small>' +
+      '<strong>' + esc(x.ad) + '</strong><span>' + esc(acik ? (x.bolge || x.kategori || "") : (x.kategori || "") + (x.yazar ? " · " + x.yazar + " paylaştı" : "")) + '</span>';
+    var alt = acik ? ((x.aciklama && x.aciklama !== x.bolge ? '<p>' + esc(x.aciklama) + '</p>' : '') +
+      (x.postId && postById(x.postId) ? '<div class="row-links"><button type="button" data-open="' + esc(x.postId) + '">Gönderiyi aç</button></div>' : '')) : '';
+    if (!x.foto) return '<div class="gm-info page-pad">' + ust + alt + '</div>';
+    return '<div class="gm-kapak"><img src="' + x.foto + '" alt="' + esc(x.ad) + '"><div class="gm-ust page-pad">' + ust + '</div>' +
+      (x.kredi ? '<em class="gm-kredi">Foto: ' + esc(x.kredi) + ' · Wikimedia Commons</em>' : '') + '</div>' +
+      (alt ? '<div class="gm-info page-pad">' + alt + '</div>' : '');
+  }
   function gmTur() {
     var x = GM.turlar[GM.i], toplam = GM.sonuc.reduce(function (s, r) { return s + r.puan; }, 0);
     GM.tahmin = null; GM.bitti = false; gmLayer.clearLayers(); gmGorunum();
-    $("gm-card").innerHTML = (x.foto ? '<img class="gm-foto" src="' + x.foto + '" alt="">' : '') +
-      '<div class="gm-info"><small>Tur ' + (GM.i + 1) + '/' + GM_TUR + ' · ' + toplam.toLocaleString("tr-TR") + ' puan</small>' +
-      '<strong>' + esc(x.ad) + '</strong><span>' + esc(x.kategori || "") + (x.yazar ? " · " + esc(x.yazar) + " paylaştı" : "") + '</span></div>';
+    $("gm-card").innerHTML = gmKart(x, false, toplam);
+    if (GM.etiket) { gmMap.removeLayer(GM.etiket); GM.etiket = null; }
     $("gm-durum").textContent = "Haritada yerine dokun.";
     var b = $("gm-btn"); b.textContent = "Tahmin et"; b.disabled = true;
   }
@@ -3249,12 +3273,10 @@ var ORNEK_GONDERILER = true;  // Ayşe, Mehmet ve Elif'in örnek gönderileri ak
     L.marker(x.koordinat, { icon: mainPin() }).addTo(gmLayer);
     L.polyline([GM.tahmin, x.koordinat], { color: "#b4553a", weight: 2.5, dashArray: "6 6", interactive: false }).addTo(gmLayer);
     var toplam = GM.sonuc.reduce(function (s, r) { return s + r.puan; }, 0);
-    $("gm-card").innerHTML = (x.foto ? '<img class="gm-foto" src="' + x.foto + '" alt="">' : '') +
-      '<div class="gm-info"><small>Tur ' + (GM.i + 1) + '/' + GM_TUR + ' · ' + toplam.toLocaleString("tr-TR") + ' puan</small>' +
-      '<strong>' + esc(x.ad) + '</strong><span>' + esc(x.bolge || "") + '</span>' + (x.aciklama && x.aciklama !== x.bolge ? '<p>' + esc(x.aciklama) + '</p>' : '') +
-      (x.postId && postById(x.postId) ? '<div class="row-links"><button type="button" data-open="' + esc(x.postId) + '">Gönderiyi aç</button></div>' : '') + '</div>';
+    $("gm-card").innerHTML = gmKart(x, true, toplam);
+    if (!GM.yedek) GM.etiket = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}", { maxZoom: 18, zIndex: 5 }).addTo(gmMap);
     gmMap.invalidateSize();
-    gmMap.fitBounds(L.latLngBounds([GM.tahmin, x.koordinat]), { padding: [40, 40], maxZoom: 7, animate: false });
+    gmMap.fitBounds(L.latLngBounds([GM.tahmin, x.koordinat]), { padding: [40, 40], maxZoom: 9, animate: false });
     $("gm-durum").innerHTML = '<b>' + gmKm(d) + '</b> uzaktaydın · <b class="gm-p">+' + puan + '</b>';
     $("gm-btn").textContent = GM.i + 1 < GM_TUR ? "Sonraki" : "Sonucu gör";
   }

@@ -1,9 +1,9 @@
 {
 "Topkapı Sarayı": {
 "foto": "assets/oyun/topkapi-sarayi.jpg",
-"kaynak": "File:Tughra of Mahmud II on the Gate of Salutation, Topkapi Palace.jpg",
-"yazar": "José Luiz",
-"lisans": "CC BY-SA 3.0"
+"kaynak": "File:Bâb-üs Selâm.jpg",
+"yazar": "Maksym Kozlenko",
+"lisans": "CC BY-SA 4.0"
 },
 "Ayasofya": {
 "foto": "assets/oyun/ayasofya.jpg",
@@ -37,7 +37,7 @@
 },
 "Beylerbeyi Sarayı": {
 "foto": "assets/oyun/beylerbeyi-sarayi.jpg",
-"kaynak": "File:Beylerbeyi Palace - Lion statue.jpg",
+"kaynak": "File:Beylerbeyi Palace - Bosphorus gate.jpg",
 "yazar": "José Luiz",
 "lisans": "CC BY-SA 3.0"
 },
@@ -91,8 +91,8 @@
 },
 "Kapalıçarşı": {
 "foto": "assets/oyun/kapalicarsi.jpg",
-"kaynak": "File:Sample of Tee - Grand Bazaar.JPG",
-"yazar": "Martin Falbisoner",
+"kaynak": "File:Grand Bazaar in Istanbul Turkey.jpg",
+"yazar": "EWilson (Volunteer)",
 "lisans": "CC BY-SA 4.0"
 },
 "Mısır Çarşısı": {
@@ -103,9 +103,9 @@
 },
 "Galata Kulesi": {
 "foto": "assets/oyun/galata-kulesi.jpg",
-"kaynak": "File:Ceiling of Galata Tower.jpg",
-"yazar": "Julian Lupyan",
-"lisans": "CC0"
+"kaynak": "File:Istanbul Galata Tower IMG 7475 1800.jpg",
+"yazar": "Alexxx1979",
+"lisans": "CC BY-SA 3.0"
 },
 "Kız Kulesi": {
 "foto": "assets/oyun/kiz-kulesi.jpg",
@@ -163,9 +163,9 @@
 },
 "Bursa Ulu Camii": {
 "foto": "assets/oyun/bursa-ulu-camii.jpg",
-"kaynak": "File:Kalomilli - panoramio.jpg",
-"yazar": "curukaismail",
-"lisans": "CC BY 3.0"
+"kaynak": "File:Bursa - Bursa Grand Mosque - 20230709201719.jpg",
+"yazar": "Canercangul",
+"lisans": "CC BY-SA 4.0"
 },
 "Yeşil Türbe": {
 "foto": "assets/oyun/yesil-turbe.jpg",
@@ -181,9 +181,9 @@
 },
 "Cumalıkızık": {
 "foto": "assets/oyun/cumalikizik.jpg",
-"kaynak": "File:Cumalıkızık, Bursa 1.jpg",
-"yazar": "Kadı",
-"lisans": "CC BY 4.0"
+"kaynak": "File:Blue House in Cumalıkızık villages.jpg",
+"yazar": "Ayratayrat",
+"lisans": "CC BY-SA 4.0"
 },
 "Troya": {
 "foto": "assets/oyun/troya.jpg",
@@ -199,15 +199,15 @@
 },
 "Çanakkale Şehitler Abidesi": {
 "foto": "assets/oyun/canakkale-sehitler-abidesi.jpg",
-"kaynak": "File:Gelibolu.JPG",
-"yazar": "Filanca",
-"lisans": "CC BY-SA 3.0"
+"kaynak": "File:Çanakkale Şehitleri Anıtı.JPG",
+"yazar": "Original uploader was Selçuk Bağrışen at tr.wikipedia",
+"lisans": "Public domain"
 },
 "Ephesus (Efes Antik Kenti)": {
 "foto": "assets/oyun/ephesus-efes-antik-kenti.jpg",
-"kaynak": "File:Swissôtel Büyük Efes, 2008.jpg",
-"yazar": "ugur onder bozkurt",
-"lisans": "CC BY 2.0"
+"kaynak": "File:Ephesus Celsus Library Façade.jpg",
+"yazar": "Benh LIEU SONG",
+"lisans": "CC BY-SA 3.0"
 },
 "Bergama (Pergamon)": {
 "foto": "assets/oyun/bergama-pergamon.jpg",
@@ -253,9 +253,9 @@
 },
 "Afrodisias": {
 "foto": "assets/oyun/afrodisias.jpg",
-"kaynak": "File:Geyre - panoramio - Nihat1988 (1).jpg",
-"yazar": "Nihat1988",
-"lisans": "CC BY 3.0"
+"kaynak": "File:Aphrodisias - Tetrapylon 06.jpg",
+"yazar": "Bernard Gagnon",
+"lisans": "CC BY-SA 3.0"
 },
 "Priene": {
 "foto": "assets/oyun/priene.jpg",
@@ -271,9 +271,9 @@
 },
 "Didim Apollon Tapınağı": {
 "foto": "assets/oyun/didim-apollon-tapinagi.jpg",
-"kaynak": "File:Altınkum, Didim, Turkey, evening.jpg",
-"yazar": "Frunze103",
-"lisans": "CC0"
+"kaynak": "File:Temple of Apollo, Didyma 01.jpg",
+"yazar": "Bernard Gagnon",
+"lisans": "CC BY-SA 3.0"
 },
 "Hierapolis (Pamukkale)": {
 "foto": "assets/oyun/hierapolis-pamukkale.jpg",
@@ -307,9 +307,9 @@
 },
 "Kaunos": {
 "foto": "assets/oyun/kaunos.jpg",
-"kaynak": "File:Dalyan, Turkey March 2022 - Fireside Breakfast.jpg",
-"yazar": "Sharon Hahn Darlin",
-"lisans": "CC BY 2.0"
+"kaynak": "File:Dalyan. Rock Tombs - panoramio.jpg",
+"yazar": "Николай Максимович",
+"lisans": "CC BY 3.0"
 },
 "Knidos": {
 "foto": "assets/oyun/knidos.jpg",
@@ -349,9 +349,9 @@
 },
 "Perge": {
 "foto": "assets/oyun/perge.jpg",
-"kaynak": "File:Perge Antik Kenti Sikkeleri2.jpg",
-"yazar": "Antiksikkeler",
-"lisans": "CC BY-SA 4.0"
+"kaynak": "File:Colonnade, Perge 01.jpg",
+"yazar": "Bernard Gagnon",
+"lisans": "CC BY-SA 3.0"
 },
 "Side Antik Kenti": {
 "foto": "assets/oyun/side-antik-kenti.jpg",
@@ -367,15 +367,15 @@
 },
 "Olimpos": {
 "foto": "assets/oyun/olimpos.jpg",
-"kaynak": "File:Olympos Aerial Tram.jpg",
-"yazar": "Lee Vilenski",
+"kaynak": "File:Olympos Ancient City.jpg",
+"yazar": "Capyusuf",
 "lisans": "CC BY-SA 4.0"
 },
 "Phaselis": {
 "foto": "assets/oyun/phaselis.jpg",
-"kaynak": "File:Phaselis August 2019 09.jpg",
-"yazar": "Лобачев Владимир",
-"lisans": "CC BY-SA 4.0"
+"kaynak": "File:Kemer - 2007 - 0486.JPG",
+"yazar": "Nikolay Yushnikov",
+"lisans": "Public domain"
 },
 "Myra": {
 "foto": "assets/oyun/myra.jpg",
@@ -577,15 +577,15 @@
 },
 "Ağrı Dağı": {
 "foto": "assets/oyun/agri-dagi.jpg",
-"kaynak": "File:Mount Ararat and the Yerevan skyline.jpg",
-"yazar": "Սէրուժ Ուրիշեան (Serouj Ourishian)",
-"lisans": "CC BY-SA 3.0"
+"kaynak": "File:Doğubayazıt, veduta sul monte ararat, 03.jpg",
+"yazar": "Francesco Bini",
+"lisans": "CC BY-SA 4.0"
 },
 "Ani Ören Yeri": {
 "foto": "assets/oyun/ani-oren-yeri.jpg",
-"kaynak": "File:Ani, Kars.jpg",
-"yazar": "Jaba1977",
-"lisans": "CC BY-SA 4.0"
+"kaynak": "File:Ani-Cathedral, Ruine.jpeg",
+"yazar": "Hansm",
+"lisans": "CC BY-SA 3.0"
 },
 "Çifte Minareli Medrese": {
 "foto": "assets/oyun/cifte-minareli-medrese.jpg",
@@ -595,9 +595,9 @@
 },
 "Sümela Manastırı": {
 "foto": "assets/oyun/sumela-manastiri.jpg",
-"kaynak": "File:Sümela Manastırı 2014-1.jpg",
-"yazar": "Hamdigumus",
-"lisans": "CC0"
+"kaynak": "File:Sumela Monastery 01.jpg",
+"yazar": "BSRF",
+"lisans": "CC BY-SA 4.0"
 },
 "Trabzon Ayasofya": {
 "foto": "assets/oyun/trabzon-ayasofya.jpg",
@@ -703,9 +703,9 @@
 },
 "Ankara Kalesi": {
 "foto": "assets/oyun/ankara-kalesi.jpg",
-"kaynak": "File:Hisar mumbai duranto express.jpg",
-"yazar": "Sid Sharma5911",
-"lisans": "CC BY 4.0"
+"kaynak": "File:Ankara Akkale from south - Şark Kalesi in 2011 04.jpg",
+"yazar": "Dosseman",
+"lisans": "CC BY-SA 4.0"
 },
 "Anadolu Medeniyetleri Müzesi": {
 "foto": "assets/oyun/anadolu-medeniyetleri-muzesi.jpg",
@@ -715,8 +715,8 @@
 },
 "Augustus Tapınağı": {
 "foto": "assets/oyun/augustus-tapinagi.jpg",
-"kaynak": "File:Britain in the Ankara Augusteum.jpg",
-"yazar": "Mellangoose",
+"kaynak": "File:Monumento de Ancira, Ankara, Turquía, 2024-10-03, DD 48.jpg",
+"yazar": "Diego Delso",
 "lisans": "CC BY-SA 4.0"
 },
 "Gordion": {
@@ -769,9 +769,9 @@
 },
 "Sardes": {
 "foto": "assets/oyun/sardes.jpg",
-"kaynak": "File:Sard Manisa-Ömer Gemici.jpg",
-"yazar": "Gemici49",
-"lisans": "CC BY-SA 4.0"
+"kaynak": "File:The Bath-Gymnasium complex at Sardis, late 2nd - early 3rd century AD, Sardis, Turkey (17098680002).jpg",
+"yazar": "Carole Raddato from FRANKFURT, Germany",
+"lisans": "CC BY-SA 2.0"
 },
 "Harput": {
 "foto": "assets/oyun/harput.jpg",
@@ -907,9 +907,9 @@
 },
 "Knossos": {
 "foto": "assets/oyun/knossos.jpg",
-"kaynak": "File:Beyaz Papatyalar, Eski Foça, Seyir Tepesi.jpg",
-"yazar": "Ferit BAYCUMAN",
-"lisans": "CC BY-SA 4.0"
+"kaynak": "File:Throne of Minos at Knossos Palace.jpg",
+"yazar": "Jebulon",
+"lisans": "CC0"
 },
 "Giza Piramitleri": {
 "foto": "assets/oyun/giza-piramitleri.jpg",
@@ -931,9 +931,9 @@
 },
 "Petra": {
 "foto": "assets/oyun/petra.jpg",
-"kaynak": "File:The Jordan valley and Petra (1905) (14776153221).jpg",
-"yazar": "Internet Archive Book Images",
-"lisans": "No restrictions"
+"kaynak": "File:Petra , Al-Khazneh 2.jpg",
+"yazar": "Faraheed",
+"lisans": "CC BY-SA 3.0"
 },
 "Ceraş (Ürdün)": {
 "foto": "assets/oyun/ceras-urdun.jpg",
@@ -955,8 +955,8 @@
 },
 "Kubbetüs Sahra": {
 "foto": "assets/oyun/kubbetus-sahra.jpg",
-"kaynak": "File:Entrance to Well of Souls, Dome of the Rock (Jerusalem 2018).jpg",
-"yazar": "Virtutepetens",
+"kaynak": "File:Jerusalem-2013-Temple Mount-Dome of the Rock & Chain 02.jpg",
+"yazar": "Godot13",
 "lisans": "CC BY-SA 4.0"
 },
 "Mescid-i Haram": {
@@ -985,7 +985,7 @@
 },
 "Buhara Eski Şehir": {
 "foto": "assets/oyun/buhara-eski-sehir.jpg",
-"kaynak": "File:Woman in traditional Uzbek long adras dress (Po-i-Kalyan complex, 2025 Buhara).jpg",
+"kaynak": "File:Kalyan Minaret (Минарет Калян, Minorai Kalon) - Bukhara.jpg",
 "yazar": "Petar Milošević",
 "lisans": "CC BY-SA 4.0"
 },
@@ -1015,8 +1015,8 @@
 },
 "Angkor Wat": {
 "foto": "assets/oyun/angkor-wat.jpg",
-"kaynak": "File:Preah Pithu T Monks - Siem Reap.jpg",
-"yazar": "JJ Harrison (https://www.jjharrison.com.au/)",
+"kaynak": "File:Angkor Wat Sunrise.jpg",
+"yazar": "Brohard",
 "lisans": "CC BY-SA 3.0"
 },
 "Kinkaku-ji": {
@@ -1039,9 +1039,9 @@
 },
 "Teotihuacan": {
 "foto": "assets/oyun/teotihuacan.jpg",
-"kaynak": "File:Teotihuacán, Meksiko 2022.jpg",
-"yazar": "August Dominus",
-"lisans": "CC BY-SA 4.0"
+"kaynak": "File:Pyramid of the Sun, Teotihuacan, from path to parking lot.jpg",
+"yazar": "Daniel Case",
+"lisans": "CC BY-SA 3.0"
 },
 "Özgürlük Heykeli": {
 "foto": "assets/oyun/ozgurluk-heykeli.jpg",
@@ -1057,9 +1057,9 @@
 },
 "Londra Kulesi": {
 "foto": "assets/oyun/londra-kulesi.jpg",
-"kaynak": "File:Jubilee and Munin, Ravens, Tower of London 2016-04-30.jpg",
-"yazar": "Colin",
-"lisans": "CC BY-SA 4.0"
+"kaynak": "File:Tower of London viewed from the River Thames.jpg",
+"yazar": "Bob Collowan",
+"lisans": "CC BY-SA 3.0"
 },
 "Versay Sarayı": {
 "foto": "assets/oyun/versay-sarayi.jpg",
@@ -1111,14 +1111,14 @@
 },
 "Kurtuba Camii": {
 "foto": "assets/oyun/kurtuba-camii.jpg",
-"kaynak": "File:201 Dome Mosque 02.jpg",
-"yazar": "Azim Khan Ronnie",
+"kaynak": "File:Cordoba Cathedral 2024 - Arches.jpg",
+"yazar": "Fernando",
 "lisans": "CC BY-SA 4.0"
 },
 "Prag Kalesi": {
 "foto": "assets/oyun/prag-kalesi.jpg",
-"kaynak": "File:Solar eclipse of 2026 August 12 in Prague (Prague Castle from Riegrovy sady).jpg",
-"yazar": "Václav Jiroušek",
+"kaynak": "File:Prag, Prager Burg -- 2019 -- 6671.jpg",
+"yazar": "Dietmar Rabich",
 "lisans": "CC BY-SA 4.0"
 },
 "Schönbrunn Sarayı": {
@@ -1135,9 +1135,9 @@
 },
 "Kış Sarayı (Ermitaj)": {
 "foto": "assets/oyun/kis-sarayi-ermitaj.jpg",
-"kaynak": "File:Hermitage Museum in August 2025 013.jpg",
-"yazar": "MBH",
-"lisans": "CC BY 4.0"
+"kaynak": "File:RUS-2016-Aerial-SPB-Winter Palace (crop).jpg",
+"yazar": "Godot13",
+"lisans": "CC BY-SA 4.0"
 },
 "Mostar Köprüsü": {
 "foto": "assets/oyun/mostar-koprusu.jpg",
@@ -1147,9 +1147,9 @@
 },
 "Gazi Hüsrev Bey Camii": {
 "foto": "assets/oyun/gazi-husrev-bey-camii.jpg",
-"kaynak": "File:Gazi Husrev-beg's Mosque 01.jpg",
-"yazar": "Bernard Gagnon",
-"lisans": "CC BY-SA 4.0"
+"kaynak": "File:Sarajevo Gazi Husrev Beg Moschee 4.JPG",
+"yazar": "Julian Nyča",
+"lisans": "CC BY-SA 3.0"
 },
 "Dubrovnik Surları": {
 "foto": "assets/oyun/dubrovnik-surlari.jpg",
@@ -1162,5 +1162,11 @@
 "kaynak": "File:Colonne Doriche a Pompei.jpg",
 "yazar": "PaestumPaestum",
 "lisans": "CC BY 4.0"
+},
+"Sultanhanı Kervansarayı": {
+"foto": "assets/oyun/sultanhani-kervansarayi.jpg",
+"kaynak": "File:Sultanhani Caravanserai Aksaray.jpg",
+"yazar": "zolakoma",
+"lisans": "CC BY 2.0"
 }
 }

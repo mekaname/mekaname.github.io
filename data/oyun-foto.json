@@ -112,5 +112,431 @@
 "kaynak": "File:Maiden tower, Istanbul (P1100207).jpg",
 "yazar": "Matti Blume",
 "lisans": "CC BY-SA 4.0"
+},
+"Rumeli Hisarı": {
+"foto": "assets/oyun/rumeli-hisari.jpg",
+"kaynak": "File:Twierdza Rumeli Istambuł RB1.jpg",
+"yazar": "",
+"lisans": "CC BY-SA 3.0"
+},
+"Anadolu Hisarı": {
+"foto": "assets/oyun/anadolu-hisari.jpg",
+"kaynak": "File:Anadolu Hisarı in 2024 (cropped).jpg",
+"yazar": "flowcomm",
+"lisans": "CC BY 2.0"
+},
+"Yedikule Hisarı": {
+"foto": "assets/oyun/yedikule-hisari.jpg",
+"kaynak": "File:Yedikule Hisari, Istanbul - panoramio.jpg",
+"yazar": "Modris Putns",
+"lisans": "CC BY-SA 3.0"
+},
+"Beyazıt Yangın Kulesi": {
+"foto": "assets/oyun/beyazit-yangin-kulesi.jpg",
+"kaynak": "File:Torre de Beyazıt, Estambul, Turquía, 2024-09-29, DD 20.jpg",
+"yazar": "Diego Delso",
+"lisans": "CC BY-SA 4.0"
+},
+"Bozdoğan Su Kemeri": {
+"foto": "assets/oyun/bozdogan-su-kemeri.jpg",
+"kaynak": "File:Bozdoğan Kemeri.jpg",
+"yazar": "Abdullah Can Aldanmaz",
+"lisans": "CC BY-SA 4.0"
+},
+"İstanbul Arkeoloji Müzeleri": {
+"foto": "assets/oyun/istanbul-arkeoloji-muzeleri.jpg",
+"kaynak": "File:İstanbul Arkeoloji Müzeleri girişi Panoramio 20.01.2025.jpg",
+"yazar": "Kuzey ege Bayraktar",
+"lisans": "CC0"
+},
+"Pera Müzesi": {
+"foto": "assets/oyun/pera-muzesi.jpg",
+"kaynak": "File:Istanbul Beyoglu Pera museum.jpg",
+"yazar": "Tatiana Matlina",
+"lisans": "CC BY-SA 3.0"
+},
+"Selimiye Camii": {
+"foto": "assets/oyun/selimiye-camii.jpg",
+"kaynak": "File:Selimiye Mosque in Edirne 01.jpg",
+"yazar": "BuhaM",
+"lisans": "CC BY-SA 4.0"
+},
+"Bursa Ulu Camii": {
+"foto": "assets/oyun/bursa-ulu-camii.jpg",
+"kaynak": "File:Kalomilli - panoramio.jpg",
+"yazar": "curukaismail",
+"lisans": "CC BY 3.0"
+},
+"Yeşil Türbe": {
+"foto": "assets/oyun/yesil-turbe.jpg",
+"kaynak": "File:Yeşil Türbe 06.jpg",
+"yazar": "Bernard Gagnon",
+"lisans": "CC BY-SA 3.0"
+},
+"Koza Han": {
+"foto": "assets/oyun/koza-han.jpg",
+"kaynak": "File:BURSA KOZAHAN - panoramio.jpg",
+"yazar": "Mustafa DUMAN",
+"lisans": "CC BY 3.0"
+},
+"Cumalıkızık": {
+"foto": "assets/oyun/cumalikizik.jpg",
+"kaynak": "File:Cumalıkızık, Bursa 1.jpg",
+"yazar": "Kadı",
+"lisans": "CC BY 4.0"
+},
+"Troya": {
+"foto": "assets/oyun/troya.jpg",
+"kaynak": "File:Çanakkale, Truva Arkeolojik Alan.jpg",
+"yazar": "Hande111",
+"lisans": "CC BY-SA 4.0"
+},
+"Assos": {
+"foto": "assets/oyun/assos.jpg",
+"kaynak": "File:Assos, Turkey - 6452161411.jpg",
+"yazar": "Carole Raddato",
+"lisans": "CC BY-SA 2.0"
+},
+"Çanakkale Şehitler Abidesi": {
+"foto": "assets/oyun/canakkale-sehitler-abidesi.jpg",
+"kaynak": "File:Gelibolu.JPG",
+"yazar": "Filanca",
+"lisans": "CC BY-SA 3.0"
+},
+"Ephesus (Efes Antik Kenti)": {
+"foto": "assets/oyun/ephesus-efes-antik-kenti.jpg",
+"kaynak": "File:Swissôtel Büyük Efes, 2008.jpg",
+"yazar": "ugur onder bozkurt",
+"lisans": "CC BY 2.0"
+},
+"Bergama (Pergamon)": {
+"foto": "assets/oyun/bergama-pergamon.jpg",
+"kaynak": "File:Temple of Trajan, Pergamon 01.jpg",
+"yazar": "Bernard Gagnon",
+"lisans": "CC BY-SA 3.0"
+},
+"Meryem Ana Evi": {
+"foto": "assets/oyun/meryem-ana-evi.jpg",
+"kaynak": "File:Meryemana Kaynağı (Spring of the Virgin Mary) - Selçuk, İzmir Province, Turkey - October 7, 2025 04.jpg",
+"yazar": "Giorgio Galeotti",
+"lisans": "CC BY-SA 4.0"
+},
+"Aziz Yuhanna Bazilikası": {
+"foto": "assets/oyun/aziz-yuhanna-bazilikasi.jpg",
+"kaynak": "File:Basilica of St. John in Ephesus 09.jpg",
+"yazar": "Bernard Gagnon",
+"lisans": "CC BY-SA 3.0"
+},
+"İzmir Saat Kulesi": {
+"foto": "assets/oyun/izmir-saat-kulesi.jpg",
+"kaynak": "File:Izmir Konak Saat Kulesi.jpg",
+"yazar": "Unknown authorUnknown author",
+"lisans": "CC BY 4.0"
+},
+"Kadifekale": {
+"foto": "assets/oyun/kadifekale.jpg",
+"kaynak": "File:Kadifekale IzmirTurkey EUnluBlogspot.jpg",
+"yazar": "Mr. E. Unlu",
+"lisans": "CC BY 3.0"
+},
+"Smyrna Agorası": {
+"foto": "assets/oyun/smyrna-agorasi.jpg",
+"kaynak": "File:Agora of İzmir, July 2012.jpg",
+"yazar": "31774",
+"lisans": "CC0"
+},
+"Şirince": {
+"foto": "assets/oyun/sirince.jpg",
+"kaynak": "File:View of Sirince from the church.jpg",
+"yazar": "Lastradadeisogni",
+"lisans": "CC BY-SA 4.0"
+},
+"Afrodisias": {
+"foto": "assets/oyun/afrodisias.jpg",
+"kaynak": "File:Geyre - panoramio - Nihat1988 (1).jpg",
+"yazar": "Nihat1988",
+"lisans": "CC BY 3.0"
+},
+"Priene": {
+"foto": "assets/oyun/priene.jpg",
+"kaynak": "File:Bouleuterion of Priene, Söke, Aydın Province, Turkey 01.jpg",
+"yazar": "Ugiadam08",
+"lisans": "CC BY-SA 4.0"
+},
+"Milet": {
+"foto": "assets/oyun/milet.jpg",
+"kaynak": "File:Miletus - Ancient Greek theatre 05.jpg",
+"yazar": "Bernard Gagnon",
+"lisans": "CC BY-SA 3.0"
+},
+"Didim Apollon Tapınağı": {
+"foto": "assets/oyun/didim-apollon-tapinagi.jpg",
+"kaynak": "File:Altınkum, Didim, Turkey, evening.jpg",
+"yazar": "Frunze103",
+"lisans": "CC0"
+},
+"Hierapolis (Pamukkale)": {
+"foto": "assets/oyun/hierapolis-pamukkale.jpg",
+"kaynak": "File:TR Pamukkale White Terraces asv2020-02 img16.jpg",
+"yazar": "A.Savin",
+"lisans": "FAL"
+},
+"Pamukkale Travertenleri": {
+"foto": "assets/oyun/pamukkale-travertenleri.jpg",
+"kaynak": "File:TR Pamukkale White Terraces asv2020-02 img16.jpg",
+"yazar": "A.Savin",
+"lisans": "FAL"
+},
+"Laodikeia": {
+"foto": "assets/oyun/laodikeia.jpg",
+"kaynak": "File:TR Pamukkale Laodicea asv2020-02 img11.jpg",
+"yazar": "A.Savin",
+"lisans": "FAL"
+},
+"Bodrum Kalesi": {
+"foto": "assets/oyun/bodrum-kalesi.jpg",
+"kaynak": "File:Bodrum Castle (2017).jpg",
+"yazar": "Serhio Magpie",
+"lisans": "CC BY 4.0"
+},
+"Halikarnas Mozolesi": {
+"foto": "assets/oyun/halikarnas-mozolesi.jpg",
+"kaynak": "File:Milas Gümüşkesen Mausoleum 4872.jpg",
+"yazar": "Dosseman",
+"lisans": "CC BY-SA 4.0"
+},
+"Kaunos": {
+"foto": "assets/oyun/kaunos.jpg",
+"kaynak": "File:Dalyan, Turkey March 2022 - Fireside Breakfast.jpg",
+"yazar": "Sharon Hahn Darlin",
+"lisans": "CC BY 2.0"
+},
+"Knidos": {
+"foto": "assets/oyun/knidos.jpg",
+"kaynak": "File:Knidos Manzara.jpg",
+"yazar": "Barış Karadirek",
+"lisans": "CC BY-SA 4.0"
+},
+"Amintas Kaya Mezarları": {
+"foto": "assets/oyun/amintas-kaya-mezarlari.jpg",
+"kaynak": "File:Ancient Tombs of Fethiye (Telmessos).jpg",
+"yazar": "Harald the Bard",
+"lisans": "CC BY-SA 4.0"
+},
+"Kayaköy": {
+"foto": "assets/oyun/kayakoy.jpg",
+"kaynak": "File:Kayaköy (Karmylassos) Antik Kenti (15296133936).jpg",
+"yazar": "Jorge Franganillo",
+"lisans": "CC BY 2.0"
+},
+"Saklıkent Kanyonu": {
+"foto": "assets/oyun/saklikent-kanyonu.jpg",
+"kaynak": "File:Saklıkent Kanyonu3.jpg",
+"yazar": "Acar54",
+"lisans": "CC BY-SA 4.0"
+},
+"Stratonikeia": {
+"foto": "assets/oyun/stratonikeia.jpg",
+"kaynak": "File:Eskihisar Kalesi.jpg",
+"yazar": "Tansugunal",
+"lisans": "Public domain"
+},
+"Aspendos": {
+"foto": "assets/oyun/aspendos.jpg",
+"kaynak": "File:Aspendos Basilica Antalya Turkey.jpg",
+"yazar": "Saffron Blaze",
+"lisans": "CC BY-SA 3.0"
+},
+"Perge": {
+"foto": "assets/oyun/perge.jpg",
+"kaynak": "File:Perge Antik Kenti Sikkeleri2.jpg",
+"yazar": "Antiksikkeler",
+"lisans": "CC BY-SA 4.0"
+},
+"Side Antik Kenti": {
+"foto": "assets/oyun/side-antik-kenti.jpg",
+"kaynak": "File:Sunrise apollo side.jpg",
+"yazar": "Saffron Blaze",
+"lisans": "CC BY-SA 3.0"
+},
+"Termessos": {
+"foto": "assets/oyun/termessos.jpg",
+"kaynak": "File:Termessos - Theatre - 2.jpg",
+"yazar": "Ingo Mehling",
+"lisans": "CC BY-SA 4.0"
+},
+"Olimpos": {
+"foto": "assets/oyun/olimpos.jpg",
+"kaynak": "File:Olympos Aerial Tram.jpg",
+"yazar": "Lee Vilenski",
+"lisans": "CC BY-SA 4.0"
+},
+"Phaselis": {
+"foto": "assets/oyun/phaselis.jpg",
+"kaynak": "File:Phaselis August 2019 09.jpg",
+"yazar": "Лобачев Владимир",
+"lisans": "CC BY-SA 4.0"
+},
+"Myra": {
+"foto": "assets/oyun/myra.jpg",
+"kaynak": "File:Unnamed Road, 07570 Kaleüçağız-Demre-Antalya, Turkey - panoramio (14).jpg",
+"yazar": "Сашка Денисов",
+"lisans": "CC BY 3.0"
+},
+"Aziz Nikolaos Kilisesi": {
+"foto": "assets/oyun/aziz-nikolaos-kilisesi.jpg",
+"kaynak": "File:NoelBabaKilisesi-DuvarFreski.JPG",
+"yazar": "Maldek™ ileti",
+"lisans": "GFDL"
+},
+"Patara": {
+"foto": "assets/oyun/patara.jpg",
+"kaynak": "File:Antalya Kaş, Patara Antik Kenti Parkı.jpg",
+"yazar": "İsabellew14",
+"lisans": "CC BY-SA 4.0"
+},
+"Simena (Kaleköy)": {
+"foto": "assets/oyun/simena-kalekoy.jpg",
+"kaynak": "File:Kekova - versunkene lykische Stadt.JPG",
+"yazar": "Gisela s",
+"lisans": "CC BY-SA 4.0"
+},
+"Kaleiçi": {
+"foto": "assets/oyun/kaleici.jpg",
+"kaynak": "File:Antalya Kaleiçi.jpg",
+"yazar": "Qubated",
+"lisans": "CC BY-SA 4.0"
+},
+"Hadrian Kapısı": {
+"foto": "assets/oyun/hadrian-kapisi.jpg",
+"kaynak": "File:Hadrian Kapısı (4).JPG",
+"yazar": "Cobija",
+"lisans": "CC0"
+},
+"Alanya Kalesi": {
+"foto": "assets/oyun/alanya-kalesi.jpg",
+"kaynak": "File:Castle Alanya-Antalya - panoramio.jpg",
+"yazar": "Haluk Comertel",
+"lisans": "CC BY 3.0"
+},
+"Kızıl Kule": {
+"foto": "assets/oyun/kizil-kule.jpg",
+"kaynak": "File:Alanya Kızıl Kulesi.jpg",
+"yazar": "Emineakl42",
+"lisans": "CC BY-SA 4.0"
+},
+"Sagalassos": {
+"foto": "assets/oyun/sagalassos.jpg",
+"kaynak": "File:Sagalassos Antik Kenti - Burdur 4.jpg",
+"yazar": "Kesim00",
+"lisans": "CC0"
+},
+"Kızkalesi": {
+"foto": "assets/oyun/kizkalesi.jpg",
+"kaynak": "File:Korykos Zisterne01.jpg",
+"yazar": "Ingeborg Simon",
+"lisans": "CC BY-SA 3.0"
+},
+"Cennet ve Cehennem Obrukları": {
+"foto": "assets/oyun/cennet-ve-cehennem-obruklari.jpg",
+"kaynak": "File:Cennet Cehennem CEHENNEM - panoramio.jpg",
+"yazar": "Korkut Tas",
+"lisans": "CC BY-SA 3.0"
+},
+"Kleopatra Kapısı": {
+"foto": "assets/oyun/kleopatra-kapisi.jpg",
+"kaynak": "File:Cleopatra's Gate, Tarsus, Mersin Province.jpg",
+"yazar": "Nedim Ardoğa",
+"lisans": "CC BY-SA 3.0"
+},
+"Silifke Kalesi": {
+"foto": "assets/oyun/silifke-kalesi.jpg",
+"kaynak": "File:Hüseyinler, Silifke, Mersin Province.jpg",
+"yazar": "Nedim Ardoğa",
+"lisans": "CC BY-SA 3.0"
+},
+"Adana Taşköprü": {
+"foto": "assets/oyun/adana-taskopru.jpg",
+"kaynak": "File:Taşköprü, Adana 1 (34243582532).jpg",
+"yazar": "John Lubbock",
+"lisans": "CC BY-SA 2.0"
+},
+"Yılankale": {
+"foto": "assets/oyun/yilankale.jpg",
+"kaynak": "File:Yılankale 07.JPG",
+"yazar": "Zeynel Cebeci",
+"lisans": "CC BY-SA 4.0"
+},
+"Aziz Petrus Kilisesi": {
+"foto": "assets/oyun/aziz-petrus-kilisesi.jpg",
+"kaynak": "File:Hatay Antakya St. Pierre Kilisesi 05.jpg",
+"yazar": "Engin Mutlu 58",
+"lisans": "CC BY-SA 4.0"
+},
+"Zeugma Mozaik Müzesi": {
+"foto": "assets/oyun/zeugma-mozaik-muzesi.jpg",
+"kaynak": "File:Gaziantep Zeugma Mozaik Müzesi TÜRKİYE - panoramio.jpg",
+"yazar": "Emin Başar ÖZDEMİR",
+"lisans": "CC BY 3.0"
+},
+"Zeugma Antik Kenti": {
+"foto": "assets/oyun/zeugma-antik-kenti.jpg",
+"kaynak": "File:Gaziantep Zeugma Museum Oceanus and Thetys 1 mosaic 2494.jpg",
+"yazar": "Dosseman",
+"lisans": "CC BY-SA 4.0"
+},
+"Gaziantep Kalesi": {
+"foto": "assets/oyun/gaziantep-kalesi.jpg",
+"kaynak": "File:Gaziantep Kalesi 4696.jpg",
+"yazar": "Dosseman",
+"lisans": "CC BY-SA 4.0"
+},
+"Göbeklitepe": {
+"foto": "assets/oyun/gobeklitepe.jpg",
+"kaynak": "File:Vulture Stone, Gobekli Tepe, Sanliurfa, South-east Anatolia, Turkey.jpg",
+"yazar": "Sue Fleckney",
+"lisans": "CC BY-SA 2.0"
+},
+"Balıklıgöl": {
+"foto": "assets/oyun/balikligol.jpg",
+"kaynak": "File:Balıklıgöl, Urfa 2015.jpg",
+"yazar": "Hamdigumus",
+"lisans": "CC0"
+},
+"Harran": {
+"foto": "assets/oyun/harran.jpg",
+"kaynak": "File:Harran 2015.jpg",
+"yazar": "Hamdigumus",
+"lisans": "CC0"
+},
+"Nemrut Dağı": {
+"foto": "assets/oyun/nemrut-dagi.jpg",
+"kaynak": "File:Nemrut Dağı 01.jpg",
+"yazar": "Bernard Gagnon",
+"lisans": "CC BY-SA 3.0"
+},
+"Mardin Eski Şehir": {
+"foto": "assets/oyun/mardin-eski-sehir.jpg",
+"kaynak": "File:View from Mardin to the Mesopotamian plains.jpg",
+"yazar": "Florian Koch French translation by Yolan Chériaux",
+"lisans": "CC BY-SA 2.0"
+},
+"Deyrulzafaran Manastırı": {
+"foto": "assets/oyun/deyrulzafaran-manastiri.jpg",
+"kaynak": "File:Mor Hananyo Monastery 3.jpg",
+"yazar": "Izabela Miszczak",
+"lisans": "CC BY-SA 4.0"
+},
+"Dara Antik Kenti": {
+"foto": "assets/oyun/dara-antik-kenti.jpg",
+"kaynak": "File:Dara P1030851 20080424091200.JPG",
+"yazar": "Nevit Dilmen",
+"lisans": "CC BY-SA 3.0"
+},
+"Midyat": {
+"foto": "assets/oyun/midyat.jpg",
+"kaynak": "File:Midyat Guest House, Mardin (4).jpg",
+"yazar": "Sralp2",
+"lisans": "CC BY-SA 4.0"
 }
 }
